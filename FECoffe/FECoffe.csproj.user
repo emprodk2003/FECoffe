@@ -26,5 +26,35 @@
     <Compile Update="Dashboards\Warehouse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Form\Frm_AddCategories_Material.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddCategories_Product.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddExportReceipts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddImportReceipts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddMaterials.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddOrderNumberTag.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddProduct.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddProductSize.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddSuppliers.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddTopping.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

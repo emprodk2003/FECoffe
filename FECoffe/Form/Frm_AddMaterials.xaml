@@ -1,0 +1,116 @@
+﻿<Window x:Class="FECoffe.Form.Frm_AddMaterials"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FECoffe.Form"
+        mc:Ignorable="d"
+       Title="Thêm nguyên vật liệu" Height="500" Width="480"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        ShowInTaskbar="False"
+        Background="#f4f4f4"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <!-- Style tái sử dụng -->
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="BorderBrush" Value="#007ACC"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <TextBlock Text="Thêm Nguyên Vật Liệu" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Tên nguyên vật liệu:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtMaterialName" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Đơn vị tính:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtUnit" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Phân loại:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbCategory" Width="250">
+                    <ComboBoxItem Content="Cafe"/>
+                    <ComboBoxItem Content="Nước"/>
+                    <ComboBoxItem Content="Bánh"/>
+                    <ComboBoxItem Content="Khác"/>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Tồn kho tối thiểu:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtMinStock" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Số lượng hiện tại:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtQuantity" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Giá nhập:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtPurchasePrice" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Hạn sử dụng:" Width="150" VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpExpirationDate" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Nhà cung cấp:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbSupplier" Width="250" DisplayMemberPath="SupplierName" SelectedValuePath="SupplierID"/>
+            </StackPanel>
+
+            <!-- Nút -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button Content="Lưu"/>
+                <Button Content="Hủy" Background="#888" BorderBrush="#888"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
