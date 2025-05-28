@@ -26,7 +26,6 @@
     <Compile Update="Dashboards\Warehouse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Form\User\CreateUpdateFormUser.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
