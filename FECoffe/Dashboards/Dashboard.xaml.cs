@@ -74,5 +74,12 @@ namespace FECoffe.Dashboards
                 }
             }
         }
+
+        private void OpenUser_Click(object sender, RoutedEventArgs e)
+        {
+            User user = new User();
+            user.Show();
+            this.Close();
+        }
     }
 }
