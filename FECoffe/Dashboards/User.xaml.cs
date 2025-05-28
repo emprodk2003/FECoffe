@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FECoffe.Form;
+using FECoffe.Form.User;
+using FECoffe.Request.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,6 +53,22 @@ namespace FECoffe.Dashboards
                     IsMaximized = true;
                 }
             }
+        }
+
+        private void btn_them_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUpdateFormUser form = new CreateUpdateFormUser();
+            form.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dsUser = UserRequest.GetUser();
+            if (dsUser != null)
+            {
+                dg_user.ItemsSource = dsUser;
+            }
+            else MessageBox.Show("Loi khong doc duoc hang hoa!!!!!!!");
         }
     }
 }
