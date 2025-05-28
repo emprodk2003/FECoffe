@@ -26,7 +26,5 @@
     <Compile Update="Dashboards\Warehouse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 </Project>

@@ -65,8 +65,8 @@
         <CheckBox x:Name="chkIsAvailable" Content="Còn bán" IsChecked="True" Grid.Row="3"/>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button Content="Lưu" Click="Save_Click"/>
-            <Button Content="Hủy" Background="#888" BorderBrush="#888" Click="Cancel_Click"/>
+            <Button x:Name="save" Content="Lưu" Click="save_Click"/>
+            <Button x:Name="cancel" Content="Hủy" Background="#888" BorderBrush="#888" Click="cancel_Click"/>
         </StackPanel>
     </Grid>
 </Window>

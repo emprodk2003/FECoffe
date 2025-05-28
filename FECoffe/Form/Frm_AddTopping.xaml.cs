@@ -23,5 +23,15 @@ namespace FECoffe.Form
         {
             InitializeComponent();
         }
+
+        private void save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

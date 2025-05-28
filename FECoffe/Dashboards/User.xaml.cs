@@ -60,7 +60,6 @@ namespace FECoffe.Dashboards
             CreateUpdateFormUser form = new CreateUpdateFormUser();
             form.Show();
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var dsUser = UserRequest.GetUser();
