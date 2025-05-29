@@ -223,6 +223,8 @@
                 <StackPanel Margin="10">
                     <!-- Thanh công cụ tìm kiếm -->
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox Width="200" Margin="0,0,10,0" 
               Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Content="Tìm" Command="{Binding SearchCommand}" Margin="0,0,10,0"/>
@@ -264,6 +266,8 @@
                 <StackPanel Margin="10">
                     <!-- Khu vực tìm kiếm và thêm mới -->
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox Width="200" Margin="0,0,10,0" Text="Tìm vai trò..."/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm vai trò"/>
