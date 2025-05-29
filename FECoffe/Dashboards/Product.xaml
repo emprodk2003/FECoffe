@@ -213,6 +213,8 @@
             <TabItem Header="Danh mục thực đơn">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="10" Height="35" Width="100"/>
                         <TextBox Width="200" Text="Tìm kiếm danh mục..." Margin="0,0,10,0"/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm"/>
@@ -241,6 +243,8 @@
             <TabItem Header="Thực đơn">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="10" Height="35" Width="100"/>
                         <TextBox Width="200" Text="Tìm kiếm món..." Margin="0,0,10,0"/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm"/>
@@ -269,7 +273,8 @@
             <TabItem Header="Kích cỡ món">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="10" Height="35" Width="100"/>
                         <ComboBox Width="250"
                              DisplayMemberPath="ProductName"
                               SelectedItem="{Binding SelectedProduct}"
@@ -302,6 +307,8 @@
             <TabItem Header="Quản lý bàn">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox Width="200" Text="Tìm bàn..." Margin="0,0,10,0"/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm"/>
@@ -329,6 +336,8 @@
             <TabItem Header="Công thức">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBlock Text="Chọn món: " Margin="5,2,0,0" Foreground="Gray"/>
                         <ComboBox Width="200"
                                Margin="0,0,10,0"
