@@ -1,5 +1,4 @@
 ﻿using FECoffe.DTO.ExportDetail;
-using FECoffe.DTO.Materials;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,18 +11,18 @@ namespace FECoffe.Form
     /// </summary>
     public partial class Frm_AddExportReceipts : Window
     {
-        public ObservableCollection<Material> AllMaterials { get; set; }
+       // public ObservableCollection<Material> AllMaterials { get; set; }
         public ObservableCollection<ExportDetail> ExportDetails { get; set; } = new();
         public Frm_AddExportReceipts()
         {
             InitializeComponent();
-            AllMaterials = new ObservableCollection<Material>
-        {
-            new Material { MaterialID = 1, MaterialName = "Cà phê hạt" },
-            new Material { MaterialID = 2, MaterialName = "Sữa đặc" },
-            new Material { MaterialID = 3, MaterialName = "Đường trắng" },
-            new Material { MaterialID = 4, MaterialName = "Nước lọc" }
-        };
+        //    AllMaterials = new ObservableCollection<Material>
+        //{
+        //    new Material { MaterialID = 1, MaterialName = "Cà phê hạt" },
+        //    new Material { MaterialID = 2, MaterialName = "Sữa đặc" },
+        //    new Material { MaterialID = 3, MaterialName = "Đường trắng" },
+        //    new Material { MaterialID = 4, MaterialName = "Nước lọc" }
+        //};
 
             ExportDetails.Add(new ExportDetail()); // Dòng trống ban đầu
 
@@ -35,11 +34,11 @@ namespace FECoffe.Form
             {
                 string text = comboBox.Text?.ToLower() ?? "";
 
-                var filtered = AllMaterials
-                    .Where(m => m.MaterialName.ToLower().Contains(text))
-                    .ToList();
+                //var filtered = AllMaterials
+                //    .Where(m => m.MaterialName.ToLower().Contains(text))
+                //    .ToList();
 
-                comboBox.ItemsSource = filtered;
+                //comboBox.ItemsSource = filtered;
                 comboBox.IsDropDownOpen = true;
             }
         }

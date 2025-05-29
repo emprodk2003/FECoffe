@@ -33,7 +33,7 @@ namespace FECoffe.Request.User
         {
             try
             {
-                string url = @"http://localhost:5178/api/Account/GetAllUser";
+                string url = @"http://localhost:5178/api/Role/GetAllUer";
                 HttpClient client = new HttpClient();
                 var res = client.GetFromJsonAsync<List<GetUser>>(url);
                 res.Wait();
@@ -44,5 +44,24 @@ namespace FECoffe.Request.User
                 return null;
             }
         }
+
+        public static bool AddRolebyUser(UpdateUser user)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Role/CreateUserRole";
+                HttpClient client = new HttpClient();
+                var res = client.PostAsJsonAsync(url, user);
+                res.Wait();
+                return res.Result.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
+                return false;
+            }
+        }
+
+      
     }
 }

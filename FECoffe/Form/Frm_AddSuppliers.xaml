@@ -90,8 +90,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Lưu" Width="100" Margin="5" />
-            <Button Content="Hủy" Width="100" Margin="5" />
+            <Button Content="Lưu" Width="100" Margin="5" x:Name="luu" Click="luu_Click"/>
+            <Button Content="Hủy" Width="100" Margin="5" x:Name="huy" Click="huy_Click"/>
         </StackPanel>
     </Grid>
 </Window>

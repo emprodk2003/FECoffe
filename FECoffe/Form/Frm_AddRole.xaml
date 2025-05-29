@@ -1,11 +1,11 @@
-﻿<Window x:Class="FECoffe.Form.Frm_AddCategories_Material"
+﻿<Window x:Class="FECoffe.Form.Frm_AddRole"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Form"
         mc:Ignorable="d"
-         Title="Thêm danh mục" Height="300" Width="420"
+        Title="Frm_AddRole" Height="300" Width="420"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow"
@@ -49,9 +49,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="4">
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="4">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -68,12 +68,12 @@
         </Grid.RowDefinitions>
 
         <!-- Tiêu đề -->
-        <TextBlock Text="Thêm Danh Mục Hàng Hóa" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
+        <TextBlock Text="Thêm Quyền" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
         <!-- Form nhập liệu -->
         <StackPanel Grid.Row="1" Margin="0,10,0,10">
             <StackPanel Orientation="Horizontal" Margin="0,4">
-                <TextBlock Text="Tên danh mục:" Width="100" VerticalAlignment="Center" FontSize="14" Foreground="#333"/>
-                <TextBox x:Name="txtCategoryName" Width="250"/>
+                <TextBlock Text="Tên quyền:" Width="100" VerticalAlignment="Center" FontSize="14" Foreground="#333"/>
+                <TextBox x:Name="txtName" Width="250"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,4">
@@ -84,8 +84,8 @@
 
         <!-- Nút thao tác -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Lưu" x:Name="luu" Click="luu_Click"/>
-            <Button Content="Hủy" Background="#999" BorderBrush="#999" x:Name="huy" Click="huy_Click" />
+            <Button Content="Lưu" x:Name="Luu" Click="Luu_Click"/>
+            <Button Content="Hủy" Background="#999" BorderBrush="#999" />
         </StackPanel>
     </Grid>
 </Window>

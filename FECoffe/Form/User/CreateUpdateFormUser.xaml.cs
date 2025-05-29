@@ -16,8 +16,6 @@ namespace FECoffe.Form.User
             InitializeComponent();
         }
 
-
-
         private void btn_Register_Click(object sender, RoutedEventArgs e)
         {
             string username= UsernameTextBox.Text;

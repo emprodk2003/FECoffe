@@ -227,6 +227,7 @@
               Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Content="Tìm" Command="{Binding SearchCommand}" Margin="0,0,10,0"/>
                         <Button x:Name="btn_them" Content="Them" Click="btn_them_Click" HorizontalAlignment="Right"/>
+                        <Button Width="120" Content="Trở lại trang chủ" />
                     </StackPanel>
 
                     <!-- Bảng danh sách tài khoản -->
@@ -238,17 +239,17 @@
                        Name="dg_user">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding username}" Width="*"/>
-                            <DataGridTextColumn Header="Họ tên" Binding="{Binding FullName}" Width="*"/>
                             <DataGridTextColumn Header="Email" Binding="{Binding email}" Width="*"/>
                             <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"/>
-                            <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding IsActive}" Width="100"/>
-                            <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedAt, StringFormat=\{0:dd/MM/yyyy\}}" Width="120"/>
-                            <DataGridTemplateColumn Header="Hành động" Width="150">
+                            <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding LockoutEnabled}" Width="100"/>
+                            <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedAtFormatted}" Width="120"/>
+                            <DataGridTemplateColumn Header="Hành động" Width="250">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Button Content="Sửa" Margin="0,0,5,0" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
                                             <Button Content="Xóa" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
+                                            <Button Content="Thêm Quyền" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" x:Name="addrole" Click="addrole_Click_1"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -266,14 +267,14 @@
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <TextBox Width="200" Margin="0,0,10,0" Text="Tìm vai trò..."/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
-                        <Button Content="Thêm vai trò"/>
+                        <Button Content="Thêm vai trò" x:Name="Themquyen"  Click="Themquyen_Click"/>
                     </StackPanel>
 
                     <!-- DataGrid danh sách vai trò -->
-                    <DataGrid ItemsSource="{Binding Roles}" AutoGenerateColumns="False" Margin="0,0,0,10">
+                    <DataGrid ItemsSource="{Binding Roles}" x:Name="dg_role" AutoGenerateColumns="False"
+                              Margin="0,0,0,10">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding RoleID}" Width="50"/>
-                            <DataGridTextColumn Header="Tên vai trò" Binding="{Binding RoleName}" Width="*"/>
+                            <DataGridTextColumn Header="Tên vai trò" Binding="{Binding Name}" Width="*"/>
                             <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="2*"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -281,6 +282,7 @@
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Button Content="Sửa" Margin="0,0,5,0"/>
                                             <Button Content="Xóa"/>
+                                           
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

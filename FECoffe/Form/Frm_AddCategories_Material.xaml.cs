@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FECoffe.DTO.CategoyMaterial;
+using FECoffe.Request.CategoryMaterial;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,31 @@ namespace FECoffe.Form
         public Frm_AddCategories_Material()
         {
             InitializeComponent();
+        }
+
+        private void luu_Click(object sender, RoutedEventArgs e)
+        {
+            var name= txtCategoryName.Text;
+            var description= txtDescription.Text;
+
+            var category = new CrudCategoryMaterial()
+            {
+                CategoryName = name,
+                Description = description,
+            };
+            if (CategoryMaterialRequest.createCategoryMaterial(category)==true) {
+                MessageBox.Show("Them danh muc hang hoa thanh cong");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Them danh muc hang hoa that bai");
+            }
+        }
+
+        private void huy_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

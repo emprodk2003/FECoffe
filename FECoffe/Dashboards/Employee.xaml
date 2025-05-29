@@ -227,6 +227,7 @@
                         <TextBox Width="200" Margin="0,0,10,0" Text="Tìm kiếm..."/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm nhân viên"/>
+                        <Button Width="120" Content="Trở lại trang chủ" />
                     </StackPanel>
                     <DataGrid AutoGenerateColumns="False">
                         <DataGrid.Columns>

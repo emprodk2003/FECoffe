@@ -26,5 +26,17 @@
     <Compile Update="Dashboards\Warehouse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Form\FrmUpdate\Categorys_Material.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmUpdate\Suppliers.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\Frm_AddRole.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\User\EditUserForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

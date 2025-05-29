@@ -81,5 +81,12 @@ namespace FECoffe.Dashboards
             user.Show();
             this.Close();
         }
+
+        private void openkho_Click(object sender, RoutedEventArgs e)
+        {
+            Warehouse warehouse = new Warehouse();
+            warehouse.Show();
+            this.Close();
+        }
     }
 }
