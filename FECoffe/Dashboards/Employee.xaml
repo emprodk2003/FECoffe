@@ -224,6 +224,8 @@
             <TabItem Header="Nhân viên">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox Width="200" Margin="0,0,10,0" Text="Tìm kiếm..."/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm nhân viên"/>
@@ -247,6 +249,8 @@
             <TabItem Header="Chức vụ">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox Width="200" Text="Tìm chức vụ..." Margin="0,0,10,0"/>
                         <Button Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm chức vụ"/>
@@ -264,6 +268,8 @@
             <TabItem Header="Chấm công">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <DatePicker Width="150" Margin="0,0,10,0"/>
                         <Button Content="Lọc theo ngày"/>
                     </StackPanel>
@@ -284,6 +290,8 @@
             <TabItem Header="Bảng lương">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <ComboBox Width="150" Text="Chọn tháng" Margin="0,0,10,0"/>
                         <ComboBox Width="150" Text="Chọn năm" Margin="0,0,10,0"/>
                         <Button Content="Lọc"/>
@@ -304,6 +312,8 @@
             <TabItem Header="Lịch làm việc">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <DatePicker Width="150" Margin="0,0,10,0"/>
                         <DatePicker Width="150" Margin="0,0,10,0"/>
                         <Button Content="Lọc theo ngày"/>

@@ -133,22 +133,14 @@
             <!-- Tab: Quản lý danh mục hàng hóa -->
             <TabItem Header="Danh mục hàng hóa">
                 <StackPanel Margin="10">
-                    <Grid Margin="0,0,0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <!-- TextBox -->
-                            <ColumnDefinition Width="Auto"/>
-                            <!-- Nút Tìm -->
-                            <ColumnDefinition Width="*"/>
-                            <!-- Khoảng trống giãn -->
-                            <ColumnDefinition Width="Auto"/>
-                            <!-- Nút Thêm -->
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" Width="200" Text="Tìm kiếm danh mục..." Margin="0,0,10,0"/>
-                        <Button Grid.Column="1" Content="Tìm" Margin="0,0,10,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
+                        <TextBox Width="200" Text="Tìm kiếm danh mục..." Margin="0,0,10,0"/>
+                        <Button  Content="Tìm" Margin="0,0,10,0"/>
                         <!-- Khoảng trống tự giãn nằm ở Grid.Column="2" -->
-                        <Button Grid.Column="3" Content="Thêm" Click="Button_Click"/>
-                    </Grid>
+                        <Button  Content="Thêm" Click="Button_Click"/>
+                    </StackPanel>
                     <DataGrid AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên danh mục" Binding="{Binding CategoryName}" />
@@ -172,6 +164,8 @@
             <TabItem Header="Quản lý hàng">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox  x:Name="txtSearchMaterials" Width="200" Text="Tìm kiếm..." Margin="0,0,10,0"/>
                         <Button Content="Tìm"  Margin="0,0,10,0"/>
                         <Button Content="Thêm" />
@@ -204,6 +198,8 @@
                 <StackPanel Margin="10">
                     <!-- Bộ lọc -->
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox x:Name="txtImportIDFilter" Width="120" Margin="0,0,10,0" 
                   Text="Mã phiếu nhập" />
                         <DatePicker x:Name="dpFromDate" Width="140" Margin="0,0,10,0" />
@@ -236,6 +232,8 @@
                 <StackPanel Margin="10">
                     <!-- Bộ lọc -->
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox x:Name="txtExportIDFilter" Width="120" Margin="0,0,10,0"
                   Text="Mã phiếu xuất" />
                         <DatePicker x:Name="dpExportFromDate" Width="140" Margin="0,0,10,0" />
@@ -268,6 +266,8 @@
                 <StackPanel Margin="10">
                     <!-- Bộ lọc theo ngày -->
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
                         <DatePicker x:Name="dpLogFromDate" Width="140" Margin="0,0,10,0" />
                         <DatePicker x:Name="dpLogToDate" Width="140" Margin="0,0,10,0" />
                         <Button Content="Tìm" />
