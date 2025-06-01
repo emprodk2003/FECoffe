@@ -1,24 +1,13 @@
 ﻿using FECoffe.DTO.CategoyMaterial;
+using FECoffe.DTO.Material;
 using FECoffe.DTO.Suppliers;
-using FECoffe.DTO.User;
 using FECoffe.Form;
 using FECoffe.Form.FrmUpdate;
-using FECoffe.Form.User;
 using FECoffe.Request.CategoryMaterial;
+using FECoffe.Request.Material;
 using FECoffe.Request.Supplier;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using FECoffe.Converter;
 
 namespace FECoffe.Dashboards
 {
@@ -43,6 +32,7 @@ namespace FECoffe.Dashboards
         {
             loaddsCate();
             loaddsSuppliers();
+            loaddsMarerial();
         }
         public void loaddsCate()
         {
@@ -60,7 +50,16 @@ namespace FECoffe.Dashboards
             {
                 dgSuppliers.ItemsSource = dsSuppliers;
             }
-            else MessageBox.Show("Loi khong doc duoc CategoryMaterial!!!!!!!");
+            else MessageBox.Show("Loi khong doc duoc GetSupplier!!!!!!!");
+        }
+        public void loaddsMarerial()
+        {
+            var dsMarerial = MaterialRequest.GetMaterial();
+            if (dsMarerial != null)
+            {
+                dgMaterials.ItemsSource = dsMarerial;
+            }
+            else MessageBox.Show("Loi khong doc duoc Material!!!!!!!");
         }
         private void BackToHome_Click(object sender, RoutedEventArgs e)
         {
@@ -138,6 +137,45 @@ namespace FECoffe.Dashboards
             Frm_AddSuppliers frm = new Frm_AddSuppliers();
             frm.ShowDialog();
             loaddsSuppliers();
+        }
+
+        private void addMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            Frm_AddMaterials frm = new Frm_AddMaterials();
+            frm.ShowDialog();
+            loaddsMarerial();
+        }
+
+        private void deleteMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as FrameworkElement;
+            var selectedMaterial = button.DataContext as CrudMaterial;
+
+            if (selectedMaterial != null)
+            {
+                // Truyền dữ liệu sang window mới
+                if (MaterialRequest.deleteMaterial(selectedMaterial.MaterialID) == true)
+                {
+                    MessageBox.Show("Xóa Thành Công Hang Hoa ");
+                    loaddsMarerial();
+                }
+                else MessageBox.Show("Xóa Thất Bại Hang Hoa ");
+            }
+
+        }
+
+        private void editMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as FrameworkElement;
+            var selectedMaterial = button.DataContext as CrudMaterial;
+
+            if (selectedMaterial != null)
+            {
+                // Truyền dữ liệu sang window mới
+                var frm = new Material(selectedMaterial);
+                frm.ShowDialog(); // hoặc Show()
+                loaddsMarerial();
+            }
         }
     }
 }

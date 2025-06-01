@@ -1,24 +1,19 @@
-﻿using FECoffe.DTO.Auth;
-using FECoffe.DTO.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
+using FECoffe.DTO.Material;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FECoffe.Request.User
+namespace FECoffe.Request.Material
 {
-    public class UserRequest
+    public class MaterialRequest
     {
-        public static bool createUser(CreateUser user)
+        public static bool createMaterial(CrudMaterial data)
         {
             try
             {
-                string url = @"http://localhost:5178/api/Account/register";
+                string url = @"http://localhost:5178/api/Materials";
                 HttpClient client = new HttpClient();
-                var res = client.PostAsJsonAsync(url, user);
+                var res = client.PostAsJsonAsync(url, data);
                 res.Wait();
                 return res.Result.IsSuccessStatusCode;
             }
@@ -29,13 +24,13 @@ namespace FECoffe.Request.User
             }
         }
 
-        public static List<GetUser> GetUser()
+        public static List<CrudMaterial> GetMaterial()
         {
             try
             {
-                string url = @"http://localhost:5178/api/Role/GetAllUer";
+                string url = @"http://localhost:5178/api/Materials/GetAllCategory";
                 HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<List<GetUser>>(url);
+                var res = client.GetFromJsonAsync<List<CrudMaterial>>(url);
                 res.Wait();
                 return res.Result;
             }
@@ -45,29 +40,13 @@ namespace FECoffe.Request.User
             }
         }
 
-        public static GetInfoUser GetUserByID(Guid id)
+        public static bool updateMaterial(CrudMaterial data)
         {
             try
             {
-                string url = @"http://localhost:5178/api/Role/GetUserDetail?UserId="+id;
+                string url = @"http://localhost:5178/api/Materials"; // Giả sử `Id` là khoá chính
                 HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<GetInfoUser>(url);
-                res.Wait();
-                return res.Result;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public static bool AddRolebyUser(UpdateUser user)
-        {
-            try
-            {
-                string url = @"http://localhost:5178/api/Role/CreateUserRole";
-                HttpClient client = new HttpClient();
-                var res = client.PostAsJsonAsync(url, user);
+                var res = client.PutAsJsonAsync(url, data);
                 res.Wait();
                 return res.Result.IsSuccessStatusCode;
             }
@@ -77,7 +56,21 @@ namespace FECoffe.Request.User
                 return false;
             }
         }
-
-      
+        public static bool deleteMaterial(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Materials?id=" + id;
+                HttpClient client = new HttpClient();
+                var res = client.DeleteAsync(url);
+                res.Wait();
+                return res.Result.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

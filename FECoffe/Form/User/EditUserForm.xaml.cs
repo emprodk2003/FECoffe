@@ -26,7 +26,7 @@ namespace FECoffe.Form.User
     public partial class EditUserForm : Window
     {
         public GetUser _user {  get; set; }
-        string userid;
+        Guid userid;
         public EditUserForm(GetUser user)
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace FECoffe.Form.User
             var addRole = new UpdateUser
             {
                 userID= userid,
-                roleID=selectedRole.ID
+                roleID=selectedRole.RoleID
             };
 
             if (UserRequest.AddRolebyUser(addRole) == true)

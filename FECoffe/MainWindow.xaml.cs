@@ -2,6 +2,7 @@
 using FECoffe.DTO.Auth;
 using FECoffe.Request.Auth;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -27,20 +28,42 @@ namespace FECoffe
             Application.Current.Shutdown();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            btnLogin.IsEnabled = false;
+            btnText.Text = "Loading...";
+            await Task.Delay(2);
             var handler = new JwtSecurityTokenHandler();
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             string email = txtUsername.Text;
-            string pass= txtPassword.Password;
-
-            AuthAdmin login = new AuthAdmin
+            string pass = txtPassword.Password;
+            var resultAuth = new AuthAdmin();
+            if (Regex.IsMatch(email, pattern))
             {
-                Email = email,
-                Password = pass
-            };
+                AuthAdmin login = new AuthAdmin
+                {
+                    Email = email,
+                    UserName="",
+                    Password = pass
+                };
+                resultAuth=login;
+                btnText.Text = "Login";
+                btnLogin.IsEnabled = true;
+            }
+            else
+            {
+                AuthAdmin login = new AuthAdmin
+                {
+                    Email="",
+                    UserName = email,
+                    Password = pass
+                };
+                resultAuth = login;
+                btnText.Text = "Login";
+                btnLogin.IsEnabled = true;
+            }
 
-            
-            var result=  AuthAdminRequest.login(login);
+            var result = AuthAdminRequest.login(resultAuth);
             if (result != null && !string.IsNullOrEmpty(result.Token))
             {
                 var jwt = handler.ReadJwtToken(result.Token);
@@ -58,12 +81,17 @@ namespace FECoffe
                 }
                 else
                 {
+                    btnText.Text = "Login";
+                    btnLogin.IsEnabled = true;
                     MessageBox.Show("Bạn không có quyền truy cập.");
                 }
             }
             else
             {
+                btnText.Text = "Login";
+                btnLogin.IsEnabled = true;
                 MessageBox.Show("Đăng nhập thất bại.");
+
             }
         }
     }

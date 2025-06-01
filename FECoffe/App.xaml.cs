@@ -20,6 +20,7 @@ namespace FECoffe
 
         public string IdUser => JwtToken?.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
         public string UserEmail => JwtToken?.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        public string UserName => JwtToken?.Claims.FirstOrDefault(c => c.Type == "userName")?.Value;
 
         // Lấy vai trò từ token
         public string UserRole => JwtToken?.Claims.FirstOrDefault(c => c.Type == "role" || c.Type == "roles")?.Value;

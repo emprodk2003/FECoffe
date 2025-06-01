@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Dashboards"
+        xmlns:conv="clr-namespace:FECoffe.Converter"
         mc:Ignorable="d"
         Title="Warehouse" Height="550" Width="900" Loaded="Window_Loaded">
     <Window.Resources>
@@ -127,6 +128,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <conv:UserIdToUsernameConverter x:Key="UserConverter"/>
     </Window.Resources>
     
     <Grid>
@@ -209,7 +212,7 @@
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <TextBox  x:Name="txtSearchMaterials" Width="200" Text="Tìm kiếm..." Margin="0,0,10,0"/>
                             <Button Content="Tìm"  Margin="0,0,10,0"/>
-                            <Button Content="Thêm" />
+                            <Button Content="Thêm" x:Name="addMaterial" Click="addMaterial_Click"/>
                         </StackPanel>
                         <DataGrid x:Name="dgMaterials" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
@@ -217,14 +220,18 @@
                                 <DataGridTextColumn Header="Đơn vị" Binding="{Binding Unit}"/>
                                 <DataGridTextColumn Header="Tồn kho" Binding="{Binding Quantity}"/>
                                 <DataGridTextColumn Header="Giá mua" Binding="{Binding PurchasePrice}"/>
-                                <DataGridTextColumn Header="Người cập nhật" Binding="{Binding UserId}"/>
+                                <DataGridTextColumn Header="Người cập nhật">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="UserID" Converter="{StaticResource UserConverter}" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
                                 <DataGridTextColumn Header="Ngày cập nhật" Binding="{Binding UpdatedAt}"/>
                                 <DataGridTemplateColumn Header="Hành động" Width="150">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <Button Content="Sửa"  Margin="0,0,5,0"/>
-                                                <Button Content="Xóa" />
+                                                <Button Content="Sửa"  Margin="0,0,5,0" x:Name="editMaterial" Click="editMaterial_Click" />
+                                                <Button Content="Xóa" x:Name="deleteMaterial" Click="deleteMaterial_Click" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
