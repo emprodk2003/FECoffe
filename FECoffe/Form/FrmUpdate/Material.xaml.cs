@@ -1,33 +1,34 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.Material;
+﻿using FECoffe.DTO.Material;
+using FECoffe.DTO.Suppliers;
 using FECoffe.Request.CategoryMaterial;
 using FECoffe.Request.Material;
+using FECoffe.Request.Role;
 using FECoffe.Request.Supplier;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace FECoffe.Form
+namespace FECoffe.Form.FrmUpdate
 {
     /// <summary>
-    /// Interaction logic for Frm_AddMaterials.xaml
+    /// Interaction logic for Material.xaml
     /// </summary>
-    public partial class Frm_AddMaterials : Window
+    public partial class Material : Window
     {
+        public CrudMaterial crudMaterial {  get; set; }
+        public int id { get; set; }
         public string userId { get; set; }
-        public Frm_AddMaterials()
+        public Material(CrudMaterial material)
         {
             InitializeComponent();
+            crudMaterial = material;
+            txtMaterialName.Text=material.MaterialName;
+            txtUnit.Text = material.Unit;
+            txtQuantity.Text = (material.Quantity).ToString();
+            txtPurchasePrice.Text=(material.PurchasePrice).ToString();
+            txtMinStock.Text=(material.MinStock).ToString();
+            cbCategory.SelectedItem=material.CategoryID;
+            cbSupplier.SelectedItem = material.SupplierID;
+            id=material.MaterialID;
+            
             var app = (App)Application.Current;
             userId = app.IdUser;
         }
@@ -38,24 +39,23 @@ namespace FECoffe.Form
             {
                 MaterialName = txtMaterialName.Text,
                 Unit = txtUnit.Text,
+                MaterialID=id,
                 MinStock = int.Parse(txtMinStock.Text),
-                Quantity = float.Parse(txtQuantity.Text),
-                PurchasePrice = decimal.Parse(txtPurchasePrice.Text),
-                CategoryID = (int)cbCategory.SelectedValue,
-                SupplierID = (int)cbSupplier.SelectedValue,
-                UpdatedAt = DateTime.Now,
+                Quantity=float.Parse(txtQuantity.Text),
+                PurchasePrice=decimal.Parse(txtPurchasePrice.Text),
+                CategoryID=int.Parse(cbCategory.Text),
+                SupplierID=int.Parse(cbSupplier.Text),
                 UserID=Guid.Parse(userId),
-                CreatedAt = DateTime.Now,
-                ExpirationDate=dpExpirationDate.SelectedDate.Value
+                UpdatedAt=DateTime.Now,
             };
 
-            if (MaterialRequest.createMaterial(newMaterial) == true)
+            if (MaterialRequest.updateMaterial(newMaterial) == true)
             {
-                MessageBox.Show("Them Thành Công hang hoa ");
+                MessageBox.Show("Sua Thành Công hang hoa ");
                 this.Close();
             }
             else
-                MessageBox.Show("Them thất bại hang hoa ");
+                MessageBox.Show("Sua thất bại hang hoa ");
         }
 
         private void huy_Click(object sender, RoutedEventArgs e)
@@ -65,6 +65,7 @@ namespace FECoffe.Form
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
             var categoryMaterial = CategoryMaterialRequest.GetCategoryMaterial();
             if (categoryMaterial != null)
             {

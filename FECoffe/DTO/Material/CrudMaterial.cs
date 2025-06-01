@@ -1,11 +1,5 @@
-﻿using FECoffe.DTO.ExportDetail;
-using FECoffe.Form.FrmUpdate;
-using System;
-using System.Collections.Generic;
+﻿using FECoffe.DTO.User;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FECoffe.DTO.Material
 {
@@ -16,6 +10,7 @@ namespace FECoffe.DTO.Material
         [Required]
         public string MaterialName { get; set; }
         public string Unit { get; set; }
+        public int SupplierID { get; set; }
         public int CategoryID { get; set; }
         public int MinStock { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -23,7 +18,7 @@ namespace FECoffe.DTO.Material
         public float Quantity { get; set; }
         public decimal PurchasePrice { get; set; }
         public Guid UserID { get; set; }
-        // public User User { get; set; }
+        public GetUser User { get; set; }
         public DateTime ExpirationDate { get; set; }
         //public Categories_Material Categories_Material { get; set; }
         //public List<ExportDetails> ExportDetails { get; set; }

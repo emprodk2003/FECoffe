@@ -21,6 +21,7 @@ namespace FECoffe.Form.FrmUpdate
             txtAddress.Text = suppliers.Address;
             id=suppliers.SupplierID;
             createat=suppliers.CreatedAt;
+
         }
 
         private void luu_Click(object sender, RoutedEventArgs e)

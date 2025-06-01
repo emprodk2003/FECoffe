@@ -1,17 +1,16 @@
-﻿<Window x:Class="FECoffe.Form.Frm_AddMaterials"
+﻿<Window x:Class="FECoffe.Form.FrmUpdate.Material"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FECoffe.Form"
+        xmlns:local="clr-namespace:FECoffe.Form.FrmUpdate"
         mc:Ignorable="d"
-       Title="Thêm nguyên vật liệu" Height="500" Width="480"
+        Title="Sua Hang Hoa" Height="500" Width="480"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
         ShowInTaskbar="False"
         Background="#f4f4f4"
         ResizeMode="NoResize" Loaded="Window_Loaded">
-
     <Window.Resources>
         <!-- Style tái sử dụng -->
         <Style TargetType="TextBox">
@@ -59,7 +58,7 @@
 
     <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock Text="Thêm Nguyên Vật Liệu" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Sua Nguyên Vật Liệu" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Tên nguyên vật liệu:" Width="150" VerticalAlignment="Center"/>
@@ -73,7 +72,8 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Phân loại:" Width="150" VerticalAlignment="Center"/>
-                <ComboBox x:Name="cbCategory" Width="250" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryID" />
+                <ComboBox x:Name="cbCategory" Width="250" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryID"/>
+
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

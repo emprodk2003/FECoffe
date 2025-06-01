@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Dashboards"
+        xmlns:conv="clr-namespace:FECoffe.Converter"
         mc:Ignorable="d"
         Title="Quanlytaikkhoan" Height="720" Width="1080"  Loaded="Window_Loaded">
     <Window.Resources>
@@ -216,6 +217,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <conv:RoleIdToRoleNameCoverter x:Key="RoleConverter"/>
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -242,7 +245,11 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding username}" Width="*"/>
                             <DataGridTextColumn Header="Email" Binding="{Binding email}" Width="*"/>
-                            <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="*"/>
+                            <DataGridTextColumn Header="Role" Width="*">
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="roleId" Converter="{StaticResource RoleConverter}" />
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding LockoutEnabled}" Width="100"/>
                             <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedAtFormatted}" Width="120"/>
                             <DataGridTemplateColumn Header="Hành động" Width="250">
