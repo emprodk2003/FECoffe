@@ -346,7 +346,7 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}"  Click="openEmployee_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountClock" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Cham Cong"/>

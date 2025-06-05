@@ -1,0 +1,103 @@
+﻿<Window x:Class="FECoffe.Form.Frm_AddSalaries"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FECoffe.Form"
+        mc:Ignorable="d"
+        Title="Thêm bang luong" Height="500" Width="480"
+         WindowStartupLocation="CenterScreen"
+         WindowStyle="SingleBorderWindow"
+         ShowInTaskbar="False"
+         Background="#f4f4f4"
+         ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!-- Style tái sử dụng -->
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="BorderBrush" Value="#007ACC"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <TextBlock Text="Thêm Bang Luong" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Nhan vien:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbnhanvien" Width="250" DisplayMemberPath="FullName" SelectedValuePath="EmployeeID"/>
+            </StackPanel>
+            
+            <!-- Họ và tên -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Bang luong thang:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Thang:" Width="50" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtMonth" Width="50" Margin="0,0,10,5"/>
+                <TextBlock Text="Nam:" Width="50" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtYear" Width="50"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Tong thoi gian lam viec:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtTotalWorkingHours" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Tien thuong:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtBonus" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Tien phat:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtPenalty" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Tong luong:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtFinalSalary" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0" >
+                <Button Content="Lưu" x:Name="btnSave" Click="save_Click"/>
+                <Button Content="Hủy" x:Name="btnCancel" Background="#888" BorderBrush="#888" Click="btnCancel_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
