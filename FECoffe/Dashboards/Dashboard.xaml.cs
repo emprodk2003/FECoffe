@@ -88,5 +88,12 @@ namespace FECoffe.Dashboards
             warehouse.Show();
             this.Close();
         }
+
+        private void openEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Employee employee = new Employee();
+            employee.Show();
+            this.Close();
+        }
     }
 }
