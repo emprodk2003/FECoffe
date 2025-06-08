@@ -6,7 +6,10 @@
 *.futdcache.v2
 *.bin
 *.config
-
+*.csproj.user
+*.user
+*.userosscache
+*.sln.docstates
 # Bỏ qua các file JSON backup
 #*.backup.json
 
@@ -21,6 +24,7 @@
 #**/*.json
 **/*.editorconfig
 **/*.props
+
 
 # Bỏ qua các file specific từ hình ảnh của bạn
 .vs/ProjectEvaluation/
