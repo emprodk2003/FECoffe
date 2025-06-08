@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Dashboards"
         mc:Ignorable="d"
-        Title="Product" Height="450" Width="800">
+        Title="Product" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- TabControl Style -->
         <Style TargetType="TabControl">
@@ -214,13 +214,15 @@
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="10" Height="35" Width="100"/>
-                        <TextBox Width="200" Text="Tìm kiếm danh mục..." Margin="0,0,10,0"/>
-                        <Button Content="Tìm" Margin="0,0,10,0"/>
-                        <Button Content="Thêm"/>
-                        <Button Width="120" Content="Trở lại trang chủ" />
+Margin="0,0,10,0" Height="35" Width="100"/>
+                        <TextBox x:Name="txt_FindCate" Width="200" Margin="0,0,10,0"/>
+                        <Button Click="FindCate_Click" Content="Tìm" Margin="0,0,10,0"/>
+                        <Button Content="Thêm" Click="themCateProduct_Click" Margin="0,0,10,0"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
                     </StackPanel>
-                    <DataGrid AutoGenerateColumns="False">
+                    <DataGrid x:Name="dgCategories_Product" ItemsSource="{Binding Categories_ProductViewModel}" IsReadOnly="True" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên danh mục" Binding="{Binding CategoryName}" />
                             <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" />
@@ -228,8 +230,8 @@ Margin="10" Height="35" Width="100"/>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Sửa" Margin="0,0,5,0"/>
-                                            <Button Content="Xóa"/>
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_cateproduct" Click="edit_cateproduct_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_cateproduct" Click="delete_cateproduct_Click"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -244,22 +246,66 @@ Margin="10" Height="35" Width="100"/>
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="10" Height="35" Width="100"/>
-                        <TextBox Width="200" Text="Tìm kiếm món..." Margin="0,0,10,0"/>
-                        <Button Content="Tìm" Margin="0,0,10,0"/>
-                        <Button Content="Thêm"/>
+Margin="0,0,10,0" Height="35" Width="100"/>
+                        <TextBox Width="200" x:Name="txt_FindName_Product"  Margin="0,0,10,0"/>
+                        <ComboBox Width="200" x:Name="cbCategories" DisplayMemberPath="CategoryName"
+                                                                    SelectedValuePath="CategoryID"
+                                                                    Margin="0,0,10,0" />
+                        <Button Content="Tìm"  Click="FindProduct_Click" Margin="0,0,10,0"/>
+                        <Button Content="Thêm" Click="themProduct_Click"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
                     </StackPanel>
-                    <DataGrid AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_Product" ItemsSource="{Binding ProductViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên món" Binding="{Binding ProductName}"/>
                             <DataGridTextColumn Header="Giá" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="Danh mục" Binding="{Binding Category.CategoryName}"/>
+                            <DataGridTextColumn Header="Danh mục" Binding="{Binding Category_Name}"/>
+                            <DataGridTextColumn Header="Gia von" Binding="{Binding CostPrice}"/>
+                            <DataGridTextColumn Header="Gia ban" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="Ghi chu" Binding="{Binding Description}"/>
+                            <DataGridTextColumn Header="Trang thai" Binding="{Binding Trangthai}"/>
+                            <DataGridTextColumn Header="Hinh anh" Binding="{Binding UrlImg}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Sửa" Margin="0,0,5,0"/>
-                                            <Button Content="Xóa"/>
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_Product" Click="edit_cProduct_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_Product" Click="delete_Product_Click"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Topping">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100"/>
+                        <TextBlock Text="Ten topping: " Margin="5,2,0,0" Foreground="Gray"/>
+                        <TextBox Width="200" x:Name="txt_FindTopping"  Margin="0,0,10,0"/>
+                        <Button Content="Tìm" Click="FindTopping_Click" Margin="0,0,10,0"/>
+                        <Button Content="Thêm" Click="ThemTopping_CLick"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
+                    </StackPanel>
+                    <DataGrid x:Name="dg_Topping" ItemsSource="{Binding ToppingViewModel}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tên Topping" Binding="{Binding ToppingName}"/>
+                            <DataGridTextColumn Header="Don gia" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="Trang thai" Binding="{Binding Trangthai}"/>
+                            <DataGridTemplateColumn Header="Hành động" Width="150">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_Topping" Click="edit_Topping_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_Topping" Click="delete_Topping_Click"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -275,25 +321,27 @@ Margin="10" Height="35" Width="100"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="10" Height="35" Width="100"/>
-                        <ComboBox Width="250"
-                             DisplayMemberPath="ProductName"
-                              SelectedItem="{Binding SelectedProduct}"
-                              ItemsSource="{Binding Products}"
+                        <ComboBox Width="250" x:Name="cb_Productsize"
+                               DisplayMemberPath="ProductName"
+                               SelectedValuePath="ProductID"
                                Margin="0,0,10,0"/>
-                        <Button Content="Tìm" Margin="0,0,10,0"/>
-                        <Button Content="Thêm"/>
+                        <Button Click="GetSizeByProduct_Click" Content="Tìm" Margin="0,0,10,0"/>
+                        <Button Click="themSize_Click" Content="Thêm"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Size_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
                     </StackPanel>
-                    <DataGrid AutoGenerateColumns="False">
+                    <DataGrid IsReadOnly="True" x:Name="dg_ProductSize" ItemsSource="{Binding ProductSizeViewModel}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Tên món" Binding="{Binding Products.ProductName}"/>
+                            <DataGridTextColumn Header="Tên món" Binding="{Binding ProductName}"/>
                             <DataGridTextColumn Header="Kích cỡ" Binding="{Binding SizeName}"/>
                             <DataGridTextColumn Header="Giá phụ thu" Binding="{Binding AdditionalPrice}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Sửa" Margin="0,0,5,0"/>
-                                            <Button Content="Xóa"/>
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_ProductSize" Click="edit_ProductSize_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_ProductSize" Click="delete_ProductSize_Click"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -309,20 +357,23 @@ Margin="10" Height="35" Width="100"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBox Width="200" Text="Tìm bàn..." Margin="0,0,10,0"/>
-                        <Button Content="Tìm" Margin="0,0,10,0"/>
-                        <Button Content="Thêm"/>
+                        <TextBox Width="200" x:Name="txt_FindTable" Margin="0,0,10,0"/>
+                        <Button Content="Tìm" Click="FindTable_CLick" Margin="0,0,10,0"/>
+                        <Button Content="Thêm" Click="themTable_Click"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
                     </StackPanel>
-                    <DataGrid AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_Table" ItemsSource="{Binding TableViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên bàn" Binding="{Binding TableName}"/>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding trangthai}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Sửa" Margin="0,0,5,0"/>
-                                            <Button Content="Xóa"/>
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_Table" Click="edit_Table_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_Table" Click="delete_Table_Click"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

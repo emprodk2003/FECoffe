@@ -15,36 +15,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FECoffe.Form
+namespace FECoffe.Form.FrmUpdate
 {
     /// <summary>
-    /// Interaction logic for Frm_AddProduct.xaml
+    /// Interaction logic for Frm_Update_Product.xaml
     /// </summary>
-    public partial class Frm_AddProduct : Window
+    public partial class Frm_Update_Product : Window
     {
-        public Frm_AddProduct()
+        private ProductViewModel _product;
+        public Frm_Update_Product(ProductViewModel product)
         {
             InitializeComponent();
+            _product = product;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(txtCostPrice.Text) || string.IsNullOrWhiteSpace(txtPrice.Text) || string.IsNullOrWhiteSpace(txtProductName.Text) || cbCategory.SelectedValue == null)
+            if (string.IsNullOrWhiteSpace(txtCostPrice.Text) || string.IsNullOrWhiteSpace(txtPrice.Text) || string.IsNullOrWhiteSpace(txtProductName.Text) || cbCategory.SelectedValue == null)
             {
                 MessageBox.Show("Vui long dien day du thong tin!");
             }
-            else if (!decimal.TryParse(txtCostPrice.Text, out decimal costPrice) || costPrice < 0)
+            else if (!decimal.TryParse(txtCostPrice.Text, out decimal costPrice))
             {
                 MessageBox.Show("Giá vốn không hợp lệ!");
             }
-            else if (!decimal.TryParse(txtPrice.Text, out decimal price) || costPrice < 0)
+            else if (!decimal.TryParse(txtPrice.Text, out decimal price))
             {
                 MessageBox.Show("Giá bán không hợp lệ!");
             }
             else
             {
-                var pro = new CrudProduct()
+                var pro = new ProductViewModel()
                 {
+                    ProductID = _product.ProductID,
                     ProductName = txtProductName.Text,
                     CategoryID = (int)cbCategory.SelectedValue,
                     CostPrice = decimal.Parse(txtCostPrice.Text),
@@ -53,17 +56,22 @@ namespace FECoffe.Form
                     IsAvailable = chkIsAvailable.IsChecked.Value,
                     UrlImg = txtUrlImg.Text
                 };
-                if (ProductRequest.createProduct(pro) == true)
+                if (ProductRequest.updateProduct(pro) == true)
                 {
-                    MessageBox.Show("Them thuc don moi thanh cong!");
+                    MessageBox.Show("Sua thong tin thuc don moi thanh cong!");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Them thuc don moi that bai!");
+                    MessageBox.Show("Sua thong tin thuc don moi that bai!");
                     this.Close();
                 }
             }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
         private void hienthicategories_product()
         {
@@ -77,14 +85,19 @@ namespace FECoffe.Form
                 MessageBox.Show("Khong co du lieu cho danh muc thuc don!");
             }
         }
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             hienthicategories_product();
+            if(_product != null)
+            {
+                txtCostPrice.Text = _product.CostPrice.ToString();
+                txtDescription.Text = _product.Description;
+                txtPrice.Text = _product.Price.ToString();
+                txtProductName.Text = _product.ProductName;
+                txtUrlImg.Text = _product.UrlImg;
+                cbCategory.SelectedValue = _product.CategoryID;
+                chkIsAvailable.IsChecked = _product.IsAvailable;
+            }
         }
     }
 }

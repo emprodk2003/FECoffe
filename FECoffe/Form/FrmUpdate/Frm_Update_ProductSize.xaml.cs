@@ -1,4 +1,4 @@
-﻿using FECoffe.DTO.Product;
+﻿using FECoffe.Dashboards;
 using FECoffe.DTO.ProductSize;
 using FECoffe.Request.ProductSize;
 using System;
@@ -15,23 +15,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FECoffe.Form
+namespace FECoffe.Form.FrmUpdate
 {
     /// <summary>
-    /// Interaction logic for Frm_AddProductSize.xaml
+    /// Interaction logic for Frm_Update_ProductSize.xaml
     /// </summary>
-    public partial class Frm_AddProductSize : Window
+    public partial class Frm_Update_ProductSize : Window
     {
-        private ProductViewModel _product;
-        public Frm_AddProductSize(ProductViewModel product)
+        private ProductSizeViewModel _size;
+        public Frm_Update_ProductSize(ProductSizeViewModel size)
         {
             InitializeComponent();
-            _product = product;
+            _size = size;
         }
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(txtSizeName.Text) || string.IsNullOrWhiteSpace(txtAdditionalPrice.Text))
+            if (string.IsNullOrWhiteSpace(txtSizeName.Text) || string.IsNullOrWhiteSpace(txtAdditionalPrice.Text))
             {
                 MessageBox.Show("Vui long dien thong tin!");
             }
@@ -42,20 +42,21 @@ namespace FECoffe.Form
             }
             else
             {
-                var size = new CrudProductSize()
+                var size = new ProductSizeViewModel()
                 {
-                    ProductID = _product.ProductID,
+                    ProductID = _size.ProductID,
+                    ProductSizeID = _size.ProductSizeID,
                     SizeName = txtSizeName.Text,
                     AdditionalPrice = decimal.Parse(txtAdditionalPrice.Text)
                 };
-                if (ProductSizeRequest.createProduct(size) == true)
+                if (ProductSizeRequest.updateProduct(size) == true)
                 {
-                    MessageBox.Show("Them size cho" + _product.ProductName + "thanh cong.");
+                    MessageBox.Show("Sua thong tin size cho" + _size.ProductName + "thanh cong.");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Them size cho" + _product.ProductName + "that bai.");
+                    MessageBox.Show("Sua thong tin size cho" + _size.ProductName + "that bai.");
                     this.Close();
                 }
             }
@@ -68,9 +69,11 @@ namespace FECoffe.Form
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_product != null)
+            if (_size != null)
             {
-                txtProduct.Text = _product.ProductName;
+                txtAdditionalPrice.Text = _size.AdditionalPrice.ToString();
+                txtProduct.Text = _size.ProductName;
+                txtSizeName.Text = _size.SizeName;
             }
         }
     }

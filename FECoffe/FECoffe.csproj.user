@@ -29,13 +29,25 @@
     <Compile Update="Form\FrmUpdate\Categorys_Material.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Form\FrmUpdate\Frm_Update_CategoriesProduct.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Form\FrmUpdate\Frm_Update_Employee.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Form\FrmUpdate\Frm_Update_EmployeeSchedules.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Form\FrmUpdate\Frm_Update_OrderNumberTag.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Form\FrmUpdate\Frm_Update_Position.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmUpdate\Frm_Update_Product.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmUpdate\Frm_Update_ProductSize.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Form\FrmUpdate\Frm_Update_Salaries.xaml.cs">
@@ -45,6 +57,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Form\FrmUpdate\Frm_Update_Timekeeping.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmUpdate\Frm_Update_Topping.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Form\FrmUpdate\Material.xaml.cs">
