@@ -62,42 +62,28 @@ namespace FECoffe.Dashboards
         {
             CreateUpdateFormUser form = new CreateUpdateFormUser();
             form.Show();
-            loadUser();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
- 
-            loadUser();
-            loadRole();
-        }
-        public void loadUser()
-        {
             var dsUser = UserRequest.GetUser();
-            foreach (var user in dsUser)
-            {
-                var roles = UserRequest.GetRolesByUserID(user.ID);
-                user.roles = roles;
-            }
             if (dsUser != null)
             {
                 dg_user.ItemsSource = dsUser;
             }
             else MessageBox.Show("Loi khong doc duoc user!!!!!!!");
-        }
-        public void loadRole()
-        {
+
             var dsRole = RoleRequest.GetRoles();
-            if (dsRole != null)
+            if (dsUser != null)
             {
                 dg_role.ItemsSource = dsRole;
             }
             else MessageBox.Show("Loi khong doc duoc role!!!!!!!");
         }
+
         private void Themquyen_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddRole form = new Frm_AddRole();
             form.Show();
-            loadRole();
         }
 
 
@@ -111,7 +97,6 @@ namespace FECoffe.Dashboards
                 // Truyền dữ liệu sang window mới
                 var addrole = new EditUserForm(selectedRole);
                 addrole.ShowDialog(); // hoặc Show()
-                loadUser();
             }
         }
     }

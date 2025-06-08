@@ -1,5 +1,7 @@
-﻿using FECoffe.Request.Role;
+﻿using FECoffe.DTO.Role;
+using FECoffe.Request.Role;
 using FECoffe.Request.User;
+using System.Data;
 using System.Globalization;
 using System.Windows.Data;
 
@@ -9,17 +11,14 @@ namespace FECoffe.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            var rolename = string.Empty;
-            if (value is Guid roleId)
+            
+            var listuser = UserRequest.GetUser();
+            if (value is Guid userId)
             {
-                var roles = RoleRequest.GetRoles();
-                foreach (var role in roles)
+                foreach (var user in listuser)
                 {
-                    if (role.Id == roleId)
-                    {
-                        return rolename = role.Name;
-                    }
+                    var infouser = UserRequest.GetUserByID(user.ID);
+                    return infouser.Roles;        
                 }
                 return "N/A";
             }

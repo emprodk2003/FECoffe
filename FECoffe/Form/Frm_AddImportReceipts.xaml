@@ -9,11 +9,9 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow"
-        xmlns:conv="clr-namespace:FECoffe.Converter"
         ShowInTaskbar="False"
-        Title="Thêm đơn nhập phiếu" Height="680" Width="800" Loaded="Window_Loaded">
+        Title="Themdonxuat" Height="600" Width="800">
     <Window.Resources>
-        <conv:MaterialIdToMateriaName x:Key="MaterialConverter"/>
         <!-- Button Style -->
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
@@ -120,111 +118,50 @@
     <StackPanel Margin="10">
         <!-- Thông tin phiếu xuất -->
         <GroupBox Header="Thông tin phiếu xuất" Margin="0,0,0,3">
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <!-- Cột trái -->
-                <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="Ngày nhập:" Width="100" VerticalAlignment="Center"/>
-                        <DatePicker x:Name="ExportDatePicker" Height="30" SelectedDate="{x:Static sys:DateTime.Now}" Width="180"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="Nhà cung cấp:" Width="100" VerticalAlignment="Center"/>
-                        <ComboBox Style="{StaticResource StyledComboBox}" x:Name="cbSupplier"
+            <StackPanel Margin="10">
+                <StackPanel Orientation="Horizontal" Margin="0,4">
+                    <TextBlock Text="Ngày nhập:" Width="100" Margin="0,0,0,10" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="ExportDatePicker" Height="40" SelectedDate="{x:Static sys:DateTime.Now}" Margin="6,0,0,10"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,4">
+                    <TextBlock Text="Nhà cung cấp:" Margin="0,0,0,10" Width="100" VerticalAlignment="Center"/>
+                    <ComboBox Style="{StaticResource StyledComboBox}"
                           ItemsSource="{Binding Suppliers}"
                           DisplayMemberPath="SupplierName"
                           SelectedValuePath="SupplierID"
-                          SelectionChanged="cbSupplier_SelectionChanged"
-                          Width="250"
+                          Margin="6,0,0,10"
                           SelectedValue="{Binding SelectedSupplierID}" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="Ghi chú:" Width="100" VerticalAlignment="Top"/>
-                        <TextBox Text="{Binding Note}" Width="250" AcceptsReturn="True" Height="60" x:Name="txtNote" />
-                    </StackPanel>
                 </StackPanel>
-
-                <!-- Cột phải -->
-                <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="Nguyên vật liệu:" Width="100" VerticalAlignment="Center"/>
-                        <ComboBox Style="{StaticResource StyledComboBox}"
-                          ItemsSource="{Binding Materials}"
-                          DisplayMemberPath="MaterialName"
-                          SelectedValuePath="MaterialID"
-                          Width="250"
-                          x:Name="cbMaterial"
-                          SelectedValue="{Binding SelectedMaterialID}" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="Số lượng:" Width="100" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Quantity}" Width="100" x:Name="txtQuantity" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="Đơn giá:" Width="100" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Price}" x:Name="txtPrice" Width="100" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="Hạn sử dụng:" Width="100" VerticalAlignment="Center"/>
-                        <DatePicker SelectedDate="{Binding ExpirationDate}" x:Name="dpExpiration" Width="150" />
-                    </StackPanel>
-                    <Button Content="Vào nguyên liệu vào chi tiết"
-                        Width="200"
-                        Height="30"
-                        Margin="100,10,0,0"
-                        Command="{Binding AddMaterialToDetailCommand}"
-                        x:Name="AddMaterialToDetailCommand" Click="AddMaterialToDetailCommand_Click"/>
+                <StackPanel Orientation="Horizontal" Margin="0,4">
+                    <TextBlock Text="Ghi chú:" Margin="0,0,0,10" Width="100" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding Note}" Width="400" AcceptsReturn="True" />
                 </StackPanel>
-            </Grid>
+            </StackPanel>
         </GroupBox>
-
-
 
         <!-- Chi tiết phiếu xuất -->
         <GroupBox Header="Chi tiết xuất nguyên vật liệu">
-            <DataGrid x:Name="dgImportDetails"
-                    ItemsSource="{Binding ExportDetails}"
-                    AutoGenerateColumns="False" Height="220"
-                     SelectionChanged="dgImportDetails_SelectionChanged"
-                    CanUserAddRows="True">
+            <DataGrid x:Name="dgExportDetails"
+        ItemsSource="{Binding ExportDetails}"
+        AutoGenerateColumns="False" Height="220"
+          CanUserAddRows="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nguyên vật liệu"  Width="150">
-                                        
-                        <DataGridTextColumn.Binding>
-                            <Binding Path="MaterialID" Converter="{StaticResource MaterialConverter}" />
-                        </DataGridTextColumn.Binding>
-                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Nguyên vật liệu"
+Binding="{Binding Quantity}" Width="150"/>
                     <DataGridTextColumn Header="Số lượng"
-                                        Binding="{Binding Quantity}" Width="90"/>
+                                      Binding="{Binding Quantity}" Width="100"/>
+                    <DataGridTextColumn Header="Don vi"
+                  Binding="{Binding Quantity}" Width="100"/>
                     <DataGridTextColumn Header="Đơn giá"
-                                        Binding="{Binding Price}" Width="90"/>
+Binding="{Binding Price}" Width="100"/>
                     <DataGridTextColumn Header="Thành tiền"
-                                        Binding="{Binding TotalPrice}" Width="100"/>
-                    <DataGridTextColumn Header="Hạn sử dụng" Binding="{Binding ExpirationDate}" Width="150"/>
-                    <DataGridTemplateColumn Header="Hành động" Width="150">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="Sửa" Margin="0,0,5,0" x:Name="updateimpordetal" Click="updateimpordetal_Click"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+Binding="{Binding TotalPrice}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
         <!-- Nút thao tác -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="Lưu" Width="100" Margin="5" x:Name="luu" Click="luu_Click" />
+            <Button Content="Lưu" Width="100" Margin="5" />
             <Button Content="Hủy" Width="100" Margin="5" />
         </StackPanel>
     </StackPanel>

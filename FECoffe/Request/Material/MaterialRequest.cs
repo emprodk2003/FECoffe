@@ -40,21 +40,6 @@ namespace FECoffe.Request.Material
             }
         }
 
-        public static CrudMaterial GetMaterialByID(int id)
-        {
-            try
-            {
-                string url = @"http://localhost:5178/api/Materials/GetByID?id="+id;
-                HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<CrudMaterial>(url);
-                res.Wait();
-                return res.Result;
-            }
-            catch
-            {
-                return null;
-            }
-        }
         public static bool updateMaterial(CrudMaterial data)
         {
             try
@@ -85,38 +70,6 @@ namespace FECoffe.Request.Material
             {
                 Console.WriteLine("Lỗi: " + ex.Message);
                 return false;
-            }
-        }
-
-        public static List<CrudMaterial> GetMaterialBySuppliersID(int id)
-        {
-            try
-            {
-                string url = @"http://localhost:5178/api/Materials/GetBySuppliers?id="+id;
-                HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<List<CrudMaterial>>(url);
-                res.Wait();
-                return res.Result;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public static List<CrudMaterial> GetMaterialByName(string name)
-        {
-            try
-            {
-                string url = @"http://localhost:5178/api/Materials/GetMaterialByName?name=" + name;
-                HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<List<CrudMaterial>>(url);
-                res.Wait();
-                return res.Result;
-            }
-            catch
-            {
-                return null;
             }
         }
     }

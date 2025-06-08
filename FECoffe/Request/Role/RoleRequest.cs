@@ -24,13 +24,13 @@ namespace FECoffe.Request.Role
                 return false;
             }
         }
-        public static List<GetListRole> GetRoles()
+        public static List<GetRoles> GetRoles()
         {
             try
             {
                 string url = @"http://localhost:5178/api/Role/GetAllRole";
                 HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<List<GetListRole>>(url);
+                var res = client.GetFromJsonAsync<List<GetRoles>>(url);
                 res.Wait();
                 return res.Result;
             }
