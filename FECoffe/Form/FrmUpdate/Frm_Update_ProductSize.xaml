@@ -1,11 +1,11 @@
-﻿<Window x:Class="FECoffe.Form.Frm_AddProductSize"
+﻿<Window x:Class="FECoffe.Form.FrmUpdate.Frm_Update_ProductSize"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FECoffe.Form"
+        xmlns:local="clr-namespace:FECoffe.Form.FrmUpdate"
         mc:Ignorable="d"
-        Title="Thêm Kích Cỡ Món" Height="320" Width="400"
+        Title="Sua thong tin Cỡ Món" Height="320" Width="400"
         WindowStartupLocation="CenterScreen"
         Background="#f2f2f2"
         ResizeMode="NoResize" Loaded="Window_Loaded">
@@ -54,7 +54,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Thêm Kích Cỡ Cho Món" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+        <TextBlock Text="Sua Thong Tin Kích Cỡ Cho Món" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
         <StackPanel Grid.Row="1">
             <TextBlock Text="Tên món:"/>

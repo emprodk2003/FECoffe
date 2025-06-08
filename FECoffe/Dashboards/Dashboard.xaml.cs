@@ -95,5 +95,12 @@ namespace FECoffe.Dashboards
             employee.Show();
             this.Close();
         }
+
+        private void opentProductManager_Click(object sender, RoutedEventArgs e)
+        {
+            Product product = new Product();
+            product.Show();
+            this.Close();
+        }
     }
 }

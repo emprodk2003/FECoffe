@@ -130,36 +130,6 @@
     </Window.Resources>
     <Grid>
         <TabControl>
-            <!-- Quản lý bàn -->
-            <TabItem Header="Quản lý bàn">
-                <StackPanel Margin="10">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBox Width="200" Margin="0,0,10,0" Text="Tìm bàn..."/>
-                        <Button Content="Tìm" Margin="0,0,10,0"/>
-                        <Button Width="80" Content="Thêm bàn" Margin="0,0,260,0"/>
-                        <Button Width="120" Content="Trở lại trang chủ" />
-                    </StackPanel>
-                    <DataGrid ItemsSource="{Binding Tables}" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Tên bàn" Binding="{Binding TableName}"/>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}"/>
-                            <DataGridTemplateColumn Header="Hành động">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Content="Sửa" Margin="0,0,5,0"/>
-                                            <Button Content="Xóa"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </TabItem>
-
             <!-- Quản lý đơn hàng -->
             <TabItem Header="Quản lý đơn hàng">
                 <StackPanel Margin="10">

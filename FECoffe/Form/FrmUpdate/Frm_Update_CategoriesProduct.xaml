@@ -1,16 +1,16 @@
-﻿<Window x:Class="FECoffe.Form.Frm_AddCategories_Product"
+﻿<Window x:Class="FECoffe.Form.FrmUpdate.Frm_Update_CategoriesProduct"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FECoffe.Form"
+        xmlns:local="clr-namespace:FECoffe.Form.FrmUpdate"
         mc:Ignorable="d"
-        Title="Thêm danh mục" Height="300" Width="420"
+        Title="Sua thong tin danh mục" Height="300" Width="420"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow"
         ShowInTaskbar="False"
-        Background="#f9f9f9">
+        Background="#f9f9f9" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0,4"/>
@@ -65,7 +65,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Thêm Danh Mục" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
+        <TextBlock Text="Sua Thong Tin Danh Mục" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
 
         <StackPanel Grid.Row="1" Margin="0,10,0,10">
             <StackPanel Orientation="Horizontal" Margin="0,4">

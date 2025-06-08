@@ -14,16 +14,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FECoffe.Form
+namespace FECoffe.Form.FrmUpdate
 {
     /// <summary>
-    /// Interaction logic for Frm_AddCategories_Product.xaml
+    /// Interaction logic for Frm_Update_CategoriesProduct.xaml
     /// </summary>
-    public partial class Frm_AddCategories_Product : Window
+    public partial class Frm_Update_CategoriesProduct : Window
     {
-        public Frm_AddCategories_Product()
+        private Categories_ProductViewModel _categories;
+        public Frm_Update_CategoriesProduct(Categories_ProductViewModel categories)
         {
             InitializeComponent();
+            _categories = categories;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -34,19 +36,20 @@ namespace FECoffe.Form
             }
             else
             {
-                var cate = new CrudCategories_Product()
+                var cate = new Categories_ProductViewModel()
                 {
-                    CategoryName = txtCategoryName.Text,
-                    Description = txtDescription.Text
+                    CategoryID = _categories.CategoryID,
+                    Description = txtDescription.Text,
+                    CategoryName = txtCategoryName.Text
                 };
-                if (Categories_ProductRequest.createCategories_Product(cate) == true)
+                if (Categories_ProductRequest.updateCategories_Product(cate) == true)
                 {
-                    MessageBox.Show("Them danh muc thuc don moi thanh cong!");
+                    MessageBox.Show("Sua thong danh muc thanh cong!");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Them danh muc thuc don moi that bai!");
+                    MessageBox.Show("Sua thong danh muc that bai!");
                     this.Close();
                 }
             }
@@ -55,6 +58,15 @@ namespace FECoffe.Form
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(_categories != null)
+            {
+                txtCategoryName.Text = _categories.CategoryName;
+                txtDescription.Text = _categories.Description;
+            }
         }
     }
 }
