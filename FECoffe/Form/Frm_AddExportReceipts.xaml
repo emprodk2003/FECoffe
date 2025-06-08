@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Form"
         mc:Ignorable="d"
+        xmlns:conv="clr-namespace:FECoffe.Converter"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow"
         ShowInTaskbar="False"
-        Title="Themdonxuat" Height="550" Width="800">
+        Title="Themdonxuat" Height="600" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- Button Style -->
         <Style TargetType="Button">
@@ -31,6 +32,35 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <!-- Style ComboBoxItem -->
+        <Style TargetType="ComboBoxItem" x:Key="ComboBoxItemHoverStyle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Background" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#DDEEFF"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#AADDEE"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style ComboBox -->
+        <Style TargetType="ComboBox" x:Key="StyledComboBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#AAA"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemHoverStyle}"/>
         </Style>
 
         <!-- TextBox Style -->
@@ -85,20 +115,57 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <conv:LotIdToLotNameConvert x:Key="LotConverter"/>
+        <conv:MaterialIdToMateriaName x:Key="MaterialConverter"/>
     </Window.Resources>
     <StackPanel Margin="10">
         <!-- Thông tin phiếu xuất -->
         <GroupBox Header="Thông tin phiếu xuất" Margin="0,0,0,3">
-            <StackPanel Margin="10">
-                <StackPanel Orientation="Horizontal" Margin="0,4">
-                    <TextBlock Text="Ngày xuất:" Width="100" Margin="0,0,0,10" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="ExportDatePicker" IsEnabled="False" Height="40" SelectedDate="{x:Static sys:DateTime.Now}" Margin="6,0,0,10"/>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Cột trái -->
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,4">
+                        <TextBlock Text="Ngày nhập:" Width="100" VerticalAlignment="Center"/>
+                        <DatePicker x:Name="ExportDatePicker" Height="30" SelectedDate="{x:Static sys:DateTime.Now}" Width="180"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4">
+                        <TextBlock Text="Ghi chú:" Width="100" VerticalAlignment="Top"/>
+                        <TextBox Text="{Binding Note}" Width="250" AcceptsReturn="True" Height="60" x:Name="txtNote" />
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,4">
-                    <TextBlock Text="Ghi chú:" Margin="0,0,0,10" Width="100" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding Note}" Width="400" AcceptsReturn="True"/>
+
+                <!-- Cột phải -->
+                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,4">
+                        <TextBlock Text=" Lo Nguyên lieu:" Width="100" VerticalAlignment="Center"/>
+                        <ComboBox Style="{StaticResource StyledComboBox}"
+                               
+                               DisplayMemberPath="LotName"
+                               SelectedValuePath="LotID"
+                               Width="250"
+                               x:Name="cbLot"
+                                />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4">
+                        <TextBlock Text="Số lượng:" Width="100" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Quantity}" Width="100" x:Name="txtQuantity" />
+                    </StackPanel>
+
+                    <Button Content="Them So Luong can xuat"
+                         Width="200"
+                         Height="30"
+                         Margin="100,10,0,0"
+                         Command="{Binding AddMaterialToDetailCommand}"
+                         x:Name="AddMaterialToDetailCommand" Click="AddMaterialToDetailCommand_Click"/> 
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </GroupBox>
 
         <!-- Chi tiết phiếu xuất -->
@@ -106,35 +173,20 @@
             <DataGrid x:Name="dgExportDetails"
           ItemsSource="{Binding ExportDetails}"
           AutoGenerateColumns="False" Height="220"
+           MouseDoubleClick="dgExportDetails_MouseDoubleClick"
             CanUserAddRows="True">
                 <DataGrid.Columns>
-                    <DataGridComboBoxColumn Header="Nguyên vật liệu"
-                        SelectedValueBinding="{Binding MaterialID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedValuePath="MaterialID"
-                        DisplayMemberPath="MaterialName"
-                        Width="200">
-                        <!-- Hiển thị khi chưa edit -->
-                        <DataGridComboBoxColumn.ElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{Binding DataContext.AllMaterials, RelativeSource={RelativeSource AncestorType=Window}}" />
-                                <Setter Property="IsReadOnly" Value="True"/>
-                            </Style>
-                        </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridTextColumn Header="Lo Nguyên liệu" Width="150">
+                                         
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="LotID" Converter="{StaticResource LotConverter}" />
+                        </DataGridTextColumn.Binding>
 
-                        <!-- Khi đang chỉnh sửa -->
-                        <DataGridComboBoxColumn.EditingElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="IsEditable" Value="True"/>
-                                <Setter Property="IsTextSearchEnabled" Value="False"/>
-                                <Setter Property="ItemsSource" Value="{Binding DataContext.AllMaterials, RelativeSource={RelativeSource AncestorType=Window}}" />
-                                <EventSetter Event="PreviewKeyUp" Handler="ComboBox_PreviewKeyUp"/>
-                            </Style>
-                        </DataGridComboBoxColumn.EditingElementStyle>
-                    </DataGridComboBoxColumn>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Số lượng"
                                         Binding="{Binding Quantity}" Width="100"/>
-                    <DataGridTextColumn Header="Don vi"
-                    Binding="{Binding Quantity}" Width="100"/>
+                  
+                 
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

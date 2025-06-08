@@ -219,6 +219,7 @@
         </Style>
 
         <conv:RoleIdToRoleNameCoverter x:Key="RoleConverter"/>
+        <conv:UserIdToUsernameConverter x:Key="UserConverter"/>
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -245,11 +246,8 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding username}" Width="*"/>
                             <DataGridTextColumn Header="Email" Binding="{Binding email}" Width="*"/>
-                            <DataGridTextColumn Header="Role" Width="*">
-                                <DataGridTextColumn.Binding>
-                                    <Binding Path="roleId" Converter="{StaticResource RoleConverter}" />
-                                </DataGridTextColumn.Binding>
-                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Role" Binding="{Binding RoleNames}" Width="*"/>
+
                             <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding LockoutEnabled}" Width="100"/>
                             <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedAtFormatted}" Width="120"/>
                             <DataGridTemplateColumn Header="Hành động" Width="250">

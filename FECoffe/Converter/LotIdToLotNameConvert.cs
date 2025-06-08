@@ -1,24 +1,23 @@
-﻿using FECoffe.Request.Role;
+﻿using FECoffe.Request.Lots;
 using FECoffe.Request.User;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace FECoffe.Converter
 {
-    public class RoleIdToRoleNameCoverter : IValueConverter
+    public class LotIdToLotNameConvert : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            var rolename = string.Empty;
-            if (value is Guid roleId)
+            var lotname = string.Empty;
+            if (value is int lotId)
             {
-                var roles = RoleRequest.GetRoles();
-                foreach (var role in roles)
+                var lots = LotsRequest.GetLots();
+                foreach (var lot in lots)
                 {
-                    if (role.Id == roleId)
+                    if (lot.LotID == lotId)
                     {
-                        return rolename = role.Name;
+                        return lotname = lot.LotName;
                     }
                 }
                 return "N/A";

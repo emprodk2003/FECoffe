@@ -48,12 +48,12 @@ namespace FECoffe.Form.User
         private void luu_Click(object sender, RoutedEventArgs e)
         {
 
-            var selectedRole = cbRole.SelectedItem as GetRoles;
+                var selectedRole = cbRole.SelectedItem as GetListRole;
 
             var addRole = new UpdateUser
             {
                 userID= userid,
-                roleID=selectedRole.RoleID
+                roleID=selectedRole.Id
             };
 
             if (UserRequest.AddRolebyUser(addRole) == true)

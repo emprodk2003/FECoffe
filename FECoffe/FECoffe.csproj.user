@@ -26,7 +26,22 @@
     <Compile Update="Dashboards\Warehouse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Form\FrmDisplay\DisplayExportDetails.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmDisplay\DisplayImportDetails.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmDisplay\DisplayLot.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Form\FrmUpdate\Categorys_Material.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmUpdate\ExportReciptsDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Form\FrmUpdate\ImportReciptsDetail.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Form\FrmUpdate\Material.xaml.cs">

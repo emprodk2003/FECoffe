@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Dashboards"
         xmlns:conv="clr-namespace:FECoffe.Converter"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        materialDesign:ColorZoneAssist.Mode="PrimaryDark"
         Title="Warehouse" Height="550" Width="900" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- TabControl Style -->
@@ -176,16 +178,17 @@
                                 <!-- TextBox -->
                                 <ColumnDefinition Width="Auto"/>
                                 <!-- Nút Tìm -->
-                                <ColumnDefinition Width="275*"/>
-                                <ColumnDefinition Width="73*"/>
+                                <ColumnDefinition Width="275"/>
+                                <ColumnDefinition Width="73"/>
                                 <!-- Khoảng trống giãn -->
                                 <ColumnDefinition Width="Auto"/>
                                 <!-- Nút Thêm -->
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Width="200" Text="Tìm kiếm danh mục..." Margin="0,0,10,0"/>
-                            <Button Grid.Column="1" Content="Tìm" Margin="0,0,10,0"/>
+                            <TextBox Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Tìm kiếm loại nguyên liệu..." Margin="0,0,10,0" x:Name="txtfindcategorymaterials" Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue" />
+                            <Button Grid.Column="1" Content="Tìm" x:Name="btnfindcategorymaterials" Click="btnfindcategorymaterials_Click" Margin="0,0,10,0"/>
                             <!-- Khoảng trống tự giãn nằm ở Grid.Column="2" -->
-                            <Button Grid.Column="2" Width="80" Content="Thêm" x:Name="addcategorymaterial" Margin="9,0,186,0" Click="addcategorymaterial_Click"/>
+                            <Button Grid.Column="2" Width="80" Content="Thêm" x:Name="addcategorymaterial" Margin="-200,0,10,0" Click="addcategorymaterial_Click"/>
+                            <Button Grid.Column="3" Width="120" Content="Tai Lai Danh Sach" x:Name="loadcategorymaterial" Margin="-340,0,10,0" Click="loadcategorymaterial_Click"/>
                         </Grid>
                         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Categories_Material}" x:Name="dg_categorymaterial">
                             <DataGrid.Columns>
@@ -210,22 +213,26 @@
                 <TabItem Header="Quản lý hàng">
                     <StackPanel Margin="10">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBox  x:Name="txtSearchMaterials" Width="200" Text="Tìm kiếm..." Margin="0,0,10,0"/>
-                            <Button Content="Tìm"  Margin="0,0,10,0"/>
+                            <TextBox  x:Name="txtSearchMaterials" Width="200"  materialDesign:HintAssist.Hint="Tìm kiếm nguyên liệu..."  Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue" Margin="0,0,10,0"/>
+                            <Button Content="Tìm" x:Name="searchMaterials"  Click="searchMaterials_Click" Margin="0,0,10,0"/>
                             <Button Content="Thêm" x:Name="addMaterial" Click="addMaterial_Click"/>
+                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadmaterial" Margin="10,0,10,0" Click="loadmaterial_Click"/>
                         </StackPanel>
-                        <DataGrid x:Name="dgMaterials" AutoGenerateColumns="False" CanUserAddRows="False">
+                        <DataGrid x:Name="dgMaterials"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  MouseDoubleClick="dgMaterials_MouseDoubleClick">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Tên hàng" Binding="{Binding MaterialName}"/>
-                                <DataGridTextColumn Header="Đơn vị" Binding="{Binding Unit}"/>
-                                <DataGridTextColumn Header="Tồn kho" Binding="{Binding Quantity}"/>
-                                <DataGridTextColumn Header="Giá mua" Binding="{Binding PurchasePrice}"/>
-                                <DataGridTextColumn Header="Người cập nhật">
+                                <DataGridTextColumn Header="Tên hàng" Binding="{Binding MaterialName}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Đơn vị" Binding="{Binding Unit}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tồn kho" Binding="{Binding Quantity}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tong so luong" Binding="{Binding TotalMaterial}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Người cập nhật" IsReadOnly="True">
                                     <DataGridTextColumn.Binding>
-                                        <Binding Path="UserID" Converter="{StaticResource UserConverter}" />
+                                        <Binding Path="UserID" Converter="{StaticResource UserConverter}"  />
                                     </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Ngày cập nhật" Binding="{Binding UpdatedAt}"/>
+                                <DataGridTextColumn Header="Ngày cập nhật" Binding="{Binding UpdatedAt}" IsReadOnly="True"/>
                                 <DataGridTemplateColumn Header="Hành động" Width="150">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -246,25 +253,30 @@
                     <StackPanel Margin="10">
                         <!-- Bộ lọc -->
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBox x:Name="txtImportIDFilter" Width="120" Margin="0,0,10,0" 
-            Text="Mã phiếu nhập" />
-                            <DatePicker x:Name="dpFromDate" Width="140" Margin="0,0,10,0" />
+                            <TextBox x:Name="txtImportIDFilter" Width="150"  
+            materialDesign:HintAssist.Hint="Tìm kiếm mã phiếu..."  Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue" Margin="0,0,10,0" />
+                            <DatePicker x:Name="dpFromDate" Width="140" Margin="20,0,10,0" />
                             <DatePicker x:Name="dpToDate" Width="140" Margin="0,0,10,0" />
-                            <Button Content="Tìm"  Margin="0,0,10,0"/>
-                            <Button Content="Thêm" />
+                            <Button Content="Tìm"  Margin="0,0,10,0" x:Name="searchImport" Click="searchImport_Click"/>
+                            <Button Content="Thêm"  x:Name="addImport" Click="addImport_Click"/>
+                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadimport" Margin="10,0,10,0" Click="loadimport_Click"/>
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->
                         <DataGrid x:Name="dgImportReceipts" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã phiếu" Binding="{Binding ImportID}" Width="80"/>
-                                <DataGridTextColumn Header="Ngày nhập" Binding="{Binding ImportDate}" Width="120"/>
-                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="*"/>
-                                <DataGridTextColumn Header="Người tạo" Binding="{Binding User.FullName}" Width="120"/>
+                                <DataGridTextColumn Header="Mã phiếu" Binding="{Binding ImportID}" Width="100"/>
+                                <DataGridTextColumn Header="Ngày nhập" Binding="{Binding ImportDate}" Width="150"/>
+                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="300"/>
+                                <DataGridTextColumn Header="Người tạo">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="UserID" Converter="{StaticResource UserConverter}" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
                                 <DataGridTemplateColumn Header="Xem chi tiết" Width="100">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="Chi tiết" />
+                                            <Button Content="Chi tiết" x:Name="importDetail" Click="importDetail_Click"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -278,25 +290,30 @@
                     <StackPanel Margin="10">
                         <!-- Bộ lọc -->
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBox x:Name="txtExportIDFilter" Width="120" Margin="0,0,10,0"
-            Text="Mã phiếu xuất" />
+                            <TextBox x:Name="txtExportIDFilter" Width="150" Margin="0,0,10,0"
+            materialDesign:HintAssist.Hint="Tìm kiếm mã phiếu..."  Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue" />
                             <DatePicker x:Name="dpExportFromDate" Width="140" Margin="0,0,10,0" />
                             <DatePicker x:Name="dpExportToDate" Width="140" Margin="0,0,10,0" />
-                            <Button Content="Tìm" Margin="0,0,10,0"/>
-                            <Button Content="Thêm" />
+                            <Button Content="Tìm" Margin="0,0,10,0" x:Name="searchExport" Click="searchExport_Click"/>
+                            <Button Content="Thêm" x:Name="AddExport" Click="AddExport_Click"/>
+                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadexport" Margin="10,0,10,0" Click="loadexport_Click"/>
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->
                         <DataGrid x:Name="dgExportReceipts" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã phiếu" Binding="{Binding ExportID}" Width="80"/>
-                                <DataGridTextColumn Header="Ngày xuất" Binding="{Binding ExportDate}" Width="120"/>
-                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="*"/>
-                                <DataGridTextColumn Header="Người tạo" Binding="{Binding User.FullName}" Width="120"/>
-                                <DataGridTemplateColumn Header="Xem chi tiết" Width="100">
+                                <DataGridTextColumn Header="Mã phiếu" Binding="{Binding ExportID}" Width="100"/>
+                                <DataGridTextColumn Header="Ngày xuất" Binding="{Binding ExportDate}" Width="150"/>
+                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="350"/>
+                                <DataGridTextColumn Header="Người tạo" Width="100">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="UserID" Converter="{StaticResource UserConverter}" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Header="Xem chi tiết" Width="150">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="Chi tiết" />
+                                            <Button Content="Chi tiết" x:Name="detailexport" Click="detailexport_Click" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -308,9 +325,10 @@
                 <TabItem Header="Quản lý nhà cung cấp">
                     <StackPanel Margin="10">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBox  x:Name="txtSearchSuppliers" Width="200" Text="Tìm kiếm..." Margin="0,0,10,0"/>
-                            <Button Content="Tìm"  Margin="0,0,10,0"/>
+                            <TextBox  x:Name="txtSearchSuppliers" Width="200" materialDesign:HintAssist.Hint="Tìm kiếm nhà cung cấp..."  Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue" Margin="0,0,10,0"/>
+                            <Button Content="Tìm"  Margin="0,0,10,0" x:Name="searchSuppliers" Click="searchSuppliers_Click"/>
                             <Button Content="Thêm" x:Name="addsuppliers" Click="addsuppliers_Click"/>
+                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadesuppliers" Margin="10,0,10,0" Click="loadesuppliers_Click"/>
                         </StackPanel>
                         <DataGrid x:Name="dgSuppliers" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
@@ -341,19 +359,25 @@
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <DatePicker x:Name="dpLogFromDate" Width="140" Margin="0,0,10,0" />
                             <DatePicker x:Name="dpLogToDate" Width="140" Margin="0,0,10,0" />
-                            <Button Content="Tìm" />
+                            <Button Content="Tìm" x:Name="searchLotDetails" Click="searchLotDetails_Click"/>
+                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadlotdetails" Margin="10,0,10,0" Click="loadlotdetails_Click"/>
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->
-                        <DataGrid x:Name="dgInventoryLogs" AutoGenerateColumns="False" CanUserAddRows="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ngày thay đổi" Binding="{Binding ChangeDate}" Width="140"/>
-                                <DataGridTextColumn Header="Tên vật tư" Binding="{Binding Materials.MaterialName}" Width="160"/>
-                                <DataGridTextColumn Header="Loại thay đổi" Binding="{Binding ChangeType}" Width="120"/>
-                                <DataGridTextColumn Header="Số lượng" Binding="{Binding QuantityChange}" Width="100"/>
-                                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="200"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <DataGrid x:Name="dgInventoryLogs"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Visible" Height="300"
+                                      AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Ngày thay đổi" Binding="{Binding CreateAt}" Width="180"/>
+                                    <DataGridTextColumn Header="Tên vật tư" Binding="{Binding MaterialName}" Width="160"/>
+                                    <DataGridTextColumn Header="Loại thay đổi" Binding="{Binding Status}" Width="120"/>
+                                    <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="100"/>
+                                    <DataGridTextColumn Header="Số lượng truoc" Binding="{Binding QuantityBefor}" Width="150"/>
+                                    <DataGridTextColumn Header="Số lượng sau" Binding="{Binding QuantityAfter}" Width="150"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
                     </StackPanel>
                 </TabItem>
             </TabControl>
