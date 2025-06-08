@@ -1,8 +1,8 @@
 ﻿namespace FECoffe.DTO.Role
 {
-    public class GetRoles
+    public class GetListRole
     {
-        public Guid RoleID { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

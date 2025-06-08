@@ -1,24 +1,23 @@
-﻿using FECoffe.Request.Role;
+﻿using FECoffe.Request.Material;
 using FECoffe.Request.User;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace FECoffe.Converter
 {
-    public class RoleIdToRoleNameCoverter : IValueConverter
+    public class MaterialIdToMateriaName : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            var rolename = string.Empty;
-            if (value is Guid roleId)
+            var materialname = string.Empty;
+            if (value is int materialId)
             {
-                var roles = RoleRequest.GetRoles();
-                foreach (var role in roles)
+                var materials = MaterialRequest.GetMaterial();
+                foreach (var material in materials)
                 {
-                    if (role.Id == roleId)
+                    if (material.MaterialID == materialId)
                     {
-                        return rolename = role.Name;
+                        return materialname = material.MaterialName;
                     }
                 }
                 return "N/A";

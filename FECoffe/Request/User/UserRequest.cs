@@ -78,6 +78,20 @@ namespace FECoffe.Request.User
             }
         }
 
-      
+        public static List<GetRoles> GetRolesByUserID(Guid userid)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Role/ListRolesByUserId?userId=" + userid;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<GetRoles>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

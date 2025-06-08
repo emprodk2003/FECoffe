@@ -77,5 +77,21 @@ namespace FECoffe.Request.CategoryMaterial
                 return false;
             }
         }
+
+        public static List<CrudCategoryMaterial> GetCategoriesMaterialByName(string name)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Categories_Material/GetCategoriesMaterialByName?name="+name;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<CrudCategoryMaterial>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

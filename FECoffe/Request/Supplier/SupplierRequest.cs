@@ -1,4 +1,5 @@
-﻿using FECoffe.DTO.Suppliers;
+﻿using FECoffe.DTO.CategoyMaterial;
+using FECoffe.DTO.Suppliers;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -39,6 +40,22 @@ namespace FECoffe.Request.Supplier
             }
         }
 
+        public static CrudSuppliers GetSupplierbyId(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Suppliers/GetSuppliersByID?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<CrudSuppliers>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static bool updateSupplier(CrudSuppliers suppliers)
         {
             try
@@ -69,6 +86,22 @@ namespace FECoffe.Request.Supplier
             {
                 Console.WriteLine("Lỗi: " + ex.Message);
                 return false;
+            }
+        }
+
+        public static List<CrudSuppliers> GetSuppliersByName(string name)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Suppliers/GetSupplierByName?name=" + name;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<CrudSuppliers>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
             }
         }
     }
