@@ -8,7 +8,7 @@
         Title="Thêm Kích Cỡ Món" Height="320" Width="400"
         WindowStartupLocation="CenterScreen"
         Background="#f2f2f2"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0,5"/>
@@ -71,7 +71,7 @@
             <TextBox x:Name="txtAdditionalPrice" Width="300"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
             <Button x:Name="save" Content="Lưu" Click="save_Click"/>
             <Button x:Name="cancel" Content="Hủy" Background="#888" BorderBrush="#888" Click="cancel_Click"/>
         </StackPanel>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FECoffe.DTO.Categories_Product;
+using FECoffe.Request.Categories_Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,37 @@ namespace FECoffe.Form
         public Frm_AddCategories_Product()
         {
             InitializeComponent();
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
+            {
+                MessageBox.Show("Vui long nhap day du thong tin!");
+            }
+            else
+            {
+                var cate = new CrudCategories_Product()
+                {
+                    CategoryName = txtCategoryName.Text,
+                    Description = txtDescription.Text
+                };
+                if (Categories_ProductRequest.createCategories_Product(cate) == true)
+                {
+                    MessageBox.Show("Them danh muc thuc don moi thanh cong!");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Them danh muc thuc don moi that bai!");
+                    this.Close();
+                }
+            }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

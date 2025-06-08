@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FECoffe.Form"
         mc:Ignorable="d"
         Title="Frm_AddOrderNumberTag"
-        Height="180" Width="300"
+        Height="200" Width="300"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow"
@@ -54,9 +54,10 @@
     </Window.Resources>
     <Grid Margin="10">
         <StackPanel>
+            <TextBlock Text="Thêm Topping Mới" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
             <TextBlock Text="Số thẻ order mới:" Margin="0,0,0,5"/>
             <TextBox x:Name="txtTableName" Height="30" Margin="0,0,0,10"/>
-            <Button Content="Lưu số thẻ order" Margin="0,20,0,0" Width="150" Height="35" />
+            <Button Content="Lưu số thẻ order" Margin="0,20,0,0" Width="150" Height="35" Click="themban_Click" />
         </StackPanel>
     </Grid>
 </Window>
