@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        materialDesign:ColorZoneAssist.Mode="PrimaryDark"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:FECoffe.Dashboards"
         mc:Ignorable="d"
-        Title="DashboardEmployee" Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded">
+        Title="DashboardEmployee" Height="720" Width="1080" WindowStartupLocation="CenterScreen" 
+        Background="Transparent" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- DatePicker Style -->
         <Style TargetType="DatePicker">
@@ -207,29 +210,62 @@
             </Style.Triggers>
         </Style>
 
-        <!-- DataGrid Style -->
         <Style TargetType="DataGrid">
             <Setter Property="Margin" Value="0,10,0,0"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="32"/>
+            <Setter Property="RowHeight" Value="36"/>
+            <Setter Property="IsReadOnly" Value="true"/>
             <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="AlternatingRowBackground" Value="#FAFAFA"/>
             <Setter Property="GridLinesVisibility" Value="None"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+
             <Setter Property="ColumnHeaderStyle">
                 <Setter.Value>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#FF54D0FF"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Background" Value="#E3F2FD"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
                         <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Padding" Value="6"/>
+                        <Setter Property="Foreground" Value="#0D47A1"/>
+                        <Setter Property="Padding" Value="8,4"/>
                         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#DDDDDD"/>
+                        <Setter Property="BorderBrush" Value="#B0BEC5"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="6,2"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#BBDEFB"/>
+                                <Setter Property="Foreground" Value="#0D47A1"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
+
     </Window.Resources>
     <Grid Background="White">
         <TabControl>
@@ -239,23 +275,21 @@
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
-                        <TextBox x:Name="txt_findEmployee" Width="200" Height="28" Margin="0,0,10,0" Text="Tìm kiếm..."/>
+                        <TextBox x:Name="txt_findEmployee" Width="200" Height="28" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm nhân viên..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <Button Content="Tìm" Margin="0,0,10,0" Click="find_employee"/>
                         <Button Content="Thêm nhân viên" Width="120" Click="Them_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Employee" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EmployeeViewModel}" SelectionChanged="dg_Employee_SelectionChanged">
+                    <DataGrid x:Name="dg_Employee" ItemsSource="{Binding EmployeeViewModel}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Họ tên" Binding="{Binding FullName}"/>
-                            <DataGridTextColumn Header="Ma giới tính" Binding="{Binding Gender}" Visibility="Collapsed"/>
                             <DataGridTextColumn Header="Giới tính" Binding="{Binding GioiTinh}"/>
                             <DataGridTextColumn Header="Hinh thuc" Binding="{Binding TypeName}"/>
                             <DataGridTextColumn Header="Ngày sinh" Binding="{Binding BirthDate}"/>
                             <DataGridTextColumn Header="Điện thoại" Binding="{Binding Phone}"/>
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                            <DataGridTextColumn Header="Ma chức vụ" Binding="{Binding PositionID}" Visibility="Collapsed"/>
                             <DataGridTextColumn Header="Chức vụ" Binding="{Binding PositionName}"/>
                             <DataGridTextColumn Header="Lương cơ bản" Binding="{Binding SalaryBase}"/>
                             <DataGridTextColumn Header="Tình trạng" Binding="{Binding Status}"/>
@@ -282,7 +316,7 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ"  Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
                                 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBox x:Name="txt_FindPosition" Width="200" Text="Tìm chức vụ..." Margin="0,0,10,0"/>
+                        <TextBox x:Name="txt_FindPosition" Width="200" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm nhân viên..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <Button Content="Tìm" Click="FindPosition_Click" Margin="0,0,10,0"/>
                         <Button Content="Thêm chức vụ" Width="120" Click="themchucvu_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -317,9 +351,10 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ"  Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <DatePicker x:Name="dpStar_TimeKeeping" Width="150" Margin="0,0,10,0"/>
-                        <DatePicker x:Name="dpEnd_TimeKeeping" Width="150" Margin="0,0,10,0"/>
-                        <ComboBox x:Name="cbFilter_Timekeeping" Width="150" Margin="0,0,10,0" SelectedValuePath="EmployeeID" DisplayMemberPath="FullName"/>
+                        <DatePicker x:Name="dpStar_TimeKeeping" Width="160" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Ngày bắt đầu..." Style="{StaticResource MaterialDesignDatePicker}" Foreground="DarkBlue"/>
+                        <DatePicker x:Name="dpEnd_TimeKeeping" Width="160" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Ngày kết thúc..." Style="{StaticResource MaterialDesignDatePicker}" Foreground="DarkBlue"/>
+                        <ComboBox x:Name="cbFilter_Timekeeping" Width="150" Margin="0,0,10,0" SelectedValuePath="EmployeeID" DisplayMemberPath="FullName"
+                                  materialDesign:HintAssist.Hint="Chọn nhân viên ..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue"/>
                         <Button Click="FindTimeKeeping_Click" Width="120"  Margin="0,0,10,0" Content="Tim kiem"/>
                         <Button Width="120" Content="Them cham cong" Click="Themchamcong_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -356,9 +391,10 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ"  Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <ComboBox x:Name="cbFindnhanvien_salaries" Width="150" Text="Chọn tháng" SelectedValuePath="EmployeeID" DisplayMemberPath="FullName" Margin="0,0,10,0"/>
-                        <DatePicker x:Name="dpFindStart_salaries" Width="150"  Margin="0,0,15,0"/>
-                        <DatePicker x:Name="dpFindEnd_salaries" Width="150"  Margin="0,0,15,0"/>
+                        <ComboBox x:Name="cbFindnhanvien_salaries" Width="150" SelectedValuePath="EmployeeID" DisplayMemberPath="FullName" Margin="0,0,10,0" 
+                                  materialDesign:HintAssist.Hint="Chọn nhân viên..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue"/>
+                        <DatePicker x:Name="dpFindStart_salaries" Width="160"  Margin="0,0,15,0" materialDesign:HintAssist.Hint="Ngày bắt đầu..." Style="{StaticResource MaterialDesignDatePicker}" Foreground="DarkBlue"/>
+                        <DatePicker x:Name="dpFindEnd_salaries" Width="160"  Margin="0,0,15,0" materialDesign:HintAssist.Hint="Ngày kết thúc..." Style="{StaticResource MaterialDesignDatePicker}" Foreground="DarkBlue"/>
                         <Button Click="FindSalaries_Click" Content="Tim" Margin="0,0,10,0"/>
                         <Button Width="150" Content="Them bang luong" Click="thembangluong_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -398,8 +434,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ"  Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <DatePicker x:Name="dpstart_FindEmployeeSchedules" Width="150" Margin="0,0,10,0"/>
-                        <DatePicker x:Name="dpend_FindEmployeeSchedules" Width="150" Margin="0,0,10,0"/>
+                        <DatePicker x:Name="dpstart_FindEmployeeSchedules" Width="160" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Ngày bắt đầu..." Style="{StaticResource MaterialDesignDatePicker}" Foreground="DarkBlue" SelectedDate="{x:Static sys:DateTime.Today}"/>
+                        <DatePicker x:Name="dpend_FindEmployeeSchedules" Width="160" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Ngày kết thúc..." Style="{StaticResource MaterialDesignDatePicker}" Foreground="DarkBlue" SelectedDate="{x:Static sys:DateTime.Today}"/>
                         <Button  Content="Lọc" Margin="0,0,10,0" Click="Find_EmployeeSchedules"/>
                         <Button Width="120" Content="Them lich lam" Click="themlich_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -435,7 +471,7 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ"  Click="Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBox x:Name="txtFind_Shift" Width="200" Text="Tìm ca lam ..." Margin="0,0,10,0"/>
+                        <TextBox x:Name="txtFind_Shift" Width="200" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm ca làm..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <Button Click="FindShift_Click" Content="Tim" Margin="0,0,10,0" />
                         <Button Content="Them ca lam" Width="120" Click="themcalamm_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">

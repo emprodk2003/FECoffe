@@ -47,6 +47,7 @@ namespace FECoffe.Form
                 if (ToppingRequest.createTopping(top) == true)
                 {
                     MessageBox.Show("Them topping moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

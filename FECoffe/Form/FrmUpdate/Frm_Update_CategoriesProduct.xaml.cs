@@ -45,6 +45,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (Categories_ProductRequest.updateCategories_Product(cate) == true)
                 {
                     MessageBox.Show("Sua thong danh muc thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

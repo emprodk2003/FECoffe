@@ -87,19 +87,37 @@ namespace FECoffe.Dashboards
                 MessageBox.Show("Khong co du lieu cho topping!");
             }
         }
+        private void hienthiproductsize()
+        {
+            var size = ProductSizeRequest.GetAll();
+            
+            if (size != null)
+            {
+                dg_ProductSize.ItemsSource = size;
+            }
+            else
+            {
+                MessageBox.Show("Khong co du lieu cho product size!");
+            }
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             hienthicategories_product();
             hienthiproduct();
             hienthitable();
             hienthitopping();
+            hienthiproductsize();
         }
 
         private void edit_cateproduct_Click(object sender, RoutedEventArgs e)
         {
             var cate = dgCategories_Product.SelectedItem as Categories_ProductViewModel;
             Frm_Update_CategoriesProduct frm_Update_CategoriesProduct = new Frm_Update_CategoriesProduct(cate);
-            frm_Update_CategoriesProduct.ShowDialog();
+            var result = frm_Update_CategoriesProduct.ShowDialog();
+            if(result == true)
+            {
+                hienthicategories_product();
+            }
         }
 
         private void delete_cateproduct_Click(object sender, RoutedEventArgs e)
@@ -117,6 +135,7 @@ namespace FECoffe.Dashboards
                 if (Categories_ProductRequest.deleteCategories_Product(cate.CategoryID) == true)
                 {
                     MessageBox.Show("Đã xóa danh muc thuc don.");
+                    hienthicategories_product();
                 }
                 else MessageBox.Show("Loi khi xoa danh muc thuc don.");
             }
@@ -130,7 +149,11 @@ namespace FECoffe.Dashboards
         {
             var pr = dg_Product.SelectedItem as ProductViewModel;
             Frm_Update_Product frm_Update_Product = new Frm_Update_Product(pr);
-            frm_Update_Product.ShowDialog();
+            var result = frm_Update_Product.ShowDialog();
+            if(result == true)
+            {
+                hienthiproduct();
+            }
         }
 
         private void delete_Product_Click(object sender, RoutedEventArgs e)
@@ -148,6 +171,7 @@ namespace FECoffe.Dashboards
                 if (ProductRequest.deleteProduct(pro.ProductID) == true)
                 {
                     MessageBox.Show("Đã xóa thuc don.");
+                    hienthiproduct();
                 }
                 else MessageBox.Show("Loi khi xoa thuc don.");
             }
@@ -168,19 +192,31 @@ namespace FECoffe.Dashboards
         private void themCateProduct_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddCategories_Product frm_AddCategories_Product = new Frm_AddCategories_Product();
-            frm_AddCategories_Product.ShowDialog();
+            var result = frm_AddCategories_Product.ShowDialog();
+            if (result == true)
+            {
+                hienthicategories_product();
+            }
         }
 
         private void themProduct_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddProduct frm_AddProduct = new Frm_AddProduct();
-            frm_AddProduct.ShowDialog();
+            var result = frm_AddProduct.ShowDialog();
+            if (result == true)
+            {
+                hienthiproduct();
+            }
         }
 
         private void ThemTopping_CLick(object sender, RoutedEventArgs e)
         {
             Frm_AddTopping frm_AddTopping = new Frm_AddTopping();
-            frm_AddTopping.ShowDialog();
+            var result = frm_AddTopping.ShowDialog();
+            if(result == true)
+            {
+                hienthitopping();
+            }
         }
 
         private void delete_Topping_Click(object sender, RoutedEventArgs e)
@@ -198,6 +234,7 @@ namespace FECoffe.Dashboards
                 if (ToppingRequest.deleteTopping(top.ToppingID) == true)
                 {
                     MessageBox.Show("Đã xóa topping.");
+                    hienthitopping();
                 }
                 else MessageBox.Show("Loi khi xoa topping.");
             }
@@ -211,13 +248,21 @@ namespace FECoffe.Dashboards
         {
             var tp = dg_Topping.SelectedItem as ToppingViewModel;
             Frm_Update_Topping frm_Update_Topping = new Frm_Update_Topping(tp);
-            frm_Update_Topping.ShowDialog();
+            var result = frm_Update_Topping.ShowDialog();
+            if (result == true)
+            {
+                hienthitopping();
+            }
         }
 
         private void themTable_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddOrderNumberTag frm_AddOrderNumberTag = new Frm_AddOrderNumberTag();
-            frm_AddOrderNumberTag.ShowDialog();
+            var result = frm_AddOrderNumberTag.ShowDialog();
+            if(result == true)
+            {
+                hienthitable();
+            }
         }
 
         private void delete_Table_Click(object sender, RoutedEventArgs e)
@@ -235,6 +280,7 @@ namespace FECoffe.Dashboards
                 if (TableRequest.deleteTable(top.TableID) == true)
                 {
                     MessageBox.Show("Đã xóa so the order.");
+                    hienthitable();
                 }
                 else MessageBox.Show("Loi khi xoa so the order .");
             }
@@ -248,22 +294,16 @@ namespace FECoffe.Dashboards
         {
             var table = dg_Table.SelectedItem as TableViewModel;
             Frm_Update_OrderNumberTag frm_Update_OrderNumberTag = new Frm_Update_OrderNumberTag(table);
-            frm_Update_OrderNumberTag.ShowDialog();
+            var result = frm_Update_OrderNumberTag.ShowDialog();
+            if (result == true)
+            {
+                hienthitable();
+            }
         }
 
         private void GetSizeByProduct_Click(object sender, RoutedEventArgs e)
         {
-            var pr = cb_Productsize.SelectedItem as ProductViewModel;
-            if(pr == null)
-            {
-                MessageBox.Show("Vui long chon mon!");
-                return;
-            }
-            else
-            {
-                var size = ProductSizeRequest.GetByProduct(pr.ProductID);
-                dg_ProductSize.ItemsSource = size;
-            }
+            hienthiproductsize();
         }
 
         private void themSize_Click(object sender, RoutedEventArgs e)
@@ -285,7 +325,11 @@ namespace FECoffe.Dashboards
         {
             var size = dg_ProductSize.SelectedItem as ProductSizeViewModel;
             Frm_Update_ProductSize frm_Update_ProductSize = new Frm_Update_ProductSize(size);
-            frm_Update_ProductSize.ShowDialog();
+            var result = frm_Update_ProductSize.ShowDialog();
+            if(result == true)
+            {
+                hienthiproductsize();
+            }
         }
 
         private void delete_ProductSize_Click(object sender, RoutedEventArgs e)
@@ -303,6 +347,7 @@ namespace FECoffe.Dashboards
                 if (ProductSizeRequest.deleteProduct(size.ProductSizeID) == true)
                 {
                     MessageBox.Show("Đã xóa size cho mon.");
+                    hienthiproductsize();
                 }
                 else MessageBox.Show("Loi khi xoa size cho mon .");
             }
@@ -314,17 +359,7 @@ namespace FECoffe.Dashboards
 
         private void LoadData_Size_Click(object sender, RoutedEventArgs e)
         {
-            var pr = cb_Productsize.SelectedItem as ProductViewModel;
-            if (pr == null)
-            {
-                MessageBox.Show("Vui long chon mon!");
-                return;
-            }
-            else
-            {
-                var size = ProductSizeRequest.GetByProduct(pr.ProductID);
-                dg_ProductSize.ItemsSource = size;
-            }
+            hienthiproductsize();
         }
 
         private void FindProduct_Click(object sender, RoutedEventArgs e)
@@ -398,6 +433,13 @@ namespace FECoffe.Dashboards
                 var list = ToppingRequest.GetToppingByName(name);
                 dg_Topping.ItemsSource = list;
             }
+        }
+
+        private void Back_main_Click(object sender, RoutedEventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            this.Close();
+            dashboard.Show();
         }
     }
 }

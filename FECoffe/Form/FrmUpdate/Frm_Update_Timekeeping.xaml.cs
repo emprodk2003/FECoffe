@@ -68,6 +68,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (TimekeepingRequest.updateTimekeeping(timekeeping) == true)
                 {
                     MessageBox.Show("Sua thong tin bang cham cong thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

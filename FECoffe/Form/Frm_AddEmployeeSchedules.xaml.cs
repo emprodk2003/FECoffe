@@ -104,6 +104,7 @@ namespace FECoffe.Form
                     else
                     {
                         MessageBox.Show("Them lich lam thanh cong!");
+                        this.DialogResult = true;
                         this.Close();
                     }
                 }

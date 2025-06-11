@@ -42,6 +42,7 @@ namespace FECoffe.Form
                 if (Categories_ProductRequest.createCategories_Product(cate) == true)
                 {
                     MessageBox.Show("Them danh muc thuc don moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

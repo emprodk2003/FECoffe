@@ -50,6 +50,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (ToppingRequest.updateTopping(top) == true)
                 {
                     MessageBox.Show("Sua thong tin topping moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

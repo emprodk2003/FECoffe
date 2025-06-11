@@ -4,8 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Dashboards"
+        xmlns:conv="clr-namespace:FECoffe.Converter"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        materialDesign:ColorZoneAssist.Mode="PrimaryDark"       
         mc:Ignorable="d"
-        Title="Product" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Product" Height="720" Width="1080" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- TabControl Style -->
         <Style TargetType="TabControl">
@@ -45,9 +48,6 @@
                                 <Setter TargetName="Border" Property="Background" Value="#2196F3"/>
                                 <Setter TargetName="Border" Property="BorderBrush" Value="#1976D2"/>
                                 <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#E3F2FD"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -183,29 +183,60 @@
         </Style>
 
 
-        <!-- DataGrid Style -->
         <Style TargetType="DataGrid">
             <Setter Property="Margin" Value="0,10,0,0"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="32"/>
+            <Setter Property="RowHeight" Value="36"/>
             <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
+            <Setter Property="AlternatingRowBackground" Value="#FAFAFA"/>
             <Setter Property="GridLinesVisibility" Value="None"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+
             <Setter Property="ColumnHeaderStyle">
                 <Setter.Value>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#FF54D0FF"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Background" Value="#E3F2FD"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
                         <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Padding" Value="6"/>
+                        <Setter Property="Foreground" Value="#0D47A1"/>
+                        <Setter Property="Padding" Value="8,4"/>
                         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#DDDDDD"/>
+                        <Setter Property="BorderBrush" Value="#B0BEC5"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="6,2"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#BBDEFB"/>
+                                <Setter Property="Foreground" Value="#0D47A1"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </Setter.Value>
             </Setter>
         </Style>
+
     </Window.Resources>
     <Grid>
         <TabControl >
@@ -213,9 +244,9 @@
             <TabItem Header="Danh mục thực đơn">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        <Button Content="← Trang chủ" Click="Back_main_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBox x:Name="txt_FindCate" Width="200" Margin="0,0,10,0"/>
+                        <TextBox x:Name="txt_FindCate" Width="200" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm danh mục..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <Button Click="FindCate_Click" Content="Tìm" Margin="0,0,10,0"/>
                         <Button Content="Thêm" Click="themCateProduct_Click" Margin="0,0,10,0"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -245,12 +276,12 @@ Margin="0,0,10,0" Height="35" Width="100"/>
             <TabItem Header="Thực đơn">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        <Button Content="← Trang chủ" Click="Back_main_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBox Width="200" x:Name="txt_FindName_Product"  Margin="0,0,10,0"/>
+                        <TextBox Width="200" x:Name="txt_FindName_Product"  Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm thực đơn..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <ComboBox Width="200" x:Name="cbCategories" DisplayMemberPath="CategoryName"
                                                                     SelectedValuePath="CategoryID"
-                                                                    Margin="0,0,10,0" />
+                                                                    Margin="0,10,10,0"/>
                         <Button Content="Tìm"  Click="FindProduct_Click" Margin="0,0,10,0"/>
                         <Button Content="Thêm" Click="themProduct_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -285,10 +316,9 @@ Margin="0,0,10,0" Height="35" Width="100"/>
             <TabItem Header="Topping">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        <Button Content="← Trang chủ" Click="Back_main_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBlock Text="Ten topping: " Margin="5,2,0,0" Foreground="Gray"/>
-                        <TextBox Width="200" x:Name="txt_FindTopping"  Margin="0,0,10,0"/>
+                        <TextBox Width="200" x:Name="txt_FindTopping"  Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm topping..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <Button Content="Tìm" Click="FindTopping_Click" Margin="0,0,10,0"/>
                         <Button Content="Thêm" Click="ThemTopping_CLick"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -320,11 +350,11 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="10" Height="35" Width="100"/>
+Margin="10" Height="35" Width="100" Click="Back_main_Click"/>
                         <ComboBox Width="250" x:Name="cb_Productsize"
                                DisplayMemberPath="ProductName"
                                SelectedValuePath="ProductID"
-                               Margin="0,0,10,0"/>
+                               Margin="0,0,10,0" materialDesign:HintAssist.Hint="Chọn món..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue"/>
                         <Button Click="GetSizeByProduct_Click" Content="Tìm" Margin="0,0,10,0"/>
                         <Button Click="themSize_Click" Content="Thêm"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Size_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
@@ -352,12 +382,12 @@ Margin="10" Height="35" Width="100"/>
             </TabItem>
 
             <!-- Tab: Quản lý bàn -->
-            <TabItem Header="Quản lý bàn">
+            <TabItem Header="Quản lý số thẻ Order">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBox Width="200" x:Name="txt_FindTable" Margin="0,0,10,0"/>
+Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
+                        <TextBox Width="200" x:Name="txt_FindTable" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm số thẻ order..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <Button Content="Tìm" Click="FindTable_CLick" Margin="0,0,10,0"/>
                         <Button Content="Thêm" Click="themTable_Click"/>
                         <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">

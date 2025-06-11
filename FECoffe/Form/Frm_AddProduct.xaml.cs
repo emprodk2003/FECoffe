@@ -56,6 +56,7 @@ namespace FECoffe.Form
                 if (ProductRequest.createProduct(pro) == true)
                 {
                     MessageBox.Show("Them thuc don moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

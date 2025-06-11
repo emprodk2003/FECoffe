@@ -7,6 +7,21 @@ namespace FECoffe.Request.ProductSize
 {
     public class ProductSizeRequest
     {
+        public static List<ProductSizeViewModel> GetAll()
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/ProductSizes/GetAllProductSizes";
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<ProductSizeViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        } 
         public static List<ProductSizeViewModel> GetByProduct(int id)
         {
             try

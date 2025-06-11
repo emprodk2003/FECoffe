@@ -48,6 +48,7 @@ namespace FECoffe.Form.FrmUpdate
                 if(PositionsRequest.updatePosition(ps) == true)
                 {
                     MessageBox.Show("Sua thong tin chuc vu thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else MessageBox.Show("Loi khi sua thong tin chuc vu !");

@@ -69,6 +69,7 @@ namespace FECoffe.Form
                 if (TimekeepingRequest.createTimekeeping(timekeeping) == true)
                 {
                     MessageBox.Show("Them bang cham cong moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

@@ -52,6 +52,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (ProductSizeRequest.updateProduct(size) == true)
                 {
                     MessageBox.Show("Sua thong tin size cho" + _size.ProductName + "thanh cong.");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

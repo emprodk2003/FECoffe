@@ -125,6 +125,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (EmployeeRequest.updateEmployee(employ) == true)
                 {
                     MessageBox.Show("Sua thong tin nhan vien thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else MessageBox.Show("Loi khi sua thong tin nhan vien !");
