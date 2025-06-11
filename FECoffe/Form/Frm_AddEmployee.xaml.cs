@@ -96,6 +96,7 @@ namespace FECoffe.Form
                 if (EmployeeRequest.createEmployee(employ) == true)
                 {
                     MessageBox.Show("Them nhan vien moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else MessageBox.Show("Loi khi them nhan vien moi!");                

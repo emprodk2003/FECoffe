@@ -52,6 +52,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (ShiftsRequest.updateShifts(shifts) == true)
                 {
                     MessageBox.Show("Them ca lam moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else MessageBox.Show("Loi khi them ca lam moi !");

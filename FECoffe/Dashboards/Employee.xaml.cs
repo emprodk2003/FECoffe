@@ -121,8 +121,11 @@ namespace FECoffe.Dashboards
         private void Them_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddEmployee frm_AddEmployee = new Frm_AddEmployee();
-            frm_AddEmployee.ShowDialog();
-
+            var result = frm_AddEmployee.ShowDialog();
+            if (result == true)
+            {
+                hienthinhanvien();
+            }
         }
 
         private void dg_Employee_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -154,6 +157,7 @@ namespace FECoffe.Dashboards
                 if (EmployeeRequest.deleteEmployee(ep.EmployeeID) == true)
                 {
                     MessageBox.Show("Đã xóa nhân viên.");
+                    hienthinhanvien();
                 }
                 else MessageBox.Show("Loi khi xoa nhân viên.");
             }
@@ -167,20 +171,32 @@ namespace FECoffe.Dashboards
         {
             var ep = dg_Employee.SelectedItem as EmployeeViewModel;
             Frm_Update_Employee employee = new Frm_Update_Employee(ep);
-            employee.ShowDialog();
+            var result = employee.ShowDialog();
+            if (result == true)
+            {
+                hienthinhanvien();
+            }
         }
 
         private void themchucvu_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddPosition frm_AddPosition = new Frm_AddPosition();
-            frm_AddPosition.ShowDialog();
+            var result = frm_AddPosition.ShowDialog();
+            if (result == true)
+            {
+                hienthichucvu();
+            }
         }
 
         private void edit_position_Click(object sender, RoutedEventArgs e)
         {
             var ps = dg_position.SelectedItem as PositionsViewModel;
             Frm_Update_Position frm_Update_Position = new Frm_Update_Position(ps);
-            frm_Update_Position.ShowDialog();
+            var result = frm_Update_Position.ShowDialog();
+            if (result == true)
+            {
+                hienthichucvu();
+            }
         }
 
         private void delete_position_Click(object sender, RoutedEventArgs e)
@@ -198,6 +214,7 @@ namespace FECoffe.Dashboards
                 if (PositionsRequest.deletePosition(position.PositionID) == true)
                 {
                     MessageBox.Show("Đã xóa chuc vu.");
+                    hienthichucvu();
                 }
                 else MessageBox.Show("Loi khi xoa chuc vu!");
             }
@@ -211,14 +228,22 @@ namespace FECoffe.Dashboards
         private void themcalamm_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddShifts frm_AddShifts = new Frm_AddShifts();
-            frm_AddShifts.ShowDialog();
+            var result = frm_AddShifts.ShowDialog();
+            if (result == true)
+            {
+                hienthicalam();
+            }
         }
 
         private void edit_shifts_Click(object sender, RoutedEventArgs e)
         {
             var shifts = dg_Shifts.SelectedItem as ShiftsViewModel;
             Frm_Update_Shifts frm_Update_Shifts = new Frm_Update_Shifts(shifts);
-            frm_Update_Shifts.ShowDialog();
+            var result = frm_Update_Shifts.ShowDialog();
+            if (result == true)
+            {
+                hienthicalam();
+            }
         }
 
         private void delete_shifts_Click(object sender, RoutedEventArgs e)
@@ -236,6 +261,7 @@ namespace FECoffe.Dashboards
                 if (ShiftsRequest.deleteShifts(shifts.ShiftID) == true)
                 {
                     MessageBox.Show("Đã xóa ca lam nay.");
+                    hienthicalam();
                 }
                 else MessageBox.Show("Loi khi xoa ca lam nay!");
             }
@@ -248,14 +274,22 @@ namespace FECoffe.Dashboards
         private void themlich_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddEmployeeSchedules schedules = new Frm_AddEmployeeSchedules();
-            schedules.ShowDialog();
+            var result = schedules.ShowDialog();
+            if (result == true)
+            {
+                hienthilichlam();
+            }
         }
 
         private void edit_EmployeeSchedules_Click(object sender, RoutedEventArgs e)
         {
             var es = dg_EmployeeSchedules.SelectedItem as EmployeeSchedulesViewModel;
             Frm_Update_EmployeeSchedules frm_Update_EmployeeSchedules = new Frm_Update_EmployeeSchedules(es);
-            frm_Update_EmployeeSchedules.ShowDialog();
+            var result = frm_Update_EmployeeSchedules.ShowDialog();
+            if (result == true)
+            {
+                hienthilichlam();
+            }
         }
 
         private void delete_EmployeeSchedules_Click(object sender, RoutedEventArgs e)
@@ -273,6 +307,7 @@ namespace FECoffe.Dashboards
                 if (EmployeeSchedulesRequest.deleteEmployeeSchedules(es.ScheduleID) == true)
                 {
                     MessageBox.Show("Đã xóa lich lam nay.");
+                    hienthilichlam();
                 }
                 else MessageBox.Show("Loi khi xoa lich lam nay!");
             }
@@ -285,14 +320,22 @@ namespace FECoffe.Dashboards
         private void Themchamcong_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddTimekeeping frm_AddTimekeeping = new Frm_AddTimekeeping();
-            frm_AddTimekeeping.ShowDialog();
+            var result = frm_AddTimekeeping.ShowDialog();
+            if (result == true)
+            {
+                hienthichamcong();
+            }
         }
 
         private void edit_Timekeeping_Click(object sender, RoutedEventArgs e)
         {
             var tiemk = dg_Timekeeping.SelectedItem as TimekeepingViewModel;
             Frm_Update_Timekeeping frm_Update_Timekeeping = new Frm_Update_Timekeeping(tiemk);
-            frm_Update_Timekeeping.ShowDialog();
+            var result = frm_Update_Timekeeping.ShowDialog();
+            if (result == true)
+            {
+                hienthichamcong();
+            }
         }
 
         private void delete_Timekeeping_Click(object sender, RoutedEventArgs e)
@@ -310,6 +353,7 @@ namespace FECoffe.Dashboards
                 if (TimekeepingRequest.deleteTimekeeping(tk.TimekeepingID) == true)
                 {
                     MessageBox.Show("Đã xóa cham cong nay.");
+                    hienthichamcong();
                 }
                 else MessageBox.Show("Loi khi xoa cham cong nay!");
             }
@@ -322,14 +366,22 @@ namespace FECoffe.Dashboards
         private void thembangluong_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddSalaries frm_AddSalaries = new Frm_AddSalaries();
-            frm_AddSalaries.ShowDialog();
+            var result = frm_AddSalaries.ShowDialog();
+            if (result == true)
+            {
+                hienthibangluong();
+            }
         }
 
         private void edit_Salaries_Click(object sender, RoutedEventArgs e)
         {
             var salaries = dg_Salaries.SelectedItem as SalariesViewModel;
             Frm_Update_Salaries frm_Update_Salaries = new Frm_Update_Salaries(salaries);
-            frm_Update_Salaries.ShowDialog();
+            var result = frm_Update_Salaries.ShowDialog();
+            if (result == true)
+            {
+                hienthibangluong();
+            }
         }
 
         private void delete_Salaries_Click(object sender, RoutedEventArgs e)
@@ -347,6 +399,7 @@ namespace FECoffe.Dashboards
                 if (SalariesRequest.deleteSalaries(salaries.SalaryID) == true)
                 {
                     MessageBox.Show("Đã xóa bang luong nay.");
+                    hienthibangluong();
                 }
                 else MessageBox.Show("Loi khi xoa bang luong nay!");
             }
@@ -397,24 +450,28 @@ namespace FECoffe.Dashboards
 
         private void FindTimeKeeping_Click(object sender, RoutedEventArgs e)
         {
-            if(dpStar_TimeKeeping.SelectedDate == null)
+            if (dpStar_TimeKeeping.SelectedDate == null)
             {
                 MessageBox.Show("Vui long chon moc thoi gian bat dau!");
             }
-            else if(dpEnd_TimeKeeping.SelectedDate == null)
+            else if (dpEnd_TimeKeeping.SelectedDate == null)
             {
                 MessageBox.Show("Vui long chon moc thoi gian dich!");
-            }
-            else if(cbFilter_Timekeeping.SelectedValue == null)
-            {
-                MessageBox.Show("Vui long chon nhan vien can xem!");
             }
             else
             {
                 var start = DateOnly.FromDateTime(dpStar_TimeKeeping.SelectedDate.Value);
                 var end = DateOnly.FromDateTime(dpEnd_TimeKeeping.SelectedDate.Value);
-                var epid = (int)cbFilter_Timekeeping.SelectedValue;
-                var list = TimekeepingRequest.GetTimekeepingByFilter(start, end, epid);
+                int? epi = null;
+                if (cbFilter_Timekeeping.SelectedValue == null)
+                {
+                    epi = null;
+                }
+                else
+                {
+                    epi = (int)cbFilter_Timekeeping.SelectedValue;
+                }
+                var list = TimekeepingRequest.GetTimekeepingByFilter(start, end, epi);
                 dg_Timekeeping.ItemsSource = list;
             }
         }

@@ -95,6 +95,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (SalariesRequest.updateSalaries(salaries) == true)
                 {
                     MessageBox.Show("Sua thong tin bang luong thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

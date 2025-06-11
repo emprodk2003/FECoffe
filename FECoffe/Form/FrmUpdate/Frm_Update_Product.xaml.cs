@@ -59,6 +59,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (ProductRequest.updateProduct(pro) == true)
                 {
                     MessageBox.Show("Sua thong tin thuc don moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

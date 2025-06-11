@@ -42,6 +42,7 @@ namespace FECoffe.Form
                 if (TableRequest.createTable(table) == true)
                 {
                     MessageBox.Show("Them so the order moi thanh cong.");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

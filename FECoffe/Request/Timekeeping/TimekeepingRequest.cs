@@ -23,15 +23,27 @@ namespace FECoffe.Request.Timekeeping
                 return null;
             }
         }
-        public static List<TimekeepingViewModel> GetTimekeepingByFilter(DateOnly start, DateOnly end, int employeeID)
+        public static List<TimekeepingViewModel> GetTimekeepingByFilter(DateOnly start, DateOnly end, int? employeeID)
         {
             try
             {
-                string url = @"http://localhost:5178/api/Timekeeping/GetTimekeepingByFilter?start=" + start + "&end=" + end + "&EmployeeId=" + employeeID;
-                HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<List<TimekeepingViewModel>>(url);
-                res.Wait();
-                return res.Result;
+                if(employeeID == null)
+                {
+                    string url = @"http://localhost:5178/api/Timekeeping/GetTimekeepingByFilter?start=" + start + "&end=" + end;
+                    HttpClient client = new HttpClient();
+                    var res = client.GetFromJsonAsync<List<TimekeepingViewModel>>(url);
+                    res.Wait();
+                    return res.Result;
+                }
+                else
+                {
+                    string url = @"http://localhost:5178/api/Timekeeping/GetTimekeepingByFilter?start=" + start + "&end=" + end + "&EmployeeId=" + employeeID;
+                    HttpClient client = new HttpClient();
+                    var res = client.GetFromJsonAsync<List<TimekeepingViewModel>>(url);
+                    res.Wait();
+                    return res.Result;
+                }
+                
             }
             catch
             {

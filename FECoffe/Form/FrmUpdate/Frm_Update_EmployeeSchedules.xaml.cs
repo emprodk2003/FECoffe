@@ -50,6 +50,7 @@ namespace FECoffe.Form.FrmUpdate
                 if (EmployeeSchedulesRequest.updateEmployeeSchedules(es) == true)
                 {
                     MessageBox.Show("Cap nhat thong tin lich lam thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

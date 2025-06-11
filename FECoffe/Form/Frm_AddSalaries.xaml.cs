@@ -93,6 +93,7 @@ namespace FECoffe.Form
                 if(SalariesRequest.createSalaries(salaries) == true)
                 {
                     MessageBox.Show("Them bang luong moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

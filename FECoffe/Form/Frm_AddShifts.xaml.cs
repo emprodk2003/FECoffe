@@ -46,6 +46,7 @@ namespace FECoffe.Form
                 if (ShiftsRequest.createShifts(shifts) == true)
                 {
                     MessageBox.Show("Them ca lam moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else MessageBox.Show("Loi khi them ca lam moi !");

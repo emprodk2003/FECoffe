@@ -49,6 +49,7 @@ namespace FECoffe.Form
                 if (PositionsRequest.createPosition(position) == true)
                 {
                     MessageBox.Show("Them chuc vu moi thanh cong!");
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else MessageBox.Show("Loi khi them chuc vu moi !");
