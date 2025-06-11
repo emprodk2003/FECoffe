@@ -89,5 +89,21 @@ namespace FECoffe.Request.Positions
                 return false;
             }
         }
+
+        public static PositionsViewModel GetPositionByUserId(Guid userId)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Positions/GetPositionsByUserId?userId=" + userId;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<PositionsViewModel>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

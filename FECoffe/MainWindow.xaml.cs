@@ -1,4 +1,5 @@
-﻿using FECoffe.Dashboards;
+﻿using FECoffe.AppUsed;
+using FECoffe.Dashboards;
 using FECoffe.DTO.Auth;
 using FECoffe.Request.Auth;
 using System.IdentityModel.Tokens.Jwt;
@@ -79,12 +80,18 @@ namespace FECoffe
                     dashboard.Show();
                     this.Close(); // đóng cửa sổ đăng nhập nếu muốn
                 }
-                else
+
+                if (roleClaim != null && roleClaim.Value.Equals("User", StringComparison.OrdinalIgnoreCase))
                 {
-                    btnText.Text = "Login";
-                    btnLogin.IsEnabled = true;
-                    MessageBox.Show("Bạn không có quyền truy cập.");
+                    var app = (App)Application.Current;
+                    app.RawToken = result.Token;
+                    app.JwtToken = jwt;
+
+                    TheBagNumber dashboard = new TheBagNumber();
+                    dashboard.Show();
+                    this.Close(); // đóng cửa sổ đăng nhập nếu muốn
                 }
+
             }
             else
             {

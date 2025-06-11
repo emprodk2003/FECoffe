@@ -6,28 +6,42 @@
         xmlns:local="clr-namespace:FECoffe.AppUsed"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-       Title="MenuAndOrder" Height="800" Width="1200">
+        Title="MenuAndOrder"
+        Height="800"
+        Width="1500">
     <Window.Resources>
+
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#6F4E37"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="10 5"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background"
+                    Value="#6F4E37" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="Padding"
+                    Value="10 5" />
+            <Setter Property="Margin"
+                    Value="5" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
         </Style>
-        <Style x:Key="RoundedButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="#6F4E37"/>
-            <Setter Property="Padding" Value="10,5"/>
+        <Style x:Key="RoundedButtonStyle"
+               TargetType="Button">
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="Background"
+                    Value="#6F4E37" />
+            <Setter Property="Padding"
+                    Value="10,5" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                         CornerRadius="5">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -36,204 +50,301 @@
 
 
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontFamily"
+                    Value="Segoe UI" />
+            <Setter Property="Margin"
+                    Value="5" />
         </Style>
 
         <!-- Style cho mỗi item trong menu -->
-        <Style x:Key="MenuItemStyle" TargetType="ListViewItem">
+        <Style x:Key="MenuItemStyle"
+               TargetType="ListViewItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <Border Background="{TemplateBinding Background}" 
-                             CornerRadius="5" 
-                             Margin="5"
-                             Padding="0">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                Margin="5"
+                                Padding="0">
                             <ContentPresenter />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background"
+                    Value="White" />
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFF0E0"/>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#FFF0E0" />
                 </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#FFE0D0"/>
+                <Trigger Property="IsSelected"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#FFE0D0" />
                 </Trigger>
             </Style.Triggers>
         </Style>
         <ItemsPanelTemplate x:Key="WrapPanelItemsPanelTemplate">
-            <WrapPanel Orientation="Horizontal" 
-               Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}}"/>
+            <WrapPanel Orientation="Horizontal"
+                       Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}}" />
         </ItemsPanelTemplate>
 
-        <CollectionViewSource x:Key="MenuItemsGrouped" Source="{Binding MenuItems}">
+        <CollectionViewSource x:Key="MenuItemsGrouped"
+                              Source="{Binding MenuItems}">
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Category"/>
+                <PropertyGroupDescription PropertyName="Category" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
     </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="3*"/>
-
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-
+            <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-        <!-- Phần menu cà phê với 3 cột -->
-        <Border Grid.Column="0" Background="#F5F5DC" Padding="10">
 
+        <Border Grid.Column="0">
             <StackPanel>
-                <TextBlock Text="MENU CÀ PHÊ" 
-                        FontSize="24" FontWeight="Bold" 
-                        Foreground="#6F4E37" 
-                        HorizontalAlignment="Center" Margin="0 0 0 0"/>
-                <!--Filter TextBox-->
-                <Grid Width="200" HorizontalAlignment="Left" Grid.Row="0" >
-                    <TextBlock Margin="10 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                             Panel.ZIndex="1" Text="Search here ..."
-                             Visibility="{Binding }"/>
-                    <TextBox x:Name="txtFilter" Style="{StaticResource textboxSearch}"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Height="15 " Width="15" VerticalAlignment="Center"
-                         Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Column="0"
+                            Grid.Row="0"
+                            Background="#F5F5DC"
+                            Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="MENU CÀ PHÊ"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#6F4E37"
+                                       HorizontalAlignment="Center"
+                                       Margin="0 0 0 0" />
+                            <!--Filter TextBox-->
+                            <Grid Width="200"
+                                  HorizontalAlignment="Left"
+                                  Grid.Row="0">
+                                <TextBlock Margin="10 0"
+                                           VerticalAlignment="Center"
+                                           Foreground="#b0b9c6"
+                                           IsHitTestVisible="False"
+                                           Panel.ZIndex="1"
+                                           Text="Search here ..."
+                                           Visibility="{Binding }" />
+                                <TextBox x:Name="txtFilter" />
+                                <Icon:PackIconMaterial Kind="Magnify"
+                                                       Height="15 "
+                                                       Width="15"
+                                                       VerticalAlignment="Center"
+                                                       Margin="0 0 15 0"
+                                                       Foreground="#b0b9c6"
+                                                       HorizontalAlignment="Right" />
+                            </Grid>
+                            <ListView x:Name="MenuItemsList"
+                                      ItemsSource="{Binding Source={StaticResource MenuItemsGrouped}}"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      MaxHeight="690"
+                                      ItemContainerStyle="{StaticResource MenuItemStyle}"
+                                      SelectionMode="Single">
+
+                                <!-- Nhóm danh mục -->
+                                <ListView.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"
+                                                           FontWeight="Bold"
+                                                           FontSize="18"
+                                                           Margin="10 20 0 10"
+                                                           Foreground="#6F4E37" />
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+
+                                        <GroupStyle.ContainerStyle>
+                                            <Style TargetType="{x:Type GroupItem}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                            <StackPanel>
+                                                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                                                  ContentTemplate="{Binding HeaderTemplate, RelativeSource={RelativeSource AncestorType={x:Type GroupStyle}}}" />
+                                                                <ItemsControl ItemsSource="{Binding Items}">
+                                                                    <ItemsControl.ItemsPanel>
+                                                                        <ItemsPanelTemplate>
+                                                                            <UniformGrid Columns="3"
+                                                                                         HorizontalAlignment="Stretch" />
+                                                                        </ItemsPanelTemplate>
+                                                                    </ItemsControl.ItemsPanel>
+                                                                    <ItemsControl.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <Border Width="200"
+                                                                                    Height="250"
+                                                                                    Margin="5"
+                                                                                    Padding="10"
+                                                                                    Background="White"
+                                                                                    CornerRadius="5">
+                                                                                <Grid>
+                                                                                    <Grid.RowDefinitions>
+                                                                                        <RowDefinition Height="120" />
+                                                                                        <RowDefinition Height="*" />
+                                                                                        <RowDefinition Height="Auto" />
+                                                                                    </Grid.RowDefinitions>
+
+                                                                                    <Image Grid.Row="0"
+                                                                                           Source="{Binding UrlImg}"
+                                                                                           Stretch="UniformToFill"
+                                                                                           VerticalAlignment="Center"
+                                                                                           HorizontalAlignment="Center" />
+
+                                                                                    <StackPanel Grid.Row="1"
+                                                                                                Margin="0 10">
+                                                                                        <TextBlock Text="{Binding ProductName}"
+                                                                                                   FontWeight="Bold"
+                                                                                                   FontSize="16"
+                                                                                                   TextWrapping="Wrap" />
+                                                                                        <TextBlock Text="{Binding Description}"
+                                                                                                   FontSize="12"
+                                                                                                   Foreground="#555"
+                                                                                                   TextWrapping="Wrap" />
+                                                                                    </StackPanel>
+
+                                                                                    <StackPanel Grid.Row="2"
+                                                                                                Orientation="Horizontal">
+                                                                                        <TextBlock Text="{Binding Price, StringFormat={}{0:C0}}"
+                                                                                                   FontWeight="Bold"
+                                                                                                   VerticalAlignment="Center"
+                                                                                                   HorizontalAlignment="Left" />
+                                                                                        <Button Content="+"
+                                                                                                Width="30"
+                                                                                                x:Name="addSizeProduct"
+                                                                                                Margin="10 0 0 0"
+                                                                                                Click="addSizeProduct_Click"
+                                                                                                HorizontalAlignment="Right" />
+                                                                                    </StackPanel>
+                                                                                </Grid>
+                                                                            </Border>
+                                                                        </DataTemplate>
+                                                                    </ItemsControl.ItemTemplate>
+                                                                </ItemsControl>
+
+                                                            </StackPanel>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </GroupStyle.ContainerStyle>
+                                    </GroupStyle>
+                                </ListView.GroupStyle>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+
                 </Grid>
-                <ListView x:Name="MenuItemsList"
-                       ItemsSource="{Binding Source={StaticResource MenuItemsGrouped}}"
-                       Background="Transparent"
-                       BorderThickness="0"
-                       ScrollViewer.VerticalScrollBarVisibility="Auto"
-                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                       MaxHeight="690"
-                       ItemContainerStyle="{StaticResource MenuItemStyle}"
-                       SelectionMode="Single">
-
-                    <!-- Nhóm danh mục -->
-                    <ListView.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"
-                                            FontWeight="Bold"
-                                            FontSize="18"
-                                            Margin="10 20 0 10"
-                                            Foreground="#6F4E37"/>
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-
-                            <GroupStyle.ContainerStyle>
-                                <Style TargetType="{x:Type GroupItem}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type GroupItem}">
-                                                <StackPanel>
-                                                    <ContentPresenter Content="{TemplateBinding Content}"
-                                                                   ContentTemplate="{Binding HeaderTemplate, RelativeSource={RelativeSource AncestorType={x:Type GroupStyle}}}"
-                                                                      />
-                                                    <ItemsControl ItemsSource="{Binding Items}">
-                                                        <ItemsControl.ItemsPanel>
-                                                            <ItemsPanelTemplate>
-                                                                <UniformGrid Columns="3" HorizontalAlignment="Stretch"/>
-                                                            </ItemsPanelTemplate>
-                                                        </ItemsControl.ItemsPanel>
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <Border Width="200" Height="250" Margin="5" Padding="10" Background="White" CornerRadius="5">
-                                                                    <Grid>
-                                                                        <Grid.RowDefinitions>
-                                                                            <RowDefinition Height="120"/>
-                                                                            <RowDefinition Height="*"/>
-                                                                            <RowDefinition Height="Auto"/>
-                                                                        </Grid.RowDefinitions>
-
-                                                                        <Image Grid.Row="0" 
-                                                        Source="{Binding ImagePath}" 
-                                                        Stretch="UniformToFill"
-                                                        VerticalAlignment="Center"
-                                                        HorizontalAlignment="Center"/>
-
-                                                                        <StackPanel Grid.Row="1" Margin="0 10">
-                                                                            <TextBlock Text="{Binding Name}" 
-                                                                FontWeight="Bold" 
-                                                                FontSize="16"
-                                                                TextWrapping="Wrap"/>
-                                                                            <TextBlock Text="{Binding Description}" 
-                                                                FontSize="12" 
-                                                                Foreground="#555"
-                                                                TextWrapping="Wrap"/>
-                                                                        </StackPanel>
-
-                                                                        <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                                                            <TextBlock Text="{Binding Price, StringFormat={}{0:C0}}" 
-                                                                FontWeight="Bold" 
-                                                                VerticalAlignment="Center"
-                                                                HorizontalAlignment="Left"/>
-                                                                            <Button Content="+" 
-                                                             Width="30" 
-                                                             Margin="10 0 0 0"
-                                                             Click="Button_Click"
-                                                             Tag="{Binding}"
-                                                             HorizontalAlignment="Right"/>
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </Border>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                    </ItemsControl>
-
-                                                </StackPanel>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </GroupStyle.ContainerStyle>
-                        </GroupStyle>
-                    </ListView.GroupStyle>
-                </ListView>
             </StackPanel>
         </Border>
-
-
         <!-- Phần đặt hàng -->
-        <Border Grid.Column="1" Background="#FFF8E1" Padding="20">
+        <Border Grid.Column="1"
+                Background="#FFF8E1"
+                Padding="20">
             <StackPanel>
-                <TextBlock Text="ĐẶT HÀNG" 
-                        FontSize="24" FontWeight="Bold" 
-                        Foreground="#6F4E37" 
-                        HorizontalAlignment="Center" Margin="0 0 0 20"/>
+                <TextBlock Text="ĐẶT HÀNG"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#6F4E37"
+                           HorizontalAlignment="Center"
+                           Margin="0 0 0 20" />
                 <!-- Giỏ hàng -->
-                <Border Background="White" CornerRadius="5" Padding="15">
+                <Border Background="White"
+                        CornerRadius="5"
+                        Padding="15">
                     <StackPanel>
-                        <TextBlock Text="Giỏ hàng" FontWeight="Bold" Margin="0 0 0 10"/>
-
-                        <ListView x:Name="CartItemsList" Height="150" Width="530">
+                        <TextBlock Text="Don Hang"
+                                   FontWeight="Bold"
+                                   Margin="0 0 0 10" />
+                        <ListView x:Name="CartItemsList"
+                                  Height="250"
+                                  Width="630">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Tên món" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                                    <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Quantity}" Width="120"/>
-                                    <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding Price, StringFormat={}{0:C0}}" Width="120"/>
-                                    <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding Total, StringFormat={}{0:C0}}" Width="130"/>
+                                    <GridViewColumn Header="Tên món"
+                                                    DisplayMemberBinding="{Binding Name}"
+                                                    Width="150" />
+                                    <GridViewColumn Header="Topping"
+                                                    DisplayMemberBinding="{Binding Topping}"
+                                                    Width="150" />
+                                    <GridViewColumn Header="Số lượng"
+                                                    DisplayMemberBinding="{Binding Quantity}"
+                                                    Width="120" />
+                                    <GridViewColumn Header="Đơn giá"
+                                                    DisplayMemberBinding="{Binding Price, StringFormat={}{0:C0}}"
+                                                    Width="120" />
+                                    <GridViewColumn Header="Thành tiền"
+                                                    DisplayMemberBinding="{Binding Total, StringFormat={}{0:C0}}"
+                                                    Width="130" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10">
-                            <TextBlock Text="Tổng cộng:" FontWeight="Bold" Margin="0 0 10 0"/>
-                            <TextBlock x:Name="TotalAmount" Text="0 đ" FontWeight="Bold" FontSize="16"/>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 10">
+                            <TextBlock Text="Discount:"
+                                       FontWeight="Bold"
+                                       Margin="0 0 10 0" />
+                            <TextBox x:Name="txtDiscount"
+                                       Text="0%"
+                                       FontWeight="Bold"
+                                       FontSize="16" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 10">
+                            <TextBlock Text="Tổng cộng:"
+                                       FontWeight="Bold"
+                                       Margin="0 0 10 0" />
+                            <TextBlock x:Name="TotalAmount"
+                                       Text="0 đ"
+                                       FontWeight="Bold"
+                                       FontSize="16" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
 
                 <!-- Nút điều khiển -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20">
-                    <Button x:Name="AddToCartBtn" Content="Thêm vào giỏ" Width="150" Height="30" Margin="20 0 0 0"  Style="{StaticResource RoundedButtonStyle}"/>
-                    <Button x:Name="CheckoutBtn" Content="Thanh toán" Width="150" Height="30" Margin="20 0 0 0" Style="{StaticResource RoundedButtonStyle}"/>
-                    <Button x:Name="ClearCartBtn" Content="Xóa giỏ hàng" Width="150" Height="30" Margin="20 0 0 0" Style="{StaticResource RoundedButtonStyle}"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0 20">
+                    <Button x:Name="AddToCartBtn"
+                            Content="Thêm vào giỏ"
+                            Width="150"
+                            Height="30"
+                            Margin="20 0 0 0"
+                            Style="{StaticResource RoundedButtonStyle}" />
+                    <Button x:Name="CheckoutBtn"
+                            Content="Thanh toán"
+                            Width="150"
+                            Height="30"
+                            Margin="20 0 0 0"
+                            Click="CheckoutBtn_Click"
+                            Style="{StaticResource RoundedButtonStyle}" />
+                    <Button x:Name="ClearCartBtn"
+                            Content="Xóa giỏ hàng"
+                            Width="150"
+                            Height="30"
+                            Margin="20 0 0 0"
+                            Style="{StaticResource RoundedButtonStyle}" />
                 </StackPanel>
             </StackPanel>
         </Border>

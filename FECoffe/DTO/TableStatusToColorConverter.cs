@@ -1,21 +1,24 @@
-﻿using System.Windows.Data;
+﻿using FECoffe.Enum;
+using System.Windows.Data;
 using System.Windows.Media;
-using static FECoffe.AppUsed.TheBagNumber;
+
 
 namespace FECoffe.DTO
 {
     public class TableStatusToColorConverter : IValueConverter
     {
-        public Color FreeColor { get; set; }
+        public Color AvailableColor { get; set; }
         public Color OccupiedColor { get; set; }
+        public Color OutOfServiceColor { get; set; }
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value is TableStatus status)
             {
                 return status switch
                 {
-                    TableStatus.Free => new SolidColorBrush(FreeColor),
+                    TableStatus.Available => new SolidColorBrush(AvailableColor),
                     TableStatus.Occupied => new SolidColorBrush(OccupiedColor),
+                    TableStatus.OutOfService => new SolidColorBrush(OutOfServiceColor),
                     _ => Brushes.Gray
                 };
             }
