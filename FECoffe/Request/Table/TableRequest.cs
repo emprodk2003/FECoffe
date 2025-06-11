@@ -87,5 +87,38 @@ namespace FECoffe.Request.Table
                 return false;
             }
         }
+
+        public static bool updateTableByStatus(int id,int status)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/OrderNumberTag/UpdateOrderNumberTagStatus?idban="+id+ "&status="+status;
+                HttpClient client = new HttpClient();
+                var res = client.PutAsJsonAsync(url, status);
+                res.Wait();
+                return res.Result.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
+                return false;
+            }
+        }
+
+        public static TableViewModel GetTableById(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/OrderNumberTag/GetOrderNumberTagByID?id=" + id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<TableViewModel>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

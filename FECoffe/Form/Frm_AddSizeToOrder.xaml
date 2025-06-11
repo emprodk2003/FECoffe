@@ -1,0 +1,132 @@
+﻿<Window x:Class="FECoffe.Form.Frm_AddSizeToOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FECoffe.Form"
+        mc:Ignorable="d"
+        Title="Frm_AddSizeToOrder"
+        Height="680" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#f4f4f4"
+        ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,4"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="0,6"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="BorderBrush" Value="#007ACC"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <TextBlock Text="Chon Size Cho Mon an/Thức Uống" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Tên món:" Width="150" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtProductName" Width="250"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Size:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbSize" Width="250"
+                          DisplayMemberPath="SizeName"
+                          SelectedValuePath="ProductSizeID"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="So luong thuc uong:"
+                           Width="150"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="txtquantityprodutsize"
+                         Width="250" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Topping:"
+                           Width="150"
+                           VerticalAlignment="Center" />
+                <ComboBox x:Name="cbTopping"
+                          Width="250"
+                          DisplayMemberPath="ToppingName"
+                          SelectedValuePath="ToppingID" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="So luong topping:"
+                           Width="150"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="txtquantitytopping"
+                         Width="250" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,10,0,0">
+                <Button Content="Luu Toping"
+                        Click="luuTopping_Click"
+                        x:Name="luuTopping" />
+            </StackPanel>
+            <GroupBox Header="Chi tiết Toping">
+                <DataGrid x:Name="dgToppingDetails"
+                          ItemsSource="{Binding ExportDetails}"
+                          AutoGenerateColumns="False"
+                          Height="220"
+                          
+                          CanUserAddRows="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ToppingID"
+                                            Binding="{Binding ToppingID}"
+                                            Width="90" />
+                        <DataGridTextColumn Header="Topping"
+                                            Binding="{Binding ToppingName}"
+                                            Width="90" />
+                        <DataGridTextColumn Header="Số lượng"
+                                            Binding="{Binding Quantity}"
+                                            Width="90" />
+                        <DataGridTextColumn Header="Đơn giá"
+                                            Binding="{Binding UnitPrice}"
+                                            Width="90" />
+                        <DataGridTextColumn Header="Thành tiền"
+                                            Binding="{Binding TotalPrice}"
+                                            Width="100" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button Content="Lưu" Click="Save_Click" x:Name="Save"/>
+                <Button Content="Hủy" Background="#888" BorderBrush="#888" x:Name="Huy" Click="Huy_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

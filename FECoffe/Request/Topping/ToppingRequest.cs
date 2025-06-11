@@ -38,6 +38,22 @@ namespace FECoffe.Request.Topping
             }
         }
 
+        public static ToppingViewModel GetToppingById(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Toppings/GetToppingsByID?id=" + id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<ToppingViewModel>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static bool createTopping(CrudTopping topping)
         {
             try

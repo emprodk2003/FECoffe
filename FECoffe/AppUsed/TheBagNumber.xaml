@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FECoffe.AppUsed"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:local1="clr-namespace:FECoffe.DTO"
         mc:Ignorable="d"
-        Title="MenuAndOrder" Height="800" Width="1200">
+        Title="MenuAndOrder" Height="800" Width="1200" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- Style cho các trạng thái bàn ăn -->
         <Style x:Key="FreeTableStyle" TargetType="Border">
@@ -221,24 +221,26 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Button Style="{StaticResource TableButtonStyle}" 
-                                Width="150" Height="150" Margin="10"
-                                Command="{Binding DataContext.TableSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                CommandParameter="{Binding}">
+                                                Width="150" Height="150" Margin="10"
+                                                MouseRightButtonUp="numbertag_MouseRightButtonUp"
+                                                Command="{Binding DataContext.TableSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                x:Name="numbertag" Click="numbertag_Click">   
                                         <Button.Background>
                                             <Binding Path="Status">
                                                 <Binding.Converter>
                                                     <local1:TableStatusToColorConverter 
-                                                            FreeColor="#FF4CAF50" 
-                                                            OccupiedColor="#FFF44336" 
+                                                            AvailableColor="#FF4CAF50"
+                                                            OccupiedColor="#FFF44336"
+                                                            OutOfServiceColor="#FF9E9E9E" 
                                                      />
                                                 </Binding.Converter>
                                             </Binding>
                                         </Button.Background>
 
                                         <StackPanel>
-                                            <TextBlock Text="{Binding TableNumber}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="{Binding Capacity}" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0 5 0 0"/>
-                                            <TextBlock Text="{Binding StatusDisplay}" FontSize="14" Foreground="White" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                                            <TextBlock Text="{Binding TableID}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding TableName}" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                                            <TextBlock Text="{Binding trangthai}" FontSize="14" Foreground="White" HorizontalAlignment="Center" Margin="0 5 0 0"/>
                                         </StackPanel>
                                     </Button>
                                 </DataTemplate>

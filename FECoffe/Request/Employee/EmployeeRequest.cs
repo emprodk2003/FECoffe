@@ -87,5 +87,21 @@ namespace FECoffe.Request.Employee
                 return false;
             }
         }
+        public static EmployeeViewModel GetEmloyeeByPositionId(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Employees/GetEmployeByID?id=" + id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<EmployeeViewModel>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

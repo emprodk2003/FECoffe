@@ -1,9 +1,29 @@
-﻿using System;
+﻿using FECoffe.Dashboards;
+using FECoffe.DTO.CategoyMaterial;
+using FECoffe.DTO.Material;
+using FECoffe.DTO.OrderDetails;
+using FECoffe.DTO.OrderNumbertag;
+using FECoffe.DTO.Orders;
+using FECoffe.DTO.OrderToppingDetails;
+using FECoffe.DTO.Product;
+using FECoffe.DTO.ProductSize;
+using FECoffe.Form;
+using FECoffe.Request.Employee;
+using FECoffe.Request.Material;
+using FECoffe.Request.Orders;
+using FECoffe.Request.Positions;
+using FECoffe.Request.Product;
+using FECoffe.Request.ProductSize;
+using FECoffe.Request.Table;
+using FECoffe.Request.Topping;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Text;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -19,83 +39,65 @@ namespace FECoffe.AppUsed
     /// </summary>
     public partial class Order : Window
     {
-        public class MenuItem
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public decimal Price { get; set; }
-            public string ImagePath { get; set; } // Đường dẫn hình ảnh
-            public string Category { get; set; }
-        }
+        string userID;
+        public TableViewModel ViewModel { get; set; }
+        public CreateOrderDTO CreateOrderDTO { get; set; }
+        public CreateOrderDetailsDTO CreateOrderDetailsDTO{ get; set; }
+        public CreateOrderToppingDetail CreateOrderToppingDetail { get; set; }
+        public ObservableCollection<CartItem> CartItems { get; set; } = new ObservableCollection<CartItem>();
 
-        public class CartItem
-        {
-            public string Name { get; set; }
-            public int Quantity { get; set; }
-            public decimal Price { get; set; }
-            public decimal Total => Quantity * Price;
-        }
-
-        private List<MenuItem> menuItems = new List<MenuItem>();
-        private List<CartItem> cartItems = new List<CartItem>();
-        public Order()
+        public Order(TableViewModel tableView)
         {
             InitializeComponent();
+            ViewModel = tableView;
             LoadMenuItems();
-            MenuItemsList.ItemsSource = menuItems;
-            CartItemsList.ItemsSource = cartItems;
-        }
-        private void LoadMenuItems()
-        {
-            // Thêm các món vào menu với hình ảnh
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Cà phê", Price = 20000, ImagePath = "/Images/hinh-anh-ly-cafe-den-da-dep-5.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Cà phê", Price = 20000, ImagePath = "/Images/hinh-anh-ly-cafe-den-da-dep-5.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Cà phê", Price = 20000, ImagePath = "/Images/hinh-anh-ly-cafe-den-da-dep-5.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Cà phê", Price = 20000, ImagePath = "/Images/hinh-anh-ly-cafe-den-da-dep-5.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Tea", Price = 20000, ImagePath = "/Images/tradao.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Tea", Price = 20000, ImagePath = "/Images/tradao.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Tea", Price = 20000, ImagePath = "/Images/tradao.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Tea", Price = 20000, ImagePath = "/Images/tradao.jpg" });
-            menuItems.Add(new MenuItem { Name = "Cà phê đen", Category = "Tea", Price = 20000, ImagePath = "/Images/tradao.jpg" });
+            CartItemsList.ItemsSource = CartItems;
+            var app = (App)Application.Current;
+            userID = app.IdUser;
 
-            var view = CollectionViewSource.GetDefaultView(menuItems);
-            view.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+        }
+        public void LoadMenuItems()
+        {
+            var list = ProductRequest.GetAllProduct();
+
+
+            var view = CollectionViewSource.GetDefaultView(list);
+            view.GroupDescriptions.Add(new PropertyGroupDescription("Category_Name"));
             MenuItemsList.ItemsSource = view;
             MenuItemsList.Items.Refresh();
         }
 
 
-        private void UpdateTotal()
+
+        private void UpdateTotalAmount()
         {
-            decimal total = 0;
-            foreach (var item in cartItems)
-            {
-                total += item.Total;
-            }
-            TotalAmount.Text = total.ToString("C0");
+            decimal total = CartItems.Sum(item => item.Total);
+
+            // Nếu có discount, xử lý luôn ở đây nếu muốn
+            TotalAmount.Text = $"{total:N0} đ";
         }
 
         private void AddToCartBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (MenuItemsList.SelectedItem is MenuItem selectedItem)
-            {
-                var existingItem = cartItems.Find(i => i.Name == selectedItem.Name);
-                if (existingItem != null)
-                {
-                    existingItem.Quantity++;
-                }
-                else
-                {
-                    cartItems.Add(new CartItem
-                    {
-                        Name = selectedItem.Name,
-                        Price = selectedItem.Price,
-                        Quantity = 1
-                    });
-                }
-                CartItemsList.Items.Refresh();
-                UpdateTotal();
-            }
+            //if (MenuItemsList.SelectedItem is MenuItem selectedItem)
+            //{
+            //    var existingItem = cartItems.Find(i => i.Name == selectedItem.Name);
+            //    if (existingItem != null)
+            //    {
+            //        existingItem.Quantity++;
+            //    }
+            //    else
+            //    {
+            //        cartItems.Add(new CartItem
+            //        {
+            //            Name = selectedItem.Name,
+            //            Price = selectedItem.Price,
+            //            Quantity = 1
+            //        });
+            //    }
+            //    CartItemsList.Items.Refresh();
+            //    UpdateTotal();
+            //}
         }
 
         private void ClearCartBtn_Click(object sender, RoutedEventArgs e)
@@ -105,13 +107,122 @@ namespace FECoffe.AppUsed
 
         private void ClearCart()
         {
-            cartItems.Clear();
-            CartItemsList.Items.Refresh();
-            TotalAmount.Text = "0 đ";
+            //cartItems.Clear();
+            //CartItemsList.Items.Refresh();
+            //TotalAmount.Text = "0 đ";
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void addSizeProduct_Click(object sender, RoutedEventArgs e)
         {
+            var item = sender as FrameworkElement;
+            var selectedProduct = item.DataContext as ProductViewModel;
+            if (selectedProduct != null)
+            {
+                var opensize = new Frm_AddSizeToOrder(selectedProduct);
+                bool? result = opensize.ShowDialog();
+                if (result == true 
+                    && opensize.ProductSizeViewModel != null
+                    && opensize.CreateOrderToppingDetails != null 
+                    && opensize.CreateOrderToppingDetails.Count > 0)
+
+                {
+                    // 🎯 Nhận lại size đã chọn
+                    var selectedSize = opensize.ProductSizeViewModel;
+                    var sizeQuantity = opensize.QuantitySize;
+                    var listtopping = opensize.CreateOrderToppingDetails;
+                    // 👉 TODO: xử lý tiếp với size vừa chọn
+                    // Ví dụ: thêm vào danh sách đơn hàng
+                    //string message = $"✅ Đã chọn size: {selectedSize.SizeName} ({selectedSize.AdditionalPrice} VNĐ)\n";
+                    //message += $"🔢 Số lượng: {sizeQuantity}\n";
+                    //message += "🔹 Danh sách topping:\n";
+
+
+                    // Tính tổng giá topping
+                    decimal totalToppingPrice = 0;
+                    string toppingNames = "";
+                    foreach (var topping in listtopping)
+                    {
+                        //message += $"- Topping ID: {topping.ToppingID}, Số lượng: {topping.Quantity}\n";
+                        // Giả sử bạn có phương thức lấy topping theo ID
+                        var toppingInfo = ToppingRequest.GetToppingById(topping.ToppingID);
+                        var toppingTotal = topping.Quantity * toppingInfo.Price;
+
+                        totalToppingPrice += toppingTotal;
+                        toppingNames += $"{toppingInfo.ToppingName} ({topping.Quantity})\n";
+                    }
+                    if (toppingNames.EndsWith("\n"))
+                        toppingNames = toppingNames[..^1];
+
+
+                    // Giá mỗi phần: size + topping
+                    decimal pricePerItem = selectedSize.AdditionalPrice + totalToppingPrice;
+                    decimal total = pricePerItem * sizeQuantity;
+                    var cartItem = new CartItem
+                    {
+                        Name = $"{selectedProduct.ProductName} - Size {selectedSize.SizeName}",
+                        Topping = toppingNames,
+                        Quantity = sizeQuantity,
+                        Price = pricePerItem,
+                        Total = total,
+                        ProductID = selectedProduct.ProductID,
+                        ProductSizeID = selectedSize.ProductSizeID,
+                        Toppings = listtopping.ToList()
+                    };
+
+                    CartItems.Add(cartItem);
+                    //MessageBox.Show(message, "Thông tin đã chọn");
+                    UpdateTotalAmount();
+                }
+            }
+        }
+
+        private void CheckoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var position = PositionsRequest.GetPositionByUserId(Guid.Parse(userID));
+            var employess= EmployeeRequest.GetEmloyeeByPositionId(position.PositionID);
+
+            var cartItems = CartItemsList.ItemsSource as IEnumerable<CartItem>;
+            var listOrderDetail = new List<CreateOrderDetailsDTO>();
+
+            foreach (var item in cartItems)
+            {
+                var detail = new CreateOrderDetailsDTO
+                {
+                    SizeID = item.ProductSizeID,
+                    Quantity = item.Quantity,
+                    OrderToppingDetails = item.Toppings,
+                    ProductID = item.ProductID,
+                };
+
+                listOrderDetail.Add(detail);
+            }
+
+            decimal discount = 0;
+            decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
+
+            var neworder = new CreateOrderDTO()
+            {
+                Discount= discount,
+                EmployeeID=employess.EmployeeID,
+                OrderDate=DateTime.Now,
+                orderDetails= listOrderDetail,
+                PaymentStatus=1,
+                TableNumberID= ViewModel.TableID,
+            };
+
+            if (OrderRequest.createOrder(neworder) == true)
+            {
+                MessageBox.Show("Thanh toan Thành Công don hang ");
+                var table= TableRequest.GetTableById(ViewModel.TableID);
+                var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
+                var theBagWindow = new TheBagNumber();
+                theBagWindow.Show();
+
+                // 👉 Đóng cửa sổ hiện tại (form đặt món)
+                this.Close();
+            }
+            else
+                MessageBox.Show("Thanh toan That bai don hang ");
 
         }
     }
