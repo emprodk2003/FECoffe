@@ -87,7 +87,7 @@ namespace FECoffe.Request.Employee
                 return false;
             }
         }
-        public static EmployeeViewModel GetEmloyeeByPositionId(int id)
+        public static EmployeeViewModel GetEmloyeeByUserId(Guid id)
         {
             try
             {

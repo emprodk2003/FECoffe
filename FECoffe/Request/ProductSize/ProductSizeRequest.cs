@@ -26,7 +26,7 @@ namespace FECoffe.Request.ProductSize
         {
             try
             {
-                string url = @"http://localhost:5178/api/ProductSizes/GetAllProductSizes?id=" + id;
+                string url = @"http://localhost:5178/api/ProductSizes/GetProductSizesByProduct?id=" + id;
                 HttpClient client = new HttpClient();
                 var res = client.GetFromJsonAsync<List<ProductSizeViewModel>>(url);
                 res.Wait();

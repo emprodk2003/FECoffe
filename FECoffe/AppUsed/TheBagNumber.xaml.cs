@@ -1,5 +1,7 @@
 ﻿using FECoffe.DTO.OrderNumbertag;
+using FECoffe.DTO.Positions;
 using FECoffe.DTO.Product;
+using FECoffe.Request.Positions;
 using FECoffe.Request.Table;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -68,10 +70,46 @@ namespace FECoffe.AppUsed
         {
             var item = sender as FrameworkElement;
             var selectedTag = item.DataContext as TableViewModel;
-            Order order = new Order(selectedTag);
-            order.Show();
-            this.Close();
-            loaddTagNumber();
+            if(selectedTag.Status == Enum.TableStatus.Available)
+            {
+                Order order = new Order(selectedTag);
+                order.Show();
+                this.Close();
+                loaddTagNumber();
+            }
+            else if(selectedTag.Status == Enum.TableStatus.Occupied)
+            {
+                var result = MessageBox.Show(
+                    "Xác nhận đã hoàn thành thực đơn?",
+                    "Xác nhận hoàn thành",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning
+                );
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    var tagnumber = new TableViewModel()
+                    {
+                        TableID = selectedTag.TableID,
+                        TableName = selectedTag.TableName,
+                        Status = Enum.TableStatus.Available,
+                    };
+                    if (TableRequest.updateTable(tagnumber) == true)
+                    {
+                        MessageBox.Show("Đã hoàn thành.");
+                        loaddTagNumber();
+                    }
+                    else MessageBox.Show("Loi khi xác nhận!");
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+
+            }
         }
 
         private void numbertag_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -100,6 +100,7 @@
     </Window.Resources>
 
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="3*" />
@@ -275,6 +276,7 @@
                                    FontWeight="Bold"
                                    Margin="0 0 0 10" />
                         <ListView x:Name="CartItemsList"
+                                  ItemsSource="{Binding CartItem}"
                                   Height="250"
                                   Width="630">
                             <ListView.View>
@@ -327,10 +329,11 @@
                             HorizontalAlignment="Center"
                             Margin="0 20">
                     <Button x:Name="AddToCartBtn"
-                            Content="Thêm vào giỏ"
+                            Content="Thoát"
                             Width="150"
                             Height="30"
                             Margin="20 0 0 0"
+                            Click="exit_CLick"
                             Style="{StaticResource RoundedButtonStyle}" />
                     <Button x:Name="CheckoutBtn"
                             Content="Thanh toán"
@@ -340,9 +343,10 @@
                             Click="CheckoutBtn_Click"
                             Style="{StaticResource RoundedButtonStyle}" />
                     <Button x:Name="ClearCartBtn"
-                            Content="Xóa giỏ hàng"
+                            Content="Xóa món"
                             Width="150"
                             Height="30"
+                            Click="Delete_ProductClick"
                             Margin="20 0 0 0"
                             Style="{StaticResource RoundedButtonStyle}" />
                 </StackPanel>
