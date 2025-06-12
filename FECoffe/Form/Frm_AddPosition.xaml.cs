@@ -37,14 +37,12 @@ namespace FECoffe.Form
             }
             else
             {
-                var app = (App)Application.Current;
                 var position = new CrudPosition()
                 {
                     PositionName = txtPositionName.Text,
                     Description = txtDescription.Text,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                    UserID = Guid.Parse(app.IdUser),
                 };
                 if (PositionsRequest.createPosition(position) == true)
                 {

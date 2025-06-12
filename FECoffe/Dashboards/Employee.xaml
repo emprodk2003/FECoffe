@@ -328,8 +328,6 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
                             <DataGridTextColumn Header="Tên chức vụ" Binding="{Binding PositionName}"/>
                             <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}"/>
                             <DataGridTextColumn Header="Ngay cap nhat" Binding="{Binding UpdatedAt}"/>
-                            <DataGridTextColumn Header="ID nguoi tao" Binding="{Binding UserID}" Visibility="Collapsed"/>
-                            <DataGridTextColumn Header="Nguoi tao" Binding="{Binding UserName}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

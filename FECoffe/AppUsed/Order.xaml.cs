@@ -1,36 +1,18 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.CategoyMaterial;
-using FECoffe.DTO.Material;
-using FECoffe.DTO.OrderDetails;
+﻿using FECoffe.DTO.OrderDetails;
 using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Orders;
 using FECoffe.DTO.OrderToppingDetails;
 using FECoffe.DTO.Product;
-using FECoffe.DTO.ProductSize;
 using FECoffe.Form;
 using FECoffe.Request.Employee;
-using FECoffe.Request.Material;
 using FECoffe.Request.Orders;
 using FECoffe.Request.Positions;
 using FECoffe.Request.Product;
-using FECoffe.Request.ProductSize;
 using FECoffe.Request.Table;
 using FECoffe.Request.Topping;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Text;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.AppUsed
 {
@@ -122,8 +104,7 @@ namespace FECoffe.AppUsed
                 bool? result = opensize.ShowDialog();
                 if (result == true 
                     && opensize.ProductSizeViewModel != null
-                    && opensize.CreateOrderToppingDetails != null 
-                    && opensize.CreateOrderToppingDetails.Count > 0)
+                    && opensize.QuantitySize > 0)
 
                 {
                     // 🎯 Nhận lại size đã chọn
@@ -155,14 +136,14 @@ namespace FECoffe.AppUsed
 
 
                     // Giá mỗi phần: size + topping
-                    decimal pricePerItem = selectedSize.AdditionalPrice + totalToppingPrice;
+                    decimal pricePerItem = selectedSize.AdditionalPrice + totalToppingPrice + selectedProduct.Price;
                     decimal total = pricePerItem * sizeQuantity;
                     var cartItem = new CartItem
                     {
                         Name = $"{selectedProduct.ProductName} - Size {selectedSize.SizeName}",
                         Topping = toppingNames,
                         Quantity = sizeQuantity,
-                        Price = pricePerItem,
+                        Price = selectedProduct.Price,
                         Total = total,
                         ProductID = selectedProduct.ProductID,
                         ProductSizeID = selectedSize.ProductSizeID,
@@ -178,52 +159,78 @@ namespace FECoffe.AppUsed
 
         private void CheckoutBtn_Click(object sender, RoutedEventArgs e)
         {
-            var position = PositionsRequest.GetPositionByUserId(Guid.Parse(userID));
-            var employess= EmployeeRequest.GetEmloyeeByPositionId(position.PositionID);
-
-            var cartItems = CartItemsList.ItemsSource as IEnumerable<CartItem>;
-            var listOrderDetail = new List<CreateOrderDetailsDTO>();
-
-            foreach (var item in cartItems)
+           if(CartItems.Count > 0)
             {
-                var detail = new CreateOrderDetailsDTO
+                var employess = EmployeeRequest.GetEmloyeeByUserId(Guid.Parse(userID));
+                var cartItems = CartItemsList.ItemsSource as IEnumerable<CartItem>;
+                var listOrderDetail = new List<CreateOrderDetailsDTO>();
+
+                foreach (var item in cartItems)
                 {
-                    SizeID = item.ProductSizeID,
-                    Quantity = item.Quantity,
-                    OrderToppingDetails = item.Toppings,
-                    ProductID = item.ProductID,
+                    var detail = new CreateOrderDetailsDTO
+                    {
+                        SizeID = item.ProductSizeID,
+                        Quantity = item.Quantity,
+                        OrderToppingDetails = item.Toppings,
+                        ProductID = item.ProductID,
+                    };
+
+                    listOrderDetail.Add(detail);
+                }
+
+                decimal discount = 0;
+                decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
+
+                var neworder = new CreateOrderDTO()
+                {
+                    Discount = discount,
+                    EmployeeID = employess.EmployeeID,
+                    OrderDate = DateTime.Now,
+                    orderDetails = listOrderDetail,
+                    PaymentStatus = 1,
+                    TableNumberID = ViewModel.TableID,
                 };
 
-                listOrderDetail.Add(detail);
-            }
+                if (OrderRequest.createOrder(neworder) == true)
+                {
+                    MessageBox.Show("Thanh toan Thành Công don hang ");
+                    var table = TableRequest.GetTableById(ViewModel.TableID);
+                    var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
+                    var theBagWindow = new TheBagNumber();
+                    theBagWindow.Show();
 
-            decimal discount = 0;
-            decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
-
-            var neworder = new CreateOrderDTO()
-            {
-                Discount= discount,
-                EmployeeID=employess.EmployeeID,
-                OrderDate=DateTime.Now,
-                orderDetails= listOrderDetail,
-                PaymentStatus=1,
-                TableNumberID= ViewModel.TableID,
-            };
-
-            if (OrderRequest.createOrder(neworder) == true)
-            {
-                MessageBox.Show("Thanh toan Thành Công don hang ");
-                var table= TableRequest.GetTableById(ViewModel.TableID);
-                var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
-                var theBagWindow = new TheBagNumber();
-                theBagWindow.Show();
-
-                // 👉 Đóng cửa sổ hiện tại (form đặt món)
-                this.Close();
+                    // 👉 Đóng cửa sổ hiện tại (form đặt món)
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Thanh toan That bai don hang ");
             }
             else
-                MessageBox.Show("Thanh toan That bai don hang ");
+            {
+                MessageBox.Show("Vui long chon mon de thanh toan");         
+            }
 
+        }
+
+        private void exit_CLick(object sender, RoutedEventArgs e)
+        {
+            var tag = new  TheBagNumber();
+            this.Close();
+            tag.Show();
+        }
+
+        private void Delete_ProductClick(object sender, RoutedEventArgs e)
+        {
+            var item = CartItemsList.SelectedItem as CartItem;
+            if(item == null)
+            {
+                MessageBox.Show("Vui long chon mon de xoa!");
+            }
+            else
+            {
+                CartItems.Remove(item);
+                CartItemsList.ItemsSource = CartItems;
+            }
         }
     }
 }

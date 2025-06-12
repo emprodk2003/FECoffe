@@ -36,14 +36,12 @@ namespace FECoffe.Form.FrmUpdate
             }
             else
             {
-                var app = (App)Application.Current;
                 var ps = new PositionsViewModel()
                 {
                     PositionID = _positions.PositionID,
                     PositionName = txtPositionName.Text,
                     Description = txtDescription.Text,
                     UpdatedAt = DateTime.Now,
-                    UserID = Guid.Parse(app.IdUser)
                 };
                 if(PositionsRequest.updatePosition(ps) == true)
                 {
