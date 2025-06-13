@@ -299,57 +299,114 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Right"
-                                    Margin="0 10">
-                            <TextBlock Text="Discount:"
-                                       FontWeight="Bold"
-                                       Margin="0 0 10 0" />
-                            <TextBox x:Name="txtDiscount"
-                                       Text="0%"
-                                       FontWeight="Bold"
-                                       FontSize="16" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Right"
-                                    Margin="0 10">
-                            <TextBlock Text="Tổng cộng:"
-                                       FontWeight="Bold"
-                                       Margin="0 0 10 0" />
-                            <TextBlock x:Name="TotalAmount"
-                                       Text="0 đ"
-                                       FontWeight="Bold"
-                                       FontSize="16" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="0 10">
+                                <TextBlock Text="Discount:"
+                                           FontWeight="Bold"
+                                           Margin="0 0 10 0" />
+                                <TextBox x:Name="txtDiscount"
+                                         Text="0%"
+                                         FontWeight="Bold"
+                                         FontSize="16" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="0 10">
+                                <TextBlock Text="Tổng cộng:"
+                                           FontWeight="Bold"
+                                           Margin="0 0 10 0" />
+                                <TextBlock x:Name="TotalAmount"
+                                           Text="0 đ"
+                                           FontWeight="Bold"
+                                           FontSize="16" />
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="2" Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="0 10">
+                                <TextBlock Text="Thanh Tien:"
+                                           FontWeight="Bold"
+                                           Margin="0 0 10 0" />
+                                <TextBlock x:Name="TotalAmountFinal"
+                                           Text="0 đ"
+                                           FontWeight="Bold"
+                                           FontSize="16" />
+                            </StackPanel>
+                        </Grid>
+                        
                     </StackPanel>
                 </Border>
 
                 <!-- Nút điều khiển -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="0 20">
-                    <Button x:Name="AddToCartBtn"
-                            Content="Thoát"
-                            Width="150"
-                            Height="30"
-                            Margin="20 0 0 0"
-                            Click="exit_CLick"
-                            Style="{StaticResource RoundedButtonStyle}" />
-                    <Button x:Name="CheckoutBtn"
-                            Content="Thanh toán"
-                            Width="150"
-                            Height="30"
-                            Margin="20 0 0 0"
-                            Click="CheckoutBtn_Click"
-                            Style="{StaticResource RoundedButtonStyle}" />
-                    <Button x:Name="ClearCartBtn"
-                            Content="Xóa món"
-                            Width="150"
-                            Height="30"
-                            Click="Delete_ProductClick"
-                            Margin="20 0 0 0"
-                            Style="{StaticResource RoundedButtonStyle}" />
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        
+                        
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0 20">
+                        <Button x:Name="AddToCartBtn"
+                                Content="Thoát"
+                                Width="150"
+                                Height="30"
+                                Margin="20 0 0 0"
+                                Click="exit_CLick"
+                                Style="{StaticResource RoundedButtonStyle}" />
+                        <Button x:Name="CheckoutBtn"
+                                Content="Thanh toán"
+                                Width="150"
+                                Height="30"
+                                Margin="20 0 0 0"
+                                Click="CheckoutBtn_Click"
+                                Style="{StaticResource RoundedButtonStyle}" />
+                        <Button x:Name="ThanhTienBtn"
+                                Content="Thanh Tien "
+                                Width="150"
+                                Height="30"
+                                Click="ThanhTienBtn_Click"
+                                Margin="20 0 0 0"
+                                Style="{StaticResource RoundedButtonStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="0"
+                                Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0 20">
+
+                        <Button x:Name="ClearCartBtn"
+                                Content="Xóa món"
+                                Width="150"
+                                Height="30"
+                                Click="Delete_ProductClick"
+                                Margin="20 0 0 0"
+                                Style="{StaticResource RoundedButtonStyle}" />
+                        <Button x:Name="TaoQRBtn"
+                                Content="Tao OR"
+                                Width="150"
+                                Height="30"
+                                Click="TaoQRBtn_Click"
+                                Margin="20 0 0 0"
+                                Style="{StaticResource RoundedButtonStyle}" />
+                    </StackPanel>
+                </Grid>
+               
             </StackPanel>
         </Border>
     </Grid>
