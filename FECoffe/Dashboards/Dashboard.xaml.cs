@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using FECoffe.Request.Report;
+using LiveCharts;
 using LiveCharts.Wpf;
 using System.Windows;
 using System.Windows.Input;
@@ -100,6 +101,24 @@ namespace FECoffe.Dashboards
         {
             Product product = new Product();
             product.Show();
+            this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var report = ReportRequest.GetByToDay();
+            if(report != null)
+            {
+                txt_Number_employee.Text = report.Number_Employee.ToString() + " nhân viên";
+                txt_Number_Order.Text = report.Number_Orders.ToString() + " đơn hàng";
+                txt_Report_TotalRevenues.Text = report.TotalRevenue.ToString() +" VND";
+            }
+        }
+
+        private void opentBusiness_Click(object sender, RoutedEventArgs e)
+        {
+            var business = new Business();
+            business.Show();
             this.Close();
         }
     }
