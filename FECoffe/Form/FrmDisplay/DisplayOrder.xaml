@@ -4,9 +4,132 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Form.FrmDisplay"
+        xmlns:conv="clr-namespace:FECoffe.Converter"
         mc:Ignorable="d"
-        Title="DisplayOrder" Height="450" Width="800">
-    <Grid>
+        ResizeMode="NoResize"
+        SizeToContent="Manual"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        Title="DisplayOrder" Height="600" Width="1000" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!-- Style đơn giản cho đẹp -->
+        <Style TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="AlternatingRowBackground" Value="#f3f3f3"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         
+        <Style x:Key="CenterCellStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="35"/>
+        </Style>
+        <conv:ToppingIDToMateriaNameConverter x:Key="ToppingConverter"/>
+        <conv:ProductIDToMateriaNameConverter x:Key="ProductConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Thông tin đơn hàng -->
+            <RowDefinition Height="*" />
+            <!-- Danh sách món -->
+        </Grid.RowDefinitions>
+
+        <!-- Thông tin đơn hàng -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Mã đơn -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="5">
+                <TextBlock Text="Mã đơn: " FontWeight="Bold" FontSize="14"/>
+                <TextBlock x:Name="txt_OrderID" FontSize="14"/>
+            </StackPanel>
+
+            <!-- Ngày tạo -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="5">
+                <TextBlock Text="Ngày tạo: " FontWeight="Bold" FontSize="14"/>
+                <TextBlock x:Name="txt_OrderDate" Text="{Binding CreatedAt, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" FontSize="14"/>
+            </StackPanel>
+
+            <!-- Tổng tiền -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="5">
+                <TextBlock Text="Tổng tiền: " FontWeight="Bold" FontSize="14"/>
+                <TextBlock x:Name="txt_TotalProce" Text="{Binding TotalAmount, StringFormat='{}{0:N0} đ'}" FontSize="14" Foreground="DarkGreen"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Danh sách món -->
+        <DataGrid Grid.Row="1"
+              x:Name="dgOrderDetails"
+              ItemsSource="{Binding OrderDetailsViewModel}"
+              IsReadOnly="True"
+              AutoGenerateColumns="False"
+              HeadersVisibility="Column"
+              GridLinesVisibility="None"
+              RowBackground="White"
+              AlternatingRowBackground="#f9f9f9"
+              FontSize="13"
+              Margin="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên món" Width="200" ElementStyle="{StaticResource CenterCellStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="ProductID" Converter="{StaticResource ProductConverter}"  />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Size" Binding="{Binding SizeName}" Width="80" ElementStyle="{StaticResource CenterCellStyle}"/>
+                <DataGridTextColumn Header="SL" Binding="{Binding Quantity}" Width="60" ElementStyle="{StaticResource CenterCellStyle}"/>
+                <DataGridTextColumn Header="Giá Up Size" Binding="{Binding UnitPrice, StringFormat=N0}" Width="100" ElementStyle="{StaticResource CenterCellStyle}"/>
+                <DataGridTextColumn Header="Thành tiền" Binding="{Binding TotalPrice, StringFormat=N0}" Width="100" ElementStyle="{StaticResource CenterCellStyle}"/>
+
+                <!-- Cột hiển thị danh sách topping -->
+                <DataGridTemplateColumn Header="Topping kèm theo" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DataGrid ItemsSource="{Binding listtopping}" 
+                                  AutoGenerateColumns="False" 
+                                  HeadersVisibility="Column"
+                                  CanUserAddRows="False" 
+                                  Margin="5" 
+                                  IsReadOnly="True"
+                                  GridLinesVisibility="None"
+                                  RowBackground="White"
+                                  AlternatingRowBackground="#f3f3f3"
+                                  FontSize="12">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Tên Topping" Width="*">
+                                        <DataGridTextColumn.Binding>
+                                            <Binding Path="ToppingID" Converter="{StaticResource ToppingConverter}"  />
+                                        </DataGridTextColumn.Binding>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="60" />
+                                    <DataGridTextColumn Header="Đơn giá" Binding="{Binding UnitPrice, StringFormat=N0}" Width="100" />
+                                    <DataGridTextColumn Header="Thành tiền" Binding="{Binding TotalPrice, StringFormat=N0}" Width="100" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
+
 </Window>

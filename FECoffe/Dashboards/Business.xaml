@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Dashboards"
+        xmlns:conv="clr-namespace:FECoffe.Converter"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Business" Height="450" Width="800">
+        Title="Business" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- TabControl Style -->
         <Style TargetType="TabControl">
@@ -106,9 +108,10 @@
 
         <!-- DataGrid Style -->
         <Style TargetType="DataGrid">
-            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="RowHeight" Value="32"/>
+            <Setter Property="IsReadOnly" Value="true"/>
             <Setter Property="RowBackground" Value="White"/>
             <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
             <Setter Property="GridLinesVisibility" Value="None"/>
@@ -127,6 +130,45 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!-- Style tiêu đề -->
+        <Style x:Key="TopTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#2196F3"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <!-- Style DataGrid riêng cho phần top món -->
+        <Style x:Key="TopSellingGridStyle" TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="RowHeight" Value="35"/>
+            <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="BorderBrush" Value="#DDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- Style cột căn giữa nội dung -->
+        <Style x:Key="CenterCellStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Style Header DataGrid -->
+        <Style x:Key="GridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#2196F3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="6"/>
+        </Style>
+        <conv:EmployeeIDToMateriaNameConverter x:Key="EmployeeConverter"/>
+        <conv:TableIDToMateriaNameConverter x:Key="TableConverter"/>
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -135,26 +177,29 @@
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="0,0,10,0" Height="35" Width="100"/>
-                        <DatePicker Width="150" Margin="0,0,10,0" />
-                        <DatePicker Width="150" Margin="0,0,10,0" />
-                        <Button Content="Lọc"/>
+Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
+                        <DatePicker Width="150" x:Name="dp_start" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <DatePicker Width="150" x:Name="dp_end" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <Button Content="Lọc" Click="Find_Click"/>
                     </StackPanel>
-                    <DataGrid ItemsSource="{Binding Orders}" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_Orders" ItemsSource="{Binding OrdersViewModel}" AutoGenerateColumns="False" MouseDoubleClick="GetOrderDetail_Click">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}"/>
                             <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate}"/>
-                            <DataGridTextColumn Header="Nhân viên" Binding="{Binding Employees.FullName}"/>
-                            <DataGridTextColumn Header="Bàn" Binding="{Binding TableNumber}"/>
-                            <DataGridTextColumn Header="Tổng tiền" Binding="{Binding FinalAmount}"/>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding PaymentStatus}"/>
-                            <DataGridTemplateColumn Header="Chi tiết">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Xem"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Nhân viên" IsReadOnly="True" >
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="EmployeeID" Converter="{StaticResource EmployeeConverter}"/>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Bàn">
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="TableNumberID" Converter="{StaticResource TableConverter}"/>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount}"/>
+                            <DataGridTextColumn Header="Giảm giá" Binding="{Binding Discount}"/>
+                            <DataGridTextColumn Header="Tổng tiền thanh toán" Binding="{Binding FinalAmount}"/>
+                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding payment}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -165,40 +210,49 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="0,0,10,0" Height="35" Width="100"/>
-                        <DatePicker Width="150" Margin="0,0,10,0" />
-                        <DatePicker Width="150" Margin="0,0,10,0" />
-                        <ComboBox Width="60"
-                               Margin="0,0,10,0"
-                               ItemsSource="{Binding Products}"
-                               SelectedItem="{Binding SelectedProduct}"
-                               DisplayMemberPath="ProductName"/>
-                        <Button Content="Lọc"/>
+Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
+                        <DatePicker x:Name="dp_startreport" Width="150" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <DatePicker x:Name="dp_endReport" Width="150" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <Button Content="Lọc" Click="FindReport_Click"/>
                     </StackPanel>
                     <Border Background="#2196F4" Padding="10" CornerRadius="5" BorderBrush="#CCC" BorderThickness="1">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel Margin="0,0,30,0">
                                 <TextBlock Text="Tổng doanh thu" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding TotalRevenue, StringFormat='{}{0:N0} VNĐ'}"/>
+                                <TextBlock x:Name="txt_totalprice" Text="{Binding TotalRevenue, StringFormat='{}{0:N0} VNĐ'}"/>
                             </StackPanel>
                             <StackPanel Margin="0,0,30,0">
                                 <TextBlock Text="Tổng số đơn hàng" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding TotalOrders}"/>
+                                <TextBlock x:Name="txt_NumberOrders"/>
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Text="Sản phẩm bán chạy nhất" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding TopProductName}"/>
+                                <TextBlock Text="Tổng số nhân viên hiện tại" FontWeight="Bold"/>
+                                <TextBlock x:Name="txt_NumberEmployee"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
-                    <DataGrid ItemsSource="{Binding TopSellingProducts}" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Sản phẩm" Binding="{Binding ProductName}"/>
-                            <DataGridTextColumn Header="Kích cỡ" Binding="{Binding Size}"/>
-                            <DataGridTextColumn Header="Số lượng bán" Binding="{Binding Quantity}"/>
-                            <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalRevenue}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel Margin="10">
+                        <!-- Tiêu đề -->
+                        <TextBlock Text="Top món bán chạy nhất" Style="{StaticResource TopTitleStyle}" />
+
+                        <!-- DataGrid dùng style riêng -->
+                        <DataGrid x:Name="dgReport" ItemsSource="{Binding ProductReport}"
+                                  Style="{StaticResource TopSellingGridStyle}"
+                                  ColumnHeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Sản phẩm" Binding="{Binding ProductName}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <StaticResource ResourceKey="CenterCellStyle"/>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Số lượng bán" Binding="{Binding Quantity}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <StaticResource ResourceKey="CenterCellStyle"/>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
 
@@ -207,7 +261,7 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="0,0,10,0" Height="35" Width="100"/>
+Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
                         <DatePicker Width="150" Margin="0,0,10,0" />
                         <DatePicker Width="150" Margin="0,0,10,0" />
                         <ComboBox Width="60"
