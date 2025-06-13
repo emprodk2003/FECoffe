@@ -41,8 +41,6 @@ namespace FECoffe.AppUsed
         public void LoadMenuItems()
         {
             var list = ProductRequest.GetAllProduct();
-
-
             var view = CollectionViewSource.GetDefaultView(list);
             view.GroupDescriptions.Add(new PropertyGroupDescription("Category_Name"));
             MenuItemsList.ItemsSource = view;
@@ -57,41 +55,6 @@ namespace FECoffe.AppUsed
 
             // Nếu có discount, xử lý luôn ở đây nếu muốn
             TotalAmount.Text = $"{total:N0} đ";
-        }
-
-        private void AddToCartBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //if (MenuItemsList.SelectedItem is MenuItem selectedItem)
-            //{
-            //    var existingItem = cartItems.Find(i => i.Name == selectedItem.Name);
-            //    if (existingItem != null)
-            //    {
-            //        existingItem.Quantity++;
-            //    }
-            //    else
-            //    {
-            //        cartItems.Add(new CartItem
-            //        {
-            //            Name = selectedItem.Name,
-            //            Price = selectedItem.Price,
-            //            Quantity = 1
-            //        });
-            //    }
-            //    CartItemsList.Items.Refresh();
-            //    UpdateTotal();
-            //}
-        }
-
-        private void ClearCartBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ClearCart();
-        }
-
-        private void ClearCart()
-        {
-            //cartItems.Clear();
-            //CartItemsList.Items.Refresh();
-            //TotalAmount.Text = "0 đ";
         }
 
         private void addSizeProduct_Click(object sender, RoutedEventArgs e)
@@ -181,6 +144,8 @@ namespace FECoffe.AppUsed
                 decimal discount = 0;
                 decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
 
+                var codeOrder = OrderRequest.genCodeOrder();
+
                 var neworder = new CreateOrderDTO()
                 {
                     Discount = discount,
@@ -189,6 +154,7 @@ namespace FECoffe.AppUsed
                     orderDetails = listOrderDetail,
                     PaymentStatus = 1,
                     TableNumberID = ViewModel.TableID,
+                    CodeOrder=codeOrder,
                 };
 
                 if (OrderRequest.createOrder(neworder) == true)
@@ -231,6 +197,79 @@ namespace FECoffe.AppUsed
                 CartItems.Remove(item);
                 CartItemsList.ItemsSource = CartItems;
             }
+        }
+
+        private void ThanhTienBtn_Click(object sender, RoutedEventArgs e)
+        {
+            decimal total = CartItems.Sum(item => item.Total);
+
+            decimal discount = 0;
+            decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
+           
+            decimal thanhtien = total - (total*discount/100);
+            TotalAmountFinal.Text = thanhtien.ToString();
+        }
+
+        private void TaoQRBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (CartItems.Count > 0)
+            {
+                var employess = EmployeeRequest.GetEmloyeeByUserId(Guid.Parse(userID));
+                var cartItems = CartItemsList.ItemsSource as IEnumerable<CartItem>;
+                var listOrderDetail = new List<CreateOrderDetailsDTO>();
+
+                foreach (var item in cartItems)
+                {
+                    var detail = new CreateOrderDetailsDTO
+                    {
+                        SizeID = item.ProductSizeID,
+                        Quantity = item.Quantity,
+                        OrderToppingDetails = item.Toppings,
+                        ProductID = item.ProductID,
+                    };
+
+                    listOrderDetail.Add(detail);
+                }
+                decimal total = CartItems.Sum(item => item.Total);
+                decimal discount = 0;
+                decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
+
+                decimal thanhtien = total - (total * discount / 100);
+                var codeOrder = OrderRequest.genCodeOrder();
+                var neworder = new CreateOrderDTO()
+                {
+                    Discount = discount,
+                    EmployeeID = employess.EmployeeID,
+                    OrderDate = DateTime.Now,
+                    orderDetails = listOrderDetail,
+                    PaymentStatus = 0,
+                    TableNumberID = ViewModel.TableID,
+                    CodeOrder = codeOrder,
+                };
+              
+
+
+                if (OrderRequest.createOrder(neworder) == true)
+                {
+                    MessageBox.Show("Tao don hang doi thanh toan  ");
+                    var frm = new Frm_CreateQR(neworder, thanhtien);
+                    frm.ShowDialog();
+                    var table = TableRequest.GetTableById(ViewModel.TableID);
+                    var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
+                    var theBagWindow = new TheBagNumber();
+                    theBagWindow.Show();
+
+                    // 👉 Đóng cửa sổ hiện tại (form đặt món)
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Thanh toan That bai don hang ");
+            }
+            else
+            {
+                MessageBox.Show("Vui long chon mon de thanh toan");
+            }
+          
         }
     }
 }
