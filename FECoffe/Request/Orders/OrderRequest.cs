@@ -22,6 +22,5 @@ namespace FECoffe.Request.Orders
                 return false;
             }
         }
-        
     }
 }
