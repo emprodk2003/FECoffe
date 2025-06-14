@@ -12,6 +12,7 @@ namespace FECoffe.DTO.Orders
         public decimal TotalAmount { get; set; }
         public decimal Discount { get; set; }
         public decimal FinalAmount { get; set; }
+        public string CodeOrder { get; set; }
         public TransactionStatus PaymentStatus { get; set; }
         public string payment
         {

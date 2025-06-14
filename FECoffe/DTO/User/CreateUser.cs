@@ -6,6 +6,7 @@ namespace FECoffe.DTO.User
     {
         [Required(ErrorMessage = "UserName is Required")]
         public string UserName { get; set; }
+        public int EmployeeID { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }

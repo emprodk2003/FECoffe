@@ -61,12 +61,11 @@ namespace FECoffe.Dashboards
         private void btn_them_Click(object sender, RoutedEventArgs e)
         {
             CreateUpdateFormUser form = new CreateUpdateFormUser();
-            form.Show();
+            form.ShowDialog();
             loadUser();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
- 
             loadUser();
             loadRole();
         }
@@ -96,7 +95,7 @@ namespace FECoffe.Dashboards
         private void Themquyen_Click(object sender, RoutedEventArgs e)
         {
             Frm_AddRole form = new Frm_AddRole();
-            form.Show();
+            form.ShowDialog();
             loadRole();
         }
 
@@ -113,6 +112,13 @@ namespace FECoffe.Dashboards
                 addrole.ShowDialog(); // hoặc Show()
                 loadUser();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var home = new Dashboard();
+            home.Show();
+            this.Close();
         }
     }
 }

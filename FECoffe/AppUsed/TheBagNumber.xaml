@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:FECoffe.AppUsed"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:local1="clr-namespace:FECoffe.DTO"
         mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanResize"
         Title="MenuAndOrder" Height="800" Width="1200" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- Style cho các trạng thái bàn ăn -->
@@ -166,7 +169,8 @@
     </Window.Resources>
 
     <Grid >
-        <TabControl>
+        <TabControl x:Name="MainTabControl"
+                    SelectedIndex="0">
             <!-- Tab: Quản lý hàng -->
             <TabItem Header="Ban Hang">
                 <Grid Margin="10">
@@ -177,7 +181,7 @@
                     </Grid.RowDefinitions>
                     <!-- Header -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
-                        <TextBlock Text="BÀN ĂN" FontSize="24" FontWeight="Bold" Foreground="#FF333333"/>
+                        <TextBlock Text="Thẻ Bàn " FontSize="24" FontWeight="Bold" Foreground="#FF333333"/>
                     </StackPanel>
                     <!-- Legend (Chú thích) -->
                     <Grid Grid.Row="1">
@@ -188,11 +192,18 @@
 
                         <!-- ComboBox bên trái -->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
-                            <ComboBox Width="200" Margin="0 0 10 0" SelectedIndex="0" Foreground="Black">
-                                <ComboBoxItem Content="Tất cả bàn"/>
-                                <ComboBoxItem Content="Bàn trống"/>
-                                <ComboBoxItem Content="Bàn đang dùng"/>
-                                <ComboBoxItem Content="Bàn đã đặt"/>
+                            <ComboBox Width="200"
+                                      x:Name="cbTableFilter"
+                                      Margin="0 0 10 0"
+                                      SelectedIndex="0" 
+                                      Foreground="Black"
+                                      SelectionChanged="cbTableFilter_SelectionChanged">
+                                <ComboBoxItem Content="Tất cả thẻ bàn"
+                                              Tag="2" />
+                                <ComboBoxItem Content="Thẻ trống"
+                                              Tag="0" />
+                                <ComboBoxItem Content="Thẻ đang dùng"
+                                              Tag="1" />
                             </ComboBox>
                         </StackPanel>
 
@@ -200,11 +211,11 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
                             <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
                                 <Border Width="20" Height="20" Background="#FF4CAF50" CornerRadius="4" Margin="0 0 5 0"/>
-                                <TextBlock Text="Bàn trống" VerticalAlignment="Center" Width="150" FontSize="14" Foreground="Black" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Thẻ trống" VerticalAlignment="Center" Width="150" FontSize="14" Foreground="Black" HorizontalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
                                 <Border Width="20" Height="20" Background="#FFF44336" CornerRadius="4" Margin="0 0 5 0"/>
-                                <TextBlock Text="Bàn đang chuẩn bị món" VerticalAlignment="Center" Width="150" FontSize="14" Foreground="Black" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Thẻ đang chuẩn bị món" VerticalAlignment="Center" Width="150" FontSize="14" Foreground="Black" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
@@ -253,7 +264,8 @@
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="Doanh Thu Ngày Hôm Nay: " FontWeight="Bold" VerticalAlignment="Center" Foreground="Black"/>
-                        <TextBox Text="{Binding DoanhThu, StringFormat={}{0:N0} đ}" 
+                        <TextBox 
+                             x:Name="txtAmountFinal"
                              IsReadOnly="True" 
                              BorderThickness="0" 
                              Background="Transparent" 
@@ -261,11 +273,14 @@
                     </StackPanel>
 
                     <!-- Bảng dữ liệu -->
-                    <DataGrid x:Name="dgInventoryLogs" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid x:Name="dgOrderLogs" AutoGenerateColumns="False" CanUserAddRows="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Ngày " Binding="{Binding ChangeDate}" Width="140"/>
-                            <DataGridTextColumn Header="Ma Don" Binding="{Binding Materials.MaterialName}" Width="*"/>
-                            <DataGridTextColumn Header="Tong Tien" Binding="{Binding ChangeType}" Width="120"/>
+                            <DataGridTextColumn Header="Ngày "
+                                                Binding="{Binding OrderDate}" Width="340"/>
+                            <DataGridTextColumn Header="Ma Don"
+                                                Binding="{Binding CodeOrder}" Width="*"/>
+                            <DataGridTextColumn Header="Tong Tien"
+                                                Binding="{Binding FinalAmount}" Width="120"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

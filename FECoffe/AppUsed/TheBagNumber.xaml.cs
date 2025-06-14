@@ -1,10 +1,14 @@
-﻿using FECoffe.DTO.OrderNumbertag;
+﻿using FECoffe.DTO.OrderDetails;
+using FECoffe.DTO.OrderNumbertag;
+using FECoffe.DTO.Orders;
 using FECoffe.DTO.Positions;
 using FECoffe.DTO.Product;
+using FECoffe.Request.Orders;
 using FECoffe.Request.Positions;
 using FECoffe.Request.Table;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace FECoffe.AppUsed
 {
@@ -13,32 +17,9 @@ namespace FECoffe.AppUsed
     /// </summary>
     public partial class TheBagNumber : Window
     {
-      
-        public string DoanhThuHienThi => $"Doanh Thu Ngày Hôm Nay: {DoanhThu:N0} đ";
-
-        public decimal DoanhThu { get; set; } = 1200000;
-
         public TheBagNumber()
         {
             InitializeComponent();
-            //DataContext = this;
-
-            //// Sample data
-            //Tables = new ObservableCollection<Table>
-            //{
-            //    new Table { TableNumber = "B01", Capacity = 4, Status = TableStatus.Free },
-            //    new Table { TableNumber = "B02", Capacity = 6, Status = TableStatus.Occupied },
-            //    new Table { TableNumber = "B03", Capacity = 2, Status = TableStatus.Occupied },
-            //    new Table { TableNumber = "B04", Capacity = 4, Status = TableStatus.Free },
-            //    new Table { TableNumber = "B05", Capacity = 6, Status = TableStatus.Occupied },
-            //    new Table { TableNumber = "B06", Capacity = 2, Status = TableStatus.Occupied },
-            //    new Table { TableNumber = "B07", Capacity = 4, Status = TableStatus.Free },
-            //    new Table { TableNumber = "B08", Capacity = 6, Status = TableStatus.Occupied },
-            //    new Table { TableNumber = "B09", Capacity = 2, Status = TableStatus.Free },
-            //    // Thêm các bàn khác...
-            //};
-
-            //TablesItemsControl.ItemsSource = Tables;
         }
         public enum TableStatus { Free, Occupied }
 
@@ -61,7 +42,17 @@ namespace FECoffe.AppUsed
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //loaddTagNumber();
+            //if (TablesItemsControl == null)
+            //{
+            //    MessageBox.Show("TablesItemsControl chưa được khởi tạo!");
+            //    return;
+            //}
+
+            //cbTableFilter.SelectedIndex = 2; // Gọi sau khi UI đã load xong
             loaddTagNumber();
+            loadOrderLog();
+            UpdateTotalAmountFinal();
         }
 
 
@@ -112,11 +103,6 @@ namespace FECoffe.AppUsed
             }
         }
 
-        private void numbertag_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            
-        }
-
         private void numbertag_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var item = sender as FrameworkElement;
@@ -124,6 +110,60 @@ namespace FECoffe.AppUsed
             var updatetable = TableRequest.updateTableByStatus(selectedTag.TableID, 0);
             MessageBox.Show("Da cap nhat trang thai the");
             loaddTagNumber();
+        }
+        public void loadOrderLog()
+        {
+            var list = OrderRequest.GetOrderByDay();
+            if (list != null)
+            {
+                dgOrderLogs.ItemsSource = list;
+                UpdateTotalAmountFinal();
+            }
+            else
+                MessageBox.Show("Không có dữ liệu ngày hôm nay");
+        }
+
+        private void UpdateTotalAmountFinal()
+        {
+            var items = dgOrderLogs.ItemsSource as IEnumerable<OrdersViewModel>;
+            if (items != null)
+            {
+                decimal total = items.Sum(item => item.FinalAmount);
+                txtAmountFinal.Text = $"{total:N0} đ";
+            }
+            else
+            {
+                txtAmountFinal.Text = "0 đ";
+            }
+        }
+
+        private void cbTableFilter_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (TablesItemsControl == null)
+                return;
+            var selectedItem = cbTableFilter.SelectedItem as ComboBoxItem;
+            if (selectedItem != null)
+            {
+                var list=new List<TableViewModel>();
+                int value = int.Parse(selectedItem.Tag.ToString());
+
+                if(value==0)
+                {
+                    list=TableRequest.GetOrderNumberTagByStatus(value);
+                    TablesItemsControl.ItemsSource = list;
+                }
+                if(value==1)
+                {
+                    list = TableRequest.GetOrderNumberTagByStatus(value);
+                    TablesItemsControl.ItemsSource = list;
+                }
+                if (value == 2)
+                {
+                    loaddTagNumber();
+                }
+
+            }
+
         }
     }
 }

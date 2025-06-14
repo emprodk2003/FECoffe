@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Form.User"
         mc:Ignorable="d"
-        Title="CreateUpdateFormUser" Height="350" Width="400">
+        Title="CreateUpdateFormUser" Height="350" Width="400" >
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -27,16 +28,25 @@
         <!-- Email -->
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5" VerticalAlignment="Center">Email:</TextBlock>
         <TextBox x:Name="EmailTextBox" Grid.Row="1" Grid.Column="1" Margin="5"/>
-
+        <!-- Email -->
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Margin="0,5"
+                   VerticalAlignment="Center">Employess:</TextBlock>
+        <ComboBox x:Name="cbEmployess"
+                  Grid.Row="2" Grid.Column="1"
+                  
+                  DisplayMemberPath="FullName"
+                  SelectedValuePath="EmployeeID" />
         <!-- Password -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,5" VerticalAlignment="Center">Password:</TextBlock>
-        <PasswordBox x:Name="PasswordBox" Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,5" VerticalAlignment="Center">Password:</TextBlock>
+        <PasswordBox x:Name="PasswordBox" Grid.Row="3" Grid.Column="1" Margin="5"/>
 
         <!-- Confirm Password -->
-        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,5" VerticalAlignment="Center">Confirm Password:</TextBlock>
-        <PasswordBox x:Name="ConfirmPasswordBox" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,5" VerticalAlignment="Center">Confirm Password:</TextBlock>
+        <PasswordBox x:Name="ConfirmPasswordBox" Grid.Row="4" Grid.Column="1" Margin="5"/>
 
         <!-- Register Button -->
-        <Button x:Name="btn_Register"  Grid.Row="4" Grid.Column="1" Margin="5" Content="btn_Register"  HorizontalAlignment="Right" Click="btn_Register_Click"/>
+        <Button x:Name="btn_Register"  Grid.Row="5" Grid.Column="1" Margin="5" Content="Register"  HorizontalAlignment="Right" Click="btn_Register_Click"/>
     </Grid>
 </Window>

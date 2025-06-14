@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Form"
         mc:Ignorable="d"
-        Title="Frm_CreateQR"
-        Height="650"
-        Width="490"
+        Title="Tạo Mã QR Thanh Toán"
+        Height="700"
+        Width="520"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="SingleBorderWindow"
-        ShowInTaskbar="False"
-        ResizeMode="NoResize" Loaded="Window_Loaded">
+        ResizeMode="NoResize"
+        Background="#FAFAFA"
+        WindowStyle="None"
+        Loaded="Window_Loaded">
+
     <Window.Resources>
-        <!-- Style cho TextBox -->
         <Style TargetType="TextBox">
             <Setter Property="Margin"
                     Value="0,4" />
@@ -22,7 +23,7 @@
             <Setter Property="FontSize"
                     Value="14" />
             <Setter Property="BorderBrush"
-                    Value="#ccc" />
+                    Value="#CCCCCC" />
             <Setter Property="BorderThickness"
                     Value="1" />
             <Setter Property="Background"
@@ -31,13 +32,15 @@
                     Value="32" />
             <Setter Property="VerticalContentAlignment"
                     Value="Center" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="3">
+                                CornerRadius="4">
                             <ScrollViewer Margin="0"
                                           x:Name="PART_ContentHost" />
                         </Border>
@@ -46,20 +49,19 @@
             </Setter>
         </Style>
 
-        <!-- Style cho Button -->
         <Style TargetType="Button">
             <Setter Property="Margin"
-                    Value="5" />
-            <Setter Property="Padding"
                     Value="6" />
+            <Setter Property="Padding"
+                    Value="8,4" />
             <Setter Property="FontSize"
                     Value="14" />
             <Setter Property="Foreground"
                     Value="White" />
             <Setter Property="Background"
-                    Value="#007ACC" />
+                    Value="#2196F3" />
             <Setter Property="BorderBrush"
-                    Value="#007ACC" />
+                    Value="#2196F3" />
             <Setter Property="BorderThickness"
                     Value="1" />
             <Setter Property="Cursor"
@@ -67,7 +69,7 @@
             <Setter Property="Height"
                     Value="36" />
             <Setter Property="Width"
-                    Value="100" />
+                    Value="120" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -83,104 +85,118 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Margin="10">
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Tao QR Thanh Toan Cho Khach Hang"
-                   FontSize="18"
-                   HorizontalAlignment="Center"
+        <!-- Tiêu đề -->
+        <TextBlock Text="TẠO MÃ QR THANH TOÁN"
+                   FontSize="20"
                    FontWeight="Bold"
-                   Margin="0,0,0,5" />
+                   HorizontalAlignment="Center"
+                   Foreground="#333"
+                   Margin="0,0,0,15" />
 
+        <!-- Form thông tin ngân hàng -->
         <StackPanel Grid.Row="1"
-                    Margin="0,10,0,10">
+                    Margin="0,0,0,20">
             <StackPanel Orientation="Horizontal"
                         Margin="0,5">
-                <TextBlock Text="Tên Ngân Hàng:"
-                           Width="100"
+                <TextBlock Text="Ngân hàng:"
+                           Width="120"
                            VerticalAlignment="Center" />
+                <!-- Nếu muốn thay đổi ngân hàng thì mở combox
                 <ComboBox x:Name="cbBank"
                          Width="250"
                           DisplayMemberPath="name"
                           SelectedValuePath="id" />
+                -->
+                <TextBox x:Name="txtNumberBank"
+                         Width="300" />
             </StackPanel>
-
             <StackPanel Orientation="Horizontal"
                         Margin="0,5">
                 <TextBlock Text="Số tài khoản:"
-                           Width="100"
+                           Width="120"
                            VerticalAlignment="Center" />
                 <TextBox x:Name="txtNumberAccountBank"
-                         Width="250" />
+                         Width="300" />
             </StackPanel>
-
-            <StackPanel Orientation="Horizontal"
-                        Margin="0,5">
-                <TextBlock Text="Số tiền:"
-                           Width="100"
-                           VerticalAlignment="Center" />
-                <TextBox x:Name="txtAmount"
-                         Width="250" />
-            </StackPanel>
-
             <StackPanel Orientation="Horizontal"
                         Margin="0,5">
                 <TextBlock Text="Tên tài khoản:"
-                           Width="100"
+                           Width="120"
                            VerticalAlignment="Center" />
                 <TextBox x:Name="txtAccountBank"
-                         Width="250" />
+                         Width="300" />
             </StackPanel>
-
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,5">
+                <TextBlock Text="Số tiền:"
+                           Width="120"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="txtAmount"
+                         Width="300" />
+            </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Margin="0,5">
                 <TextBlock Text="Nội dung:"
-                           Width="100"
+                           Width="120"
                            VerticalAlignment="Center" />
                 <TextBox x:Name="txtContent"
-                         Width="250" />
+                         Width="300" />
             </StackPanel>
         </StackPanel>
+
+        <!-- QR Image -->
         <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center">
-            <Border x:Name="borderQR" >
-                <Image x:Name="anhQR">
-                    
-                </Image>
-                
-            </Border>   
-            
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Border x:Name="borderQR"
+                    Background="White"
+                    BorderBrush="#DDD"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Padding="10"
+                    Width="250"
+                    Height="250">
+                <Image x:Name="anhQR"
+                       Stretch="Uniform" />
+            </Border>
+            <TextBlock Text="(Mã QR sẽ được hiển thị tại đây)"
+                       FontStyle="Italic"
+                       FontSize="12"
+                       Foreground="#666"
+                       Margin="0,10,0,0"
+                       HorizontalAlignment="Center" />
         </StackPanel>
+
+        <!-- Button group -->
         <StackPanel Grid.Row="3"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Right">
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
             <Button Content="Tạo QR"
-                    Width="80"
-                    Margin="5"
                     x:Name="createQR"
                     Click="createQR_Click"
-                     />
-            <Button Content="Chuyen Thanh Tien Mat"
-                    Width="150"
-                    Margin="5"
+                    Background="#4CAF50" />
+            <Button Content="Tiền mặt"
                     x:Name="cash"
-                    Click="cash_Click" />
-            <Button Content="Xac Nhan"
-                    Width="100"
-                    Margin="5"
+                    Click="cash_Click"
+                    Background="#FF9800" />
+            <Button Content="Xác nhận"
                     x:Name="submit"
-                    Click="submit_Click" />
+                    Click="submit_Click"
+                    Background="#2196F3" />
             <Button Content="Hủy"
-                    Width="100"
-                    Margin="5"
                     x:Name="huy"
-                     />
+                    Click="huy_Click"
+                    Background="#9E9E9E" />
         </StackPanel>
     </Grid>
 </Window>
