@@ -1,8 +1,13 @@
-﻿using FECoffe.DTO.Banks;
+﻿using FECoffe.AppUsed;
+using FECoffe.DTO.Banks;
+using FECoffe.DTO.CategoyMaterial;
+using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Orders;
 using FECoffe.Enum;
 using FECoffe.Request.Banks;
+using FECoffe.Request.CategoryMaterial;
 using FECoffe.Request.Orders;
+using FECoffe.Request.Table;
 using Newtonsoft.Json;
 using RestSharp;
 using System.IO;
@@ -20,68 +25,77 @@ namespace FECoffe.Form
     {
         public CreateOrderDTO CreateOrderDTO { get; set; }
         private decimal totalAmount;
-        public Frm_CreateQR(CreateOrderDTO orderDTO ,decimal thanhtien)
+        public TableViewModel ViewModel { get; set; }
+        public Frm_CreateQR(CreateOrderDTO orderDTO ,decimal thanhtien,TableViewModel tableViewModel)
         {
             InitializeComponent();
             CreateOrderDTO = orderDTO;
             totalAmount=thanhtien;
+            ViewModel = tableViewModel;
 
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            load();
+            //load();
             txtContent.Text = CreateOrderDTO.CodeOrder;
             txtAmount.Text = totalAmount.ToString();
+            txtNumberAccountBank.Text = "0393259262";
+            txtAccountBank.Text = "NGUYEN HUYNH DUC DUY";
+            txtNumberBank.Text = "Ngân Hàng MB Bank";
         }
         public async Task load()
         {
 
-            cbBank.ItemsSource = new List<string> { "Đang tải danh sách..." };
-            var banks = await BankRequest.GetAllBanksCachedAsync();
-            if (banks != null)
-            {
-                cbBank.ItemsSource = banks?.data;
-            }
-            else
-            {
-                MessageBox.Show("Khong co du lieu");
-            }
+            //cbBank.ItemsSource = new List<string> { "Đang tải danh sách..." };
+            //var banks = await BankRequest.GetAllBanksCachedAsync();
+            //if (banks != null)
+            //{
+            //    cbBank.ItemsSource = banks?.data;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Khong co du lieu");
+            //}
         }
 
         private void createQR_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbBank.SelectedItem is Datum selectedBank)
+        {   //Muốn đổi được nhiều ngân hàng thì mở combox ra 
+            //if (cbBank.SelectedItem is Datum selectedBank)
+            //{
+            //}
+
+
+            //Code này chỉ định mặc định một ngân hàng
+            txtContent.Text = CreateOrderDTO.CodeOrder;
+            txtAmount.Text = totalAmount.ToString("0"); //format lai tu 25000.00 =>25000
+            txtNumberAccountBank.Text = "0393259262";
+
+            var result = new ApiRequest()
             {
-                txtContent.Text = CreateOrderDTO.CodeOrder;
-                txtAmount.Text = totalAmount.ToString("0"); //format lai tu 25000.00 =>25000
-                var result = new ApiRequest()
-                {
-                    accountNo = txtNumberAccountBank.Text,
-                    accountName = txtAccountBank.Text,
-                    acqId = int.Parse(selectedBank.bin),
-                    amount = int.Parse(txtAmount.Text),
-                    addInfo = txtContent.Text,
-                    format = "text",
-                    template = "qr_only"
-                };
-                var jsonRequest = JsonConvert.SerializeObject(result);
-                // use restsharp for request api.
-                var client = new RestClient("https://api.vietqr.io/v2/generate");
-                var request = new RestRequest();
+                accountNo = txtNumberAccountBank.Text,
+                accountName = txtAccountBank.Text,
+                acqId = 970422,
+                amount = int.Parse(txtAmount.Text),
+                addInfo = txtContent.Text,
+                format = "text",
+                template = "qr_only"
+            };
+            var jsonRequest = JsonConvert.SerializeObject(result);
+            // use restsharp for request api.
+            var client = new RestClient("https://api.vietqr.io/v2/generate");
+            var request = new RestRequest();
 
-                request.Method = Method.Post;
-                request.AddHeader("Accept", "application/json");
+            request.Method = Method.Post;
+            request.AddHeader("Accept", "application/json");
 
-                request.AddParameter("application/json", jsonRequest, ParameterType.RequestBody);
+            request.AddParameter("application/json", jsonRequest, ParameterType.RequestBody);
 
-                var response = client.Execute(request);
-                var content = response.Content;
-                var dataResult = JsonConvert.DeserializeObject<ApiRespond>(content);
+            var response = client.Execute(request);
+            var content = response.Content;
+            var dataResult = JsonConvert.DeserializeObject<ApiRespond>(content);
 
-                anhQR.Source = Base64ToImage(dataResult.data.qrDataURL.Replace("data:image/png;base64,", ""));
-           
-            }
+            anhQR.Source = Base64ToImage(dataResult.data.qrDataURL.Replace("data:image/png;base64,", ""));
         }
         public ImageSource Base64ToImage(string base64String)
         {
@@ -109,6 +123,8 @@ namespace FECoffe.Form
             {
                 var updateorder = OrderRequest.UpdateOrderByOrderStatus(order.OrderID, true);
                 MessageBox.Show("Cap nhat trang thai hoan thanh don hang");
+                var table = TableRequest.GetTableById(ViewModel.TableID);
+                var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
                 this.Close();
             }
             else
@@ -124,10 +140,29 @@ namespace FECoffe.Form
                 order.PaymentStatus = (TransactionStatus)1;
                 var updateorder = OrderRequest.BankTransferToCash(order.OrderID, order.PaymentStatus, true);
                 MessageBox.Show("Cap nhat doi phuong thuc thanh toan va trang thai hoan thanh don hang thanh cong");
+                var table = TableRequest.GetTableById(ViewModel.TableID);
+                var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
                 this.Close();
             }
             else
                 MessageBox.Show("Cap nhat doi phuong thuc thanh toan va trang thai hoan thanh don hang that bai");
+        }
+
+        private void huy_Click(object sender, RoutedEventArgs e)
+        {
+            var order = OrderRequest.GetOrderByCodeOrder(CreateOrderDTO.CodeOrder);
+
+            if (order != null)
+            {
+                // Truyền dữ liệu sang window mới
+                if (OrderRequest.deleteOrder(order.OrderID) == true)
+                {
+                    MessageBox.Show("Xóa Thành Công đơn hàng ");
+                    this.Close();
+                }
+                else MessageBox.Show("Xóa Thất Bại đơn hàng ");
+
+            }
         }
     }
 }

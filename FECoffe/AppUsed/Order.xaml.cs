@@ -180,9 +180,7 @@ namespace FECoffe.AppUsed
 
         private void exit_CLick(object sender, RoutedEventArgs e)
         {
-            var tag = new  TheBagNumber();
-            this.Close();
-            tag.Show();
+           
         }
 
         private void Delete_ProductClick(object sender, RoutedEventArgs e)
@@ -252,10 +250,8 @@ namespace FECoffe.AppUsed
                 if (OrderRequest.createOrder(neworder) == true)
                 {
                     MessageBox.Show("Tao don hang doi thanh toan  ");
-                    var frm = new Frm_CreateQR(neworder, thanhtien);
+                    var frm = new Frm_CreateQR(neworder, thanhtien,ViewModel);
                     frm.ShowDialog();
-                    var table = TableRequest.GetTableById(ViewModel.TableID);
-                    var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
                     var theBagWindow = new TheBagNumber();
                     theBagWindow.Show();
 
@@ -270,6 +266,13 @@ namespace FECoffe.AppUsed
                 MessageBox.Show("Vui long chon mon de thanh toan");
             }
           
+        }
+
+        private void BackToHome_Click(object sender, RoutedEventArgs e)
+        {
+            var tag = new TheBagNumber();
+            this.Close();
+            tag.Show();
         }
     }
 }

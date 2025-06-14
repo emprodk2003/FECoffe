@@ -58,13 +58,13 @@ namespace FECoffe.Request.Orders
             }
         }
 
-        public static OrderViewModel GetOrderByCodeOrder(string code)
+        public static OrdersViewModel GetOrderByCodeOrder(string code)
         {
             try
             {
                 string url = @"http://localhost:5178/api/Orders/GetOrderByCodeOrder?code=" + code;
                 HttpClient client = new HttpClient();
-                var res = client.GetFromJsonAsync<OrderViewModel>(url);
+                var res = client.GetFromJsonAsync<OrdersViewModel>(url);
                 res.Wait();
                 return res.Result;
             }
@@ -133,6 +133,38 @@ namespace FECoffe.Request.Orders
             catch
             {
                 return null;
+            }
+        }
+
+        public static List<OrdersViewModel> GetOrderByDay()
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Orders/GetOrderByDay";
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<OrdersViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static bool deleteOrder(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Orders?id=" + id;
+                HttpClient client = new HttpClient();
+                var res = client.DeleteAsync(url);
+                res.Wait();
+                return res.Result.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
+                return false;
             }
         }
     }

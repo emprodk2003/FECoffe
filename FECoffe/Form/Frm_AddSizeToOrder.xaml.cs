@@ -1,6 +1,7 @@
 ﻿using FECoffe.DTO.ExportDetail;
 using FECoffe.DTO.ImportDetail;
 using FECoffe.DTO.Lots;
+using FECoffe.DTO.OrderDetails;
 using FECoffe.DTO.OrderToppingDetails;
 using FECoffe.DTO.Product;
 using FECoffe.DTO.ProductSize;
@@ -129,6 +130,20 @@ namespace FECoffe.Form
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        private void XoaTopping_Click(object sender, RoutedEventArgs e)
+        {
+            var item = dgToppingDetails.SelectedItem as OrderToppingDisplayModel;
+            if (item == null)
+            {
+                MessageBox.Show("Vui long chon topping de xoa!");
+            }
+            else
+            {
+                OrderToppingDisplayList.Remove(item);
+                dgToppingDetails.ItemsSource = OrderToppingDisplayList;
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Product;
+using FECoffe.Enum;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -112,6 +113,22 @@ namespace FECoffe.Request.Table
                 string url = @"http://localhost:5178/api/OrderNumberTag/GetOrderNumberTagByID?id=" + id;
                 HttpClient client = new HttpClient();
                 var res = client.GetFromJsonAsync<TableViewModel>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static List<TableViewModel> GetOrderNumberTagByStatus(int status)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/OrderNumberTag/GetOrderNumberTagByStatus?status=" + status;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<TableViewModel>>(url);
                 res.Wait();
                 return res.Result;
             }
