@@ -1,0 +1,143 @@
+﻿<Window x:Class="FECoffe.Form.Frm_AddRecipes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:FECoffe.Form"
+        mc:Ignorable="d"
+        Title="Frm_AddRecipes" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="SingleBorderWindow"
+        ShowInTaskbar="False"
+        Height="600" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!-- Button Style -->
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="#2196F3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="MinWidth" Value="60"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- TextBox Style -->
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- DatePicker Style -->
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <!-- DataGrid Style -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="RowHeight" Value="40"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#FF54D0FF"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Padding" Value="6"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="BorderBrush" Value="#DDDDDD"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="10">
+
+        <GroupBox Header="Thông tin món" Margin="0,0,0,3">
+            <StackPanel Margin="10">
+                <StackPanel Orientation="Horizontal" Margin="0,4">
+                    <TextBlock Text="Tên món:" Width="100" Margin="0,0,0,10" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txt_nameProduct" IsReadOnly="True" Width="200" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,4">
+                    <TextBlock Text="Kích cỡ:" Width="100" Margin="0,0,0,10" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txt_nameProductSize" IsReadOnly="True" Width="200" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Danh sách định lượng cho món">
+            <DataGrid x:Name="dg_Recipes"
+                        ItemsSource="{Binding CrudRecipes}"
+                        AutoGenerateColumns="False" Height="220"
+                        CanUserAddRows="True">
+                <DataGrid.Columns>
+                    <DataGridComboBoxColumn Header="Nguyên liệu"
+                                             SelectedValueBinding="{Binding IngredientsID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             SelectedValuePath="Id"
+                                             DisplayMemberPath="Name"
+                                             Width="200">
+                        <!-- Hiển thị khi chưa edit -->
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding DataContext.Ingredients, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+
+                        <!-- Khi đang chỉnh sửa -->
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="IsEditable" Value="True"/>
+                                <Setter Property="IsTextSearchEnabled" Value="False"/>
+                                <Setter Property="ItemsSource" Value="{Binding DataContext.Ingredients, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                <EventSetter Event="PreviewKeyUp" Handler="ComboBox_PreviewKeyUp"/>
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                    </DataGridComboBoxColumn>
+                    <DataGridTextColumn Header="Ghi chú"  Binding="{Binding Quantity}" Width="200"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <!-- Nút thao tác -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Lưu" Width="100" Margin="5" Click="Luu_Click" />
+            <Button Content="Hủy" Width="100" Margin="5" Click="Huy_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

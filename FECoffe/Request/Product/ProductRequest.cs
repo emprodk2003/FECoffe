@@ -23,6 +23,21 @@ namespace FECoffe.Request.Product
                 return null;
             }
         }
+        public static ProductViewModel GetProductBySize(int size)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Products/GetProductsBySize?sizeID=" + size;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<ProductViewModel>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public static List<ProductViewModel> GetProductByName(string name)
         {

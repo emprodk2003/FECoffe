@@ -236,7 +236,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <conv:ProductSizeConverterProduct x:Key="ProductConverter"/>
+        <conv:ProductSizeIDToMateriaNameConverter x:Key="ProductSizeConverter"/>
+        <conv:IngredientIDToMateriaNameConverter x:Key="IngredientSizeConverter"/>
     </Window.Resources>
     <Grid>
         <TabControl >
@@ -419,32 +421,71 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
-                        <TextBlock Text="Chọn món: " Margin="5,2,0,0" Foreground="Gray"/>
-                        <ComboBox Width="200"
-                               Margin="0,0,10,0"
-                               ItemsSource="{Binding Products}"
-                               SelectedItem="{Binding SelectedProduct}"
-                               DisplayMemberPath="ProductName"/>
-                        <TextBlock Text="Chọn kích cỡ: " Margin="5,2,0,0" Foreground="Gray"/>
-                        <ComboBox Width="150"
-                               Margin="0,0,10,0"
-                               ItemsSource="{Binding ProductSizes}"
-                               SelectedItem="{Binding SelectedProductSize}"
-                               DisplayMemberPath="SizeName"/>
-                        <Button Content="Tìm" Margin="0,0,10,0"/>
-                        <Button Content="Thêm"/>
+                        <ComboBox Width="250"  x:Name="cbFind_Product_Recieps"
+                                               DisplayMemberPath="ProductName"
+                                               SelectedValuePath="ProductID"
+                                               Margin="0,0,10,0" materialDesign:HintAssist.Hint="Chọn món..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue" SelectionChanged="cbFind_Product_Recieps_SelectionChanged"/>
+                        <ComboBox Width="250"  x:Name="cbFind_ProductSize_Recieps"
+                                               DisplayMemberPath="SizeName"
+                                               SelectedValuePath="ProductSizeID"
+                                               Margin="0,0,10,0" materialDesign:HintAssist.Hint="Chọn kích cỡ..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue"/>
+                        <Button Content="Tìm" Margin="0,0,10,0" Click="Find_Recipes"/>
+                        <Button Content="Thêm" Click="Them_Recieps"/>
                     </StackPanel>
-                    <DataGrid AutoGenerateColumns="False">
+                    <DataGrid IsReadOnly="True" x:Name="dg_Recipes" ItemsSource="{Binding RecipesViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Tên món" Binding="{Binding Product.ProductName}"/>
-                            <DataGridTextColumn Header="Nguyên vật liệu" Binding="{Binding Material.MaterialName}"/>
+                            <DataGridTextColumn Header="Ten mon" IsReadOnly="True" >
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="ProductSizeID" Converter="{StaticResource ProductConverter}"/>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Ten kich co" IsReadOnly="True" >
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="ProductSizeID" Converter="{StaticResource ProductSizeConverter}"/>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Nguyên vật liệu" IsReadOnly="True" >
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="IngredientsID" Converter="{StaticResource IngredientSizeConverter}"/>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Sửa" Margin="0,0,5,0"/>
-                                            <Button Content="Xóa"/>
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_Recipes" Click="edit_Recipes_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_Recipes" Click="delete_Recipes_Click"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Nguyên liệu thực đơn">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
+                        <TextBox x:Name="txt_FindIngredients" Width="200" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm nguyên liệu..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
+                        <Button Content="Tìm" Click="FindIngredients_Click" Margin="0,0,10,0"/>
+                        <Button Content="Thêm" Click="ThemIngredients_Click"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
+                    </StackPanel>
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" x:Name="dg_Ingredients" ItemsSource="{Binding IngredientsViewModel}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tên nguyên liệu" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Đơn vị tính" Binding="{Binding Unit}"/>
+                            <DataGridTemplateColumn Header="Hành động" Width="150">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_Ingredients" Click="edit_Ingredients_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_Ingredients" Click="delete_Ingredients_Click"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

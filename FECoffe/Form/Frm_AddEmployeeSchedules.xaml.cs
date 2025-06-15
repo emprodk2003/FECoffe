@@ -100,6 +100,7 @@ namespace FECoffe.Form
                     {
                         MessageBox.Show("Lỗi khi thêm lịch làm!");
                         break;
+                        this.Close();
                     }
                     else
                     {

@@ -1,18 +1,23 @@
 ﻿using FECoffe.DTO.Categories_Product;
+using FECoffe.DTO.Ingredients;
 using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Product;
 using FECoffe.DTO.ProductSize;
+using FECoffe.DTO.Recipes;
 using FECoffe.DTO.Topping;
 using FECoffe.Form;
 using FECoffe.Form.FrmUpdate;
 using FECoffe.Request.Categories_Product;
 using FECoffe.Request.Employee;
+using FECoffe.Request.Ingredients;
 using FECoffe.Request.Product;
 using FECoffe.Request.ProductSize;
+using FECoffe.Request.Recipes;
 using FECoffe.Request.Table;
 using FECoffe.Request.Topping;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +62,7 @@ namespace FECoffe.Dashboards
             {
                 dg_Product.ItemsSource = list;
                 cb_Productsize.ItemsSource = list;
+                cbFind_Product_Recieps.ItemsSource = list;
             }
             else
             {
@@ -100,6 +106,20 @@ namespace FECoffe.Dashboards
                 MessageBox.Show("Khong co du lieu cho product size!");
             }
         }
+
+        private void hienthinguyenlieu()
+        {
+            var list = IngredientsRequest.GetAll();
+
+            if (list != null)
+            {
+                dg_Ingredients.ItemsSource = list;
+            }
+            else
+            {
+                MessageBox.Show("Khong co du lieu cho nguyen lieu!");
+            }
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             hienthicategories_product();
@@ -107,6 +127,7 @@ namespace FECoffe.Dashboards
             hienthitable();
             hienthitopping();
             hienthiproductsize();
+            hienthinguyenlieu();
         }
 
         private void edit_cateproduct_Click(object sender, RoutedEventArgs e)
@@ -186,6 +207,7 @@ namespace FECoffe.Dashboards
             hienthicategories_product();
             hienthiproduct();
             hienthitable();
+            hienthinguyenlieu();
             hienthitopping();
         }
 
@@ -440,6 +462,161 @@ namespace FECoffe.Dashboards
             Dashboard dashboard = new Dashboard();
             this.Close();
             dashboard.Show();
+        }
+
+        private void FindIngredients_Click(object sender, RoutedEventArgs e)
+        {
+            var name = txt_FindIngredients.Text;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Vui long nhap ten nguyen lieu!");
+            }
+            else
+            {
+                var list = IngredientsRequest.GetByName(name);
+                if (list != null)
+                {
+                    dg_Ingredients.ItemsSource = list;
+                }
+            }           
+        }
+
+        private void ThemIngredients_Click(object sender, RoutedEventArgs e)
+        {
+            Frm_AddIngredients frm_AddIngredients = new Frm_AddIngredients();
+            var result = frm_AddIngredients.ShowDialog();
+            if(result == true)
+            {
+                hienthinguyenlieu();
+            }
+        }
+
+        private void delete_Ingredients_Click(object sender, RoutedEventArgs e)
+        {
+            var item = dg_Ingredients.SelectedItem as IngredientsViewModel;
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn xóa nguyên liệu này?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (IngredientsRequest.delete(item.Id) == true)
+                {
+                    MessageBox.Show("Đã xóa nguyên liệu.");
+                    hienthinguyenlieu();
+                }
+                else MessageBox.Show("Loi khi xoa nguyên liệu .");
+            }
+            else
+            {
+
+            }
+        }
+
+        private void edit_Ingredients_Click(object sender, RoutedEventArgs e)
+        {
+            var item = dg_Ingredients.SelectedItem as IngredientsViewModel;
+            Frm_Update_Ingredients frm_Update_Ingredients = new Frm_Update_Ingredients(item);
+            var result = frm_Update_Ingredients.ShowDialog();
+            if(result == true)
+            {
+                hienthinguyenlieu();
+            }
+        }
+
+        private void cbFind_Product_Recieps_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var pr = (int)cbFind_Product_Recieps.SelectedValue;
+            var size = ProductSizeRequest.GetByProduct(pr);
+            if (size != null)
+            {
+                cbFind_ProductSize_Recieps.ItemsSource = size;
+            }
+        }
+
+        private void edit_Recipes_Click(object sender, RoutedEventArgs e)
+        {
+            var pr = cbFind_Product_Recieps.SelectedItem as ProductViewModel;
+            var size = cbFind_ProductSize_Recieps.SelectedItem as ProductSizeViewModel;
+            var recipes = dg_Recipes.SelectedItem as RecipesViewModel;
+            if (pr == null || size == null)
+            {
+                MessageBox.Show("Vui lòng chọn món và kích thước!");
+            }
+            else
+            {
+                Frm_Update_Recipes frm_Update_Recipes = new Frm_Update_Recipes(pr, size, recipes);
+                var result = frm_Update_Recipes.ShowDialog();
+                if(result == true)
+                {
+                    Load_Recipes();
+                }
+            }
+        }
+
+        private void delete_Recipes_Click(object sender, RoutedEventArgs e)
+        {
+            var item = dg_Recipes.SelectedItem as RecipesViewModel;
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn xóa định lượng này của thực đơn?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (RecipesRequest.delete(item.RecipeID) == true)
+                {
+                    MessageBox.Show("Đã xóa định lượng này của thực đơn.");
+                    Load_Recipes();
+                }
+                else MessageBox.Show("Loi khi xóa định lượng này của thực đơn .");
+            }
+            else
+            {
+
+            }
+        }
+
+        private void Find_Recipes(object sender, RoutedEventArgs e)
+        {
+            Load_Recipes();
+        }
+        private void Load_Recipes()
+        {
+            if (cbFind_Product_Recieps.SelectedItem == null || cbFind_ProductSize_Recieps.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn món và kích thước!");
+            }
+            else
+            {
+                int pr = (int)cbFind_Product_Recieps.SelectedValue;
+                int size = (int)cbFind_ProductSize_Recieps.SelectedValue;
+                var list = RecipesRequest.GetByProduct(size);
+                if (list != null)
+                {
+                    dg_Recipes.ItemsSource = list;
+                }
+            }
+        }
+
+        private void Them_Recieps(object sender, RoutedEventArgs e)
+        {
+            var pr = cbFind_Product_Recieps.SelectedItem as ProductViewModel;
+            var size = cbFind_ProductSize_Recieps.SelectedItem as ProductSizeViewModel;
+            if(pr == null || size == null){
+                MessageBox.Show("Vui lòng chọn món và kích thước!");
+            }
+            Frm_AddRecipes frm_AddRecipes = new Frm_AddRecipes(pr,size);
+            var result = frm_AddRecipes.ShowDialog();
+            if(result == true)
+            {
+                Load_Recipes();
+            }
         }
     }
 }

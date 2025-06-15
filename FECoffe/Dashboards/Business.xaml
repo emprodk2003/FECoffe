@@ -282,6 +282,25 @@ Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
                     </DataGrid>
                 </StackPanel>
             </TabItem>
+
+            <TabItem Header="Thống kê nguyên liệu">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
+                        <DatePicker x:Name="dp_start_IngredientsReport" Width="150" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <DatePicker x:Name="dp_end_IngredientsReport" Width="150" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <Button Content="Lọc" Click="Find_IngredientsReport_Click"/>
+                    </StackPanel>
+                    <DataGrid ItemsSource="{Binding IngredientsReport}" IsReadOnly="True" x:Name="dg_IngredientsReport" AutoGenerateColumns="False" MouseDoubleClick="Get_ProductDetailByIngredients">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nguyên liệu" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Định lượng" Binding="{Binding Quantity}"/>
+                            <DataGridTextColumn Header="Đơn vị" Binding="{Binding Unit}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
