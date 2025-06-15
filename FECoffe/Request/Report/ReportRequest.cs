@@ -1,4 +1,5 @@
-﻿using FECoffe.DTO.ProductSize;
+﻿using Data.DTO.Report;
+using FECoffe.DTO.ProductSize;
 using FECoffe.DTO.Report;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -46,6 +47,22 @@ namespace FECoffe.Request.Report
                 string url = @"http://localhost:5178/api/Report/GetReport_For_Date?start=" + start +"&end=" + end;
                 HttpClient client = new HttpClient();
                 var res = client.GetFromJsonAsync<ReportViewModel>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static List<IngredientsReport> GetByDateGetReportForIngredients(DateTime start, DateTime end)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Report/GetReport_For_Ingredients?start=" + start + "&end=" + end;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<IngredientsReport>>(url);
                 res.Wait();
                 return res.Result;
             }

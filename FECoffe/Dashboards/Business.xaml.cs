@@ -1,4 +1,5 @@
-﻿using FECoffe.DTO.Orders;
+﻿using Data.DTO.Report;
+using FECoffe.DTO.Orders;
 using FECoffe.Form.FrmDisplay;
 using FECoffe.Request.Orders;
 using FECoffe.Request.Report;
@@ -47,6 +48,17 @@ namespace FECoffe.Dashboards
                 {
                     dgReport.ItemsSource = product;
                 }
+            }
+            hienthithongkenguyenlieu();
+        }
+        private void hienthithongkenguyenlieu()
+        {
+            var start = dp_start_IngredientsReport.SelectedDate.Value;
+            var end = dp_end_IngredientsReport.SelectedDate.Value;
+            var list = ReportRequest.GetByDateGetReportForIngredients(start, end);
+            if (list != null)
+            {
+                dg_IngredientsReport.ItemsSource = list;
             }
         }
 
@@ -101,6 +113,31 @@ namespace FECoffe.Dashboards
                         dgReport.ItemsSource = product;
                     }
                 }
+            }
+        }
+
+        private void Find_IngredientsReport_Click(object sender, RoutedEventArgs e)
+        {
+            if(dp_start_IngredientsReport.SelectedDate == null || dp_end_IngredientsReport.SelectedDate == null)
+            {
+                MessageBox.Show("Vui lòng chọn ngày để xem thông tin!");
+                return;
+            }
+            else
+            {
+                hienthithongkenguyenlieu();
+            }
+        }
+
+        private void Get_ProductDetailByIngredients(object sender, MouseButtonEventArgs e)
+        {
+            var Ingredients = dg_IngredientsReport.SelectedItem as IngredientsReport;
+            if(Ingredients != null)
+            {
+
+                var list = new List<ProductDetailReport>(Ingredients.productDetails);
+                DisplayProductDetail_IngredientsReport display = new DisplayProductDetail_IngredientsReport(list);
+                display.ShowDialog();
             }
         }
     }
