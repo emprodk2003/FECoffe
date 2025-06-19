@@ -20,7 +20,9 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
-
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="true"/>
+        </Style>
         <!-- TabItem Style -->
         <Style TargetType="TabItem">
             <Setter Property="Padding" Value="10,5"/>
@@ -75,166 +77,15 @@
             </Setter>
         </Style>
 
-        <!-- TextBox Style -->
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="6"/>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#0D47A1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="#CCC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
-                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- ToggleButton dùng trong ComboBox -->
-        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="20"/>
-                </Grid.ColumnDefinitions>
-                <Border x:Name="Border"
-                 Background="{TemplateBinding Background}"
-                 BorderBrush="{TemplateBinding BorderBrush}"
-                 BorderThickness="1"
-                 CornerRadius="4"
-                 />
-                <Path x:Name="Arrow"
-               Grid.Column="1"
-               Fill="Gray"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Data="M 0 0 L 4 4 L 8 0 Z"/>
-            </Grid>
-        </ControlTemplate>
-
-        <!-- Style cho ComboBox -->
-        <Style TargetType="ComboBox" x:Key="RoundedComboBox">
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <ToggleButton Name="ToggleButton"
-                                   Template="{StaticResource ComboBoxToggleButton}"
-                                   Grid.Column="2"
-                                   Focusable="false"
-                                   IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                   ClickMode="Press"
-                                   Background="{TemplateBinding Background}"
-                                   BorderBrush="{TemplateBinding BorderBrush}"
-                                   BorderThickness="{TemplateBinding BorderThickness}" />
-                            <ContentPresenter Name="ContentSite"
-                                       IsHitTestVisible="False"
-                                       Content="{TemplateBinding SelectionBoxItem}"
-                                       ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                       ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                       Margin="6,2,30,2"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"/>
-                            <Popup Name="Popup"
-                            Placement="Bottom"
-                            IsOpen="{TemplateBinding IsDropDownOpen}"
-                            AllowsTransparency="True"
-                            Focusable="False"
-                            PopupAnimation="Slide">
-                                <Grid Name="DropDown"
-                               SnapsToDevicePixels="True"
-                               MinWidth="{TemplateBinding ActualWidth}"
-                               MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <Border x:Name="DropDownBorder"
-                                     Background="White"
-                                     BorderBrush="#CCC"
-                                     BorderThickness="1"
-                                     CornerRadius="4"/>
-                                    <ScrollViewer Margin="4" SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True"
-                                             KeyboardNavigation.DirectionalNavigation="Contained"/>
-                                    </ScrollViewer>
-                                </Grid>
-                            </Popup>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#CCC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Background" Value="White"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="#007ACC"/>
-                </Trigger>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="BorderBrush" Value="#007ACC"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-
-        <Style TargetType="DataGrid">
-            <Setter Property="Margin" Value="0,10,0,0"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="36"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#FAFAFA"/>
-            <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#E0E0E0"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-
-            <Setter Property="ColumnHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#E3F2FD"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Foreground" Value="#0D47A1"/>
-                        <Setter Property="Padding" Value="8,4"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#B0BEC5"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="CellStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="Padding" Value="6,2"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,0"/>
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#BBDEFB"/>
-                                <Setter Property="Foreground" Value="#0D47A1"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#1976D2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
         <conv:ProductSizeConverterProduct x:Key="ProductConverter"/>
         <conv:ProductSizeIDToMateriaNameConverter x:Key="ProductSizeConverter"/>
@@ -283,6 +134,7 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox Width="200" x:Name="txt_FindName_Product"  Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm thực đơn..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
                         <ComboBox Width="200" x:Name="cbCategories" DisplayMemberPath="CategoryName"
                                                                     SelectedValuePath="CategoryID"
+                                                                    materialDesign:HintAssist.Hint="Chọn danh mục..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue"
                                                                     Margin="0,10,10,0"/>
                         <Button Content="Tìm"  Click="FindProduct_Click" Margin="0,0,10,0"/>
                         <Button Content="Thêm" Click="themProduct_Click"/>
@@ -295,11 +147,11 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             <DataGridTextColumn Header="Tên món" Binding="{Binding ProductName}"/>
                             <DataGridTextColumn Header="Giá" Binding="{Binding Price}"/>
                             <DataGridTextColumn Header="Danh mục" Binding="{Binding Category_Name}"/>
-                            <DataGridTextColumn Header="Gia von" Binding="{Binding CostPrice}"/>
-                            <DataGridTextColumn Header="Gia ban" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="Ghi chu" Binding="{Binding Description}"/>
-                            <DataGridTextColumn Header="Trang thai" Binding="{Binding Trangthai}"/>
-                            <DataGridTextColumn Header="Hinh anh" Binding="{Binding UrlImg}"/>
+                            <DataGridTextColumn Header="Giá vốn" Binding="{Binding CostPrice}"/>
+                            <DataGridTextColumn Header="Giá bán" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding Description}"/>
+                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding Trangthai}"/>
+                            <DataGridTextColumn Header="Hình ảnh" Binding="{Binding UrlImg}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -317,7 +169,7 @@ Margin="0,0,10,0" Height="35" Width="100"/>
 
             <TabItem Header="Topping">
                 <StackPanel Margin="10">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" Click="Back_main_Click" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
                         <TextBox Width="200" x:Name="txt_FindTopping"  Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm topping..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
@@ -330,8 +182,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                     <DataGrid x:Name="dg_Topping" ItemsSource="{Binding ToppingViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên Topping" Binding="{Binding ToppingName}"/>
-                            <DataGridTextColumn Header="Don gia" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="Trang thai" Binding="{Binding Trangthai}"/>
+                            <DataGridTextColumn Header="Đơn giá" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding Trangthai}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -351,15 +203,15 @@ Margin="0,0,10,0" Height="35" Width="100"/>
             <TabItem Header="Kích cỡ món">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="10" Height="35" Width="100" Click="Back_main_Click"/>
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,10,0"
+ Height="35" Width="100" Click="Back_main_Click"/>
                         <ComboBox Width="250" x:Name="cb_Productsize"
                                DisplayMemberPath="ProductName"
                                SelectedValuePath="ProductID"
                                Margin="0,0,10,0" materialDesign:HintAssist.Hint="Chọn món..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue"/>
                         <Button Click="GetSizeByProduct_Click" Content="Tìm" Margin="0,0,10,0"/>
                         <Button Click="themSize_Click" Content="Thêm"/>
-                        <Button Margin="10,0,10,0" Click="LoadData_Size_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                        <Button Margin="10,0,0,0" Click="LoadData_Size_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
                             &#xE72C;
                         </Button>
                     </StackPanel>
@@ -418,7 +270,7 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
             <!-- Tab: Công thức chế biến -->
             <TabItem Header="Công thức">
                 <StackPanel Margin="10">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100"/>
                         <ComboBox Width="250"  x:Name="cbFind_Product_Recieps"
@@ -434,12 +286,12 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                     </StackPanel>
                     <DataGrid IsReadOnly="True" x:Name="dg_Recipes" ItemsSource="{Binding RecipesViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Ten mon" IsReadOnly="True" >
+                            <DataGridTextColumn Header="Tên món" IsReadOnly="True" >
                                 <DataGridTextColumn.Binding>
                                     <Binding Path="ProductSizeID" Converter="{StaticResource ProductConverter}"/>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Ten kich co" IsReadOnly="True" >
+                            <DataGridTextColumn Header="Tên kích cỡ" IsReadOnly="True" >
                                 <DataGridTextColumn.Binding>
                                     <Binding Path="ProductSizeID" Converter="{StaticResource ProductSizeConverter}"/>
                                 </DataGridTextColumn.Binding>
@@ -466,7 +318,7 @@ Margin="0,0,10,0" Height="35" Width="100"/>
             </TabItem>
             <TabItem Header="Nguyên liệu thực đơn">
                 <StackPanel Margin="10">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
                         <TextBox x:Name="txt_FindIngredients" Width="200" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm nguyên liệu..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>

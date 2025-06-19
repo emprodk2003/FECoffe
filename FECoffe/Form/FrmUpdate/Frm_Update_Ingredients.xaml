@@ -68,7 +68,7 @@
         </Grid.RowDefinitions>
 
         <!-- Tiêu đề -->
-        <TextBlock Text="Sua Nguyên Liệu Cho Thực Đơn" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
+        <TextBlock Text="Sửa Nguyên Liệu Cho Thực Đơn" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
         <!-- Form nhập liệu -->
         <StackPanel Grid.Row="1" Margin="0,10,0,10">
             <StackPanel Orientation="Horizontal" Margin="0,4">

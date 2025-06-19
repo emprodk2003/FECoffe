@@ -54,7 +54,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Sua Thong Tin Kích Cỡ Cho Món" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+        <TextBlock Text="Sửa Thông Tin Kích Cỡ Cho Món" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
         <StackPanel Grid.Row="1">
             <TextBlock Text="Tên món:"/>

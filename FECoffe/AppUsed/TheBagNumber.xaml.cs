@@ -9,6 +9,7 @@ using FECoffe.Request.Table;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FECoffe.AppUsed
 {
@@ -51,8 +52,8 @@ namespace FECoffe.AppUsed
 
             //cbTableFilter.SelectedIndex = 2; // Gọi sau khi UI đã load xong
             loaddTagNumber();
-            loadOrderLog();
-            UpdateTotalAmountFinal();
+            hienthidanhthu();
+            //UpdateTotalAmountFinal();
         }
 
 
@@ -111,31 +112,37 @@ namespace FECoffe.AppUsed
             MessageBox.Show("Da cap nhat trang thai the");
             loaddTagNumber();
         }
-        public void loadOrderLog()
+        private void hienthidanhthu()
         {
             var list = OrderRequest.GetOrderByDay();
             if (list != null)
             {
-                dgOrderLogs.ItemsSource = list;
-                UpdateTotalAmountFinal();
+                dg_Orders.ItemsSource = list;
+                var total = list.Sum(x => x.FinalAmount);
+                var number = list.Count();
+                txt_filnalAmount.Text = "Tổng doanh thu hôm nay: " + total.ToString() + " VND";
+                txt_numberOrders.Text = "Tổng số đơn hàng :" + number;
             }
             else
-                MessageBox.Show("Không có dữ liệu ngày hôm nay");
+            {
+                txt_filnalAmount.Text = "Tổng doanh thu hôm nay: 0 VND";
+                txt_numberOrders.Text = "Tổng số đơn hàng : 0";
+            }
         }
 
-        private void UpdateTotalAmountFinal()
-        {
-            var items = dgOrderLogs.ItemsSource as IEnumerable<OrdersViewModel>;
-            if (items != null)
-            {
-                decimal total = items.Sum(item => item.FinalAmount);
-                txtAmountFinal.Text = $"{total:N0} đ";
-            }
-            else
-            {
-                txtAmountFinal.Text = "0 đ";
-            }
-        }
+        //private void UpdateTotalAmountFinal()
+        //{
+        //    var items = dgOrderLogs.ItemsSource as IEnumerable<OrdersViewModel>;
+        //    if (items != null)
+        //    {
+        //        decimal total = items.Sum(item => item.FinalAmount);
+        //        txtAmountFinal.Text = $"{total:N0} đ";
+        //    }
+        //    else
+        //    {
+        //        txtAmountFinal.Text = "0 đ";
+        //    }
+        //}
 
         private void cbTableFilter_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {

@@ -96,7 +96,7 @@
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Size" Binding="{Binding SizeName}" Width="80" ElementStyle="{StaticResource CenterCellStyle}"/>
-                <DataGridTextColumn Header="SL" Binding="{Binding Quantity}" Width="60" ElementStyle="{StaticResource CenterCellStyle}"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="60" ElementStyle="{StaticResource CenterCellStyle}"/>
                 <DataGridTextColumn Header="Giá Up Size" Binding="{Binding UnitPrice, StringFormat=N0}" Width="100" ElementStyle="{StaticResource CenterCellStyle}"/>
                 <DataGridTextColumn Header="Thành tiền" Binding="{Binding TotalPrice, StringFormat=N0}" Width="100" ElementStyle="{StaticResource CenterCellStyle}"/>
 

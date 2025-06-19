@@ -50,6 +50,19 @@ namespace FECoffe.Dashboards
                 }
             }
             hienthithongkenguyenlieu();
+            hienthipayment();
+        }
+        private void hienthipayment()
+        {
+            var start = dp_start_payment.SelectedDate.Value;
+            var end = dp_end_payment.SelectedDate.Value;
+            var list = OrderRequest.GetOrderByPayStatus(start, end);
+            if(list != null)
+            {
+                dg_Payment.ItemsSource = list;
+                var total = list.Sum(x => x.FinalAmount);
+                txt_filnalAmount.Text = "Tổng doanh thu chuyển khoản: " + total.ToString() + " VND";
+            }
         }
         private void hienthithongkenguyenlieu()
         {
@@ -80,7 +93,7 @@ namespace FECoffe.Dashboards
         {
             if(dp_end.SelectedDate == null || dp_start.SelectedDate == null)
             {
-                MessageBox.Show("Vui long chon moc thoi gian tim kiem");
+                MessageBox.Show("Vui lòng chọn mốc thời gian tìm kiếm");
             }
             else
             {
@@ -95,7 +108,7 @@ namespace FECoffe.Dashboards
         {
             if(dp_startreport.SelectedDate == null || dp_endReport.SelectedDate == null)
             {
-                MessageBox.Show("Vui long chon moc thoi gian tim kiem");
+                MessageBox.Show("Vui lòng chọn mốc thời gian tìm kiếm");
             }
             else
             {
@@ -138,6 +151,18 @@ namespace FECoffe.Dashboards
                 var list = new List<ProductDetailReport>(Ingredients.productDetails);
                 DisplayProductDetail_IngredientsReport display = new DisplayProductDetail_IngredientsReport(list);
                 display.ShowDialog();
+            }
+        }
+
+        private void find_payment_click(object sender, RoutedEventArgs e)
+        {
+            if(dp_end_payment.SelectedDate == null || dp_start_payment.SelectedDate == null)
+            {
+                MessageBox.Show("vui longf chọn thời gian đầy đủ!");
+            }
+            else
+            {
+                hienthipayment();
             }
         }
     }

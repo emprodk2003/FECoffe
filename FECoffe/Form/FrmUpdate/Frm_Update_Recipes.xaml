@@ -58,27 +58,27 @@
 
     <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock Text="Sua Thong Tin Dinh Luong" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Sửa Thông Tin Định Lượng" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Ten mon:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Tên món:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtproduct" Width="250" IsReadOnly="True"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Kich co:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Kích cỡ:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtproductsize" Width="250" IsReadOnly="True"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Nguyen lieu:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Nguyên liệu:" Width="150" VerticalAlignment="Center"/>
                 <ComboBox x:Name="cbIngredients" Width="250"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Id"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Dinh luong:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Định lượng:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtQuantity" Width="250"/>
             </StackPanel>
 

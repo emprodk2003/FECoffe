@@ -50,7 +50,7 @@
 
     <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock Text="Sua Thong Tin Món Ăn / Thức Uống" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Sửa Thông Tin Món Ăn / Thức Uống" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Tên món:" Width="150" VerticalAlignment="Center"/>
@@ -75,7 +75,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Link hinh anh:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Link hình ảnh:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtUrlImg" Width="250"/>
             </StackPanel>
 

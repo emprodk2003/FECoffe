@@ -203,7 +203,7 @@ namespace FECoffe.Dashboards
         {
             var position = dg_position.SelectedItem as PositionsViewModel;
             var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn xóa chuc vu này?",
+                "Bạn có chắc chắn muốn xóa chức vụ này?",
                 "Xác nhận xóa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
@@ -213,10 +213,10 @@ namespace FECoffe.Dashboards
             {
                 if (PositionsRequest.deletePosition(position.PositionID) == true)
                 {
-                    MessageBox.Show("Đã xóa chuc vu.");
+                    MessageBox.Show("Đã xóa chức vụ.");
                     hienthichucvu();
                 }
-                else MessageBox.Show("Loi khi xoa chuc vu!");
+                else MessageBox.Show("Loi khi xóa chức vụ!");
             }
             else
             {
@@ -250,7 +250,7 @@ namespace FECoffe.Dashboards
         {
             var shifts = dg_Shifts.SelectedItem as ShiftsViewModel;
             var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn xóa ca lam này?",
+                "Bạn có chắc chắn muốn xóa ca làm này?",
                 "Xác nhận xóa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
@@ -260,10 +260,10 @@ namespace FECoffe.Dashboards
             {
                 if (ShiftsRequest.deleteShifts(shifts.ShiftID) == true)
                 {
-                    MessageBox.Show("Đã xóa ca lam nay.");
+                    MessageBox.Show("Đã xóa ca làm này.");
                     hienthicalam();
                 }
-                else MessageBox.Show("Loi khi xoa ca lam nay!");
+                else MessageBox.Show("Lỗi khi xóa ca làm này!");
             }
             else
             {
@@ -296,7 +296,7 @@ namespace FECoffe.Dashboards
         {
             var es = dg_EmployeeSchedules.SelectedItem as EmployeeSchedulesViewModel;
             var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn xóa lich lam này?",
+                "Bạn có chắc chắn muốn xóa lịch làm này?",
                 "Xác nhận xóa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
@@ -306,10 +306,10 @@ namespace FECoffe.Dashboards
             {
                 if (EmployeeSchedulesRequest.deleteEmployeeSchedules(es.ScheduleID) == true)
                 {
-                    MessageBox.Show("Đã xóa lich lam nay.");
+                    MessageBox.Show("Đã xóa lịch làm này.");
                     hienthilichlam();
                 }
-                else MessageBox.Show("Loi khi xoa lich lam nay!");
+                else MessageBox.Show("Lỗi khi xóa lịch làm này!");
             }
             else
             {
@@ -352,10 +352,10 @@ namespace FECoffe.Dashboards
             {
                 if (TimekeepingRequest.deleteTimekeeping(tk.TimekeepingID) == true)
                 {
-                    MessageBox.Show("Đã xóa cham cong nay.");
+                    MessageBox.Show("Đã xóa chấm công này.");
                     hienthichamcong();
                 }
-                else MessageBox.Show("Loi khi xoa cham cong nay!");
+                else MessageBox.Show("Lỗi khi xóa chấm công này!");
             }
             else
             {
@@ -388,7 +388,7 @@ namespace FECoffe.Dashboards
         {
             var salaries = dg_Salaries.SelectedItem as SalariesViewModel;
             var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn xóa bang luong này?",
+                "Bạn có chắc chắn muốn xóa bảng lương này?",
                 "Xác nhận xóa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
@@ -398,10 +398,10 @@ namespace FECoffe.Dashboards
             {
                 if (SalariesRequest.deleteSalaries(salaries.SalaryID) == true)
                 {
-                    MessageBox.Show("Đã xóa bang luong nay.");
+                    MessageBox.Show("Đã xóa bảng lương này.");
                     hienthibangluong();
                 }
-                else MessageBox.Show("Loi khi xoa bang luong nay!");
+                else MessageBox.Show("Lỗi khi xóa bảng lương này!");
             }
             else
             {
@@ -413,7 +413,7 @@ namespace FECoffe.Dashboards
         {
             if(string.IsNullOrWhiteSpace(txt_findEmployee.Text))
             {
-                MessageBox.Show("Vui long nhap ten tim kiem");
+                MessageBox.Show("Vui lòng nhập tên tìm kiếm!");
             }
             else
             {
@@ -426,7 +426,7 @@ namespace FECoffe.Dashboards
         {
             if (string.IsNullOrWhiteSpace(txt_FindPosition.Text))
             {
-                MessageBox.Show("Vui long nhap ten tim kiem");
+                MessageBox.Show("Vui lòng nhập tên tìm kiếm!");
             }
             else
             {
@@ -439,7 +439,7 @@ namespace FECoffe.Dashboards
         {
             if (string.IsNullOrWhiteSpace(txtFind_Shift.Text))
             {
-                MessageBox.Show("Vui long nhap ten tim kiem");
+                MessageBox.Show("Vui lòng nhập tên tìm kiếm!");
             }
             else
             {
@@ -452,11 +452,11 @@ namespace FECoffe.Dashboards
         {
             if (dpStar_TimeKeeping.SelectedDate == null)
             {
-                MessageBox.Show("Vui long chon moc thoi gian bat dau!");
+                MessageBox.Show("Vui òng nhập mốc thời gian bắt đầu!");
             }
             else if (dpEnd_TimeKeeping.SelectedDate == null)
             {
-                MessageBox.Show("Vui long chon moc thoi gian dich!");
+                MessageBox.Show("Vui lòng nhập mốc thời gian đích!");
             }
             else
             {
@@ -480,7 +480,7 @@ namespace FECoffe.Dashboards
         {
             if (dpFindEnd_salaries.SelectedDate == null || dpFindStart_salaries.SelectedDate == null) 
             {
-                MessageBox.Show("Vui long chon moc thoi gian!");
+                MessageBox.Show("Vui lòng nhập mốc thời gian!");
             }
             else if(cbFindnhanvien_salaries.SelectedValue == null)
             {
@@ -504,7 +504,7 @@ namespace FECoffe.Dashboards
         {
             if (dpend_FindEmployeeSchedules.SelectedDate == null || dpstart_FindEmployeeSchedules.SelectedDate == null)
             {
-                MessageBox.Show("Vui long chon moc thoi gian!");
+                MessageBox.Show("Vui lòng nhập mốc thời gian!");
             }
             else
             {
