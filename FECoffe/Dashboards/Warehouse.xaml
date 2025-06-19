@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         materialDesign:ColorZoneAssist.Mode="PrimaryDark"
-        Title="Warehouse" Height="550" Width="900" Loaded="Window_Loaded">
+        Title="Warehouse" Height="720" Width="1080" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- TabControl Style -->
         <Style TargetType="TabControl">
@@ -107,30 +107,16 @@
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
 
-        <!-- DataGrid Style -->
-        <Style TargetType="DataGrid">
-            <Setter Property="Margin" Value="0,10,0,0"/>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#0D47A1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="32"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
-            <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="ColumnHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#FF54D0FF"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Padding" Value="6"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#DDDDDD"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#1976D2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
-
         <conv:UserIdToUsernameConverter x:Key="UserConverter"/>
     </Window.Resources>
     

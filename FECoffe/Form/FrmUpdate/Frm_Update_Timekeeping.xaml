@@ -58,30 +58,30 @@
 
     <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock Text="Sua Thong Tin Bang Cham Cong" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Sửa Thông Tin Bảng Chấm Công" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Nhan vien:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Nhân viên:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtnhanvien" Width="250" IsReadOnly="True"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Ngày lam viec:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Ngày làm việc:" Width="150" VerticalAlignment="Center"/>
                 <DatePicker x:Name="dpWorkDate" Width="250"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Gio vao:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Giờ vào:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtgiovao" Width="250" ToolTip="hh:mm"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Gio ra:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Giờ ra:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtgiora" Width="250" ToolTip="hh:mm"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Ghi chu:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Ghi chú:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtNote" Width="250"/>
             </StackPanel>
 

@@ -49,8 +49,17 @@
                 }
                 else
                 {
-                    return "Nu";
+                    return "Nữ";
                 }
+            }
+        }
+        public string StatusVN
+        {
+            get
+            {
+                if (Status == true) return "Đang làm";
+                else if (Status == false) return "Đã nghĩ làm";
+                else return string.Empty;
             }
         }
     }

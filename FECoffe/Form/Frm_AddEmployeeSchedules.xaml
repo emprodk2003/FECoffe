@@ -88,20 +88,20 @@
     </Window.Resources>
     <StackPanel Margin="10">
 
-        <GroupBox Header="Thông tin lich lam" Margin="0,0,0,3">
+        <GroupBox Header="Thông tin lịch làm cho nhân viên" Margin="0,0,0,3">
             <StackPanel Margin="10">
                 <StackPanel Orientation="Horizontal" Margin="0,4">
                     <TextBlock Text="Ngày nhập:" Width="100" Margin="0,0,0,10" VerticalAlignment="Center"/>
                     <DatePicker x:Name="ExportDatePicker" Height="40" SelectedDate="{x:Static sys:DateTime.Now}" Margin="6,0,0,10" IsEnabled="True"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,4">
-                    <TextBlock Text="Nhan vien:" Margin="0,0,0,10" Width="100" VerticalAlignment="Center"/>
+                    <TextBlock Text="Nhân viên:" Margin="0,0,0,10" Width="100" VerticalAlignment="Center"/>
                     <ComboBox Width="200" x:Name="cbnhanvien" SelectedValuePath="EmployeeID" DisplayMemberPath="FullName"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Danh sach nhan vien lam trong ngay">
+        <GroupBox Header="Danh sách chi tiết lịch làm cho nhân viên đã chọn">
             <DataGrid x:Name="dgEmployeeSchedules"
                         ItemsSource="{Binding CrudEmployeeSchedules}"
                         AutoGenerateColumns="False" Height="220"
@@ -132,7 +132,7 @@
                     </DataGridTemplateColumn>
 
 
-                    <DataGridComboBoxColumn Header="Ca lam"
+                    <DataGridComboBoxColumn Header="Ca làm"
                                              SelectedValueBinding="{Binding ShiftID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              SelectedValuePath="ShiftID"
                                              DisplayMemberPath="ShiftName"

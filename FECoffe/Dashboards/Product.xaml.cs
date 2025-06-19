@@ -52,7 +52,7 @@ namespace FECoffe.Dashboards
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho danh muc thuc don!");
+                MessageBox.Show("Không có dữ liệu cho danh mục thực đơn!");
             }
         }
         private void hienthiproduct()
@@ -66,7 +66,7 @@ namespace FECoffe.Dashboards
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho thuc don!");
+                MessageBox.Show("Không có dữ liệu cho tực đơn!");
             }
         }
         private void hienthitable()
@@ -78,7 +78,7 @@ namespace FECoffe.Dashboards
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho the order!");
+                MessageBox.Show("Không có dữ liệu cho thẻ order!");
             }
         }
         private void hienthitopping()
@@ -90,7 +90,7 @@ namespace FECoffe.Dashboards
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho topping!");
+                MessageBox.Show("Không có dữ liệu cho topping!");
             }
         }
         private void hienthiproductsize()
@@ -103,7 +103,7 @@ namespace FECoffe.Dashboards
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho product size!");
+                MessageBox.Show("Không có dữ liệu cho product size!");
             }
         }
 
@@ -117,7 +117,7 @@ namespace FECoffe.Dashboards
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho nguyen lieu!");
+                MessageBox.Show("Không có dữ liệu chho nguyên liệu!");
             }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -145,7 +145,7 @@ namespace FECoffe.Dashboards
         {
             var cate = dgCategories_Product.SelectedItem as Categories_ProductViewModel;
             var result = MessageBox.Show(
-                 "Bạn có chắc chắn muốn xóa danh muc thuc don này?",
+                 "Bạn có chắc chắn muốn xóa danh mục thực đơn này?",
                  "Xác nhận xóa",
                  MessageBoxButton.YesNo,
                  MessageBoxImage.Warning
@@ -155,10 +155,10 @@ namespace FECoffe.Dashboards
             {
                 if (Categories_ProductRequest.deleteCategories_Product(cate.CategoryID) == true)
                 {
-                    MessageBox.Show("Đã xóa danh muc thuc don.");
+                    MessageBox.Show("Đã xóa danh mục thực đơn.");
                     hienthicategories_product();
                 }
-                else MessageBox.Show("Loi khi xoa danh muc thuc don.");
+                else MessageBox.Show("Lỗi khi xóa danh mục thực đơn!");
             }
             else
             {
@@ -181,7 +181,7 @@ namespace FECoffe.Dashboards
         {
             var pro = dg_Product.SelectedItem as ProductViewModel;
             var result = MessageBox.Show(
-                 "Bạn có chắc chắn muốn xóa thuc don này?",
+                 "Bạn có chắc chắn muốn xóa thực đơn này?",
                  "Xác nhận xóa",
                  MessageBoxButton.YesNo,
                  MessageBoxImage.Warning
@@ -191,10 +191,10 @@ namespace FECoffe.Dashboards
             {
                 if (ProductRequest.deleteProduct(pro.ProductID) == true)
                 {
-                    MessageBox.Show("Đã xóa thuc don.");
+                    MessageBox.Show("Đã xóa thực đơn.");
                     hienthiproduct();
                 }
-                else MessageBox.Show("Loi khi xoa thuc don.");
+                else MessageBox.Show("Lỗi khi xóa thực đơn!");
             }
             else
             {
@@ -258,7 +258,7 @@ namespace FECoffe.Dashboards
                     MessageBox.Show("Đã xóa topping.");
                     hienthitopping();
                 }
-                else MessageBox.Show("Loi khi xoa topping.");
+                else MessageBox.Show("Lỗi khi xóa topping!");
             }
             else
             {
@@ -291,7 +291,7 @@ namespace FECoffe.Dashboards
         {
             var top = dg_Table.SelectedItem as TableViewModel;
             var result = MessageBox.Show(
-                 "Bạn có chắc chắn muốn xóa so the order này?",
+                 "Bạn có chắc chắn muốn xóa số thẻ orders này?",
                  "Xác nhận xóa",
                  MessageBoxButton.YesNo,
                  MessageBoxImage.Warning
@@ -299,12 +299,16 @@ namespace FECoffe.Dashboards
 
             if (result == MessageBoxResult.Yes)
             {
-                if (TableRequest.deleteTable(top.TableID) == true)
+                if (top.Status == Enum.TableStatus.Occupied)
                 {
-                    MessageBox.Show("Đã xóa so the order.");
+                    MessageBox.Show("Thẻ đang sử dụng không được xó!.");
+                }
+                else if (TableRequest.deleteTable(top.TableID) == true)
+                {
+                    MessageBox.Show("Đã xóa số thẻ orders này.");
                     hienthitable();
                 }
-                else MessageBox.Show("Loi khi xoa so the order .");
+                else MessageBox.Show("Lỗi khi xóa số thẻ orders.");
             }
             else
             {
@@ -333,7 +337,7 @@ namespace FECoffe.Dashboards
             var pr = cb_Productsize.SelectedItem as ProductViewModel;
             if (pr == null)
             {
-                MessageBox.Show("Vui long chon mon!");
+                MessageBox.Show("Vui lòng chọn món!");
                 return;
             }
             else
@@ -368,10 +372,10 @@ namespace FECoffe.Dashboards
             {
                 if (ProductSizeRequest.deleteProduct(size.ProductSizeID) == true)
                 {
-                    MessageBox.Show("Đã xóa size cho mon.");
+                    MessageBox.Show("Đã xóa kích cỡ món thành công.");
                     hienthiproductsize();
                 }
-                else MessageBox.Show("Loi khi xoa size cho mon .");
+                else MessageBox.Show("Lỗi khi xóa kích cỡ món!");
             }
             else
             {
@@ -388,7 +392,7 @@ namespace FECoffe.Dashboards
         {
             if (string.IsNullOrWhiteSpace(txt_FindName_Product.Text) && cbCategories.SelectedValue == null)
             {
-                MessageBox.Show("Vui long nhap ten thuc don can tim");
+                MessageBox.Show("Vui lòng nhập tên món cần tìm!");
                 return;
             }
             else if (string.IsNullOrWhiteSpace(txt_FindName_Product.Text) && cbCategories.SelectedValue != null)
@@ -416,7 +420,7 @@ namespace FECoffe.Dashboards
         {
             if (string.IsNullOrWhiteSpace(txt_FindCate.Text))
             {
-                MessageBox.Show("Vui long nhap ten danh muc can tim");
+                MessageBox.Show("Vui lòng nhập tên danh mục cần tìm!");
                 return;
             }
             else 
@@ -431,7 +435,7 @@ namespace FECoffe.Dashboards
         {
             if (string.IsNullOrWhiteSpace(txt_FindTable.Text))
             {
-                MessageBox.Show("Vui long nhap ten ban can tim");
+                MessageBox.Show("Vui lòng nhập tên số thẻ cần tìm!");
                 return;
             }
             else
@@ -446,7 +450,7 @@ namespace FECoffe.Dashboards
         {
             if (string.IsNullOrWhiteSpace(txt_FindTopping.Text))
             {
-                MessageBox.Show("Vui long nhap ten topping can tim");
+                MessageBox.Show("Vui longf nhập tên topping cần tìm!");
                 return;
             }
             else
@@ -469,7 +473,7 @@ namespace FECoffe.Dashboards
             var name = txt_FindIngredients.Text;
             if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show("Vui long nhap ten nguyen lieu!");
+                MessageBox.Show("Vui lòng nhập tên nguyên liệu!");
             }
             else
             {
@@ -508,7 +512,7 @@ namespace FECoffe.Dashboards
                     MessageBox.Show("Đã xóa nguyên liệu.");
                     hienthinguyenlieu();
                 }
-                else MessageBox.Show("Loi khi xoa nguyên liệu .");
+                else MessageBox.Show("Lỗi khi xóa nguyên liệu .");
             }
             else
             {

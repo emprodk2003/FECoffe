@@ -152,6 +152,22 @@ namespace FECoffe.Request.Orders
                 return null;
             }
         }
+
+        public static List<OrdersViewModel> GetOrderByPayStatus(DateTime start , DateTime end)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Orders/GetAllOrderByPayStatus?start="+start+"&end="+end;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<OrdersViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public static bool deleteOrder(int id)
         {
             try

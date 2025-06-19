@@ -77,7 +77,7 @@
 
             <!-- Kieu nhan vien -->
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Hinh thuc:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Hình thức:" Width="150" VerticalAlignment="Center"/>
                 <ComboBox x:Name="cbEmploymentType" Width="250">
                     <ComboBoxItem Content="FullTime" Tag="True"/>
                     <ComboBoxItem Content="PartTime" Tag="False"/>

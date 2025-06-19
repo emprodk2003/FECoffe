@@ -58,39 +58,39 @@
 
     <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock Text="Thêm Bang Luong" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Thêm Bảng Lương" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Nhan vien:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Nhân viên:" Width="150" VerticalAlignment="Center"/>
                 <ComboBox x:Name="cbnhanvien" Width="250" DisplayMemberPath="FullName" SelectedValuePath="EmployeeID"/>
             </StackPanel>
             
             <!-- Họ và tên -->
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Bang luong thang:" Width="150" VerticalAlignment="Center"/>
-                <TextBlock Text="Thang:" Width="50" VerticalAlignment="Center"/>
+                <TextBlock Text="Bảng lương tháng:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Tháng:" Width="50" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtMonth" Width="50" Margin="0,0,10,5"/>
-                <TextBlock Text="Nam:" Width="50" VerticalAlignment="Center"/>
+                <TextBlock Text="Năm:" Width="50" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtYear" Width="50"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Tong thoi gian lam viec:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Tổng thời gian làm việc:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtTotalWorkingHours" Width="250"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Tien thuong:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Tiền thưởng:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtBonus" Width="250"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Tien phat:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Tiền lỗi:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtPenalty" Width="250"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Tong luong:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Tổng lương:" Width="150" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtFinalSalary" Width="250"/>
             </StackPanel>
 

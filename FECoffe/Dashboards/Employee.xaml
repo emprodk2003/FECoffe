@@ -32,7 +32,9 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
-
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="true"/>
+        </Style>
         <!-- TabItem Style -->
         <Style TargetType="TabItem">
             <Setter Property="Padding" Value="10,5"/>
@@ -209,61 +211,15 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-        <Style TargetType="DataGrid">
-            <Setter Property="Margin" Value="0,10,0,0"/>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#0D47A1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="36"/>
-            <Setter Property="IsReadOnly" Value="true"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="AlternatingRowBackground" Value="#FAFAFA"/>
-            <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#E0E0E0"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-
-            <Setter Property="ColumnHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#E3F2FD"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Foreground" Value="#0D47A1"/>
-                        <Setter Property="Padding" Value="8,4"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#B0BEC5"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="CellStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="Padding" Value="6,2"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,0"/>
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#BBDEFB"/>
-                                <Setter Property="Foreground" Value="#0D47A1"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#1976D2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
 
     </Window.Resources>
@@ -286,15 +242,15 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Họ tên" Binding="{Binding FullName}"/>
                             <DataGridTextColumn Header="Giới tính" Binding="{Binding GioiTinh}"/>
-                            <DataGridTextColumn Header="Hinh thuc" Binding="{Binding TypeName}"/>
+                            <DataGridTextColumn Header="Hình thức" Binding="{Binding TypeName}"/>
                             <DataGridTextColumn Header="Ngày sinh" Binding="{Binding BirthDate}"/>
                             <DataGridTextColumn Header="Điện thoại" Binding="{Binding Phone}"/>
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                             <DataGridTextColumn Header="Chức vụ" Binding="{Binding PositionName}"/>
                             <DataGridTextColumn Header="Lương cơ bản" Binding="{Binding SalaryBase}"/>
-                            <DataGridTextColumn Header="Tình trạng" Binding="{Binding Status}"/>
-                            <DataGridTextColumn Header="Ngay vao lam" Binding="{Binding StartDate}"/>
-                            <DataGridTextColumn Header="Dia chi" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Tình trạng" Binding="{Binding StatusVN}"/>
+                            <DataGridTextColumn Header="Ngày vào làm" Binding="{Binding StartDate}"/>
+                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -327,7 +283,7 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên chức vụ" Binding="{Binding PositionName}"/>
                             <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}"/>
-                            <DataGridTextColumn Header="Ngay cap nhat" Binding="{Binding UpdatedAt}"/>
+                            <DataGridTextColumn Header="Ngày cập nhật" Binding="{Binding UpdatedAt}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -366,7 +322,7 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             <DataGridTextColumn Header="Ngày làm việc" Binding="{Binding WorkDate}"/>
                             <DataGridTextColumn Header="Giờ vào" Binding="{Binding CheckInTime}"/>
                             <DataGridTextColumn Header="Giờ ra" Binding="{Binding CheckOutTime}"/>
-                            <DataGridTextColumn Header="Tong gio làm" Binding="{Binding WorkingHours}"/>
+                            <DataGridTextColumn Header="Tổng giờ làm" Binding="{Binding WorkingHours}"/>
                             <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -448,7 +404,7 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             <DataGridTextColumn Header="Tên ca" Binding="{Binding ShiftName}"/>
                             <DataGridTextColumn Header="Ngày làm việc" Binding="{Binding WorkDate}"/>
                             <DataGridCheckBoxColumn Header="Đi làm" Binding="{Binding IsWorking}"/>
-                            <DataGridTextColumn Header="Ghi chu" Binding="{Binding Note}"/>
+                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}"/>
                             <DataGridTemplateColumn Header="Hành động" Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

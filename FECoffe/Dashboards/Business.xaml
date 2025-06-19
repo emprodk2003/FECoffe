@@ -7,7 +7,7 @@
         xmlns:conv="clr-namespace:FECoffe.Converter"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Business" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Business" Height="720" Width="1080" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- TabControl Style -->
         <Style TargetType="TabControl">
@@ -106,31 +106,9 @@
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
 
-        <!-- DataGrid Style -->
-        <Style TargetType="DataGrid">
-            <Setter Property="Margin" Value="0,0,0,0"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="32"/>
-            <Setter Property="IsReadOnly" Value="true"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
-            <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="ColumnHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#FF54D0FF"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Padding" Value="6"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#DDDDDD"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
+
+
+
         <!-- Style tiêu đề -->
         <Style x:Key="TopTitleStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
@@ -157,16 +135,20 @@
         <Style x:Key="CenterCellStyle" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-
-        <!-- Style Header DataGrid -->
-        <Style x:Key="GridHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#2196F3"/>
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="true"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#0D47A1"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#1976D2"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="6"/>
         </Style>
+        
         <conv:EmployeeIDToMateriaNameConverter x:Key="EmployeeConverter"/>
         <conv:TableIDToMateriaNameConverter x:Key="TableConverter"/>
     </Window.Resources>
@@ -236,9 +218,7 @@ Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
                         <TextBlock Text="Top món bán chạy nhất" Style="{StaticResource TopTitleStyle}" />
 
                         <!-- DataGrid dùng style riêng -->
-                        <DataGrid x:Name="dgReport" ItemsSource="{Binding ProductReport}"
-                                  Style="{StaticResource TopSellingGridStyle}"
-                                  ColumnHeaderStyle="{StaticResource GridHeaderStyle}">
+                        <DataGrid x:Name="dgReport" ItemsSource="{Binding ProductReport}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Sản phẩm" Binding="{Binding ProductName}">
                                     <DataGridTextColumn.ElementStyle>
@@ -257,29 +237,45 @@ Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
             </TabItem>
 
             <!-- Giao dịch chuyển khoản -->
-            <TabItem Header="Giao dịch chuyển khoản">
+            <TabItem Header="Đơn chuyển khoản">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
 Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
-                        <DatePicker Width="150" Margin="0,0,10,0" />
-                        <DatePicker Width="150" Margin="0,0,10,0" />
-                        <ComboBox Width="60"
-                               Margin="0,0,10,0"
-                               ItemsSource="{Binding Products}"
-                               SelectedItem="{Binding SelectedProduct}"
-                               DisplayMemberPath="ProductName"/>
-                        <Button Content="Lọc"/>
+                        <DatePicker  Width="150" x:Name="dp_start_payment" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}" />
+                        <DatePicker Width="150" x:Name="dp_end_payment" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                        <Button Content="Lọc" Click="find_payment_click"/>
                     </StackPanel>
-                    <DataGrid ItemsSource="{Binding Payments}" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}"/>
-                            <DataGridTextColumn Header="Ngày" Binding="{Binding PaymentDate}"/>
-                            <DataGridTextColumn Header="Số tiền" Binding="{Binding Amount}"/>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}"/>
-                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel>
+                        <!-- DataGrid hiển thị danh sách đơn hàng -->
+                        <DataGrid ItemsSource="{Binding OrdersViewModel}" x:Name="dg_Payment" AutoGenerateColumns="False"
+              HeadersVisibility="Column" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}"/>
+                                <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate}"/>
+                                <DataGridTextColumn Header="Nhân viên">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="EmployeeID" Converter="{StaticResource EmployeeConverter}"/>
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Bàn">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="TableNumberID" Converter="{StaticResource TableConverter}"/>
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount, StringFormat=N0}"/>
+                                <DataGridTextColumn Header="Giảm giá" Binding="{Binding Discount, StringFormat=N0}"/>
+                                <DataGridTextColumn Header="Tổng tiền thanh toán" Binding="{Binding FinalAmount, StringFormat=N0}"/>
+                                <DataGridTextColumn Header="Trạng thái" Binding="{Binding payment}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!-- Dòng hiển thị tổng cộng -->
+                        <Border Background="#E3F2FD" BorderThickness="1" Margin="0,5,0,0" Padding="5">
+                            <TextBlock x:Name="txt_filnalAmount" FontSize="14" FontWeight="Bold" Foreground="#0D47A1" TextAlignment="Right"/>
+                        </Border>
+                    </StackPanel>
+
                 </StackPanel>
             </TabItem>
 

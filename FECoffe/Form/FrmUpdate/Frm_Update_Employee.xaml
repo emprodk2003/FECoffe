@@ -58,7 +58,7 @@
 
     <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock Text="Sua Thong Tin Nhân Viên" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Sua Thông Tin Nhân Viên" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBlock Text="Họ và tên:" Width="150" VerticalAlignment="Center"/>
@@ -75,7 +75,7 @@
 
             <!-- Kieu nhan vien -->
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Hinh thuc:" Width="150" VerticalAlignment="Center"/>
+                <TextBlock Text="Hình thức:" Width="150" VerticalAlignment="Center"/>
                 <ComboBox x:Name="cbEmploymentType" Width="250">
                     <ComboBoxItem Content="FullTime" Tag="True"/>
                     <ComboBoxItem Content="PartTime" Tag="False"/>
