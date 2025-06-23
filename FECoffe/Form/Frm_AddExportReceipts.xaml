@@ -145,17 +145,26 @@
                     <StackPanel Orientation="Horizontal" Margin="0,4">
                         <TextBlock Text=" Lo Nguyên lieu:" Width="100" VerticalAlignment="Center"/>
                         <ComboBox Style="{StaticResource StyledComboBox}"
-                               
                                DisplayMemberPath="LotName"
                                SelectedValuePath="LotID"
                                Width="250"
                                x:Name="cbLot"
+                                  SelectionChanged="cbLot_SelectionChanged"
                                 />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,4">
                         <TextBlock Text="Số lượng:" Width="100" VerticalAlignment="Center"/>
                         <TextBox Text="{Binding Quantity}" Width="100" x:Name="txtQuantity" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,4">
+                        <TextBlock Text="Số lượng tồn kho:"
+                                   Width="100"
+                                   VerticalAlignment="Center" />
+                        <TextBox IsReadOnly="True"
+                                 Width="100"
+                                 x:Name="txtinventoryquantity" />
                     </StackPanel>
 
                     <Button Content="Them So Luong can xuat"

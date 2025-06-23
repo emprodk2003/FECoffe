@@ -32,7 +32,7 @@ namespace FECoffe.Form
 
             userID = app.IdUser;
         }
-       
+
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             if (cbLot.SelectedItem is CrudLot selectedLot)
@@ -40,7 +40,7 @@ namespace FECoffe.Form
                 var importReceipts = new CrudExportReceipts()
                 {
                     CreatedAt = DateTime.Now,
-                    ExportDate=DateTime.Now,
+                    ExportDate = DateTime.Now,
                     Note = txtNote.Text,
                     UserID = Guid.Parse(userID),
                 };
@@ -72,15 +72,23 @@ namespace FECoffe.Form
             {
                 if (cbLot.SelectedItem is CrudLot selectedLot)
                 {
-                    if (int.TryParse(txtQuantity.Text, out int quantity))
+                    if (int.TryParse(txtinventoryquantity.Text, out int inventoryquantity) &&
+                            int.TryParse(txtQuantity.Text, out int quantity))
                     {
-                        var detail = new ExportDetail
+                        if (inventoryquantity >= quantity)
                         {
-                            LotID = selectedLot.LotID,
-                            Quantity = quantity,
-                        };
-                        
-                        ExportDetails.Add(detail);
+                            var detail = new ExportDetail
+                            {
+                                LotID = selectedLot.LotID,
+                                Quantity = quantity,
+                            };
+
+                            ExportDetails.Add(detail);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vui lòng nhập số lượng dưới hoặc bằng số lượng tồn kho .");
+                        }
                     }
                     else
                     {
@@ -122,8 +130,17 @@ namespace FECoffe.Form
 
                 var frm = new ExportReciptsDetail(selectedDetail);
                 frm.ShowDialog();
-               // dgExportDetails.Items.Refresh();
+                // dgExportDetails.Items.Refresh();
             }
+        }
+
+        private void cbLot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbLot.SelectedItem is CrudLot selectedLot)
+            {
+                txtinventoryquantity.Text = selectedLot.Quantity.ToString();
+            }
+
         }
     }
 }

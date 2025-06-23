@@ -211,8 +211,9 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên hàng" Binding="{Binding MaterialName}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Đơn vị" Binding="{Binding Unit}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Tồn kho" Binding="{Binding Quantity}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Tong so luong" Binding="{Binding TotalMaterial}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tồn kho cho phép"
+                                                    Binding="{Binding MinStock}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tồn Kho" Binding="{Binding TotalMaterial}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Người cập nhật" IsReadOnly="True">
                                     <DataGridTextColumn.Binding>
                                         <Binding Path="UserID" Converter="{StaticResource UserConverter}"  />

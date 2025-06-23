@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FECoffe.Form"
         mc:Ignorable="d"
-       Title="Thêm nguyên vật liệu" Height="500" Width="480"
+       Title="Thêm nguyên vật liệu" Height="350" Width="480"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
         ShowInTaskbar="False"
@@ -77,23 +77,11 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Tồn kho tối thiểu:" Width="150" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtMinStock" Width="250"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Số lượng hiện tại:" Width="150" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtQuantity" Width="250"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Giá nhập:" Width="150" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtPurchasePrice" Width="250"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Hạn sử dụng:" Width="150" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpExpirationDate" Width="250"/>
+                <TextBlock Text="Tồn kho tối thiểu:"
+                           Width="150"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="txtMinStock"
+                         Width="250" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

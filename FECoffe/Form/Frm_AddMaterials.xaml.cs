@@ -39,14 +39,11 @@ namespace FECoffe.Form
                 MaterialName = txtMaterialName.Text,
                 Unit = txtUnit.Text,
                 MinStock = int.Parse(txtMinStock.Text),
-                Quantity = float.Parse(txtQuantity.Text),
-                PurchasePrice = decimal.Parse(txtPurchasePrice.Text),
                 CategoryID = (int)cbCategory.SelectedValue,
                 SupplierID = (int)cbSupplier.SelectedValue,
                 UpdatedAt = DateTime.Now,
                 UserID=Guid.Parse(userId),
                 CreatedAt = DateTime.Now,
-                ExpirationDate=dpExpirationDate.SelectedDate.Value
             };
 
             if (MaterialRequest.createMaterial(newMaterial) == true)
