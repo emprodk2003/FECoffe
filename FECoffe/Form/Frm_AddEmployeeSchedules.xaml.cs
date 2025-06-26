@@ -76,15 +76,16 @@ namespace FECoffe.Form
         private void Luu_Click(object sender, RoutedEventArgs e)
         {
             var list = dgEmployeeSchedules.ItemsSource.Cast<CrudEmployeeSchedules>().ToList();
-            var emloyee = (int)cbnhanvien.SelectedValue;
+            
             if (cbnhanvien.SelectedItem == null || list == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng chọn nhân viên!");
             }
             else
             {
+                var emloyee = (int)cbnhanvien.SelectedValue;
                 List<EmployeeSchedulesTemp> dses = new List<EmployeeSchedulesTemp>();
-                foreach(var item in list)
+                foreach (var item in list)
                 {
                     var es = new EmployeeSchedulesTemp();
                     es.EmployeeID = emloyee;
@@ -96,9 +97,17 @@ namespace FECoffe.Form
                 }
                 foreach (var item in dses)
                 {
+                    var ep = EmployeeSchedulesRequest.GetAllEmployeeSchedu();
+                    var eps = ep.Where(x => x.WorkDate == item.WorkDate && x.ShiftID == item.ShiftID).ToList();
+                    if(eps != null)
+                    {
+                        MessageBox.Show("Lịch làm đã tồn tại vui lòng kiểm tra lại thông tin và chọn lại!!");
+                        break;
+                        this.Close();
+                    }
                     if (!EmployeeSchedulesRequest.createEmployeeSchedules(item))
                     {
-                        MessageBox.Show("Lỗi khi thêm lịch làm!");
+                        MessageBox.Show("Lỗi khi thêm lịch làm. Vui lòng kiểm tra lại thông tin làm việc nhân viên!!");
                         break;
                         this.Close();
                     }

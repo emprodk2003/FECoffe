@@ -13,6 +13,7 @@
         WindowState="Maximized"
         WindowStyle="SingleBorderWindow"
         ResizeMode="CanResize"
+        Loaded="Window_Loaded"
         Width="1500">
     <Window.Resources>
 

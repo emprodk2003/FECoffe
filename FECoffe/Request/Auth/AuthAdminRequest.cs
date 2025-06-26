@@ -32,5 +32,20 @@ namespace FECoffe.Request.Auth
                 return null;
             }
         }
+        public static bool log_out()
+        {
+            string url = @"http://localhost:5178/api/Account/Logout";
+            HttpClient client = new HttpClient();
+            var res = client.PostAsync(url,null);
+            res.Wait();
+            if (res.Result.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

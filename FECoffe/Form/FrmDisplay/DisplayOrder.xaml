@@ -88,7 +88,7 @@
               RowBackground="White"
               AlternatingRowBackground="#f9f9f9"
               FontSize="13"
-              Margin="0">
+              Margin="0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Tên món" Width="200" ElementStyle="{StaticResource CenterCellStyle}">
                     <DataGridTextColumn.Binding>

@@ -1,6 +1,8 @@
-﻿using FECoffe.Request.Report;
+﻿using FECoffe.Request.Auth;
+using FECoffe.Request.Report;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Newtonsoft.Json.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -120,6 +122,18 @@ namespace FECoffe.Dashboards
             var business = new Business();
             business.Show();
             this.Close();
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            var status = AuthAdminRequest.log_out();
+            if(status == true)
+            {
+                ((App)Application.Current).Logout();
+                main.Show();
+                this.Close();
+            }
         }
     }
 }

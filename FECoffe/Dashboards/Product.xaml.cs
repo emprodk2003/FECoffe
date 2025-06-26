@@ -4,6 +4,7 @@ using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Product;
 using FECoffe.DTO.ProductSize;
 using FECoffe.DTO.Recipes;
+using FECoffe.DTO.Surcharges;
 using FECoffe.DTO.Topping;
 using FECoffe.Form;
 using FECoffe.Form.FrmUpdate;
@@ -13,6 +14,7 @@ using FECoffe.Request.Ingredients;
 using FECoffe.Request.Product;
 using FECoffe.Request.ProductSize;
 using FECoffe.Request.Recipes;
+using FECoffe.Request.Surcharges;
 using FECoffe.Request.Table;
 using FECoffe.Request.Topping;
 using System;
@@ -128,6 +130,7 @@ namespace FECoffe.Dashboards
             hienthitopping();
             hienthiproductsize();
             hienthinguyenlieu();
+            hienthiphuthu();
         }
 
         private void edit_cateproduct_Click(object sender, RoutedEventArgs e)
@@ -209,6 +212,7 @@ namespace FECoffe.Dashboards
             hienthitable();
             hienthinguyenlieu();
             hienthitopping();
+            hienthiphuthu();
         }
 
         private void themCateProduct_Click(object sender, RoutedEventArgs e)
@@ -329,7 +333,20 @@ namespace FECoffe.Dashboards
 
         private void GetSizeByProduct_Click(object sender, RoutedEventArgs e)
         {
-            hienthiproductsize();
+            if(cb_Productsize.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn món!");
+                return;
+            }
+            else
+            {
+                var pr = (int)cb_Productsize.SelectedValue;
+                var list = ProductSizeRequest.GetByProduct(pr);
+                if(list != null)
+                {
+                    dg_ProductSize.ItemsSource = list;
+                }
+            }
         }
 
         private void themSize_Click(object sender, RoutedEventArgs e)
@@ -620,6 +637,78 @@ namespace FECoffe.Dashboards
             if(result == true)
             {
                 Load_Recipes();
+            }
+        }
+
+        private void hienthiphuthu()
+        {
+            var list = SurchargesRequest.GetAll();
+            if(list != null)
+            {
+                dg_Surcharges.ItemsSource = list;
+            }
+        }
+
+        private void FindSurcharges_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_FindSurcharges.Text))
+            {
+                MessageBox.Show("Vui lòng nhập từ khoác tìm kiếm!");
+                return;
+            }
+            else
+            {
+                var list = SurchargesRequest.GetByName(txt_FindSurcharges.Text);
+                if(list != null)
+                {
+                    dg_Surcharges.ItemsSource = list;
+                }
+            }
+        }
+
+        private void ThemSurcharges_Click(object sender, RoutedEventArgs e)
+        {
+            Frm_AddSurcharges frm_Add = new Frm_AddSurcharges();
+            var resuft = frm_Add.ShowDialog();
+            if(resuft == true)
+            {
+                hienthiphuthu();
+            }
+        }
+
+        private void edit_Surcharges_Click(object sender, RoutedEventArgs e)
+        {
+            var sur = dg_Surcharges.SelectedItem as SurchargesViewModel;
+            Frm_Update_Surcharges frm_Update_ = new Frm_Update_Surcharges(sur);
+            var resuft = frm_Update_.ShowDialog();
+            if(resuft == true)
+            {
+                hienthiphuthu();
+            }
+        }
+
+        private void delete_Surcharges_Click(object sender, RoutedEventArgs e)
+        {
+            var item = dg_Surcharges.SelectedItem as SurchargesViewModel;
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn xóa loại phụ thu này?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (SurchargesRequest.delete(item.ID) == true)
+                {
+                    MessageBox.Show("Đã xóa loại phụ thu này.");
+                    hienthiphuthu();
+                }
+                else MessageBox.Show("Lỗi khi xóa loại phụ thu.");
+            }
+            else
+            {
+
             }
         }
     }

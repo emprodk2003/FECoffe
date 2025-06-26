@@ -3,11 +3,13 @@ using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Orders;
 using FECoffe.DTO.OrderToppingDetails;
 using FECoffe.DTO.Product;
+using FECoffe.DTO.Surcharges;
 using FECoffe.Form;
 using FECoffe.Request.Employee;
 using FECoffe.Request.Orders;
 using FECoffe.Request.Positions;
 using FECoffe.Request.Product;
+using FECoffe.Request.Surcharges;
 using FECoffe.Request.Table;
 using FECoffe.Request.Topping;
 using System.Collections.ObjectModel;
@@ -22,6 +24,7 @@ namespace FECoffe.AppUsed
     public partial class Order : Window
     {
         string userID;
+        public SurchargesViewModel surcharges { get; set; } = new SurchargesViewModel();
         public TableViewModel ViewModel { get; set; }
         public CreateOrderDTO CreateOrderDTO { get; set; }
         public CreateOrderDetailsDTO CreateOrderDetailsDTO{ get; set; }
@@ -273,6 +276,16 @@ namespace FECoffe.AppUsed
             var tag = new TheBagNumber();
             this.Close();
             tag.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var date = DateTime.Now;
+            var sur = SurchargesRequest.GetByToDay(date);
+            if(sur != null)
+            {
+                txtDiscount.Text = sur.SurchargesValue.ToString();
+            }
         }
     }
 }

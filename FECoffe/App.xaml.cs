@@ -24,6 +24,11 @@ namespace FECoffe
 
         // Lấy vai trò từ token
         public string UserRole => JwtToken?.Claims.FirstOrDefault(c => c.Type == "role" || c.Type == "roles")?.Value;
+        public void Logout()
+        {
+            RawToken = null;
+            JwtToken = null;
+        }
     }
 
 }
