@@ -6,7 +6,54 @@
         xmlns:local="clr-namespace:FECoffe.Form.FrmDisplay"
         mc:Ignorable="d"
         Title="DisplayLot" Height="450" Width="800" Loaded="Window_Loaded">
-
+    <Window.Resources>
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="350" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+            <Setter Property="HeadersVisibility"
+                    Value="Column" />
+            <Setter Property="GridLinesVisibility"
+                    Value="None" />
+            <Setter Property="AlternatingRowBackground"
+                    Value="#f3f3f3" />
+            <Setter Property="RowBackground"
+                    Value="White" />
+            <Setter Property="FontSize"
+                    Value="14" />
+        </Style>
+        <Style x:Key="CenterCellStyle"
+               TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="TextAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Background"
+                    Value="#007ACC" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="Height"
+                    Value="35" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <DockPanel LastChildFill="True">
             <Grid DockPanel.Dock="Top" Height="30" Margin="10">
@@ -46,6 +93,7 @@
                 <DataGrid x:Name="dgLot"
                      AutoGenerateColumns="False"
                      CanUserAddRows="False"
+                          Style="{StaticResource MyDataGridStyle}"
                      >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Lô hàng" Binding="{Binding LotName}" IsReadOnly="True"/>

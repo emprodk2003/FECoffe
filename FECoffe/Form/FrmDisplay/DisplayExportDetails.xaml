@@ -10,8 +10,19 @@
 
     <Window.Resources>
         <conv:LotIdToLotNameConvert x:Key="LotConverter"/>
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="350" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+        </Style>
     </Window.Resources>
-    <Grid>
+    <Grid >
         <DockPanel LastChildFill="True">
             <Grid DockPanel.Dock="Top" Height="30" Margin="10">
                 <Grid.ColumnDefinitions>
@@ -43,14 +54,15 @@
             </Grid>
 
             <StackPanel Margin="10">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBox  x:Name="txtSearchMaterials" Width="200" Text="Tìm kiếm..." Margin="0,0,10,0"/>
-                    <Button Content="Tìm"  Margin="0,0,10,0"/>
-                </StackPanel>
+                <!-- <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+     <TextBox  x:Name="txtSearchMaterials" Width="200" Text="Tìm kiếm..." Margin="0,0,10,0"/>
+     <Button Content="Tìm"  Margin="0,0,10,0"/>
+ </StackPanel> -->
+               
                 <DataGrid x:Name="dgExportDetail"
                      AutoGenerateColumns="False"
-                     CanUserAddRows="False"
-                     >
+                          CanUserAddRows="False"
+                          Style="{StaticResource MyDataGridStyle}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nguyen Lieu"  IsReadOnly="True">
                             <DataGridTextColumn.Binding>

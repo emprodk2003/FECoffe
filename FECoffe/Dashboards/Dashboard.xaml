@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Height="820" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="topButton" TargetType="Button">
@@ -28,6 +28,72 @@
                     <Setter Property="Background" Value="#dcdcdc"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <!-- TabControl Style -->
+        <Style TargetType="TabControl">
+            <Setter Property="Margin"
+                    Value="10" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="BorderBrush"
+                    Value="#CCCCCC" />
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="Padding"
+                    Value="5" />
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly"
+                    Value="true" />
+        </Style>
+        <!-- TabItem Style -->
+        <Style TargetType="TabItem">
+            <Setter Property="Padding"
+                    Value="10,5" />
+            <Setter Property="Margin"
+                    Value="2,0,2,0" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="Background"
+                    Value="#FFCEF8F5" />
+            <Setter Property="BorderBrush"
+                    Value="#DDD" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6,6,0,0"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="ContentSite"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected"
+                                     Value="True">
+                                <Setter TargetName="Border"
+                                        Property="Background"
+                                        Value="#2196F3" />
+                                <Setter TargetName="Border"
+                                        Property="BorderBrush"
+                                        Value="#1976D2" />
+                                <Setter Property="Foreground"
+                                        Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="menuButton" TargetType="Button">
@@ -429,29 +495,70 @@
                         </Border>
                     </WrapPanel>
                 </materialDesign:Card>
-                <materialDesign:Card Margin="30 20" UniformCornerRadius="20" Grid.Row="2" Height="200">
-                    <Grid>
-                        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Tháng"  Labels="{Binding Labels}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Doanh thu"></lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
-                    </Grid>
+                <materialDesign:Card Margin="30 20" UniformCornerRadius="20" Grid.Row="2" Height="250">
+                    <TabControl Height="240"
+                                Foreground="Black">
+                        <!-- hoặc Width đủ chứa 2 tab -->
+                        <TabItem Header="Theo Tháng">
+                            <Grid>
+                                <lvc:CartesianChart Series="{Binding SeriesCollection}"
+                                                    LegendLocation="Right"
+                                                    Foreground="Black">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Ngày"
+                                                  Foreground="Black"
+                                                  Labels="{Binding Labels}" />
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="VND"
+                                                  Foreground="Black"/>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="Theo Năm">
+                            <Grid>
+                                <lvc:CartesianChart Series="{Binding SeriesCollection1}"
+                                                    LegendLocation="Right"
+                                                    Foreground="Black">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Tháng"
+                                                  Foreground="Black"
+                                                  Labels="{Binding Labels1}" />
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="VND"
+                                                  Foreground="Black"/>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </Grid>
+                        </TabItem>
+
+                    </TabControl>
                 </materialDesign:Card>
-                <materialDesign:Card Margin="30 20" UniformCornerRadius="20" Grid.Row="3" Height="200">
-                    <Grid>
-                        <lvc:CartesianChart Series="{Binding SeriesCollection1}" LegendLocation="Right">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Tháng"  Labels="{Binding Labels1}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="So Don"></lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
-                    </Grid>
+                <materialDesign:Card Margin="30 20" UniformCornerRadius="20" Grid.Row="3" Height="250">
+                    <TabControl Height="240"
+                                Foreground="Black">
+                        <TabItem Header="Ngày Hiện tại">
+                            <Grid>
+                                <lvc:CartesianChart Series="{Binding SeriesCollection2}"
+                                                    LegendLocation="Right"
+                                                    
+                                                    Foreground="Black">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Giờ"
+                                                  Foreground="Black"
+                                                  Labels="{Binding Labels2}" />
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="VND"
+                                                  Foreground="Black" />
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </materialDesign:Card>
             </Grid>
         </Grid>

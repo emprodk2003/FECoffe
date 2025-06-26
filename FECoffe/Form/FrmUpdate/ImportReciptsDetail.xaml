@@ -58,7 +58,7 @@
 
     <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock Text="Sua Chi Tiet Phieu Nhap" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Sửa chi tiết phiếu nhập" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,4">
                 <TextBlock Text="Nguyên vật liệu:" Width="100" VerticalAlignment="Center"/>

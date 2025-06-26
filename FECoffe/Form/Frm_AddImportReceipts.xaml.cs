@@ -17,7 +17,7 @@ namespace FECoffe.Form
     /// </summary>
     public partial class Frm_AddImportReceipts : Window
     {
-        
+
         public ObservableCollection<CrudImportDetail> ExportDetails { get; set; }
         public int SupplierID { get; set; }
         public ObservableCollection<CrudImportDetail> ImportDetail = new ObservableCollection<CrudImportDetail>();
@@ -81,12 +81,14 @@ namespace FECoffe.Form
             {
                 if (cbMaterial.SelectedItem is CrudMaterial selectedMaterial)
                 {
-                    if (int.TryParse(txtQuantity.Text, out int quantity) &&
-                        decimal.TryParse(txtPrice.Text, out decimal price))
+                    // Gán giá trị với kiểm tra đúng
+                    bool isQuantityValid = int.TryParse(txtQuantity.Text, out int quantity) && quantity > 0;
+                    bool isPriceValid = decimal.TryParse(txtPrice.Text, out decimal price) && price > 0;
+
+                    if (isQuantityValid && isPriceValid)
                     {
                         var detail = new CrudImportDetail
                         {
-                            
                             MaterialID = selectedMaterial.MaterialID,
                             Quantity = quantity,
                             Price = price,
@@ -100,7 +102,7 @@ namespace FECoffe.Form
                     }
                     else
                     {
-                        MessageBox.Show("Vui lòng nhập đúng định dạng số cho số lượng và đơn giá.");
+                        MessageBox.Show("Vui lòng nhập đúng định dạng và giá trị > 0 cho số lượng và đơn giá.");
                     }
                 }
                 else
@@ -112,6 +114,7 @@ namespace FECoffe.Form
             {
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
+
         }
 
         private void luu_Click(object sender, RoutedEventArgs e)
@@ -119,6 +122,7 @@ namespace FECoffe.Form
 
             if (cbSupplier.SelectedItem is CrudSuppliers selectedSuppliers)
             {
+
                 var importReceipts = new CrudImportReceipts()
                 {
                     CreatedAt = DateTime.Now,
@@ -142,6 +146,7 @@ namespace FECoffe.Form
                 else
                     MessageBox.Show("Thêm thất bại");
             }
+            else MessageBox.Show("Chưa nhà cung cấp");
         }
 
         private void dgImportDetails_SelectionChanged(object sender, SelectionChangedEventArgs e)

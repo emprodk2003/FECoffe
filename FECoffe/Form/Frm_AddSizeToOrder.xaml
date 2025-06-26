@@ -12,8 +12,9 @@
         Background="#f9f9f9"
         ResizeMode="NoResize"
         Loaded="Window_Loaded">
+
     <Window.Resources>
-        <!-- Style chuẩn hóa cho TextBox -->
+        <!-- Style chuẩn hóa -->
         <Style TargetType="TextBox">
             <Setter Property="Margin"
                     Value="0,5" />
@@ -25,7 +26,6 @@
                     Value="32" />
         </Style>
 
-        <!-- ComboBox style -->
         <Style TargetType="ComboBox">
             <Setter Property="Margin"
                     Value="0,5" />
@@ -37,7 +37,6 @@
                     Value="32" />
         </Style>
 
-        <!-- Button style -->
         <Style TargetType="Button">
             <Setter Property="Margin"
                     Value="6" />
@@ -68,112 +67,126 @@
                 BorderBrush="#DDD"
                 BorderThickness="1">
             <StackPanel>
-                <TextBlock Text="Chọn Size và Topping cho Món"
+
+                <TextBlock Text="Thêm Size và Topping cho Món"
                            FontSize="20"
                            FontWeight="Bold"
                            Foreground="#333"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,20" />
 
-                <!-- Món ăn -->
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,10">
+                <!-- Form nhập thông tin món -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
                     <TextBlock Text="Tên món:"
-                               Width="160"
                                VerticalAlignment="Center" />
                     <TextBox x:Name="txtProductName"
-                             Width="400" />
-                </StackPanel>
+                             Grid.Column="1" />
+                </Grid>
 
-                <!-- Size -->
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,10">
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
                     <TextBlock Text="Size:"
-                               Width="160"
                                VerticalAlignment="Center" />
                     <ComboBox x:Name="cbSize"
-                              Width="400"
+                              Grid.Column="1"
                               DisplayMemberPath="SizeName"
                               SelectedValuePath="ProductSizeID" />
-                </StackPanel>
+                </Grid>
 
-                <!-- Số lượng sản phẩm -->
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,10">
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
                     <TextBlock Text="Số lượng sản phẩm:"
-                               Width="160"
                                VerticalAlignment="Center" />
                     <TextBox x:Name="txtquantityprodutsize"
-                             Width="400" />
-                </StackPanel>
+                             Grid.Column="1" />
+                </Grid>
 
-                <!-- Topping -->
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,10">
-                    <TextBlock Text="Topping:"
-                               Width="160"
-                               VerticalAlignment="Center" />
-                    <ComboBox x:Name="cbTopping"
-                              Width="400"
-                              DisplayMemberPath="ToppingName"
-                              SelectedValuePath="ToppingID" />
-                </StackPanel>
-
-                <!-- Số lượng topping -->
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,10">
-                    <TextBlock Text="Số lượng topping:"
-                               Width="160"
-                               VerticalAlignment="Center" />
-                    <TextBox x:Name="txtquantitytopping"
-                             Width="400" />
-                </StackPanel>
-
-                <!-- Nút lưu / xóa topping -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            Margin="0,10,0,10">
-                    <Button Content="Lưu Topping"
-                            Click="luuTopping_Click"
-                            Background="#4CAF50" />
-                    <Button Content="Xóa Topping"
-                            Click="XoaTopping_Click"
-                            Background="#F44336" />
-                </StackPanel>
-
-                <!-- Bảng chi tiết topping -->
+                <!-- GroupBox Topping -->
                 <GroupBox Header="Chi tiết Topping"
                           FontWeight="Bold"
                           Margin="0,10,0,10">
-                    <DataGrid x:Name="dgToppingDetails"
-                              ItemsSource="{Binding ExportDetails}"
-                              AutoGenerateColumns="False"
-                              CanUserAddRows="True"
-                              Height="250"
-                              HeadersVisibility="Column"
-                              AlternatingRowBackground="#f0f0f0"
-                              GridLinesVisibility="None">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ToppingID"
-                                                Binding="{Binding ToppingID}"
-                                                Width="*" />
-                            <DataGridTextColumn Header="Tên Topping"
-                                                Binding="{Binding ToppingName}"
-                                                Width="*" />
-                            <DataGridTextColumn Header="Số lượng"
-                                                Binding="{Binding Quantity}"
-                                                Width="*" />
-                            <DataGridTextColumn Header="Đơn giá"
-                                                Binding="{Binding UnitPrice}"
-                                                Width="*" />
-                            <DataGridTextColumn Header="Thành tiền"
-                                                Binding="{Binding TotalPrice}"
-                                                Width="*" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel Margin="10">
+
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Topping:"
+                                       VerticalAlignment="Center" />
+                            <ComboBox x:Name="cbTopping"
+                                      Grid.Column="1"
+                                      DisplayMemberPath="ToppingName"
+                                      SelectedValuePath="ToppingID" />
+                        </Grid>
+
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Số lượng topping:"
+                                       VerticalAlignment="Center" />
+                            <TextBox x:Name="txtquantitytopping"
+                                     Grid.Column="1" />
+                        </Grid>
+
+                        <!-- Nút -->
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,10,0,10">
+                            <Button Content="Lưu Topping"
+                                    Click="luuTopping_Click"
+                                    Background="#4CAF50" />
+                            <Button Content="Xóa Topping"
+                                    Click="XoaTopping_Click"
+                                    Background="#F44336" />
+                        </StackPanel>
+
+                        <!-- DataGrid -->
+                        <DataGrid x:Name="dgToppingDetails"
+                                  ItemsSource="{Binding ExportDetails}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="True"
+                                  Height="250"
+                                  HeadersVisibility="Column"
+                                  AlternatingRowBackground="#f0f0f0"
+                                  GridLinesVisibility="None">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ToppingID"
+                                                    Binding="{Binding ToppingID}"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Tên Topping"
+                                                    Binding="{Binding ToppingName}"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Số lượng"
+                                                    Binding="{Binding Quantity}"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Đơn giá"
+                                                    Binding="{Binding UnitPrice}"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Thành tiền"
+                                                    Binding="{Binding TotalPrice}"
+                                                    Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </GroupBox>
 
-                <!-- Nút lưu / hủy -->
+                <!-- Nút chính -->
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right"
                             Margin="0,10,0,0">
@@ -184,6 +197,7 @@
                             Click="Huy_Click"
                             Background="#9E9E9E" />
                 </StackPanel>
+
             </StackPanel>
         </Border>
     </ScrollViewer>

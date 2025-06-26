@@ -1,8 +1,11 @@
-﻿using FECoffe.Request.Report;
+﻿using FECoffe.DTO.Report;
+using FECoffe.Request.Orders;
+using FECoffe.Request.Report;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace FECoffe.Dashboards
 {
@@ -11,10 +14,20 @@ namespace FECoffe.Dashboards
     /// </summary>
     public partial class Dashboard : Window
     {
-        public SeriesCollection SeriesCollection { get; set; }
+        public List<decimal> RevenueByMonth { get; set; }
+        public List<int> Day { get; set; }
         public string[] Labels { get; set; }
-        public SeriesCollection SeriesCollection1 { get; set; }
+        public List<decimal> RevenueByYear { get; set; }
+        public List<int> Month { get; set; }
         public string[] Labels1 { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
+
+        public SeriesCollection SeriesCollection1 { get; set; }
+        public SeriesCollection SeriesCollection2 { get; set; }
+        public List<decimal> RevenueByDay { get; set; }
+        public List<int> Hour { get; set; }
+        public List<int> CountOrder { get; set; }
+        public string[] Labels2 { get; set; }
         public Dashboard()
         {
             InitializeComponent();
@@ -25,27 +38,54 @@ namespace FECoffe.Dashboards
             string email = app.UserEmail;
             string role = app.UserRole;
             Title = $"Xin chào {email} - ({role})";
-            SeriesCollection1 = new SeriesCollection
-            {
-                 new LineSeries
-                  {
-                     Title = "Tong so don",
-                     Values = new ChartValues<double> { 100, 150, 200, 180, 220, 250 }
-                  }
-             };
 
-            Labels1 = new[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6" };
+            var report = OrderRequest.getReportRevenue();
+            RevenueByMonth = report.ReportRevenueByMonth.Data;
+            Day = report.ReportRevenueByMonth.Categories;
             SeriesCollection = new SeriesCollection
             {
                  new LineSeries
                   {
                      Title = "Doanh thu",
-                     Values = new ChartValues<double> { 100, 150, 200, 180, 220, 250 }
+                     Values = new ChartValues<decimal> ( RevenueByMonth ),
+
                   }
              };
+            Labels = Day.Select(d => d.ToString()).ToArray();
 
-            Labels = new[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6" };
+            RevenueByYear = report.ReportRevenueByYear.Data;
+            Month = report.ReportRevenueByYear.Categories;
+            SeriesCollection1 = new SeriesCollection
+            {
+                 new LineSeries
+                  {
+                     Title = "Doanh thu",
+                     Values = new ChartValues<decimal> ( RevenueByYear )
+                  }
+             };
+            Labels1 = Month.Select(d => d.ToString()).ToArray();
 
+            RevenueByDay = report.ReportRevenueByDay.Data;
+            CountOrder = report.ReportRevenueByDay.CountOrder;
+            Hour = report.ReportRevenueByDay.Categories;
+            SeriesCollection2 = new SeriesCollection
+            {
+                 new LineSeries
+                 {
+                     Title = "Doanh thu",
+                     Values = new ChartValues<decimal> (RevenueByDay)
+                 },
+                 new LineSeries
+                 {
+                     Title = "Tổng số đơn",
+                     Values = new ChartValues<int> (CountOrder),
+                     Stroke = Brushes.Orange,                //  màu đường kẻ
+                     PointForeground = Brushes.Orange,       //  màu điểm (nút)
+                     Fill = Brushes.Transparent
+                 }
+            };
+           
+            Labels2 = Hour.Select(d => d.ToString()).ToArray();
             DataContext = this;
         }
 
@@ -107,11 +147,11 @@ namespace FECoffe.Dashboards
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var report = ReportRequest.GetByToDay();
-            if(report != null)
+            if (report != null)
             {
                 txt_Number_employee.Text = report.Number_Employee.ToString() + " nhân viên";
                 txt_Number_Order.Text = report.Number_Orders.ToString() + " đơn hàng";
-                txt_Report_TotalRevenues.Text = report.TotalRevenue.ToString() +" VND";
+                txt_Report_TotalRevenues.Text = report.TotalRevenue.ToString() + " VND";
             }
         }
 
