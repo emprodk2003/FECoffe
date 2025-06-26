@@ -366,6 +366,39 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
                     </DataGrid>
                 </StackPanel>
             </TabItem>
+
+            <TabItem Header="Phụ thu">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
+                        <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
+Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
+                        <TextBox x:Name="txt_FindSurcharges" Width="200" Margin="0,0,10,0" materialDesign:HintAssist.Hint="Tìm kiếm loại phụ thu..." Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue"/>
+                        <Button Content="Tìm" Click="FindSurcharges_Click" Margin="0,0,10,0"/>
+                        <Button Content="Thêm" Click="ThemSurcharges_Click"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
+                    </StackPanel>
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" x:Name="dg_Surcharges" ItemsSource="{Binding SurchargesViewModel}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tên loại phụ thu" Binding="{Binding SurchargesName}"/>
+                            <DataGridTextColumn Header="Mức phụ thu" Binding="{Binding SurchargesValue}"/>
+                            <DataGridTextColumn Header="Ngày bắt đầu tính" Binding="{Binding StartDate}"/>
+                            <DataGridTextColumn Header="Ngày kết thúc" Binding="{Binding EndDate}"/>
+                            <DataGridTemplateColumn Header="Hành động" Width="150">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="Sửa" FontSize="12"  Margin="0,0,5,0" x:Name="edit_Surcharges" Click="edit_Surcharges_Click"/>
+                                            <Button Content="Xóa" Background="Red" FontSize="12" x:Name="delete_Surcharges" Click="delete_Surcharges_Click"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -75,7 +75,7 @@ namespace FECoffe.AppUsed
                     "Xác nhận đã hoàn thành thực đơn?",
                     "Xác nhận hoàn thành",
                     MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning
+                    MessageBoxImage.Hand
                 );
 
                 if (result == MessageBoxResult.Yes)
