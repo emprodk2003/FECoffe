@@ -181,10 +181,6 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Margin="0,20,0,0">
-            <Button Content="Tạo QR"
-                    x:Name="createQR"
-                    Click="createQR_Click"
-                    Background="#4CAF50" />
             <Button Content="Tiền mặt"
                     x:Name="cash"
                     Click="cash_Click"
@@ -192,10 +188,12 @@
             <Button Content="Xác nhận"
                     x:Name="submit"
                     Click="submit_Click"
+                    
                     Background="#2196F3" />
             <Button Content="Hủy"
                     x:Name="huy"
                     Click="huy_Click"
+                   
                     Background="#9E9E9E" />
         </StackPanel>
     </Grid>

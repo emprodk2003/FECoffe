@@ -117,6 +117,19 @@
             <Setter Property="BorderBrush" Value="#1976D2"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="600" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
+        </Style>
         <conv:UserIdToUsernameConverter x:Key="UserConverter"/>
     </Window.Resources>
     
@@ -176,7 +189,7 @@
                             <Button Grid.Column="2" Width="80" Content="Thêm" x:Name="addcategorymaterial" Margin="-200,0,10,0" Click="addcategorymaterial_Click"/>
                             <Button Grid.Column="3" Width="120" Content="Tai Lai Danh Sach" x:Name="loadcategorymaterial" Margin="-340,0,10,0" Click="loadcategorymaterial_Click"/>
                         </Grid>
-                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Categories_Material}" x:Name="dg_categorymaterial">
+                        <DataGrid Style="{StaticResource MyDataGridStyle}" AutoGenerateColumns="False" ItemsSource="{Binding Categories_Material}" x:Name="dg_categorymaterial">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên danh mục" Binding="{Binding CategoryName}" />
                                 <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" />
@@ -205,6 +218,7 @@
                             <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadmaterial" Margin="10,0,10,0" Click="loadmaterial_Click"/>
                         </StackPanel>
                         <DataGrid x:Name="dgMaterials"
+                                  Style="{StaticResource MyDataGridStyle}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   MouseDoubleClick="dgMaterials_MouseDoubleClick">
@@ -250,7 +264,9 @@
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->
-                        <DataGrid x:Name="dgImportReceipts" AutoGenerateColumns="False" CanUserAddRows="False">
+                        <DataGrid x:Name="dgImportReceipts"
+                                  Style="{StaticResource MyDataGridStyle}"
+                                  AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Mã phiếu" Binding="{Binding ImportID}" Width="100"/>
                                 <DataGridTextColumn Header="Ngày nhập" Binding="{Binding ImportDate}" Width="150"/>
@@ -287,7 +303,7 @@
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->
-                        <DataGrid x:Name="dgExportReceipts" AutoGenerateColumns="False" CanUserAddRows="False">
+                        <DataGrid Style="{StaticResource MyDataGridStyle}" x:Name="dgExportReceipts" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Mã phiếu" Binding="{Binding ExportID}" Width="100"/>
                                 <DataGridTextColumn Header="Ngày xuất" Binding="{Binding ExportDate}" Width="150"/>
@@ -317,7 +333,7 @@
                             <Button Content="Thêm" x:Name="addsuppliers" Click="addsuppliers_Click"/>
                             <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadesuppliers" Margin="10,0,10,0" Click="loadesuppliers_Click"/>
                         </StackPanel>
-                        <DataGrid x:Name="dgSuppliers" AutoGenerateColumns="False" CanUserAddRows="False">
+                        <DataGrid Style="{StaticResource MyDataGridStyle}" x:Name="dgSuppliers" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên nhà cung cấp" Binding="{Binding SupplierName}"/>
                                 <DataGridTextColumn Header="Số Điện Thoại" Binding="{Binding Phone}"/>
@@ -353,7 +369,7 @@
                         <!-- Bảng dữ liệu -->
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <DataGrid x:Name="dgInventoryLogs"
-                                      ScrollViewer.HorizontalScrollBarVisibility="Visible" Height="300"
+                                      Style="{StaticResource MyDataGridStyle}"
                                       AutoGenerateColumns="False" CanUserAddRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ngày thay đổi" Binding="{Binding CreateAt}" Width="180"/>

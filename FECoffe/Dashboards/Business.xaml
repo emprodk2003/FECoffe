@@ -164,26 +164,47 @@ Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
                         <DatePicker Width="150" x:Name="dp_end" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
                         <Button Content="Lọc" Click="Find_Click"/>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Orders" ItemsSource="{Binding OrdersViewModel}" AutoGenerateColumns="False" MouseDoubleClick="GetOrderDetail_Click">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}"/>
-                            <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate}"/>
-                            <DataGridTextColumn Header="Nhân viên" IsReadOnly="True" >
-                                <DataGridTextColumn.Binding>
-                                    <Binding Path="EmployeeID" Converter="{StaticResource EmployeeConverter}"/>
-                                </DataGridTextColumn.Binding>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Bàn">
-                                <DataGridTextColumn.Binding>
-                                    <Binding Path="TableNumberID" Converter="{StaticResource TableConverter}"/>
-                                </DataGridTextColumn.Binding>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount}"/>
-                            <DataGridTextColumn Header="Giảm giá" Binding="{Binding Discount}"/>
-                            <DataGridTextColumn Header="Tổng tiền thanh toán" Binding="{Binding FinalAmount}"/>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding payment}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                   
+                        <DataGrid x:Name="dg_Orders"
+                              Grid.Row="1"
+                              Height="600"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                              ItemsSource="{Binding OrdersViewModel}"
+                              MouseDoubleClick="GetOrderDetail_Click">
+                        
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã đơn"
+                                                    Binding="{Binding OrderID}" />
+                                <DataGridTextColumn Header="Ngày"
+                                                    Binding="{Binding OrderDate}" />
+                                <DataGridTextColumn Header="Nhân viên"
+                                                    IsReadOnly="True">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="EmployeeID"
+                                                 Converter="{StaticResource EmployeeConverter}" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Bàn">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="TableNumberID"
+                                                 Converter="{StaticResource TableConverter}" />
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Tổng tiền"
+                                                    Binding="{Binding TotalAmount}" />
+                                <DataGridTextColumn Header="Giảm giá"
+                                                    Binding="{Binding Discount}" />
+                                <DataGridTextColumn Header="Tổng tiền thanh toán"
+                                                    Binding="{Binding FinalAmount}" />
+                                <DataGridTextColumn Header="Trạng thái"
+                                                    Binding="{Binding payment}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    
+                    
                 </StackPanel>
             </TabItem>
 
@@ -218,7 +239,14 @@ Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
                         <TextBlock Text="Top món bán chạy nhất" Style="{StaticResource TopTitleStyle}" />
 
                         <!-- DataGrid dùng style riêng -->
-                        <DataGrid x:Name="dgReport" ItemsSource="{Binding ProductReport}">
+                        <DataGrid x:Name="dgReport"
+                                  Height="480"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  ItemsSource="{Binding ProductReport}"
+                                  >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Sản phẩm" Binding="{Binding ProductName}">
                                     <DataGridTextColumn.ElementStyle>
@@ -249,7 +277,12 @@ Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
                     <StackPanel>
                         <!-- DataGrid hiển thị danh sách đơn hàng -->
                         <DataGrid ItemsSource="{Binding OrdersViewModel}" x:Name="dg_Payment" AutoGenerateColumns="False"
-              HeadersVisibility="Column" IsReadOnly="True">
+              HeadersVisibility="Column"
+                                  Height="570"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  
+                                  IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}"/>
                                 <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate}"/>
@@ -288,7 +321,12 @@ Margin="0,0,10,0" Height="35" Width="100" Click="exit_Click"/>
                         <DatePicker x:Name="dp_end_IngredientsReport" Width="150" Margin="0,0,10,0" SelectedDate="{x:Static sys:DateTime.Now}"/>
                         <Button Content="Lọc" Click="Find_IngredientsReport_Click"/>
                     </StackPanel>
-                    <DataGrid ItemsSource="{Binding IngredientsReport}" IsReadOnly="True" x:Name="dg_IngredientsReport" AutoGenerateColumns="False" MouseDoubleClick="Get_ProductDetailByIngredients">
+                    <DataGrid ItemsSource="{Binding IngredientsReport}"
+                              Height="600"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                             
+                              IsReadOnly="True" x:Name="dg_IngredientsReport" AutoGenerateColumns="False" MouseDoubleClick="Get_ProductDetailByIngredients">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nguyên liệu" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Định lượng" Binding="{Binding Quantity}"/>

@@ -43,6 +43,7 @@ namespace FECoffe.Form
             txtNumberAccountBank.Text = "0393259262";
             txtAccountBank.Text = "NGUYEN HUYNH DUC DUY";
             txtNumberBank.Text = "Ngân Hàng MB Bank";
+            createQR();
         }
         public async Task load()
         {
@@ -58,15 +59,8 @@ namespace FECoffe.Form
             //    MessageBox.Show("Khong co du lieu");
             //}
         }
-
-        private void createQR_Click(object sender, RoutedEventArgs e)
-        {   //Muốn đổi được nhiều ngân hàng thì mở combox ra 
-            //if (cbBank.SelectedItem is Datum selectedBank)
-            //{
-            //}
-
-
-            //Code này chỉ định mặc định một ngân hàng
+        public void createQR()
+        {
             txtContent.Text = CreateOrderDTO.CodeOrder;
             txtAmount.Text = totalAmount.ToString("0"); //format lai tu 25000.00 =>25000
             txtNumberAccountBank.Text = "0393259262";
@@ -97,6 +91,7 @@ namespace FECoffe.Form
 
             anhQR.Source = Base64ToImage(dataResult.data.qrDataURL.Replace("data:image/png;base64,", ""));
         }
+
         public ImageSource Base64ToImage(string base64String)
         {
             byte[] imageBytes = Convert.FromBase64String(base64String);

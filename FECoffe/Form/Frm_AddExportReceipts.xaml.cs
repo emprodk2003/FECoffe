@@ -72,7 +72,7 @@ namespace FECoffe.Form
             {
                 if (cbLot.SelectedItem is CrudLot selectedLot)
                 {
-                    if (int.TryParse(txtinventoryquantity.Text, out int inventoryquantity) &&
+                    if (int.TryParse(txtinventoryquantity.Text, out int inventoryquantity )  &&
                             int.TryParse(txtQuantity.Text, out int quantity))
                     {
                         if (inventoryquantity >= quantity)

@@ -221,7 +221,19 @@
             <Setter Property="BorderBrush" Value="#1976D2"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
-
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="600" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
+        </Style>
     </Window.Resources>
     <Grid Background="White">
         <TabControl>
@@ -238,7 +250,8 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Employee" ItemsSource="{Binding EmployeeViewModel}" AutoGenerateColumns="False" >
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dg_Employee" ItemsSource="{Binding EmployeeViewModel}"  >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Họ tên" Binding="{Binding FullName}"/>
                             <DataGridTextColumn Header="Giới tính" Binding="{Binding GioiTinh}"/>
@@ -279,7 +292,8 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Button_Click"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_position" IsReadOnly="True" ItemsSource="{Binding PositionsViewModel}" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_position" IsReadOnly="True" ItemsSource="{Binding PositionsViewModel}"
+                              Style="{StaticResource MyDataGridStyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên chức vụ" Binding="{Binding PositionName}"/>
                             <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}"/>
@@ -315,7 +329,9 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Timekeeping" IsReadOnly="True" ItemStringFormat="{Binding TimekeepingViewModel}" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_Timekeeping"
+                              Style="{StaticResource MyDataGridStyle}"
+                              IsReadOnly="True" ItemStringFormat="{Binding TimekeepingViewModel}" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ma nhân viên" Binding="{Binding EmployeeID}" Visibility="Collapsed"/>
                             <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding FullName}"/>
@@ -355,7 +371,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Salaries" ItemsSource="{Binding SalariesViewModel}" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dg_Salaries" ItemsSource="{Binding SalariesViewModel}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ma nhân viên" Binding="{Binding EmployeeID}" Visibility="Collapsed"/>
                             <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding FullName}"/>
@@ -396,7 +413,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_EmployeeSchedules" ItemsSource="{Binding EmployeeSchedulesViewModel}" IsReadOnly="True" AutoGenerateColumns="False" >
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dg_EmployeeSchedules" ItemsSource="{Binding EmployeeSchedulesViewModel}" IsReadOnly="True"  >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding EmployeeID}" Visibility="Collapsed"/>
                             <DataGridTextColumn Header="Tên ca" Binding="{Binding ShiftID}" Visibility="Collapsed"/>
@@ -432,7 +450,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Shifts" ItemsSource="{Binding ShiftsViewModel}" IsReadOnly="True" AutoGenerateColumns="False" >
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dg_Shifts" ItemsSource="{Binding ShiftsViewModel}" IsReadOnly="True" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên ca làm" Binding="{Binding ShiftName}"/>
                             <DataGridTextColumn Header="Thời gian bắt đầu" Binding="{Binding StartTime}"/>
