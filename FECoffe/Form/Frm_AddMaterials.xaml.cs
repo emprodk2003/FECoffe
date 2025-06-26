@@ -34,25 +34,32 @@ namespace FECoffe.Form
 
         private void luu_Click(object sender, RoutedEventArgs e)
         {
-            var newMaterial = new CrudMaterial()
+            if (int.TryParse(txtMinStock.Text, out int quantity) || quantity > 0)
             {
-                MaterialName = txtMaterialName.Text,
-                Unit = txtUnit.Text,
-                MinStock = int.Parse(txtMinStock.Text),
-                CategoryID = (int)cbCategory.SelectedValue,
-                SupplierID = (int)cbSupplier.SelectedValue,
-                UpdatedAt = DateTime.Now,
-                UserID=Guid.Parse(userId),
-                CreatedAt = DateTime.Now,
-            };
+                var newMaterial = new CrudMaterial()
+                {
+                    MaterialName = txtMaterialName.Text,
+                    Unit = txtUnit.Text,
+                    MinStock = int.Parse(txtMinStock.Text),
+                    CategoryID = (int)cbCategory.SelectedValue,
+                    SupplierID = (int)cbSupplier.SelectedValue,
+                    UpdatedAt = DateTime.Now,
+                    UserID = Guid.Parse(userId),
+                    CreatedAt = DateTime.Now,
+                };
 
-            if (MaterialRequest.createMaterial(newMaterial) == true)
-            {
-                MessageBox.Show("Them Thành Công hang hoa ");
-                this.Close();
+                if (MaterialRequest.createMaterial(newMaterial) == true)
+                {
+                    MessageBox.Show("Them Thành Công hang hoa ");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Them thất bại hang hoa ");
             }
             else
-                MessageBox.Show("Them thất bại hang hoa ");
+            {
+                MessageBox.Show("Số lượng tồn kho phải lớn hơn 0");
+            }
         }
 
         private void huy_Click(object sender, RoutedEventArgs e)

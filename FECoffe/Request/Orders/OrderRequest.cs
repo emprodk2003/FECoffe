@@ -1,5 +1,6 @@
 ﻿using FECoffe.DTO.Orders;
 using FECoffe.DTO.Positions;
+using FECoffe.DTO.Report;
 using FECoffe.Enum;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -182,6 +183,22 @@ namespace FECoffe.Request.Orders
             {
                 Console.WriteLine("Lỗi: " + ex.Message);
                 return false;
+            }
+        }
+
+        public static ReportRevenue getReportRevenue()
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Report/Report_Revenue";
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<ReportRevenue>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

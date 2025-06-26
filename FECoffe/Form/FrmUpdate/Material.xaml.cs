@@ -22,7 +22,6 @@ namespace FECoffe.Form.FrmUpdate
             crudMaterial = material;
             txtMaterialName.Text=material.MaterialName;
             txtUnit.Text = material.Unit;
-            txtQuantity.Text = (material.Quantity).ToString();
             txtPurchasePrice.Text=(material.PurchasePrice).ToString();
             txtMinStock.Text=(material.MinStock).ToString();
             cbCategory.SelectedItem=material.CategoryID;
@@ -35,27 +34,32 @@ namespace FECoffe.Form.FrmUpdate
 
         private void luu_Click(object sender, RoutedEventArgs e)
         {
-            var newMaterial = new CrudMaterial()
+            if (int.TryParse(txtMinStock.Text, out int quantity) || quantity > 0)
             {
-                MaterialName = txtMaterialName.Text,
-                Unit = txtUnit.Text,
-                MaterialID=id,
-                MinStock = int.Parse(txtMinStock.Text),
-                Quantity=float.Parse(txtQuantity.Text),
-                PurchasePrice=decimal.Parse(txtPurchasePrice.Text),
-                CategoryID=int.Parse(cbCategory.Text),
-                SupplierID=int.Parse(cbSupplier.Text),
-                UserID=Guid.Parse(userId),
-                UpdatedAt=DateTime.Now,
-            };
+                var newMaterial = new CrudMaterial()
+                {
+                    MaterialName = txtMaterialName.Text,
+                    Unit = txtUnit.Text,
+                    MaterialID = id,
+                    MinStock = int.Parse(txtMinStock.Text),
+                    CategoryID = int.Parse(cbCategory.Text),
+                    SupplierID = int.Parse(cbSupplier.Text),
+                    UserID = Guid.Parse(userId),
+                    UpdatedAt = DateTime.Now,
+                };
 
-            if (MaterialRequest.updateMaterial(newMaterial) == true)
-            {
-                MessageBox.Show("Sua Thành Công hang hoa ");
-                this.Close();
+                if (MaterialRequest.updateMaterial(newMaterial) == true)
+                {
+                    MessageBox.Show("Sua Thành Công hang hoa ");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Sua thất bại hang hoa ");
             }
             else
-                MessageBox.Show("Sua thất bại hang hoa ");
+            {
+                MessageBox.Show("Số lượng tồn kho phải lớn hơn 0");
+            }
         }
 
         private void huy_Click(object sender, RoutedEventArgs e)

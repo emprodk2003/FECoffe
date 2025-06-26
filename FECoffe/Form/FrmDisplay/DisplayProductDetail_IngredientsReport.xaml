@@ -8,6 +8,17 @@
         mc:Ignorable="d"
         Title="DisplayProductDetail_IngredientsReport" Height="350" Width="600" Loaded="Window_Loaded">
     <Window.Resources>
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="290" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+        </Style>
         <Style TargetType="DataGrid">
             <Setter Property="AutoGenerateColumns" Value="False"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
@@ -39,7 +50,8 @@
               HeadersVisibility="Column"
               GridLinesVisibility="None"
               RowBackground="White"
-              AlternatingRowBackground="#f9f9f9"
+                  Style="{StaticResource MyDataGridStyle}"
+                  AlternatingRowBackground="#f9f9f9"
               FontSize="13"
               Margin="0">
             <DataGrid.Columns>

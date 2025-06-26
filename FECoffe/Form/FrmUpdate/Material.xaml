@@ -77,23 +77,19 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Tồn kho tối thiểu:" Width="150" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtMinStock" Width="250"/>
+                <TextBlock Text="Tồn kho tối thiểu:"
+                           Width="150"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="txtMinStock"
+                         Width="250" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Số lượng hiện tại:" Width="150" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtQuantity" Width="250"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Giá nhập:" Width="150" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtPurchasePrice" Width="250"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Hạn sử dụng:" Width="150" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpExpirationDate" Width="250"/>
+                <TextBlock Text="Giá nhập:"
+                           Width="150"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="txtPurchasePrice"
+                         Width="250" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

@@ -21,7 +21,17 @@
             <Setter Property="RowBackground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-        
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="450" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+        </Style>
         <Style x:Key="CenterCellStyle" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -82,6 +92,7 @@
               x:Name="dgOrderDetails"
               ItemsSource="{Binding OrderDetailsViewModel}"
               IsReadOnly="True"
+              Style="{StaticResource MyDataGridStyle}"
               AutoGenerateColumns="False"
               HeadersVisibility="Column"
               GridLinesVisibility="None"

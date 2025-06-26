@@ -10,6 +10,19 @@
         mc:Ignorable="d"
         Title="Product" Height="720" Width="1080" Loaded="Window_Loaded">
     <Window.Resources>
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="600" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
+        </Style>
         <!-- TabControl Style -->
         <Style TargetType="TabControl">
             <Setter Property="Margin" Value="10"/>
@@ -106,7 +119,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dgCategories_Product" ItemsSource="{Binding Categories_ProductViewModel}" IsReadOnly="True" AutoGenerateColumns="False" >
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dgCategories_Product" ItemsSource="{Binding Categories_ProductViewModel}" IsReadOnly="True" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên danh mục" Binding="{Binding CategoryName}" />
                             <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" />
@@ -142,7 +156,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Product" ItemsSource="{Binding ProductViewModel}" AutoGenerateColumns="False">
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dg_Product" ItemsSource="{Binding ProductViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên món" Binding="{Binding ProductName}"/>
                             <DataGridTextColumn Header="Giá" Binding="{Binding Price}"/>
@@ -179,7 +194,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Topping" ItemsSource="{Binding ToppingViewModel}" AutoGenerateColumns="False">
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dg_Topping" ItemsSource="{Binding ToppingViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên Topping" Binding="{Binding ToppingName}"/>
                             <DataGridTextColumn Header="Đơn giá" Binding="{Binding Price}"/>
@@ -215,7 +231,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid IsReadOnly="True" x:Name="dg_ProductSize" ItemsSource="{Binding ProductSizeViewModel}" AutoGenerateColumns="False" >
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              IsReadOnly="True" x:Name="dg_ProductSize" ItemsSource="{Binding ProductSizeViewModel}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên món" Binding="{Binding ProductName}"/>
                             <DataGridTextColumn Header="Kích cỡ" Binding="{Binding SizeName}"/>
@@ -248,7 +265,8 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dg_Table" ItemsSource="{Binding TableViewModel}" AutoGenerateColumns="False">
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              x:Name="dg_Table" ItemsSource="{Binding TableViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên bàn" Binding="{Binding TableName}"/>
                             <DataGridTextColumn Header="Trạng thái" Binding="{Binding trangthai}"/>
@@ -284,7 +302,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                         <Button Content="Tìm" Margin="0,0,10,0" Click="Find_Recipes"/>
                         <Button Content="Thêm" Click="Them_Recieps"/>
                     </StackPanel>
-                    <DataGrid IsReadOnly="True" x:Name="dg_Recipes" ItemsSource="{Binding RecipesViewModel}" AutoGenerateColumns="False">
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              IsReadOnly="True" x:Name="dg_Recipes" ItemsSource="{Binding RecipesViewModel}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên món" IsReadOnly="True" >
                                 <DataGridTextColumn.Binding>
@@ -328,7 +347,8 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
                             &#xE72C;
                         </Button>
                     </StackPanel>
-                    <DataGrid AutoGenerateColumns="False" IsReadOnly="True" x:Name="dg_Ingredients" ItemsSource="{Binding IngredientsViewModel}">
+                    <DataGrid Style="{StaticResource MyDataGridStyle}"
+                              AutoGenerateColumns="False" IsReadOnly="True" x:Name="dg_Ingredients" ItemsSource="{Binding IngredientsViewModel}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Tên nguyên liệu" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Đơn vị tính" Binding="{Binding Unit}"/>
