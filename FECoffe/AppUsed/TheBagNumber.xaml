@@ -179,27 +179,36 @@
             <TabItem Header="Ban Hang">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <!-- Header -->
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
-                        <TextBlock Text="Thẻ Bàn " FontSize="24" FontWeight="Bold" Foreground="#FF333333"/>
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0 0 0 20">
+                        <TextBlock Text="Thẻ Bàn "
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="#FF333333" />
                     </StackPanel>
                     <!-- Legend (Chú thích) -->
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <!-- ComboBox bên trái -->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="0">
                             <ComboBox Width="200"
                                       x:Name="cbTableFilter"
                                       Margin="0 0 10 0"
-                                      SelectedIndex="0" 
+                                      SelectedIndex="0"
                                       Foreground="Black"
                                       SelectionChanged="cbTableFilter_SelectionChanged">
                                 <ComboBoxItem Content="Tất cả thẻ bàn"
@@ -212,50 +221,87 @@
                         </StackPanel>
 
                         <!-- Chú thích bên phải -->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
-                            <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
-                                <Border Width="20" Height="20" Background="#FF4CAF50" CornerRadius="4" Margin="0 0 5 0"/>
-                                <TextBlock Text="Thẻ trống" VerticalAlignment="Center" Width="150" FontSize="14" Foreground="Black" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="1">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0 0 10 0">
+                                <Border Width="20"
+                                        Height="20"
+                                        Background="#FF4CAF50"
+                                        CornerRadius="4"
+                                        Margin="0 0 5 0" />
+                                <TextBlock Text="Thẻ trống"
+                                           VerticalAlignment="Center"
+                                           Width="150"
+                                           FontSize="14"
+                                           Foreground="Black"
+                                           HorizontalAlignment="Center" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
-                                <Border Width="20" Height="20" Background="#FFF44336" CornerRadius="4" Margin="0 0 5 0"/>
-                                <TextBlock Text="Thẻ đang chuẩn bị món" VerticalAlignment="Center" Width="150" FontSize="14" Foreground="Black" HorizontalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0 0 10 0">
+                                <Border Width="20"
+                                        Height="20"
+                                        Background="#FFF44336"
+                                        CornerRadius="4"
+                                        Margin="0 0 5 0" />
+                                <TextBlock Text="Thẻ đang chuẩn bị món"
+                                           VerticalAlignment="Center"
+                                           Width="150"
+                                           FontSize="14"
+                                           Foreground="Black"
+                                           HorizontalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>
 
                     <!-- Main content - Grid of tables -->
-                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Grid.Row="2"
+                                  VerticalScrollBarVisibility="Auto">
                         <ItemsControl x:Name="TablesItemsControl">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <UniformGrid Columns="5" Rows="0"/>
+                                    <UniformGrid Columns="5"
+                                                 Rows="0" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource TableButtonStyle}" 
-                                                Width="150" Height="150" Margin="10"
-                                                MouseRightButtonUp="numbertag_MouseRightButtonUp"
-                                                Command="{Binding DataContext.TableSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                x:Name="numbertag" Click="numbertag_Click">   
+                                    <Button Style="{StaticResource TableButtonStyle}"
+                                            Width="150"
+                                            Height="150"
+                                            Margin="10"
+                                            MouseRightButtonUp="numbertag_MouseRightButtonUp"
+                                            Command="{Binding DataContext.TableSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                            x:Name="numbertag"
+                                            Click="numbertag_Click">
                                         <Button.Background>
                                             <Binding Path="Status">
                                                 <Binding.Converter>
-                                                    <local1:TableStatusToColorConverter 
-                                                            AvailableColor="#FF4CAF50"
-                                                            OccupiedColor="#FFF44336"
-                                                            OutOfServiceColor="#FF9E9E9E" 
-                                                     />
+                                                    <local1:TableStatusToColorConverter AvailableColor="#FF4CAF50"
+                                                                                        OccupiedColor="#FFF44336"
+                                                                                        OutOfServiceColor="#FF9E9E9E" />
                                                 </Binding.Converter>
                                             </Binding>
                                         </Button.Background>
 
                                         <StackPanel>
-                                            <TextBlock Text="{Binding TableID}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="{Binding TableName}" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0 5 0 0"/>
-                                            <TextBlock Text="{Binding trangthai}" FontSize="14" Foreground="White" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                                            <TextBlock Text="{Binding TableID}"
+                                                       FontSize="24"
+                                                       Foreground="White"
+                                                       HorizontalAlignment="Center" />
+                                            <TextBlock Text="{Binding TableName}"
+                                                       FontSize="16"
+                                                       Foreground="White"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="0 5 0 0" />
+                                            <TextBlock Text="{Binding trangthai}"
+                                                       FontSize="14"
+                                                       Foreground="White"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="0 5 0 0" />
                                         </StackPanel>
                                     </Button>
                                 </DataTemplate>
@@ -266,47 +312,88 @@
             </TabItem>
             <TabItem Header="Thong Ke">
                 <StackPanel Margin="10">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="Doanh Thu Ngày Hôm Nay: " FontWeight="Bold" VerticalAlignment="Center" Foreground="Black"/>
-                        <TextBox 
-                             x:Name="txtAmountFinal"
-                             IsReadOnly="True" 
-                             BorderThickness="0" 
-                             Background="Transparent" 
-                             VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="Doanh Thu Ngày Hôm Nay: "
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   Foreground="Black" />
+                        <TextBox x:Name="txtAmountFinal"
+                                 IsReadOnly="True"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel>
-                        <DataGrid ItemsSource="{Binding OrdersViewModel}" x:Name="dg_Orders" AutoGenerateColumns="False"
-              HeadersVisibility="Column" IsReadOnly="True">
+                        <DataGrid ItemsSource="{Binding OrdersViewModel}"
+                                  x:Name="dg_Orders"
+                                  AutoGenerateColumns="False"
+                                  HeadersVisibility="Column"
+                                  IsReadOnly="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}"/>
-                                <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate}"/>
+                                <DataGridTextColumn Header="Mã đơn"
+                                                    Binding="{Binding OrderID}" />
+                                <DataGridTextColumn Header="Ngày"
+                                                    Binding="{Binding OrderDate}" />
                                 <DataGridTextColumn Header="Nhân viên">
                                     <DataGridTextColumn.Binding>
-                                        <Binding Path="EmployeeID" Converter="{StaticResource EmployeeConverter}"/>
+                                        <Binding Path="EmployeeID"
+                                                 Converter="{StaticResource EmployeeConverter}" />
                                     </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>
                                 <DataGridTextColumn Header="Bàn">
                                     <DataGridTextColumn.Binding>
-                                        <Binding Path="TableNumberID" Converter="{StaticResource TableConverter}"/>
+                                        <Binding Path="TableNumberID"
+                                                 Converter="{StaticResource TableConverter}" />
                                     </DataGridTextColumn.Binding>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount, StringFormat=N0}"/>
-                                <DataGridTextColumn Header="Giảm giá" Binding="{Binding Discount, StringFormat=N0}"/>
-                                <DataGridTextColumn Header="Tổng tiền thanh toán" Binding="{Binding FinalAmount, StringFormat=N0}"/>
-                                <DataGridTextColumn Header="Trạng thái" Binding="{Binding payment}"/>
+                                <DataGridTextColumn Header="Tổng tiền"
+                                                    Binding="{Binding TotalAmount, StringFormat=N0}" />
+                                <DataGridTextColumn Header="Phụ thu"
+                                                    Binding="{Binding Discount, StringFormat=N0}" />
+                                <DataGridTextColumn Header="Tổng tiền thanh toán"
+                                                    Binding="{Binding FinalAmount, StringFormat=N0}" />
+                                <DataGridTextColumn Header="Trạng thái"
+                                                    Binding="{Binding payment}" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Border Background="#E3F2FD" BorderThickness="1" Margin="0,5,0,0" Padding="5">
-                            <TextBlock x:Name="txt_filnalAmount" FontSize="14" FontWeight="Bold" Foreground="#0D47A1" TextAlignment="Right"/>
+                        <Border Background="#E3F2FD"
+                                BorderThickness="1"
+                                Margin="0,5,0,0"
+                                Padding="5">
+                            <TextBlock x:Name="txt_filnalAmount"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="#0D47A1"
+                                       TextAlignment="Right" />
                         </Border>
-                        <Border Background="#E3F2FD" BorderThickness="1" Margin="0,5,0,0" Padding="5">
-                            <TextBlock x:Name="txt_numberOrders" FontSize="14" FontWeight="Bold" Foreground="#0D47A1" TextAlignment="Right"/>
+                        <Border Background="#E3F2FD"
+                                BorderThickness="1"
+                                Margin="0,5,0,0"
+                                Padding="5">
+                            <TextBlock x:Name="txt_numberOrders"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="#0D47A1"
+                                       TextAlignment="Right" />
                         </Border>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
         </TabControl>
+        <Button Content="Đăng xuất"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Padding="10,5"
+                x:Name="Logout"
+                Click="Logout_Click"
+                Background="Blue"
+                Foreground="White"
+                FontWeight="Bold"
+                Width="100"
+                Cursor="Hand" />
+
     </Grid>
 </Window>

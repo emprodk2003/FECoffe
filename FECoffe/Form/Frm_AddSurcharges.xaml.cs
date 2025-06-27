@@ -44,11 +44,11 @@ namespace FECoffe.Form
                 {
                     SurchargesName = txtName.Text,
                     SurchargesValue = int.Parse(txtValue.Text),
-                    StartDate = dp_start.SelectedDate.Value,
-                    EndDate = dp_end.SelectedDate.Value
+                    StartDate = dp_start.SelectedDate.Value.Date,
+                    EndDate = dp_end.SelectedDate.Value.Date
                 };
                 var list = SurchargesRequest.GetByStart_End(sur.StartDate, sur.EndDate);
-                if(list != null)
+                if(list != null && list.Count > 0)
                 {
                     MessageBox.Show("Thêm loại phụ thu không thành công, thời gian phụ thu bị trùng với loại phụ thu khác vui lòng kiểm tra lại!");
                     return;

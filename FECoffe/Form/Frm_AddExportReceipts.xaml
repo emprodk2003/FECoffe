@@ -167,7 +167,7 @@
                                  x:Name="txtinventoryquantity" />
                     </StackPanel>
 
-                    <Button Content="Them So Luong can xuat"
+                    <Button Content="Thêm Số Lượng cần xuất "
                          Width="200"
                          Height="30"
                          Margin="100,10,0,0"

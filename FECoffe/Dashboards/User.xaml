@@ -9,22 +9,19 @@
         mc:Ignorable="d"
         Title="Quanlytaikkhoan" Height="720" Width="1080"  Loaded="Window_Loaded">
     <Window.Resources>
-        <!-- DatePicker Style -->
-        <Style TargetType="DatePicker">
-            <Setter Property="Margin"
-                    Value="5" />
-            <Setter Property="Padding"
-                    Value="6" />
-            <Setter Property="FontSize"
-                    Value="14" />
-            <Setter Property="Background"
-                    Value="White" />
-            <Setter Property="BorderBrush"
-                    Value="#CCC" />
-            <Setter Property="BorderThickness"
-                    Value="1" />
+        <Style TargetType="DataGrid"
+               x:Key="MyDataGridStyle">
+            <Setter Property="Height"
+                    Value="600" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="AutoGenerateColumns"
+                    Value="False" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
         </Style>
-
         <!-- TabControl Style -->
         <Style TargetType="TabControl">
             <Setter Property="Margin"
@@ -111,173 +108,16 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="4">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="3">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center" />
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <!-- Hover -->
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Setter TargetName="border"
-                                        Property="Background"
-                                        Value="#1976D2" />
-                            </Trigger>
-                            <!-- Pressed -->
-                            <Trigger Property="IsPressed"
-                                     Value="True">
-                                <Setter TargetName="border"
-                                        Property="Background"
-                                        Value="#1565C0" />
-                            </Trigger>
-                            <!-- Disabled -->
-                            <Trigger Property="IsEnabled"
-                                     Value="False">
-                                <Setter TargetName="border"
-                                        Property="Opacity"
-                                        Value="0.5" />
-                                <Setter Property="Cursor"
-                                        Value="Arrow" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-
-        <!-- TextBox Style -->
-        <Style TargetType="TextBox">
-            <Setter Property="Margin"
-                    Value="5" />
-            <Setter Property="Padding"
-                    Value="6" />
-            <Setter Property="FontSize"
-                    Value="14" />
-            <Setter Property="Background"
-                    Value="White" />
-            <Setter Property="BorderBrush"
-                    Value="#CCC" />
-            <Setter Property="BorderThickness"
-                    Value="1" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
-                            <ScrollViewer Margin="0"
-                                          x:Name="PART_ContentHost" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- ToggleButton dùng trong ComboBox -->
-        <ControlTemplate x:Key="ComboBoxToggleButton"
-                         TargetType="ToggleButton">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="20" />
-                </Grid.ColumnDefinitions>
-                <Border x:Name="Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4" />
-                <Path x:Name="Arrow"
-                      Grid.Column="1"
-                      Fill="Gray"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      Data="M 0 0 L 4 4 L 8 0 Z" />
-            </Grid>
-        </ControlTemplate>
-
-        <!-- Style cho ComboBox -->
-        <Style TargetType="ComboBox"
-               x:Key="RoundedComboBox">
-            <Setter Property="SnapsToDevicePixels"
-                    Value="True" />
-            <Setter Property="OverridesDefaultStyle"
-                    Value="True" />
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-                    Value="Auto" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-                    Value="Auto" />
-            <Setter Property="FontSize"
-                    Value="14" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <ToggleButton Name="ToggleButton"
-                                          Template="{StaticResource ComboBoxToggleButton}"
-                                          Grid.Column="2"
-                                          Focusable="false"
-                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          ClickMode="Press"
-                                          Background="{TemplateBinding Background}"
-                                          BorderBrush="{TemplateBinding BorderBrush}"
-                                          BorderThickness="{TemplateBinding BorderThickness}" />
-                            <ContentPresenter Name="ContentSite"
-                                              IsHitTestVisible="False"
-                                              Content="{TemplateBinding SelectionBoxItem}"
-                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                              Margin="6,2,30,2"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Left" />
-                            <Popup Name="Popup"
-                                   Placement="Bottom"
-                                   IsOpen="{TemplateBinding IsDropDownOpen}"
-                                   AllowsTransparency="True"
-                                   Focusable="False"
-                                   PopupAnimation="Slide">
-                                <Grid Name="DropDown"
-                                      SnapsToDevicePixels="True"
-                                      MinWidth="{TemplateBinding ActualWidth}"
-                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <Border x:Name="DropDownBorder"
-                                            Background="White"
-                                            BorderBrush="#CCC"
-                                            BorderThickness="1"
-                                            CornerRadius="4" />
-                                    <ScrollViewer Margin="4"
-                                                  SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True"
-                                                    KeyboardNavigation.DirectionalNavigation="Contained" />
-                                    </ScrollViewer>
-                                </Grid>
-                            </Popup>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush"
-                    Value="#CCC" />
-            <Setter Property="BorderThickness"
-                    Value="1" />
-            <Setter Property="Background"
-                    Value="White" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver"
-                         Value="True">
-                    <Setter Property="BorderBrush"
-                            Value="#007ACC" />
-                </Trigger>
-                <Trigger Property="IsFocused"
-                         Value="True">
-                    <Setter Property="BorderBrush"
-                            Value="#007ACC" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background"
                     Value="#0D47A1" />
@@ -296,19 +136,6 @@
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
         </Style>
-        <Style TargetType="DataGrid"
-               x:Key="MyDataGridStyle">
-            <Setter Property="Height"
-                    Value="600" />
-            <Setter Property="VerticalScrollBarVisibility"
-                    Value="Auto" />
-            <Setter Property="HorizontalScrollBarVisibility"
-                    Value="Auto" />
-            <Setter Property="AutoGenerateColumns"
-                    Value="False" />
-            <Setter Property="IsReadOnly"
-                    Value="True" />
-        </Style>
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -321,7 +148,9 @@
                         <TextBox Width="200" Margin="0,0,10,0" 
               Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}" />
                         <Button Content="Tìm" Command="{Binding SearchCommand}" Margin="0,0,10,0"/>
-                        <Button x:Name="btn_them" Content="Them" Click="btn_them_Click" HorizontalAlignment="Right"/>
+                        <Button x:Name="btn_them"
+                                Margin="0,0,10,0"
+                                Content="Them" Click="btn_them_Click" HorizontalAlignment="Right"/>
                         <Button Width="120" Content="Trở lại trang chủ" />
                     </StackPanel>
 
@@ -340,17 +169,43 @@
 
                             <DataGridCheckBoxColumn Header="Hoạt động" Binding="{Binding LockoutEnabled}" Width="100"/>
                             <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedAtFormatted}" Width="120"/>
-                            <DataGridTemplateColumn Header="Hành động" Width="250">
+                            <DataGridTemplateColumn Header="Hành động"
+                                                    Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Sửa" Margin="0,0,5,0" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
-                                            <Button Content="Xóa" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
-                                            <Button Content="Thêm Quyền" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" x:Name="addrole" Click="addrole_Click_1"/>
-                                        </StackPanel>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                                      VerticalScrollBarVisibility="Disabled">
+                                            <WrapPanel Orientation="Horizontal"
+                                                       HorizontalAlignment="Center">
+                                                <Button Content="Sửa"
+                                                        Background="Orange"
+                                                        Margin="0,0,5,0"
+                                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                        CommandParameter="{Binding}" />
+                                                <Button Content="Xóa"
+                                                        Background="Red"
+                                                        Margin="0,0,5,0"
+                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                        CommandParameter="{Binding}" />
+                                                <Button Content="Thêm Quyền"
+                                                        Margin="0,0,5,0"
+                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                        CommandParameter="{Binding}"
+                                                        x:Name="addrole"
+                                                        Click="addrole_Click_1" />
+                                                <Button Content="Đổi mật khẩu"
+                                                        Background="DarkGray"
+                                                        Margin="0,0,5,0"
+                                                        x:Name="Doipass"
+                                                        Click="Doipass_Click"
+                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                        CommandParameter="{Binding}" />
+                                            </WrapPanel>
+                                        </ScrollViewer>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -380,8 +235,8 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Sửa" Margin="0,0,5,0"/>
-                                            <Button Content="Xóa"/>
+                                            <Button Content="Sửa" Margin="0,0,5,0" Background="Orange" x:Name="editrole" Click="editrole_Click"/>
+                                            <Button Content="Xóa" Background="Red" x:Name="deleterole" Click="deleterole_Click"/>
                                            
                                         </StackPanel>
                                     </DataTemplate>

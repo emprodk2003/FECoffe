@@ -1,6 +1,12 @@
-﻿using FECoffe.DTO.User;
+﻿using FECoffe.DTO.Product;
+using FECoffe.DTO.ProductSize;
+using FECoffe.DTO.Recipes;
+using FECoffe.DTO.Role;
+using FECoffe.DTO.User;
 using FECoffe.Form;
+using FECoffe.Form.FrmUpdate;
 using FECoffe.Form.User;
+using FECoffe.Request.Recipes;
 using FECoffe.Request.Role;
 using FECoffe.Request.User;
 using System;
@@ -110,6 +116,7 @@ namespace FECoffe.Dashboards
                 // Truyền dữ liệu sang window mới
                 var addrole = new EditUserForm(selectedRole);
                 addrole.ShowDialog(); // hoặc Show()
+                this.Close();
                 loadUser();
             }
         }
@@ -119,6 +126,55 @@ namespace FECoffe.Dashboards
             var home = new Dashboard();
             home.Show();
             this.Close();
+        }
+
+        private void editrole_Click(object sender, RoutedEventArgs e)
+        {
+            var recipes = dg_role.SelectedItem as GetListRole;
+            Frm_Update_Role frm_Update_Role = new Frm_Update_Role(recipes);
+            var result = frm_Update_Role.ShowDialog();
+            if (result == true)
+            {
+                loadRole();
+            }
+
+        }
+
+        private void deleterole_Click(object sender, RoutedEventArgs e)
+        {
+            var item = dg_role.SelectedItem as GetListRole;
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn xóa quyền này không?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (RoleRequest.deleteRole(item.Id) == true)
+                {
+                    MessageBox.Show("Đã xóa quyền thành công.");
+                    loadRole();
+                }
+                else MessageBox.Show("Lỗi khi xóa quyền");
+            }
+            else
+            {
+
+            }
+
+        }
+
+        private void Doipass_Click(object sender, RoutedEventArgs e)
+        {
+            var user = dg_user.SelectedItem as GetUser;
+            Frm_ChangePassword frm_changepassword = new Frm_ChangePassword(user);
+            var result = frm_changepassword.ShowDialog();
+            if (result == true)
+            {
+                loadUser();
+            }
         }
     }
 }

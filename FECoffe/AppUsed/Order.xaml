@@ -327,7 +327,7 @@
                             <StackPanel Grid.Column="0" Orientation="Horizontal"
                                         HorizontalAlignment="Right"
                                         Margin="0 10">
-                                <TextBlock Text="Discount:"
+                                <TextBlock Text="Phụ Thu:"
                                            FontWeight="Bold"
                                            Margin="0 0 10 0" />
                                 <TextBox x:Name="txtDiscount"

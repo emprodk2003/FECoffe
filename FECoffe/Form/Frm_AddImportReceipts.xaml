@@ -177,7 +177,7 @@
                         <TextBlock Text="Hạn sử dụng:" Width="100" VerticalAlignment="Center"/>
                         <DatePicker SelectedDate="{Binding ExpirationDate}" x:Name="dpExpiration" Width="150" />
                     </StackPanel>
-                    <Button Content="Vào nguyên liệu vào chi tiết"
+                    <Button Content="Nhập nguyên liệu vào chi tiết"
                         Width="200"
                         Height="30"
                         Margin="100,10,0,0"

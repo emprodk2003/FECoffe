@@ -29,6 +29,23 @@ namespace FECoffe.Request.User
             }
         }
 
+        public static bool changePassword(ChangePassword pass,Guid id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Role/set-password?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.PostAsJsonAsync(url, pass);
+                res.Wait();
+                return res.Result.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
+                return false;
+            }
+        }
+
         public static List<GetUser> GetUser()
         {
             try

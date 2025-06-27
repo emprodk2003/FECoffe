@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Height="820" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Height="820" Width="1180" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        
         AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="topButton" TargetType="Button">
@@ -340,14 +341,18 @@
         </Style>
     </Window.Resources>
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        
         <Grid>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60" />
             </Grid.ColumnDefinitions>
 
             <!--Menu Left-->
             <Grid>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -380,42 +385,38 @@
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dashboard"/>
+                                    <TextBlock Text="Trang chủ"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button x:Name="OpenUser" Style="{StaticResource menuButton}" Click="OpenUser_Click">
+                            <Button x:Name="OpenUser"
+                                    Style="{StaticResource menuButton}"
+                                    Click="OpenUser_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="AccountMultiple" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="User"/>
-                                </StackPanel>
-                            </Button>
-
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="Tag" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Category"/>
+                                    <Icon:PackIconMaterial Kind="AccountMultiple"
+                                                           Style="{StaticResource menuButtonIcon}" />
+                                    <TextBlock Text="Tài Khoản" />
                                 </StackPanel>
                             </Button>
 
                             <Button Style="{StaticResource menuButton}" Click="opentProductManager_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="CubeOutline" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Product"/>
+                                    <TextBlock Text="Sản phẩm"/>
                                 </StackPanel>
                             </Button>
 
                             <Button Style="{StaticResource menuButton}" Click="opentBusiness_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="BookOpenPageVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Order"/>
+                                    <TextBlock Text="Đơn Hàng"/>
                                 </StackPanel>
                             </Button>
 
                             <Button Style="{StaticResource menuButton}"  Click="openEmployee_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountClock" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Cham Cong"/>
+                                    <TextBlock Text="Nhân Sự"/>
                                 </StackPanel>
                             </Button>
 
@@ -440,6 +441,7 @@
 
             <!--Menu Main-->
             <Grid Grid.Column="1" Margin="30 20 20 20 ">
+   
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -449,7 +451,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-
+                
                 <!--page Title-->
                 <materialDesign:Card Margin="30 20" UniformCornerRadius="20">
                     <WrapPanel HorizontalAlignment="Center">
@@ -476,7 +478,7 @@
                                             </LinearGradientBrush>
                                         </materialDesign:PackIcon.Foreground>
                                     </materialDesign:PackIcon>
-                                    <TextBlock FontWeight="SemiBold" FontSize="25" Text="Nhan Vien" Margin="0 10 0 0" />
+                                    <TextBlock FontWeight="SemiBold" FontSize="25" Text="Nhân Viên" Margin="0 10 0 0" />
                                     <TextBlock FontSize="12"  Text="0" x:Name="txt_Number_employee"  HorizontalAlignment="Center"/>
                                     <materialDesign:PackIcon Kind="EllipsisHorizontal" HorizontalAlignment="Right" />
                                 </StackPanel>
@@ -487,7 +489,7 @@
                              BorderBrush="White" Width="140" Height="130" Background="#F6F6F8">
                                 <StackPanel Margin="10">
                                     <materialDesign:PackIcon Kind="CartCheck" Foreground="DarkBlue" />
-                                    <TextBlock FontWeight="SemiBold" FontSize="25" Text="Tong Don" Margin="0 10 0 0" />
+                                    <TextBlock FontWeight="SemiBold" FontSize="25" Text="Tổng Đơn" Margin="0 10 0 0" />
                                     <TextBlock FontSize="12"  Text="0" x:Name="txt_Number_Order"  HorizontalAlignment="Center"/>
                                     <materialDesign:PackIcon Kind="EllipsisHorizontal" HorizontalAlignment="Right" />
                                 </StackPanel>
@@ -561,6 +563,21 @@
                     </TabControl>
                 </materialDesign:Card>
             </Grid>
+            <Grid Grid.Column="2">
+                <Button Margin="0 0 0 700"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Background="{x:Null}"
+                        ToolTip="Close"
+                        x:Name="btnExit"
+                        Click="btnExit_Click">
+                    <materialDesign:PackIcon Kind="Close"
+                                             Foreground="Black"
+                                             Width="30"
+                                             Height="30" />
+                </Button>
+
+            </Grid>
         </Grid>
+        
     </Border>
 </Window>

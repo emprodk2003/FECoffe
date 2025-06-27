@@ -3,6 +3,7 @@ using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Orders;
 using FECoffe.DTO.Positions;
 using FECoffe.DTO.Product;
+using FECoffe.Request.Auth;
 using FECoffe.Request.Orders;
 using FECoffe.Request.Positions;
 using FECoffe.Request.Table;
@@ -171,6 +172,18 @@ namespace FECoffe.AppUsed
 
             }
 
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            var status = AuthAdminRequest.log_out();
+            if (status == true)
+            {
+                ((App)Application.Current).Logout();
+                main.Show();
+                this.Close();
+            }
         }
     }
 }

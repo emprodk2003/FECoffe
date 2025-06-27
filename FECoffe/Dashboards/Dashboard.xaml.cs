@@ -176,5 +176,10 @@ namespace FECoffe.Dashboards
                 this.Close();
             }
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

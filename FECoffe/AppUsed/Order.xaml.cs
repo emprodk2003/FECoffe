@@ -207,7 +207,7 @@ namespace FECoffe.AppUsed
             decimal discount = 0;
             decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
            
-            decimal thanhtien = total - (total*discount/100);
+            decimal thanhtien = total + (total*discount/100);
             TotalAmountFinal.Text = thanhtien.ToString();
         }
 
@@ -235,7 +235,7 @@ namespace FECoffe.AppUsed
                 decimal discount = 0;
                 decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
 
-                decimal thanhtien = total - (total * discount / 100);
+                decimal thanhtien = total + (total * discount / 100);
                 var codeOrder = OrderRequest.genCodeOrder();
                 var neworder = new CreateOrderDTO()
                 {
