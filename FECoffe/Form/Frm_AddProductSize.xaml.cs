@@ -1,19 +1,7 @@
 ﻿using FECoffe.DTO.Product;
 using FECoffe.DTO.ProductSize;
 using FECoffe.Request.ProductSize;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -33,7 +21,7 @@ namespace FECoffe.Form
         {
             if(string.IsNullOrWhiteSpace(txtSizeName.Text) || string.IsNullOrWhiteSpace(txtAdditionalPrice.Text))
             {
-                MessageBox.Show("Vui long dien thong tin!");
+                MessageBox.Show("Vui lòng điền đẩy đủ thông tin!");
             }
             else if (!decimal.TryParse(txtAdditionalPrice.Text, out decimal AdditionalPrice) || AdditionalPrice < 0)
             {
@@ -50,12 +38,12 @@ namespace FECoffe.Form
                 };
                 if (ProductSizeRequest.createProduct(size) == true)
                 {
-                    MessageBox.Show("Them size cho" + _product.ProductName + "thanh cong.");
+                    MessageBox.Show("Thêm size cho" + _product.ProductName + "thành công.");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Them size cho" + _product.ProductName + "that bai.");
+                    MessageBox.Show("Thêm size cho" + _product.ProductName + "thất bại.");
                     this.Close();
                 }
             }

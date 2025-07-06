@@ -1,20 +1,8 @@
 ﻿using FECoffe.DTO.Timekeeping;
 using FECoffe.Request.Timekeeping;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -34,7 +22,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtgiora.Text) || string.IsNullOrWhiteSpace(txtgiovao.Text) || string.IsNullOrWhiteSpace(txtnhanvien.Text) || dpWorkDate.SelectedDate == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             // Kiểm tra định dạng giờ: hh:mm (24 giờ)
             else if (!Regex.IsMatch(txtgiovao.Text, @"^\d{2}:\d{2}$") ||
@@ -65,16 +53,25 @@ namespace FECoffe.Form.FrmUpdate
                     WorkingHours = totalHours,
                     Note = txtNote.Text
                 };
-                if (TimekeepingRequest.updateTimekeeping(timekeeping) == true)
+                var tk = TimekeepingRequest.GetByEmployee(timekeeping.EmployeeID, timekeeping.WorkDate, timekeeping.CheckInTime, timekeeping.CheckOutTime);
+                if (tk.Count > 0)
                 {
-                    MessageBox.Show("Sua thong tin bang cham cong thanh cong!");
-                    this.DialogResult = true;
-                    this.Close();
+                    MessageBox.Show("Chấm công đã tồn tại vui lòng kiểm tra lại thông tin!");
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Loi khi sua thong tin bang cham cong moi !");
-                    this.Close();
+                    if (TimekeepingRequest.updateTimekeeping(timekeeping) == true)
+                    {
+                        MessageBox.Show("Sửa thông tin chấm công thành công.");
+                        this.DialogResult = true;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi khi sửa chấm công!");
+                        this.Close();
+                    }
                 }
             }
         }

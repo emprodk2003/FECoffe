@@ -1,13 +1,7 @@
 ﻿using FECoffe.DTO.LotDetails;
 using FECoffe.DTO.Lots;
-using FECoffe.DTO.Material;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FECoffe.Request.Lots
 {

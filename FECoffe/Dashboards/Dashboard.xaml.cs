@@ -149,7 +149,7 @@ namespace FECoffe.Dashboards
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var report = ReportRequest.GetByToDay();
+            var report = ReportRequest.GetByToMonth();
             if (report != null)
             {
                 txt_Number_employee.Text = report.Number_Employee.ToString() + " nhân viên";

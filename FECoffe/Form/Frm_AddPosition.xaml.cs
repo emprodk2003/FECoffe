@@ -1,21 +1,6 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.Employee;
-using FECoffe.DTO.Positions;
-using FECoffe.Request.Employee;
+﻿using FECoffe.DTO.Positions;
 using FECoffe.Request.Positions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -33,7 +18,7 @@ namespace FECoffe.Form
         {
             if (string.IsNullOrWhiteSpace(txtPositionName.Text))
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -46,11 +31,11 @@ namespace FECoffe.Form
                 };
                 if (PositionsRequest.createPosition(position) == true)
                 {
-                    MessageBox.Show("Them chuc vu moi thanh cong!");
+                    MessageBox.Show("Thêm chức vụ mới thành công!");
                     this.DialogResult = true;
                     this.Close();
                 }
-                else MessageBox.Show("Loi khi them chuc vu moi !");
+                else MessageBox.Show("Lỗi khi thêm chức vụ!");
             }
         }
 

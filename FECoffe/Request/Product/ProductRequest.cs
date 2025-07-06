@@ -1,8 +1,7 @@
-﻿using FECoffe.DTO.Employee;
+﻿using FECoffe.DTO.OrderDetails;
 using FECoffe.DTO.Product;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Xml.Linq;
 
 namespace FECoffe.Request.Product
 {
@@ -23,6 +22,23 @@ namespace FECoffe.Request.Product
                 return null;
             }
         }
+
+        public static List<OrderDetailsViewModel> GetBillByID(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Products/GetForenkeyToDelete?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<OrderDetailsViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static ProductViewModel GetProductBySize(int size)
         {
             try

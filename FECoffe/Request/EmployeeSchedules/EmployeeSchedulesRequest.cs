@@ -1,6 +1,4 @@
-﻿using FECoffe.DTO.Employee;
-using FECoffe.DTO.EmployeeSchedules;
-using FECoffe.DTO.Positions;
+﻿using FECoffe.DTO.EmployeeSchedules;
 using System.Net.Http;
 using System.Net.Http.Json;
 

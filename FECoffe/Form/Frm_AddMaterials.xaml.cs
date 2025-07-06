@@ -1,21 +1,8 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.Material;
+﻿using FECoffe.DTO.Material;
 using FECoffe.Request.CategoryMaterial;
 using FECoffe.Request.Material;
 using FECoffe.Request.Supplier;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -50,11 +37,11 @@ namespace FECoffe.Form
 
                 if (MaterialRequest.createMaterial(newMaterial) == true)
                 {
-                    MessageBox.Show("Them Thành Công hang hoa ");
+                    MessageBox.Show("Thêm hàng hóa thành công ");
                     this.Close();
                 }
                 else
-                    MessageBox.Show("Them thất bại hang hoa ");
+                    MessageBox.Show("Thêm hàng hóa thất bại");
             }
             else
             {

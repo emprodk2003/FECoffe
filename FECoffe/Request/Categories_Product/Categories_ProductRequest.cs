@@ -1,5 +1,5 @@
 ﻿using FECoffe.DTO.Categories_Product;
-using FECoffe.DTO.Employee;
+using FECoffe.DTO.Product;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -14,6 +14,21 @@ namespace FECoffe.Request.Categories_Product
                 string url = @"http://localhost:5178/api/Categories_Products/GetAllCategories_Products";
                 HttpClient client = new HttpClient();
                 var res = client.GetFromJsonAsync<List<Categories_ProductViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<ProductViewModel> GetProductByID(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Categories_Products/GetProductByCategories_ProductsID?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<ProductViewModel>>(url);
                 res.Wait();
                 return res.Result;
             }

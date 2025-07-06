@@ -1,18 +1,6 @@
 ﻿using FECoffe.DTO.Positions;
 using FECoffe.Request.Positions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -32,7 +20,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtPositionName.Text))
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -45,11 +33,11 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if(PositionsRequest.updatePosition(ps) == true)
                 {
-                    MessageBox.Show("Sua thong tin chuc vu thanh cong!");
+                    MessageBox.Show("Sửa thông tin chức vụ thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
-                else MessageBox.Show("Loi khi sua thong tin chuc vu !");
+                else MessageBox.Show("Lỗi khi sửa thông tin chức vụ!");
             }
         }
 

@@ -1,6 +1,4 @@
-﻿using FECoffe.DTO.Topping;
-using FECoffe.DTO.User;
-using FECoffe.Request.Topping;
+﻿using FECoffe.DTO.User;
 using FECoffe.Request.User;
 using System.Windows;
 
@@ -22,7 +20,7 @@ namespace FECoffe.Form
         {
             if (string.IsNullOrWhiteSpace(txtpass.Text))
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {

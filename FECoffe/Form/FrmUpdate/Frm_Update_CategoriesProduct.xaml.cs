@@ -1,18 +1,6 @@
 ﻿using FECoffe.DTO.Categories_Product;
 using FECoffe.Request.Categories_Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -32,7 +20,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -44,13 +32,13 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (Categories_ProductRequest.updateCategories_Product(cate) == true)
                 {
-                    MessageBox.Show("Sua thong danh muc thanh cong!");
+                    MessageBox.Show("Sửa thông tin danh mục thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Sua thong danh muc that bai!");
+                    MessageBox.Show("Sửa thông tin danh mục thất bại!");
                     this.Close();
                 }
             }

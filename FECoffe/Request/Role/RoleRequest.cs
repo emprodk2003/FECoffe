@@ -1,6 +1,4 @@
 ﻿using FECoffe.DTO.Role;
-using FECoffe.DTO.Shifts;
-using FECoffe.DTO.User;
 using System.Net.Http;
 using System.Net.Http.Json;
 

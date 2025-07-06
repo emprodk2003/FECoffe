@@ -1,5 +1,4 @@
 ﻿using FECoffe.DTO.Employee;
-using FECoffe.DTO.Material;
 using FECoffe.DTO.Positions;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -23,6 +22,23 @@ namespace FECoffe.Request.Positions
                 return null;
             }
         }
+
+        public static List<EmployeeViewModel> GetAllPositionByIDEployee(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Positions/GetByEmployeeID?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<EmployeeViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static List<PositionsViewModel> GetPositionByName(string name)
         {
             try

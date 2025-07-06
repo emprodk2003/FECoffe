@@ -1,6 +1,4 @@
-﻿using FECoffe.DTO.CategoyMaterial;
-using FECoffe.DTO.Suppliers;
-using FECoffe.Request.CategoryMaterial;
+﻿using FECoffe.DTO.Suppliers;
 using FECoffe.Request.Supplier;
 using System.Text.RegularExpressions;
 using System.Windows;

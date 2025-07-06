@@ -4,20 +4,9 @@ using FECoffe.DTO.ProductSize;
 using FECoffe.DTO.Recipes;
 using FECoffe.Request.Ingredients;
 using FECoffe.Request.Recipes;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -75,7 +64,7 @@ namespace FECoffe.Form
             var list = dg_Recipes.ItemsSource.Cast<CrudRecipes>().ToList();
             if (string.IsNullOrWhiteSpace(txt_nameProduct.Text) || string.IsNullOrWhiteSpace(txt_nameProductSize.Text) || list == null)
             {
-                MessageBox.Show("Vui long khong de trong thong tin!");
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
             }
             else
             {
@@ -95,13 +84,13 @@ namespace FECoffe.Form
                 {
                     if (!RecipesRequest.create(item))
                     {
-                        MessageBox.Show("Loi khi them!");
+                        MessageBox.Show("Lỗi khi thêm!");
                         break;
                         this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("Them thanh cong!");
+                        MessageBox.Show("Thêm thành công!");
                         this.DialogResult = true;
                         this.Close();
                     }

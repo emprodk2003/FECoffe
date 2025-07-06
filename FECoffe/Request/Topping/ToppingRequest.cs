@@ -1,4 +1,4 @@
-﻿using FECoffe.DTO.OrderNumbertag;
+﻿using FECoffe.DTO.OrderToppingDetails;
 using FECoffe.DTO.Topping;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -22,6 +22,23 @@ namespace FECoffe.Request.Topping
                 return null;
             }
         }
+
+        public static List<OrderToppingDisplayModel> GetBillByID(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Toppings/GetForenkeyToDelete?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<OrderToppingDisplayModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static List<ToppingViewModel> GetToppingByName(string name)
         {
             try

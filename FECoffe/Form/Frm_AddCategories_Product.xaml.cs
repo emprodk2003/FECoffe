@@ -1,18 +1,6 @@
 ﻿using FECoffe.DTO.Categories_Product;
 using FECoffe.Request.Categories_Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -30,7 +18,7 @@ namespace FECoffe.Form
         {
             if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -41,13 +29,13 @@ namespace FECoffe.Form
                 };
                 if (Categories_ProductRequest.createCategories_Product(cate) == true)
                 {
-                    MessageBox.Show("Them danh muc thuc don moi thanh cong!");
+                    MessageBox.Show("Thêm danh mục thực đơn mới thành công!");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Them danh muc thuc don moi that bai!");
+                    MessageBox.Show("Thêm danh mục thực đơn mới thất bại!");
                     this.Close();
                 }
             }

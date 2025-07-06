@@ -1,5 +1,4 @@
-﻿using FECoffe.DTO.Product;
-using FECoffe.DTO.Recipes;
+﻿using FECoffe.DTO.Recipes;
 using System.Net.Http;
 using System.Net.Http.Json;
 

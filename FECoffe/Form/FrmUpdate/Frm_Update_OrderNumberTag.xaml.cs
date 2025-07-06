@@ -1,19 +1,7 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.OrderNumbertag;
+﻿using FECoffe.DTO.OrderNumbertag;
 using FECoffe.Request.Table;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -50,7 +38,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtTableName.Text) || cbStatus.SelectedItem == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -69,12 +57,12 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (TableRequest.updateTable(table) == true)
                 {
-                    MessageBox.Show("Sua thong tin so the ban thanh cong.");
+                    MessageBox.Show("Suaử thông tin số thẻ thành công.");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Sua thong tin so the ban that bai!");
+                    MessageBox.Show("Sửa thông tin số thẻ thất bại!");
                     this.Close();
                 }
             }

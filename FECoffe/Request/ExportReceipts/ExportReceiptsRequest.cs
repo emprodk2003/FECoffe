@@ -1,7 +1,5 @@
 ﻿using FECoffe.DTO.ExportDetail;
 using FECoffe.DTO.ExportReceipts;
-using FECoffe.DTO.ImportDetail;
-using FECoffe.DTO.ImportReceipts;
 using System.Net.Http;
 using System.Net.Http.Json;
 

@@ -1,5 +1,4 @@
-﻿using FECoffe.DTO.CategoyMaterial;
-using FECoffe.DTO.Employee;
+﻿using FECoffe.DTO.Employee;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -35,6 +34,22 @@ namespace FECoffe.Request.Employee
             }
             catch
             {
+                return null;
+            }
+        }
+        public static bool? getforenkey(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Employees/GetAllEmployeesByID?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<bool>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
                 return null;
             }
         }

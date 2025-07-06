@@ -1,16 +1,9 @@
 ﻿using FECoffe.DTO.ExportDetail;
 using FECoffe.DTO.ExportReceipts;
-using FECoffe.DTO.ImportDetail;
-using FECoffe.DTO.ImportReceipts;
 using FECoffe.DTO.Lots;
-using FECoffe.DTO.Material;
-using FECoffe.DTO.Suppliers;
 using FECoffe.Form.FrmUpdate;
 using FECoffe.Request.ExportReceipts;
-using FECoffe.Request.ImportReceipts;
 using FECoffe.Request.Lots;
-using FECoffe.Request.Material;
-using FECoffe.Request.Supplier;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;

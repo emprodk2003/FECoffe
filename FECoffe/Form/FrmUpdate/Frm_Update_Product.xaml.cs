@@ -1,19 +1,7 @@
 ﻿using FECoffe.DTO.Product;
 using FECoffe.Request.Categories_Product;
 using FECoffe.Request.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -33,7 +21,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtCostPrice.Text) || string.IsNullOrWhiteSpace(txtPrice.Text) || string.IsNullOrWhiteSpace(txtProductName.Text) || cbCategory.SelectedValue == null)
             {
-                MessageBox.Show("Vui long dien day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else if (!decimal.TryParse(txtCostPrice.Text, out decimal costPrice))
             {
@@ -58,13 +46,13 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (ProductRequest.updateProduct(pro) == true)
                 {
-                    MessageBox.Show("Sua thong tin thuc don moi thanh cong!");
+                    MessageBox.Show("Sửa thông tin món thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Sua thong tin thuc don moi that bai!");
+                    MessageBox.Show("Sửa thông tin món thất bại!");
                     this.Close();
                 }
             }
@@ -83,7 +71,7 @@ namespace FECoffe.Form.FrmUpdate
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho danh muc thuc don!");
+                MessageBox.Show("Không có dữ liệu nào cho danh mục thực đơn!");
             }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -1,21 +1,9 @@
 ﻿using FECoffe.DTO.Employee;
 using FECoffe.Request.Employee;
 using FECoffe.Request.Positions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Xceed.Wpf.Toolkit.Primitives;
 
 namespace FECoffe.Form
 {
@@ -44,7 +32,7 @@ namespace FECoffe.Form
         {
             if(txtFullName.Text == null || txtAddress.Text == null || txtEmail.Text == null || txtPhone.Text == null || txtSalaryBase.Text == null || cbGender.SelectedItem == null || cbEmploymentType.SelectedItem == null || cbPosition.SelectedValue == null || dpBirthDate.SelectedDate.Value == null || dpStartDate.SelectedDate.Value == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             // Kiểm tra định dạng số điện thoại (10 chữ số)
             else if (!Regex.IsMatch(txtPhone.Text, @"^\d{10}$"))
@@ -95,11 +83,11 @@ namespace FECoffe.Form
                 };
                 if (EmployeeRequest.createEmployee(employ) == true)
                 {
-                    MessageBox.Show("Them nhan vien moi thanh cong!");
+                    MessageBox.Show("Thêm nhân viên mới thành công!");
                     this.DialogResult = true;
                     this.Close();
                 }
-                else MessageBox.Show("Loi khi them nhan vien moi!");                
+                else MessageBox.Show("Lỗi khi thêm nhân viên mới!");                
             }
         }
     }

@@ -1,6 +1,4 @@
-﻿using FECoffe.DTO.Positions;
-using FECoffe.DTO.Salaries;
-using FECoffe.DTO.Shifts;
+﻿using FECoffe.DTO.Salaries;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -13,6 +11,21 @@ namespace FECoffe.Request.Salaries
             try
             {
                 string url = @"http://localhost:5178/api/Salaries/GetAllSalaries";
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<SalariesViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<SalariesViewModel> GetByEmployee(int id, int year, int month)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Salaries/GetByEmployee?id="+id+"&year="+year+"&month" + month;
                 HttpClient client = new HttpClient();
                 var res = client.GetFromJsonAsync<List<SalariesViewModel>>(url);
                 res.Wait();

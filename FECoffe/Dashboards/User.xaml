@@ -12,7 +12,7 @@
         <Style TargetType="DataGrid"
                x:Key="MyDataGridStyle">
             <Setter Property="Height"
-                    Value="600" />
+                    Value="500" />
             <Setter Property="VerticalScrollBarVisibility"
                     Value="Auto" />
             <Setter Property="HorizontalScrollBarVisibility"
@@ -21,6 +21,8 @@
                     Value="False" />
             <Setter Property="IsReadOnly"
                     Value="True" />
+            <Setter Property="Background"
+        Value="White" />
         </Style>
         <!-- TabControl Style -->
         <Style TargetType="TabControl">

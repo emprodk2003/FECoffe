@@ -1,6 +1,4 @@
-﻿using FECoffe.DTO.Employee;
-using FECoffe.DTO.Positions;
-using FECoffe.DTO.Timekeeping;
+﻿using FECoffe.DTO.Timekeeping;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -13,6 +11,21 @@ namespace FECoffe.Request.Timekeeping
             try
             {
                 string url = @"http://localhost:5178/api/Timekeeping/GetAllTimekeeping";
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<TimekeepingViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<TimekeepingViewModel> GetByEmployee(int id, DateOnly date,TimeOnly start,TimeOnly end)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Timekeeping/GetByEmployee?id="+id+"&date="+date+"&start="+start+"&end="+end;
                 HttpClient client = new HttpClient();
                 var res = client.GetFromJsonAsync<List<TimekeepingViewModel>>(url);
                 res.Wait();

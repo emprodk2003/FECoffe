@@ -1,19 +1,7 @@
 ﻿using FECoffe.DTO.Salaries;
 using FECoffe.Request.Employee;
 using FECoffe.Request.Salaries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -32,7 +20,7 @@ namespace FECoffe.Form
             if(string.IsNullOrWhiteSpace(txtBonus.Text) || string.IsNullOrWhiteSpace(txtMonth.Text) || string.IsNullOrWhiteSpace(txtPenalty.Text) 
                 || string.IsNullOrWhiteSpace(txtYear.Text) || string.IsNullOrWhiteSpace(txtTotalWorkingHours.Text) || cbnhanvien.SelectedValue == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             // Kiểm tra tháng
             else if (!int.TryParse(txtMonth.Text, out int month) || month < 1 || month > 12)
@@ -90,17 +78,27 @@ namespace FECoffe.Form
                     FinalSalary = decimal.Parse(txtFinalSalary.Text),
                     UserID = Guid.Parse(app.IdUser)
                 };
-                if(SalariesRequest.createSalaries(salaries) == true)
+                var sala = SalariesRequest.GetByEmployee(salaries.EmployeeID, salaries.Year, salaries.Month);
+                if(sala.Count > 0)
                 {
-                    MessageBox.Show("Them bang luong moi thanh cong!");
-                    this.DialogResult = true;
-                    this.Close();
+                    MessageBox.Show("Bảng lương đã tồn tại vui lòng kiếm tra lại thông tin!");
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Them bang luong moi that bai!");
-                    this.Close();
+                    if (SalariesRequest.createSalaries(salaries) == true)
+                    {
+                        MessageBox.Show("Thêm bảng lương mới thành công!");
+                        this.DialogResult = true;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm bảng lương mới thất bại!");
+                        this.Close();
+                    }
                 }
+               
             }
         }
 

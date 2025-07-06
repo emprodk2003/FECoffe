@@ -1,23 +1,9 @@
-﻿using FECoffe.DTO.Shifts;
-using FECoffe.DTO.Timekeeping;
+﻿using FECoffe.DTO.Timekeeping;
 using FECoffe.Request.Employee;
-using FECoffe.Request.Shifts;
 using FECoffe.Request.Timekeeping;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -35,7 +21,7 @@ namespace FECoffe.Form
         {
             if (string.IsNullOrWhiteSpace(txtgiora.Text) || string.IsNullOrWhiteSpace(txtgiovao.Text) || cbnhanvien.SelectedValue == null || dpWorkDate.SelectedDate == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             // Kiểm tra định dạng giờ: hh:mm (24 giờ)
             else if (!Regex.IsMatch(txtgiovao.Text, @"^\d{2}:\d{2}$") ||
@@ -66,17 +52,27 @@ namespace FECoffe.Form
                     Note = txtNote.Text
 
                 };
-                if (TimekeepingRequest.createTimekeeping(timekeeping) == true)
+                var tk = TimekeepingRequest.GetByEmployee(timekeeping.EmployeeID, timekeeping.WorkDate,timekeeping.CheckInTime,timekeeping.CheckOutTime);
+                if(tk.Count > 0)
                 {
-                    MessageBox.Show("Them bang cham cong moi thanh cong!");
-                    this.DialogResult = true;
-                    this.Close();
+                    MessageBox.Show("Chấm công đã tồn tại vui lòng kiểm tra lại thông tin!");
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Loi khi them bang cham cong moi !");
-                    this.Close();
+                    if (TimekeepingRequest.createTimekeeping(timekeeping) == true)
+                    {
+                        MessageBox.Show("Thêm chấm công thành công.");
+                        this.DialogResult = true;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi khi thêm chấm công!");
+                        this.Close();
+                    }
                 }
+                
             }
         }
 
@@ -93,7 +89,7 @@ namespace FECoffe.Form
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho employee !");
+                MessageBox.Show("Không có dữ liệu cho employee !");
             }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

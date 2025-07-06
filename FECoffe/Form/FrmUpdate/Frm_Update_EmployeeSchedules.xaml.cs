@@ -1,20 +1,7 @@
 ﻿using FECoffe.DTO.EmployeeSchedules;
 using FECoffe.Request.EmployeeSchedules;
 using FECoffe.Request.Shifts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -34,7 +21,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if(string.IsNullOrWhiteSpace(txtnhanvien.Text) || cbShifts.SelectedValue == null || dpWorkDate.SelectedDate == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -49,13 +36,13 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (EmployeeSchedulesRequest.updateEmployeeSchedules(es) == true)
                 {
-                    MessageBox.Show("Cap nhat thong tin lich lam thanh cong!");
+                    MessageBox.Show("Cập nhật thông tin lịch làm thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Cap nhat thong tin lich lam that bai vui long thu lai!");
+                    MessageBox.Show("Cập nhật thông tin lịch làm thất bại vui lòng thử lại!");
                     this.Close();
                 }
             }
@@ -75,7 +62,7 @@ namespace FECoffe.Form.FrmUpdate
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho ca lam !");
+                MessageBox.Show("Không có dữ liệu cho ca làm việc!");
             }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)

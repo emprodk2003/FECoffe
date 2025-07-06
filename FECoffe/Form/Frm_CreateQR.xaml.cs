@@ -1,18 +1,13 @@
-﻿using FECoffe.AppUsed;
-using FECoffe.DTO.Banks;
-using FECoffe.DTO.CategoyMaterial;
+﻿using FECoffe.DTO.Banks;
 using FECoffe.DTO.OrderNumbertag;
 using FECoffe.DTO.Orders;
 using FECoffe.Enum;
-using FECoffe.Request.Banks;
-using FECoffe.Request.CategoryMaterial;
 using FECoffe.Request.Orders;
 using FECoffe.Request.Table;
 using Newtonsoft.Json;
 using RestSharp;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -117,13 +112,13 @@ namespace FECoffe.Form
             if (order != null)
             {
                 var updateorder = OrderRequest.UpdateOrderByOrderStatus(order.OrderID, true);
-                MessageBox.Show("Cap nhat trang thai hoan thanh don hang");
+                MessageBox.Show("Cập nhật trạng thái hoàn thành đơn hàng");
                 var table = TableRequest.GetTableById(ViewModel.TableID);
                 var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
                 this.Close();
             }
             else
-                MessageBox.Show("Cap nhat trang thai that bai don hang");
+                MessageBox.Show("Cập nhật trang thái đơn hàng thất bại");
             
         }
 
@@ -134,13 +129,13 @@ namespace FECoffe.Form
             {
                 order.PaymentStatus = (TransactionStatus)1;
                 var updateorder = OrderRequest.BankTransferToCash(order.OrderID, order.PaymentStatus, true);
-                MessageBox.Show("Cap nhat doi phuong thuc thanh toan va trang thai hoan thanh don hang thanh cong");
+                MessageBox.Show("Cập nhật đổi phương thức thanh toán và trạng thái hoàn thành đơn hàng thành công");
                 var table = TableRequest.GetTableById(ViewModel.TableID);
                 var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
                 this.Close();
             }
             else
-                MessageBox.Show("Cap nhat doi phuong thuc thanh toan va trang thai hoan thanh don hang that bai");
+                MessageBox.Show("Cập nhật đổi phương thức thanh toán và trạng thái hoàn thành đơn hàng thất bại");
         }
 
         private void huy_Click(object sender, RoutedEventArgs e)
