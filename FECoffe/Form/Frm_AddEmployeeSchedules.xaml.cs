@@ -1,7 +1,4 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.Employee;
-using FECoffe.DTO.EmployeeSchedules;
-using FECoffe.DTO.ExportDetail;
+﻿using FECoffe.DTO.EmployeeSchedules;
 using FECoffe.DTO.Shifts;
 using FECoffe.Request.Employee;
 using FECoffe.Request.EmployeeSchedules;
@@ -28,7 +25,7 @@ namespace FECoffe.Form
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho ca lam !");
+                MessageBox.Show("Không có dữ liệu cho ca làm vui lòng thêm ca làm!");
             }
         }
         private void hienthinhanvien()
@@ -40,7 +37,7 @@ namespace FECoffe.Form
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho employee !");
+                MessageBox.Show("Không có dữ liệu cho nhân viên vui lòng thêm nhân viên!");
             }
         }
         public Frm_AddEmployeeSchedules()
@@ -113,7 +110,7 @@ namespace FECoffe.Form
                     }
                     else
                     {
-                        MessageBox.Show("Them lich lam thanh cong!");
+                        MessageBox.Show("Thêm lịch làm thành công!");
                         this.DialogResult = true;
                         this.Close();
                     }

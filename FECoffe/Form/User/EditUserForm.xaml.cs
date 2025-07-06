@@ -58,11 +58,11 @@ namespace FECoffe.Form.User
 
             if (UserRequest.AddRolebyUser(addRole) == true)
             {
-                MessageBox.Show("Tao Thanh Cong role cho user ");
+                MessageBox.Show("Đã thêm quyền cho tài user.");
                 this.Close();
             }
             else
-                MessageBox.Show("Tao That Bai role cho user");
+                MessageBox.Show("Lỗi khi thêm quyền!");
         }
     }
 }

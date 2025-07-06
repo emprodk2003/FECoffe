@@ -156,12 +156,22 @@ namespace FECoffe.Dashboards
 
             if (result == MessageBoxResult.Yes)
             {
-                if (Categories_ProductRequest.deleteCategories_Product(cate.CategoryID) == true)
+                var pr = Categories_ProductRequest.GetProductByID(cate.CategoryID);
+                if(pr.Count == 0)
                 {
-                    MessageBox.Show("Đã xóa danh mục thực đơn.");
-                    hienthicategories_product();
+                    if (Categories_ProductRequest.deleteCategories_Product(cate.CategoryID) == true)
+                    {
+                        MessageBox.Show("Đã xóa danh mục thực đơn.");
+                        hienthicategories_product();
+                    }
+                    else MessageBox.Show("Lỗi khi xóa danh mục thực đơn!");
                 }
-                else MessageBox.Show("Lỗi khi xóa danh mục thực đơn!");
+                else
+                {
+                    MessageBox.Show("Đã có món thuộc danh mục này không thể xóa!");
+                    return;
+                }
+               
             }
             else
             {
@@ -192,12 +202,20 @@ namespace FECoffe.Dashboards
 
             if (result == MessageBoxResult.Yes)
             {
-                if (ProductRequest.deleteProduct(pro.ProductID) == true)
+                var bill = ProductRequest.GetBillByID(pro.ProductID);
+                if(bill.Count == 0)
                 {
-                    MessageBox.Show("Đã xóa thực đơn.");
-                    hienthiproduct();
+                    if (ProductRequest.deleteProduct(pro.ProductID) == true)
+                    {
+                        MessageBox.Show("Đã xóa thực đơn.");
+                        hienthiproduct();
+                    }
+                    else MessageBox.Show("Lỗi khi xóa thực đơn!");
                 }
-                else MessageBox.Show("Lỗi khi xóa thực đơn!");
+                else
+                {
+                    MessageBox.Show("Món đã tồn tại trong đơn hàng nên không thể xóa món!");
+                }
             }
             else
             {
@@ -257,12 +275,21 @@ namespace FECoffe.Dashboards
 
             if (result == MessageBoxResult.Yes)
             {
-                if (ToppingRequest.deleteTopping(top.ToppingID) == true)
+                var bill = ToppingRequest.GetBillByID(top.ToppingID);
+                if(bill.Count == 0)
                 {
-                    MessageBox.Show("Đã xóa topping.");
-                    hienthitopping();
+                    if (ToppingRequest.deleteTopping(top.ToppingID) == true)
+                    {
+                        MessageBox.Show("Đã xóa topping.");
+                        hienthitopping();
+                    }
+                    else MessageBox.Show("Lỗi khi xóa topping!");
                 }
-                else MessageBox.Show("Lỗi khi xóa topping!");
+                else
+                {
+                    MessageBox.Show("Topping đã tồn tại trong đơn hàng nên không thể xóa topping!");
+                }
+                
             }
             else
             {
@@ -303,16 +330,25 @@ namespace FECoffe.Dashboards
 
             if (result == MessageBoxResult.Yes)
             {
-                if (top.Status == Enum.TableStatus.Occupied)
+                var table = TableRequest.GetBillByID(top.TableID);
+                if(table.Count == 0)
                 {
-                    MessageBox.Show("Thẻ đang sử dụng không được xó!.");
+                    if (top.Status == Enum.TableStatus.Occupied)
+                    {
+                        MessageBox.Show("Thẻ đang sử dụng không được xóa!.");
+                    }
+                    else if (TableRequest.deleteTable(top.TableID) == true)
+                    {
+                        MessageBox.Show("Đã xóa số thẻ orders này.");
+                        hienthitable();
+                    }
+                    else MessageBox.Show("Lỗi khi xóa số thẻ orders.");
                 }
-                else if (TableRequest.deleteTable(top.TableID) == true)
+                else
                 {
-                    MessageBox.Show("Đã xóa số thẻ orders này.");
-                    hienthitable();
+                    MessageBox.Show("Thẻ đax tồn tại trong đơn hàng nên không được xóa!.");
+                    return;
                 }
-                else MessageBox.Show("Lỗi khi xóa số thẻ orders.");
             }
             else
             {

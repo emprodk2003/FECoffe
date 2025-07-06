@@ -31,7 +31,7 @@ namespace FECoffe.Form.FrmUpdate
 
             if (CategoryMaterialRequest.updateCategoryMaterial(newcate) == true)
             {
-                MessageBox.Show("Sữa Thành Công danh mục hàng hóa ");
+                MessageBox.Show("Sữa thành công danh mục hàng hóa ");
                 this.Close();
             }else
                 MessageBox.Show("Sữa thất bại danh mục hàng hóa ");

@@ -1,18 +1,6 @@
 ﻿using FECoffe.DTO.Shifts;
 using FECoffe.Request.Shifts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -37,7 +25,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtShiftName.Text) || string.IsNullOrWhiteSpace(txtDescription.Text) || dpStartTime.Value?.TimeOfDay == null || dpEndTime.Value?.TimeOfDay == null)
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -51,11 +39,11 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (ShiftsRequest.updateShifts(shifts) == true)
                 {
-                    MessageBox.Show("Them ca lam moi thanh cong!");
+                    MessageBox.Show("Thêm ca làm mới thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
-                else MessageBox.Show("Loi khi them ca lam moi !");
+                else MessageBox.Show("Lỗi khi thêm ca làm mới!");
             }
         }
 

@@ -1,12 +1,6 @@
-﻿using FECoffe.DTO.Auth;
-using FECoffe.DTO.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FECoffe.DTO.User;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FECoffe.Request.User
 {

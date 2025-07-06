@@ -1,24 +1,6 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.Product;
-using FECoffe.DTO.ProductSize;
-using FECoffe.DTO.Recipes;
-using FECoffe.DTO.Role;
-using FECoffe.Request.Ingredients;
-using FECoffe.Request.Recipes;
+﻿using FECoffe.DTO.Role;
 using FECoffe.Request.Role;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {

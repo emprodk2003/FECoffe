@@ -1,5 +1,4 @@
-﻿using FECoffe.DTO.Product;
-using FECoffe.DTO.ProductSize;
+﻿using FECoffe.DTO.ProductSize;
 using System.Net.Http;
 using System.Net.Http.Json;
 

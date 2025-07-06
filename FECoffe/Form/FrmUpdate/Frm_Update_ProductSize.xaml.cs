@@ -1,19 +1,6 @@
-﻿using FECoffe.Dashboards;
-using FECoffe.DTO.ProductSize;
+﻿using FECoffe.DTO.ProductSize;
 using FECoffe.Request.ProductSize;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -33,7 +20,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtSizeName.Text) || string.IsNullOrWhiteSpace(txtAdditionalPrice.Text))
             {
-                MessageBox.Show("Vui long dien thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else if (!decimal.TryParse(txtAdditionalPrice.Text, out decimal AdditionalPrice) || AdditionalPrice < 0)
             {
@@ -51,13 +38,13 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (ProductSizeRequest.updateProduct(size) == true)
                 {
-                    MessageBox.Show("Sua thong tin size cho" + _size.ProductName + "thanh cong.");
+                    MessageBox.Show("Sửa thông tin size cho" + _size.ProductName + "thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Sua thong tin size cho" + _size.ProductName + "that bai.");
+                    MessageBox.Show("Sửa thông tin size cho" + _size.ProductName + "thất bại.");
                     this.Close();
                 }
             }

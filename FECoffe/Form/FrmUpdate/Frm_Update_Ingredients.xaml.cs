@@ -1,18 +1,6 @@
 ﻿using FECoffe.DTO.Ingredients;
 using FECoffe.Request.Ingredients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -34,7 +22,7 @@ namespace FECoffe.Form.FrmUpdate
             var unit = txtUnit.Text;
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(unit))
             {
-                MessageBox.Show("Vui long dien day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else
             {
@@ -46,13 +34,13 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (IngredientsRequest.update(result) == true)
                 {
-                    MessageBox.Show("Cap nhat thong tin nguyen lieu thanh cong.");
+                    MessageBox.Show("Cập nhật thông tin nguyên liệu thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Cap nhat thong tin nguyen lieu that bai!");
+                    MessageBox.Show("Cập nhật thông tin nguyên liệu thất bại!");
                     this.Close();
                 }
             }

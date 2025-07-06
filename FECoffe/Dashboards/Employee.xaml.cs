@@ -154,12 +154,32 @@ namespace FECoffe.Dashboards
 
             if (result == MessageBoxResult.Yes)
             {
-                if (EmployeeRequest.deleteEmployee(ep.EmployeeID) == true)
+                var status = EmployeeRequest.getforenkey(ep.EmployeeID);
+                if(status == false)
                 {
-                    MessageBox.Show("Đã xóa nhân viên.");
-                    hienthinhanvien();
+                    if (EmployeeRequest.deleteEmployee(ep.EmployeeID) == true)
+                    {
+                        MessageBox.Show("Đã xóa nhân viên.");
+                        hienthinhanvien();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Loi khi xoa nhân viên.");
+                        return;
+                    }
                 }
-                else MessageBox.Show("Loi khi xoa nhân viên.");
+                else if(status == true)
+                {
+                    MessageBox.Show("Nhân viên có tài khoản lịch làm bảng lương không được xóa!");
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Loi khi xoa nhân viên.");
+                    return;
+                }
+                
             }
             else
             {
@@ -211,12 +231,25 @@ namespace FECoffe.Dashboards
 
             if (result == MessageBoxResult.Yes)
             {
-                if (PositionsRequest.deletePosition(position.PositionID) == true)
+                var ep = PositionsRequest.GetAllPositionByIDEployee(position.PositionID);
+                if(ep.Count > 0)
                 {
-                    MessageBox.Show("Đã xóa chức vụ.");
-                    hienthichucvu();
+                    MessageBox.Show("Đã có nhân viên thuộc chức vụ này, không thể xóa, vui lòng gỡ chức vụ ra khỏi nhân viên rồi thử lại!");
+                    return;
                 }
-                else MessageBox.Show("Loi khi xóa chức vụ!");
+                else
+                {
+                    if (PositionsRequest.deletePosition(position.PositionID) == true)
+                    {
+                        MessageBox.Show("Đã xóa chức vụ.");
+                        hienthichucvu();
+                    }
+                    else
+                    { 
+                        MessageBox.Show("Loi khi xóa chức vụ!");
+                        return;
+                    }
+                }
             }
             else
             {

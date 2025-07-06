@@ -1,19 +1,7 @@
 ﻿using FECoffe.DTO.Product;
 using FECoffe.Request.Categories_Product;
 using FECoffe.Request.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -31,7 +19,7 @@ namespace FECoffe.Form
         {
             if(string.IsNullOrWhiteSpace(txtCostPrice.Text) || string.IsNullOrWhiteSpace(txtPrice.Text) || string.IsNullOrWhiteSpace(txtProductName.Text) || cbCategory.SelectedValue == null)
             {
-                MessageBox.Show("Vui long dien day du thong tin!");
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
             }
             else if (!decimal.TryParse(txtCostPrice.Text, out decimal costPrice) || costPrice < 0)
             {
@@ -55,13 +43,13 @@ namespace FECoffe.Form
                 };
                 if (ProductRequest.createProduct(pro) == true)
                 {
-                    MessageBox.Show("Them thuc don moi thanh cong!");
+                    MessageBox.Show("Thêm món mới thành công!");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Them thuc don moi that bai!");
+                    MessageBox.Show("Thêm món mới thất bại!");
                     this.Close();
                 }
             }
@@ -75,7 +63,7 @@ namespace FECoffe.Form
             }
             else
             {
-                MessageBox.Show("Khong co du lieu cho danh muc thuc don!");
+                MessageBox.Show("Không có dữ liệu nào cho danh mục thực đơn!");
             }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)

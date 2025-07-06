@@ -1,8 +1,6 @@
 ﻿using FECoffe.DTO.Material;
-using FECoffe.DTO.Suppliers;
 using FECoffe.Request.CategoryMaterial;
 using FECoffe.Request.Material;
-using FECoffe.Request.Role;
 using FECoffe.Request.Supplier;
 using System.Windows;
 
@@ -54,7 +52,7 @@ namespace FECoffe.Form.FrmUpdate
                     this.Close();
                 }
                 else
-                    MessageBox.Show("Sua thất bại hang hoa ");
+                    MessageBox.Show("Sửa hàng hóa thất bại!");
             }
             else
             {

@@ -1,18 +1,6 @@
 ﻿using FECoffe.DTO.Topping;
 using FECoffe.Request.Topping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -32,7 +20,7 @@ namespace FECoffe.Form.FrmUpdate
         {
             if (string.IsNullOrWhiteSpace(txtToppingName.Text) || string.IsNullOrWhiteSpace(txtToppingPrice.Text))
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             else if (!decimal.TryParse(txtToppingPrice.Text, out decimal price) || price < 0)
             {
@@ -49,13 +37,13 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (ToppingRequest.updateTopping(top) == true)
                 {
-                    MessageBox.Show("Sua thong tin topping moi thanh cong!");
+                    MessageBox.Show("Sửa thông tin cho topping thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Sua thong tin topping moi that bai!");
+                    MessageBox.Show("Lỗi khi sửa thông tin cho topping!");
                     this.Close();
                 }
             }

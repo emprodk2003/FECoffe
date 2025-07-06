@@ -1,5 +1,4 @@
-﻿using FECoffe.DTO.Positions;
-using FECoffe.DTO.Shifts;
+﻿using FECoffe.DTO.Shifts;
 using System.Net.Http;
 using System.Net.Http.Json;
 

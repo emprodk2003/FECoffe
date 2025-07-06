@@ -1,27 +1,11 @@
-﻿using FECoffe.DTO.ExportDetail;
-using FECoffe.DTO.ImportDetail;
-using FECoffe.DTO.Lots;
-using FECoffe.DTO.OrderDetails;
-using FECoffe.DTO.OrderToppingDetails;
+﻿using FECoffe.DTO.OrderToppingDetails;
 using FECoffe.DTO.Product;
 using FECoffe.DTO.ProductSize;
 using FECoffe.DTO.Topping;
 using FECoffe.Request.ProductSize;
 using FECoffe.Request.Topping;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form
 {
@@ -52,7 +36,7 @@ namespace FECoffe.Form
                 cbSize.ItemsSource = list;
             }
             else
-                MessageBox.Show("Khong tim thay size");
+                MessageBox.Show("Không tìm thấy size");
 
             var toppings =ToppingRequest.GetAllTopping();
             if (toppings != null)
@@ -60,7 +44,7 @@ namespace FECoffe.Form
                 cbTopping.ItemsSource = toppings;
             }
             else
-                MessageBox.Show("khong tim thay toppings");
+                MessageBox.Show("không tìm thấy toppings");
             dgToppingDetails.ItemsSource = OrderToppingDisplayList;
         }
 
@@ -138,7 +122,7 @@ namespace FECoffe.Form
             var item = dgToppingDetails.SelectedItem as OrderToppingDisplayModel;
             if (item == null)
             {
-                MessageBox.Show("Vui long chon topping de xoa!");
+                MessageBox.Show("Vui lòng chọn topping để xóa!");
             }
             else
             {

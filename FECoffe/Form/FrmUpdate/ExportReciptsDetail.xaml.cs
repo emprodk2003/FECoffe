@@ -1,9 +1,6 @@
 ﻿using FECoffe.DTO.ExportDetail;
-using FECoffe.DTO.ImportDetail;
 using FECoffe.DTO.Lots;
-using FECoffe.DTO.Material;
 using FECoffe.Request.Lots;
-using FECoffe.Request.Material;
 using System.Windows;
 
 

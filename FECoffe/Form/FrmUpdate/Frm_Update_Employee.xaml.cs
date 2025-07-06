@@ -72,7 +72,7 @@ namespace FECoffe.Form.FrmUpdate
                 dpStartDate.SelectedDate == null ||
                 cbEmploymentType.SelectedItem == null) 
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             // Kiểm tra định dạng số điện thoại (10 chữ số)
             else if (!Regex.IsMatch(txtPhone.Text, @"^\d{10}$"))
@@ -124,11 +124,11 @@ namespace FECoffe.Form.FrmUpdate
                 };
                 if (EmployeeRequest.updateEmployee(employ) == true)
                 {
-                    MessageBox.Show("Sua thong tin nhan vien thanh cong!");
+                    MessageBox.Show("Sửa thông tin nhân viên thành công.");
                     this.DialogResult = true;
                     this.Close();
                 }
-                else MessageBox.Show("Loi khi sua thong tin nhan vien !");
+                else MessageBox.Show("Lỗi khi sửa thông tin nhân viên!");
             }
         }
         

@@ -30,7 +30,7 @@ namespace FECoffe.Form.User
             }
             else
             {
-                MessageBox.Show("Khoong co du lieu employss");
+                MessageBox.Show("Không có dữ liệu cho employss");
             }
         }
         private void btn_Register_Click(object sender, RoutedEventArgs e)
@@ -53,15 +53,15 @@ namespace FECoffe.Form.User
 
                 if (UserRequest.createUser(user) == true)
                 {
-                    MessageBox.Show("Tao Thanh Cong User Moi");
+                    MessageBox.Show("Thêm tài khoản mới thành công.");
                     this.Close();
                 }
                 else
-                    MessageBox.Show("Tao That Bai User Moi");
+                    MessageBox.Show("Lỗi khi thêm tài khoản mới!");
             }
             else
             {
-                MessageBox.Show("Chua chon employess");
+                MessageBox.Show("Chưa chọn employess");
             }
                
         }

@@ -1,6 +1,5 @@
 ﻿using FECoffe.DTO.OrderNumbertag;
-using FECoffe.DTO.Product;
-using FECoffe.Enum;
+using FECoffe.DTO.Orders;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -23,6 +22,23 @@ namespace FECoffe.Request.Table
                 return null;
             }
         }
+
+        public static List<OrdersViewModel> GetBillByID(int id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/OrderNumberTag/GetForenkeyToDelete?id="+id;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<OrdersViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static List<TableViewModel> GetTableByName(string name)
         {
             try

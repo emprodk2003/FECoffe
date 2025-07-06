@@ -1,12 +1,7 @@
-﻿using FECoffe.DTO.ExportDetail;
-using FECoffe.DTO.ImportDetail;
+﻿using FECoffe.DTO.ImportDetail;
 using FECoffe.DTO.Material;
 using FECoffe.Request.Material;
-using FECoffe.Request.Supplier;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
-using System.Windows.Media.Media3D;
 
 namespace FECoffe.Form.FrmUpdate
 {

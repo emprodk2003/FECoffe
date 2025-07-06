@@ -1,18 +1,6 @@
 ﻿using FECoffe.DTO.Salaries;
 using FECoffe.Request.Salaries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FECoffe.Form.FrmUpdate
 {
@@ -33,7 +21,7 @@ namespace FECoffe.Form.FrmUpdate
             if (string.IsNullOrWhiteSpace(txtBonus.Text) || string.IsNullOrWhiteSpace(txtMonth.Text) || string.IsNullOrWhiteSpace(txtPenalty.Text)
                 || string.IsNullOrWhiteSpace(txtYear.Text) || string.IsNullOrWhiteSpace(txtTotalWorkingHours.Text) || string.IsNullOrWhiteSpace(txtnhanvien.Text))
             {
-                MessageBox.Show("Vui long nhap day du thong tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
             }
             // Kiểm tra tháng
             else if (!int.TryParse(txtMonth.Text, out int month) || month < 1 || month > 12)
@@ -92,16 +80,25 @@ namespace FECoffe.Form.FrmUpdate
                     FinalSalary = decimal.Parse(txtFinalSalary.Text),
                     UserID = Guid.Parse(app.IdUser)
                 };
-                if (SalariesRequest.updateSalaries(salaries) == true)
+                var sala = SalariesRequest.GetByEmployee(salaries.EmployeeID, salaries.Year, salaries.Month);
+                if (sala.Count > 0)
                 {
-                    MessageBox.Show("Sua thong tin bang luong thanh cong!");
-                    this.DialogResult = true;
-                    this.Close();
+                    MessageBox.Show("Bảng lương đã tồn tại vui lòng kiếm tra lại thông tin!");
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Sua thong tin bang luong  that bai!");
-                    this.Close();
+                    if (SalariesRequest.updateSalaries(salaries) == true)
+                    {
+                        MessageBox.Show("Sửa thông tin bảng lương thành công!");
+                        this.DialogResult = true;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi khi sửa bảng lương!");
+                        this.Close();
+                    }
                 }
             }
         }
