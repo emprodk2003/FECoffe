@@ -30,6 +30,7 @@ namespace FECoffe.Form
         {
             if (cbLot.SelectedItem is CrudLot selectedLot)
             {
+
                 var importReceipts = new CrudExportReceipts()
                 {
                     CreatedAt = DateTime.Now,
@@ -39,17 +40,29 @@ namespace FECoffe.Form
                 };
                 var list = new List<ExportDetail>();
                 list = ExportDetails.ToList();
-                var create = new CreateExportDTO()
+                if (list.Count == 0)
                 {
-                    Details = list,
-                    Receipt = importReceipts
-                };
-                if (ExportReceiptsRequest.createExport(create) == true)
-                {
-                    MessageBox.Show("Thêm thành công");
+                    MessageBox.Show("Nội dung phiếu xuất chưa có dữ liêu");
+                    return;
                 }
                 else
-                    MessageBox.Show("Thêm thất bại");
+                {
+                    var create = new CreateExportDTO()
+                    {
+                        Details = list,
+                        Receipt = importReceipts
+                    };
+                    if (ExportReceiptsRequest.createExport(create) == true)
+                    {
+                        MessageBox.Show("Thêm thành công");
+                    }
+                    else
+                        MessageBox.Show("Thêm thất bại");
+                }   
+            }
+            else
+            {
+                MessageBox.Show("Chưa chọn lô hàng cần xuất");
             }
             this.Close();
         }

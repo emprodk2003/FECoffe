@@ -122,7 +122,6 @@ namespace FECoffe.Form
 
             if (cbSupplier.SelectedItem is CrudSuppliers selectedSuppliers)
             {
-
                 var importReceipts = new CrudImportReceipts()
                 {
                     CreatedAt = DateTime.Now,
@@ -133,18 +132,26 @@ namespace FECoffe.Form
                 };
                 var list = new List<CrudImportDetail>();
                 list = ImportDetail.ToList();
-                var create = new CreateImportDTO()
+                if (list.Count == 0)
                 {
-                    Details = list,
-                    Receipt = importReceipts
-                };
-                if (ImportReceiptsRequest.createImport(create) == true)
-                {
-                    MessageBox.Show("Thêm thành công");
-                    this.Close();
+                    MessageBox.Show("Nội dung phiếu nhập chưa có dữ liêu");
+                    return;
                 }
                 else
-                    MessageBox.Show("Thêm thất bại");
+                {
+                    var create = new CreateImportDTO()
+                    {
+                        Details = list,
+                        Receipt = importReceipts
+                    };
+                    if (ImportReceiptsRequest.createImport(create) == true)
+                    {
+                        MessageBox.Show("Thêm thành công");
+                        this.Close();
+                    }
+                    else
+                        MessageBox.Show("Thêm thất bại");
+                }
             }
             else MessageBox.Show("Chưa nhà cung cấp");
         }

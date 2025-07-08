@@ -72,5 +72,22 @@ namespace FECoffe.Request.Role
                 return false;
             }
         }
+
+        public static bool deleteUser(Guid id)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Role/delete-user?id=" + id;
+                HttpClient client = new HttpClient();
+                var res = client.DeleteAsync(url);
+                res.Wait();
+                return res.Result.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

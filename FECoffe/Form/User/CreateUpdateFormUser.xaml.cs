@@ -4,8 +4,10 @@ using FECoffe.DTO.User;
 using FECoffe.Request.Employee;
 using FECoffe.Request.User;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace FECoffe.Form.User
 {
@@ -35,7 +37,30 @@ namespace FECoffe.Form.User
         }
         private void btn_Register_Click(object sender, RoutedEventArgs e)
         {
-            if (cbEmployess.SelectedItem is EmployeeViewModel selectedEmployss)
+            var pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            var email = EmailTextBox.Text;
+            if (string.IsNullOrWhiteSpace(UsernameTextBox.Text) || string.IsNullOrWhiteSpace(EmailTextBox.Text) || string.IsNullOrWhiteSpace(PasswordBox.Password) == null || string.IsNullOrWhiteSpace(ConfirmPasswordBox.Password) == null)
+            {
+                MessageBox.Show("Xin vui lòng nhập đầy đủ thông tin.");
+                return;
+            }
+
+            else if (Regex.IsMatch(email, pattern) == false)
+            {
+                MessageBox.Show("Email sai định dạng /n Định dạng chuẩn xxx@gmail.com");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(PasswordBox.Password) == null)
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu.");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(ConfirmPasswordBox.Password) == null)
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu xác nhận.");
+                return;
+            }
+            else if (cbEmployess.SelectedItem is EmployeeViewModel selectedEmployss)
             {
                 string username = UsernameTextBox.Text;
                 string Email = EmailTextBox.Text;
@@ -47,7 +72,7 @@ namespace FECoffe.Form.User
                     UserName = username,
                     Email = Email,
                     Password = pass,
-                    EmployeeID=selectedEmployss.EmployeeID,
+                    EmployeeID = selectedEmployss.EmployeeID,
                     ConfirmPassword = ConfirmPassword,
                 };
 
@@ -62,8 +87,7 @@ namespace FECoffe.Form.User
             else
             {
                 MessageBox.Show("Chưa chọn employess");
-            }
-               
+            } 
         }
 
     }

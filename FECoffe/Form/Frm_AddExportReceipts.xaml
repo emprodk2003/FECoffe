@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow"
         ShowInTaskbar="False"
-        Title="Themdonxuat" Height="600" Width="800" Loaded="Window_Loaded">
+        Title="Themdonxuat" Height="650" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- Button Style -->
         <Style TargetType="Button">

@@ -152,8 +152,9 @@
                         <Button Content="Tìm" Command="{Binding SearchCommand}" Margin="0,0,10,0"/>
                         <Button x:Name="btn_them"
                                 Margin="0,0,10,0"
-                                Content="Them" Click="btn_them_Click" HorizontalAlignment="Right"/>
-                        <Button Width="120" Content="Trở lại trang chủ" />
+                                Content="Thêm"
+                                Click="btn_them_Click"
+                                HorizontalAlignment="Right" />
                     </StackPanel>
 
                     <!-- Bảng danh sách tài khoản -->
@@ -182,11 +183,15 @@
                                                 <Button Content="Sửa"
                                                         Background="Orange"
                                                         Margin="0,0,5,0"
+                                                        x:Name="editUser"
+                                                        Click="editUser_Click"
                                                         Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                         CommandParameter="{Binding}" />
                                                 <Button Content="Xóa"
                                                         Background="Red"
                                                         Margin="0,0,5,0"
+                                                        x:Name="deleteUser"
+                                                        Click="deleteUser_Click"
                                                         Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                         CommandParameter="{Binding}" />
                                                 <Button Content="Thêm Quyền"
