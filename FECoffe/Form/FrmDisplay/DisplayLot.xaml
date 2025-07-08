@@ -68,7 +68,7 @@
 
                 <!-- Tiêu đề căn giữa -->
                 <TextBlock Grid.Column="1"
-                   Text="Thong tin chi tiet cua lo hang"
+                   Text="Thông tin chi tiết của lô hàng"
                    FontSize="24"
                    FontWeight="Bold"
                    VerticalAlignment="Center"

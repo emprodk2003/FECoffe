@@ -189,7 +189,7 @@
                             <Button Grid.Column="1" Content="Tìm" x:Name="btnfindcategorymaterials" Click="btnfindcategorymaterials_Click" Margin="0,0,10,0"/>
                             <!-- Khoảng trống tự giãn nằm ở Grid.Column="2" -->
                             <Button Grid.Column="2" Width="80" Content="Thêm" x:Name="addcategorymaterial" Margin="-200,0,10,0" Click="addcategorymaterial_Click"/>
-                            <Button Grid.Column="3" Width="120" Content="Tai Lai Danh Sach" x:Name="loadcategorymaterial" Margin="-340,0,10,0" Click="loadcategorymaterial_Click"/>
+                            <Button Grid.Column="3" Width="120" Content="Tải lại trang" x:Name="loadcategorymaterial" Margin="-340,0,10,0" Click="loadcategorymaterial_Click"/>
                         </Grid>
                         <DataGrid Style="{StaticResource MyDataGridStyle}" AutoGenerateColumns="False" ItemsSource="{Binding Categories_Material}" x:Name="dg_categorymaterial">
                             <DataGrid.Columns>
@@ -199,8 +199,14 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <Button Content="Sửa" Margin="0,0,5,0" x:Name="editcategory" Click="editcategory_Click"/>
-                                                <Button Content="Xóa" x:Name="deletecategory" Click="deletecategory_Click"/>
+                                                <Button Content="Sửa"
+                                                        Background="Orange"
+                                                        FontSize="12"
+                                                        Margin="0,0,5,0" x:Name="editcategory" Click="editcategory_Click"/>
+                                                <Button Content="Xóa"
+                                                        Background="Red"
+                                                        FontSize="12"
+                                                        x:Name="deletecategory" Click="deletecategory_Click"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -217,7 +223,7 @@
                             <TextBox  x:Name="txtSearchMaterials" Width="200"  materialDesign:HintAssist.Hint="Tìm kiếm nguyên liệu..."  Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue" Margin="0,0,10,0"/>
                             <Button Content="Tìm" x:Name="searchMaterials"  Click="searchMaterials_Click" Margin="0,0,10,0"/>
                             <Button Content="Thêm" x:Name="addMaterial" Click="addMaterial_Click"/>
-                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadmaterial" Margin="10,0,10,0" Click="loadmaterial_Click"/>
+                            <Button  Width="120" Content="Tải lại trang" x:Name="loadmaterial" Margin="10,0,10,0" Click="loadmaterial_Click"/>
                         </StackPanel>
                         <DataGrid x:Name="dgMaterials"
                                   Style="{StaticResource MyDataGridStyle}"
@@ -240,8 +246,14 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <Button Content="Sửa"  Margin="0,0,5,0" x:Name="editMaterial" Click="editMaterial_Click" />
-                                                <Button Content="Xóa" x:Name="deleteMaterial" Click="deleteMaterial_Click" />
+                                                <Button Content="Sửa"
+                                                        Background="Orange"
+                                                        FontSize="12"
+                                                        Margin="0,0,5,0" x:Name="editMaterial" Click="editMaterial_Click" />
+                                                <Button Content="Xóa"
+                                                        Background="Red"
+                                                        FontSize="12"
+                                                        x:Name="deleteMaterial" Click="deleteMaterial_Click" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -262,7 +274,8 @@
                             <DatePicker x:Name="dpToDate" Width="140" Margin="0,0,10,0" />
                             <Button Content="Tìm"  Margin="0,0,10,0" x:Name="searchImport" Click="searchImport_Click"/>
                             <Button Content="Thêm"  x:Name="addImport" Click="addImport_Click"/>
-                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadimport" Margin="10,0,10,0" Click="loadimport_Click"/>
+                            <Button  Width="120"
+                                     Content="Tải lại trang" x:Name="loadimport" Margin="10,0,10,0" Click="loadimport_Click"/>
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->
@@ -301,7 +314,8 @@
                             <DatePicker x:Name="dpExportToDate" Width="140" Margin="0,0,10,0" />
                             <Button Content="Tìm" Margin="0,0,10,0" x:Name="searchExport" Click="searchExport_Click"/>
                             <Button Content="Thêm" x:Name="AddExport" Click="AddExport_Click"/>
-                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadexport" Margin="10,0,10,0" Click="loadexport_Click"/>
+                            <Button  Width="120"
+                                     Content="Tải lại trang" x:Name="loadexport" Margin="10,0,10,0" Click="loadexport_Click"/>
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->
@@ -333,7 +347,8 @@
                             <TextBox  x:Name="txtSearchSuppliers" Width="200" materialDesign:HintAssist.Hint="Tìm kiếm nhà cung cấp..."  Style="{StaticResource MaterialDesignTextBox}" Foreground="DarkBlue" Margin="0,0,10,0"/>
                             <Button Content="Tìm"  Margin="0,0,10,0" x:Name="searchSuppliers" Click="searchSuppliers_Click"/>
                             <Button Content="Thêm" x:Name="addsuppliers" Click="addsuppliers_Click"/>
-                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadesuppliers" Margin="10,0,10,0" Click="loadesuppliers_Click"/>
+                            <Button  Width="120"
+                                     Content="Tải lại trang" x:Name="loadesuppliers" Margin="10,0,10,0" Click="loadesuppliers_Click"/>
                         </StackPanel>
                         <DataGrid Style="{StaticResource MyDataGridStyle}" x:Name="dgSuppliers" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
@@ -347,8 +362,14 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <Button Content="Sửa"  Margin="0,0,5,0"  x:Name="editsuppliers" Click="editsuppliers_Click"/>
-                                                <Button Content="Xóa"  x:Name="deletesuppliers" Click="deletesuppliers_Click"/>
+                                                <Button Content="Sửa"
+                                                        Background="Orange"
+                                                        FontSize="12"
+                                                        Margin="0,0,5,0"  x:Name="editsuppliers" Click="editsuppliers_Click"/>
+                                                <Button Content="Xóa"
+                                                        Background="Red"
+                                                        FontSize="12"
+                                                        x:Name="deletesuppliers" Click="deletesuppliers_Click"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -365,7 +386,8 @@
                             <DatePicker x:Name="dpLogFromDate" Width="140" Margin="0,0,10,0" />
                             <DatePicker x:Name="dpLogToDate" Width="140" Margin="0,0,10,0" />
                             <Button Content="Tìm" x:Name="searchLotDetails" Click="searchLotDetails_Click"/>
-                            <Button  Width="120" Content="Tai Lai Danh Sach" x:Name="loadlotdetails" Margin="10,0,10,0" Click="loadlotdetails_Click"/>
+                            <Button  Width="120"
+                                     Content="Tải lại trang" x:Name="loadlotdetails" Margin="10,0,10,0" Click="loadlotdetails_Click"/>
                         </StackPanel>
 
                         <!-- Bảng dữ liệu -->

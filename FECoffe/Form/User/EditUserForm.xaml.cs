@@ -47,22 +47,33 @@ namespace FECoffe.Form.User
         }
         private void luu_Click(object sender, RoutedEventArgs e)
         {
-
-                var selectedRole = cbRole.SelectedItem as GetListRole;
-
-            var addRole = new UpdateUser
+            var selectedRole = cbRole.SelectedItem as GetListRole;
+            if (selectedRole == null)
             {
-                userID= userid,
-                roleID=selectedRole.Id
-            };
-
-            if (UserRequest.AddRolebyUser(addRole) == true)
-            {
-                MessageBox.Show("Đã thêm quyền cho tài user.");
-                this.Close();
+                MessageBox.Show("Vui lòng chọn quyền cho tài khoản .");
+                return;
             }
             else
-                MessageBox.Show("Lỗi khi thêm quyền!");
+            {
+                var addRole = new UpdateUser
+                {
+                    userID = userid,
+                    roleID = selectedRole.Id
+                };
+
+                if (UserRequest.AddRolebyUser(addRole) == true)
+                {
+                    MessageBox.Show("Đã thêm quyền cho tài khoản.");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Lỗi khi thêm quyền!");
+            }
+        }
+
+        private void huy_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

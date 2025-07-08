@@ -36,7 +36,7 @@
 
                 <!-- Tiêu đề căn giữa -->
                 <TextBlock Grid.Column="1"
-                   Text="Thong tin chi tiet cua Phieu Xuat"
+                   Text="Thông tin chi tiết của Phiếu Xuất"
                    FontSize="24"
                    FontWeight="Bold"
                    VerticalAlignment="Center"
@@ -64,7 +64,7 @@
                           CanUserAddRows="False"
                           Style="{StaticResource MyDataGridStyle}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nguyen Lieu"  IsReadOnly="True">
+                        <DataGridTextColumn Header="Nguyên Liệu"  IsReadOnly="True">
                             <DataGridTextColumn.Binding>
                                 <Binding Path="LotID" Converter="{StaticResource LotConverter}"  />
                             </DataGridTextColumn.Binding>

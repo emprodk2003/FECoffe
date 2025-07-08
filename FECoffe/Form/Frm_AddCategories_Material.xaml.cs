@@ -1,6 +1,7 @@
 ﻿using FECoffe.DTO.CategoyMaterial;
 using FECoffe.Request.CategoryMaterial;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace FECoffe.Form
 {
@@ -16,22 +17,32 @@ namespace FECoffe.Form
 
         private void luu_Click(object sender, RoutedEventArgs e)
         {
-            var name= txtCategoryName.Text;
-            var description= txtDescription.Text;
-
-            var category = new CrudCategoryMaterial()
+            if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
             {
-                CategoryName = name,
-                Description = description,
-            };
-            if (CategoryMaterialRequest.createCategoryMaterial(category)==true) {
-                MessageBox.Show("Thêm danh mục hàng hóa thành công");
-                this.Close();
+                MessageBox.Show("Vui lòng không được để trống tên danh mục hàng hóa!");
+                return;
             }
             else
             {
-                MessageBox.Show("Thêm danh mục hàng hóa thất bại");
+                var name = txtCategoryName.Text;
+                var description = txtDescription.Text;
+
+                var category = new CrudCategoryMaterial()
+                {
+                    CategoryName = name,
+                    Description = description,
+                };
+                if (CategoryMaterialRequest.createCategoryMaterial(category) == true)
+                {
+                    MessageBox.Show("Thêm danh mục hàng hóa thành công");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm danh mục hàng hóa thất bại");
+                }
             }
+               
         }
 
         private void huy_Click(object sender, RoutedEventArgs e)

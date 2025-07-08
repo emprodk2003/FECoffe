@@ -1,4 +1,5 @@
-﻿using FECoffe.DTO.User;
+﻿using FECoffe.DTO.Product;
+using FECoffe.DTO.User;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -39,7 +40,22 @@ namespace FECoffe.Request.User
                 return false;
             }
         }
-
+        public static bool updateUser(Guid id, IsActionUser isAction)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Role/update-IsAction?id="+id+ "&isAction="+ isAction.IsAction; // Giả sử `Id` là khoá chính
+                HttpClient client = new HttpClient();
+                var res = client.PutAsJsonAsync(url, isAction);
+                res.Wait();
+                return res.Result.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi: " + ex.Message);
+                return false;
+            }
+        }
         public static List<GetUser> GetUser()
         {
             try

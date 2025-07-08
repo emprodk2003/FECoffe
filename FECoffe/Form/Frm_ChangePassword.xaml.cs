@@ -27,6 +27,7 @@ namespace FECoffe.Form
                 var top = new ChangePassword()
                 {
                     NewPassword = txtpass.Text,
+
                 };
                 if (UserRequest.changePassword(top,_user.ID) == true)
                 {
@@ -46,5 +47,6 @@ namespace FECoffe.Form
         {
             this.Close();
         }
+
     }
 }

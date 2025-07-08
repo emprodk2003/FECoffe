@@ -87,7 +87,7 @@ namespace FECoffe.Dashboards
             {
                 dg_user.ItemsSource = dsUser;
             }
-            else MessageBox.Show("Loi khong doc duoc user!!!!!!!");
+            else MessageBox.Show("Lỗi không đọc được user!!!!!!!");
         }
         public void loadRole()
         {
@@ -96,7 +96,7 @@ namespace FECoffe.Dashboards
             {
                 dg_role.ItemsSource = dsRole;
             }
-            else MessageBox.Show("Loi khong doc duoc role!!!!!!!");
+            else MessageBox.Show("Lỗi không đọc được role!!!!!!!");
         }
         private void Themquyen_Click(object sender, RoutedEventArgs e)
         {
@@ -157,7 +157,7 @@ namespace FECoffe.Dashboards
                     MessageBox.Show("Đã xóa quyền thành công.");
                     loadRole();
                 }
-                else MessageBox.Show("Lỗi khi xóa quyền");
+                else MessageBox.Show("Quyền hạn này đã sử lên cho tài khoản");
             }
             else
             {
@@ -174,6 +174,42 @@ namespace FECoffe.Dashboards
             if (result == true)
             {
                 loadUser();
+            }
+        }
+
+        private void editUser_Click(object sender, RoutedEventArgs e)
+        {
+            var user = dg_user.SelectedItem as GetUser;
+            Frm_Update_User frm_updateUser = new Frm_Update_User(user);
+            var result = frm_updateUser.ShowDialog();
+            if (result == true)
+            {
+                loadUser();
+            }
+        }
+
+        private void deleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            var item = dg_user.SelectedItem as GetUser;
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn xóa quyền này không?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (RoleRequest.deleteUser(item.ID) == true)
+                {
+                    MessageBox.Show("Đã xóa tài khoản thành công thành công.");
+                    loadUser();
+                }
+                else MessageBox.Show("Tài Khoản có quyền hạn nên không thể xóa");
+            }
+            else
+            {
+
             }
         }
     }
