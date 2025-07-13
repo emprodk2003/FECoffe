@@ -144,29 +144,6 @@
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
 
-        <!-- DataGrid Style -->
-        <Style TargetType="DataGrid">
-            <Setter Property="Margin" Value="0,10,0,0"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="32"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
-            <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="ColumnHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#FF3EBAF5"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Padding" Value="6"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#DDDDDD"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-        </Style>
         
         <conv:EmployeeIDToMateriaNameConverter x:Key="EmployeeConverter"/>
         <conv:TableIDToMateriaNameConverter x:Key="TableConverter"/>
@@ -323,11 +300,15 @@
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center" />
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" HorizontalAlignment="Right"  FontFamily="Segoe MDL2 Assets" FontSize="18" >
+                            &#xE72C;
+                        </Button>
                     </StackPanel>
 
                     <StackPanel>
                         <DataGrid ItemsSource="{Binding OrdersViewModel}"
                                   x:Name="dg_Orders"
+                                  Height="500"
                                   AutoGenerateColumns="False"
                                   HeadersVisibility="Column"
                                   IsReadOnly="True">

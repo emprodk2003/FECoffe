@@ -5,6 +5,7 @@ using FECoffe.DTO.OrderToppingDetails;
 using FECoffe.DTO.Product;
 using FECoffe.DTO.Surcharges;
 using FECoffe.Form;
+using FECoffe.Form.FrmDisplay;
 using FECoffe.Request.Employee;
 using FECoffe.Request.Orders;
 using FECoffe.Request.Positions;
@@ -58,6 +59,11 @@ namespace FECoffe.AppUsed
 
             // Nếu có discount, xử lý luôn ở đây nếu muốn
             TotalAmount.Text = $"{total:N0} đ";
+            decimal discount = 0;
+            decimal.TryParse(txtDiscount.Text.Replace("%", ""), out discount);
+
+            decimal thanhtien = total + (total * discount / 100);
+            TotalAmountFinal.Text = thanhtien.ToString("N0");
         }
 
         private void addSizeProduct_Click(object sender, RoutedEventArgs e)
@@ -162,21 +168,22 @@ namespace FECoffe.AppUsed
 
                 if (OrderRequest.createOrder(neworder) == true)
                 {
-                    MessageBox.Show("Thanh toan Thành Công don hang ");
+                    var window = new InvoicePreviewWindow(cartItems, employess.FullName, discount);
+                    window.ShowDialog();
+                    MessageBox.Show("Thanh toán thành công.");
                     var table = TableRequest.GetTableById(ViewModel.TableID);
                     var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
                     var theBagWindow = new TheBagNumber();
                     theBagWindow.Show();
 
-                    // 👉 Đóng cửa sổ hiện tại (form đặt món)
                     this.Close();
                 }
                 else
-                    MessageBox.Show("Thanh toan That bai don hang ");
+                    MessageBox.Show("Thanh toán đơn hàng thất bại!");
             }
             else
             {
-                MessageBox.Show("Vui long chon mon de thanh toan");         
+                MessageBox.Show("Vui lòng chọn món để thanh toán!");         
             }
 
         }
@@ -191,7 +198,7 @@ namespace FECoffe.AppUsed
             var item = CartItemsList.SelectedItem as CartItem;
             if(item == null)
             {
-                MessageBox.Show("Vui long chon mon de xoa!");
+                MessageBox.Show("Vui lòng chọn món để xóa!");
             }
             else
             {
@@ -252,21 +259,31 @@ namespace FECoffe.AppUsed
 
                 if (OrderRequest.createOrder(neworder) == true)
                 {
-                    MessageBox.Show("Tao don hang doi thanh toan  ");
+                    MessageBox.Show("Xác nhận khách hàng chuyển khoản và tạo mã QR. ");
                     var frm = new Frm_CreateQR(neworder, thanhtien,ViewModel);
-                    frm.ShowDialog();
-                    var theBagWindow = new TheBagNumber();
-                    theBagWindow.Show();
-
-                    // 👉 Đóng cửa sổ hiện tại (form đặt món)
-                    this.Close();
+                    var resuft = frm.ShowDialog();
+                    if(resuft == true)
+                    {
+                        var window = new InvoicePreviewWindow(cartItems, employess.FullName, discount);
+                        window.ShowDialog();
+                        var theBagWindow = new TheBagNumber();
+                        theBagWindow.Show();
+                    }
+                    else if (resuft == false)
+                    {
+                        var theBagWindow = new TheBagNumber();
+                        theBagWindow.Show();
+                        this.Close();
+                        MessageBox.Show("Đã hủy đơn hàng.");
+                    }
+                    
                 }
                 else
-                    MessageBox.Show("Thanh toan That bai don hang ");
+                    MessageBox.Show("Thanh toán đơn hàng thất bại! ");
             }
             else
             {
-                MessageBox.Show("Vui long chon mon de thanh toan");
+                MessageBox.Show("Vui lòng chọn món để thanh toán!");
             }
           
         }
@@ -284,7 +301,7 @@ namespace FECoffe.AppUsed
             var sur = SurchargesRequest.GetByToDay(date);
             if(sur != null)
             {
-                txtDiscount.Text = sur.SurchargesValue.ToString();
+                txtDiscount.Text = sur.SurchargesValue.ToString()+"%";
             }
         }
     }

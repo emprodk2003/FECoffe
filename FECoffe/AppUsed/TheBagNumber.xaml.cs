@@ -76,7 +76,7 @@ namespace FECoffe.AppUsed
                     "Xác nhận đã hoàn thành thực đơn?",
                     "Xác nhận hoàn thành",
                     MessageBoxButton.YesNo,
-                    MessageBoxImage.Hand
+                    MessageBoxImage.Information
                 );
 
                 if (result == MessageBoxResult.Yes)
@@ -121,7 +121,7 @@ namespace FECoffe.AppUsed
                 dg_Orders.ItemsSource = list;
                 var total = list.Sum(x => x.FinalAmount);
                 var number = list.Count();
-                txt_filnalAmount.Text = "Tổng doanh thu hôm nay: " + total.ToString() + " VND";
+                txt_filnalAmount.Text = "Tổng doanh thu hôm nay: " + total.ToString("N0") + " VND";
                 txt_numberOrders.Text = "Tổng số đơn hàng :" + number;
             }
             else
@@ -184,6 +184,11 @@ namespace FECoffe.AppUsed
                 main.Show();
                 this.Close();
             }
+        }
+
+        private void LoadData_Click(object sender, RoutedEventArgs e)
+        {
+            hienthidanhthu();
         }
     }
 }
