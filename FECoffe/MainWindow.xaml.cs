@@ -81,7 +81,7 @@ namespace FECoffe
                     this.Close(); // đóng cửa sổ đăng nhập nếu muốn
                 }
 
-                if (roleClaim != null && roleClaim.Value.Equals("User", StringComparison.OrdinalIgnoreCase))
+                else if (roleClaim != null && roleClaim.Value.Equals("User", StringComparison.OrdinalIgnoreCase))
                 {
                     var app = (App)Application.Current;
                     app.RawToken = result.Token;
@@ -90,6 +90,12 @@ namespace FECoffe
                     TheBagNumber dashboard = new TheBagNumber();
                     dashboard.Show();
                     this.Close(); // đóng cửa sổ đăng nhập nếu muốn
+                }
+                else
+                {
+                    btnText.Text = "Login";
+                    btnLogin.IsEnabled = true;
+                    MessageBox.Show("Tài khoản không có quyền hạn.");
                 }
 
             }
