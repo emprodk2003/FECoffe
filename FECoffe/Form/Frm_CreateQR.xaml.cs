@@ -113,6 +113,7 @@ namespace FECoffe.Form
             {
                 var updateorder = OrderRequest.UpdateOrderByOrderStatus(order.OrderID, true);
                 MessageBox.Show("Cập nhật trạng thái hoàn thành đơn hàng");
+                this.DialogResult = true;
                 var table = TableRequest.GetTableById(ViewModel.TableID);
                 var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
                 this.Close();
@@ -132,6 +133,7 @@ namespace FECoffe.Form
                 MessageBox.Show("Cập nhật đổi phương thức thanh toán và trạng thái hoàn thành đơn hàng thành công");
                 var table = TableRequest.GetTableById(ViewModel.TableID);
                 var updatetable = TableRequest.updateTableByStatus(table.TableID, 1);
+                this.DialogResult = true;
                 this.Close();
             }
             else
@@ -148,6 +150,7 @@ namespace FECoffe.Form
                 if (OrderRequest.deleteOrder(order.OrderID) == true)
                 {
                     MessageBox.Show("Xóa Thành Công đơn hàng ");
+                    this.DialogResult = false;
                     this.Close();
                 }
                 else MessageBox.Show("Xóa Thất Bại đơn hàng ");
