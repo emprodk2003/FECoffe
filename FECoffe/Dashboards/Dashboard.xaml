@@ -513,7 +513,9 @@
                                     </lvc:CartesianChart.AxisX>
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis Title="VND"
-                                                  Foreground="Black"/>
+                                                  MinValue="0"
+                                                  Foreground="Black"
+                                                  LabelFormatter="{Binding Formatter}"/>
                                     </lvc:CartesianChart.AxisY>
                                 </lvc:CartesianChart>
                             </Grid>
@@ -530,9 +532,14 @@
                                                   Labels="{Binding Labels1}" />
                                     </lvc:CartesianChart.AxisX>
                                     <lvc:CartesianChart.AxisY>
-                                        <lvc:Axis Title="VND"
-                                                  Foreground="Black"/>
+                                        <lvc:Axis Title="Doanh thu (VND)"
+                                                  Foreground="Blue"
+                                                  MinValue="0"
+                                                  LabelFormatter="{Binding FormatterVND}" />
+                                      
                                     </lvc:CartesianChart.AxisY>
+
+
                                 </lvc:CartesianChart>
                             </Grid>
                         </TabItem>
@@ -555,7 +562,17 @@
                                     </lvc:CartesianChart.AxisX>
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis Title="VND"
-                                                  Foreground="Black" />
+                                                  MinValue="0"
+                                                  Foreground="Black"
+                                                  LabelFormatter="{Binding Formatter}" />
+                                        <lvc:Axis Title="Số đơn"
+                                                  Foreground="Orange"
+                                                  Position="RightTop"
+                                                  MinValue="0">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator Step="5" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
                                 </lvc:CartesianChart>
                             </Grid>

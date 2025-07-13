@@ -1,11 +1,9 @@
-
-﻿using FECoffe.Request.Auth;
-﻿using FECoffe.DTO.Report;
+using FECoffe.Request.Auth;
 using FECoffe.Request.Orders;
 using FECoffe.Request.Report;
 using LiveCharts;
 using LiveCharts.Wpf;
-using Newtonsoft.Json.Linq;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -25,6 +23,7 @@ namespace FECoffe.Dashboards
         public string[] Labels1 { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
 
+        public Func<double, string> Formatter { get; set; }
         public SeriesCollection SeriesCollection1 { get; set; }
         public SeriesCollection SeriesCollection2 { get; set; }
         public List<decimal> RevenueByDay { get; set; }
@@ -54,6 +53,8 @@ namespace FECoffe.Dashboards
 
                   }
              };
+
+
             Labels = Day.Select(d => d.ToString()).ToArray();
 
             RevenueByYear = report.ReportRevenueByYear.Data;
@@ -67,7 +68,12 @@ namespace FECoffe.Dashboards
                   }
              };
             Labels1 = Month.Select(d => d.ToString()).ToArray();
-
+            // Format số tiền: 1.000.000 VND
+            //Formatter dung func<double,string> vì trong livechart cột y thuộc double để chuyển thành string,
+            //value :10000 => 10000 VND
+            //N0 dùng để làm tròn thập phân vd: 1,234,567.89 => 1,234,568
+            //Nếu muốn đổi thành USD thì đổi thành en-US , USD
+            Formatter = value => value.ToString("N0", new CultureInfo("vi-VN")) + " VND";
             RevenueByDay = report.ReportRevenueByDay.Data;
             CountOrder = report.ReportRevenueByDay.CountOrder;
             Hour = report.ReportRevenueByDay.Categories;
@@ -76,18 +82,21 @@ namespace FECoffe.Dashboards
                  new LineSeries
                  {
                      Title = "Doanh thu",
-                     Values = new ChartValues<decimal> (RevenueByDay)
+                     Values = new ChartValues<decimal> (RevenueByDay),
+                     ScalesYAt = 0,
                  },
                  new LineSeries
                  {
-                     Title = "Tổng số đơn",
+                     Title = "Số đơn",
                      Values = new ChartValues<int> (CountOrder),
                      Stroke = Brushes.Orange,                //  màu đường kẻ
                      PointForeground = Brushes.Orange,       //  màu điểm (nút)
-                     Fill = Brushes.Transparent
+                     Fill = Brushes.Transparent,
+                     ScalesYAt = 1,
+
                  }
             };
-           
+
             Labels2 = Hour.Select(d => d.ToString()).ToArray();
             DataContext = this;
         }
@@ -169,7 +178,7 @@ namespace FECoffe.Dashboards
         {
             MainWindow main = new MainWindow();
             var status = AuthAdminRequest.log_out();
-            if(status == true)
+            if (status == true)
             {
                 ((App)Application.Current).Logout();
                 main.Show();

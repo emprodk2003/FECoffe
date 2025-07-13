@@ -333,7 +333,7 @@
                                 <TextBox x:Name="txtDiscount"
                                          Text="0%"
                                          FontWeight="Bold"
-                                         FontSize="16" />
+                                         FontSize="16" IsReadOnly="True" />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal"
                                         HorizontalAlignment="Right"
@@ -344,7 +344,7 @@
                                 <TextBlock x:Name="TotalAmount"
                                            Text="0 đ"
                                            FontWeight="Bold"
-                                           FontSize="16" />
+                                           FontSize="16"  />
                             </StackPanel>
                             
                             <StackPanel Grid.Column="2" Orientation="Horizontal"
