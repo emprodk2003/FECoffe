@@ -23,6 +23,22 @@ namespace FECoffe.Request.Product
             }
         }
 
+        public static List<ProductViewModel> GetAllProductIsVailable()
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Products/GetAllProductsIsAvailable";
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<ProductViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static List<OrderDetailsViewModel> GetBillByID(int id)
         {
             try

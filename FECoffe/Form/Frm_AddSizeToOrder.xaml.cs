@@ -38,7 +38,7 @@ namespace FECoffe.Form
             else
                 MessageBox.Show("Không tìm thấy size");
 
-            var toppings =ToppingRequest.GetAllTopping();
+            var toppings =ToppingRequest.GetAllToppingIsAvailable();
             if (toppings != null)
             {
                 cbTopping.ItemsSource = toppings;
