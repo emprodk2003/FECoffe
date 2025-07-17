@@ -23,6 +23,23 @@ namespace FECoffe.Request.Topping
             }
         }
 
+
+        public static List<ToppingViewModel> GetAllToppingIsAvailable()
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Toppings/GetAllToppingsIsAvailable";
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<List<ToppingViewModel>>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static List<OrderToppingDisplayModel> GetBillByID(int id)
         {
             try

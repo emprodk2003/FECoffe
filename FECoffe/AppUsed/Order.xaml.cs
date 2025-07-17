@@ -44,7 +44,7 @@ namespace FECoffe.AppUsed
         }
         public void LoadMenuItems()
         {
-            var list = ProductRequest.GetAllProduct();
+            var list = ProductRequest.GetAllProductIsVailable();
             var view = CollectionViewSource.GetDefaultView(list);
             view.GroupDescriptions.Add(new PropertyGroupDescription("Category_Name"));
             MenuItemsList.ItemsSource = view;
