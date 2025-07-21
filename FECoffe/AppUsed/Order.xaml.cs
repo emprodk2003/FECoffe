@@ -45,8 +45,9 @@ namespace FECoffe.AppUsed
         public void LoadMenuItems()
         {
             var list = ProductRequest.GetAllProductIsVailable();
-            var view = CollectionViewSource.GetDefaultView(list);
-            view.GroupDescriptions.Add(new PropertyGroupDescription("Category_Name"));
+            var view = CollectionViewSource.GetDefaultView(list);//CollectionView là một lớp cung cấp các tính năng như lọc (filter), sắp xếp (sorting),
+                                                                 //và phân trang (grouping) khi hiển thị dữ liệu trong giao diện (UI).
+            view.GroupDescriptions.Add(new PropertyGroupDescription("Category_Name")); // group theo danh mục của sản phẩm
             MenuItemsList.ItemsSource = view;
             MenuItemsList.Items.Refresh();
         }
@@ -79,15 +80,11 @@ namespace FECoffe.AppUsed
                     && opensize.QuantitySize > 0)
 
                 {
-                    // 🎯 Nhận lại size đã chọn
+                    //  Nhận lại size đã chọn
                     var selectedSize = opensize.ProductSizeViewModel;
                     var sizeQuantity = opensize.QuantitySize;
                     var listtopping = opensize.CreateOrderToppingDetails;
-                    // 👉 TODO: xử lý tiếp với size vừa chọn
-                    // Ví dụ: thêm vào danh sách đơn hàng
-                    //string message = $"✅ Đã chọn size: {selectedSize.SizeName} ({selectedSize.AdditionalPrice} VNĐ)\n";
-                    //message += $"🔢 Số lượng: {sizeQuantity}\n";
-                    //message += "🔹 Danh sách topping:\n";
+
 
 
                     // Tính tổng giá topping
@@ -95,7 +92,6 @@ namespace FECoffe.AppUsed
                     string toppingNames = "";
                     foreach (var topping in listtopping)
                     {
-                        //message += $"- Topping ID: {topping.ToppingID}, Số lượng: {topping.Quantity}\n";
                         // Giả sử bạn có phương thức lấy topping theo ID
                         var toppingInfo = ToppingRequest.GetToppingById(topping.ToppingID);
                         var toppingTotal = topping.Quantity * toppingInfo.Price;
