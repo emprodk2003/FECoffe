@@ -30,7 +30,7 @@ namespace FECoffe.Form.FrmUpdate
                 MessageBox.Show("Số không được để trông thông tin!");
                 return;
             }
-            else if (!int.TryParse(txtQuantity.Text, out int quantity) || quantity < 0)
+            else if (!float.TryParse(txtQuantity.Text, out float quantity) || quantity < 0)
             {
                 MessageBox.Show("Số lượng không hợp lệ!");
                 return;
@@ -42,7 +42,7 @@ namespace FECoffe.Form.FrmUpdate
                     RecipeID = _recipes.RecipeID,
                     ProductSizeID = _recipes.ProductSizeID,
                     IngredientsID = (int)cbIngredients.SelectedValue,
-                    Quantity = int.Parse(txtQuantity.Text)
+                    Quantity = float.Parse(txtQuantity.Text)
                 };
                 if (RecipesRequest.update(recipes) == true)
                 {

@@ -21,6 +21,23 @@ namespace FECoffe.Request.Recipes
                 return null;
             }
         }
+
+        public static bool CheckWhenAdd(int size, int ingre)
+        {
+            try
+            {
+                string url = @"http://localhost:5178/api/Recipes/CheckWhenAdd?size="+size+"&ingre="+ingre;
+                HttpClient client = new HttpClient();
+                var res = client.GetFromJsonAsync<bool>(url);
+                res.Wait();
+                return res.Result;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static List<RecipesViewModel> GetByProduct(int size)
         {
             try

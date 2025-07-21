@@ -586,11 +586,13 @@ namespace FECoffe.Dashboards
 
         private void cbFind_Product_Recieps_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var pr = (int)cbFind_Product_Recieps.SelectedValue;
-            var size = ProductSizeRequest.GetByProduct(pr);
-            if (size != null)
-            {
-                cbFind_ProductSize_Recieps.ItemsSource = size;
+            if(cbFind_Product_Recieps.SelectedValue != null){
+                var pr = (int)cbFind_Product_Recieps.SelectedValue;
+                var size = ProductSizeRequest.GetByProduct(pr);
+                if (size != null)
+                {
+                    cbFind_ProductSize_Recieps.ItemsSource = size;
+                }
             }
         }
 

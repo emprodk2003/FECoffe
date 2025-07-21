@@ -292,7 +292,7 @@ Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="← Trang chủ" HorizontalAlignment="Left" VerticalAlignment="Top" 
-Margin="0,0,10,0" Height="35" Width="100"/>
+Margin="0,0,10,0" Height="35" Width="100" Click="Back_main_Click"/>
                         <ComboBox Width="250"  x:Name="cbFind_Product_Recieps"
                                                DisplayMemberPath="ProductName"
                                                SelectedValuePath="ProductID"
@@ -303,6 +303,9 @@ Margin="0,0,10,0" Height="35" Width="100"/>
                                                Margin="0,0,10,0" materialDesign:HintAssist.Hint="Chọn kích cỡ..." Style="{StaticResource MaterialDesignComboBox}" Foreground="DarkBlue"/>
                         <Button Content="Tìm" Margin="0,0,10,0" Click="Find_Recipes"/>
                         <Button Content="Thêm" Click="Them_Recieps"/>
+                        <Button Margin="10,0,10,0" Click="LoadData_Click" FontFamily="Segoe MDL2 Assets" FontSize="18">
+                            &#xE72C;
+                        </Button>
                     </StackPanel>
                     <DataGrid Style="{StaticResource MyDataGridStyle}"
                               IsReadOnly="True" x:Name="dg_Recipes" ItemsSource="{Binding RecipesViewModel}" AutoGenerateColumns="False">
