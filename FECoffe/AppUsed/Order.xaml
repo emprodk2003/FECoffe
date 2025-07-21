@@ -148,28 +148,7 @@
                                        Foreground="#6F4E37"
                                        HorizontalAlignment="Center"
                                        Margin="0 0 0 0" />
-                            <!--Filter TextBox-->
-                            <Grid Width="200"
-                                  HorizontalAlignment="Left"
-                                  Grid.Row="0">
-                                <TextBlock Margin="10 0"
-                                           VerticalAlignment="Center"
-                                           Foreground="#b0b9c6"
-                                           IsHitTestVisible="False"
-                                           Panel.ZIndex="1"
-                                           Text="Search here ..."
-                                           Visibility="{Binding }" />
-                                <TextBox x:Name="txtFilter" />
-                                <Icon:PackIconMaterial Kind="Magnify"
-                                                       Height="15 "
-                                                       Width="15"
-                                                       VerticalAlignment="Center"
-                                                       Margin="0 0 15 0"
-                                                       Foreground="#b0b9c6"
-                                                       HorizontalAlignment="Right" />
-                            </Grid>
                             <ListView x:Name="MenuItemsList"
-                                      ItemsSource="{Binding Source={StaticResource MenuItemsGrouped}}"
                                       Background="Transparent"
                                       BorderThickness="0"
                                       ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -197,8 +176,10 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="{x:Type GroupItem}">
                                                             <StackPanel>
+                                                                <!--	Lấy nội dung từ Content property của GroupItem. Đây chính là tên nhóm hoặc tiêu đề nhóm (VD: "Category A"). -->
                                                                 <ContentPresenter Content="{TemplateBinding Content}"
                                                                                   ContentTemplate="{Binding HeaderTemplate, RelativeSource={RelativeSource AncestorType={x:Type GroupStyle}}}" />
+                                                                <!-- Items có từ property mặc định trong đối tượng CollectionViewGroup-->
                                                                 <ItemsControl ItemsSource="{Binding Items}">
                                                                     <ItemsControl.ItemsPanel>
                                                                         <ItemsPanelTemplate>

@@ -400,7 +400,7 @@
                                     <DataGridTextColumn Header="Tên vật tư" Binding="{Binding MaterialName}" Width="160"/>
                                     <DataGridTextColumn Header="Loại thay đổi" Binding="{Binding Status}" Width="120"/>
                                     <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="100"/>
-                                    <DataGridTextColumn Header="Số lượng truoc" Binding="{Binding QuantityBefor}" Width="150"/>
+                                    <DataGridTextColumn Header="Số lượng trước" Binding="{Binding QuantityBefor}" Width="150"/>
                                     <DataGridTextColumn Header="Số lượng sau" Binding="{Binding QuantityAfter}" Width="150"/>
                                 </DataGrid.Columns>
                             </DataGrid>
