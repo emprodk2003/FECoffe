@@ -82,19 +82,24 @@ namespace FECoffe.Form
                 }
                 foreach (var item in Recipes)
                 {
+                    if (RecipesRequest.CheckWhenAdd(item.ProductSizeID, item.IngredientsID))
+                    {
+                        MessageBox.Show("Nguyên liệu đã tồn tại trong công thức vui lòng kiểm tra lại thông tin!");
+                        return;
+                    }
+                }
+                foreach (var item in Recipes)
+                {
                     if (!RecipesRequest.create(item))
                     {
                         MessageBox.Show("Lỗi khi thêm!");
                         break;
                         this.Close();
                     }
-                    else
-                    {
-                        MessageBox.Show("Thêm thành công!");
-                        this.DialogResult = true;
-                        this.Close();
-                    }
                 }
+                MessageBox.Show("Thêm thành công!");
+                this.DialogResult = true;
+                this.Close();
             }
         }
 
